@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>提升8智商</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.3/pixi.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    
+</head>
+<body>
+    <div style="position: fixed;bottom: 0;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a></div>
+    <script>
+        let app = new PIXI.Application({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+        document.body.appendChild(app.view);
+        //创建居中的文字背景颜色为蓝色
+        let style = new PIXI.TextStyle({});
+
+        
+        let target = new PIXI.Text('提升\n8\n智商', style);
+
+        target.anchor.set(0.5);
+
+        app.stage.addChild(target);
+        let vx = 1;
+        let vy = 1;
+        let hue = 0;
+        let score = 8;
+
+
+
+
+        app.ticker.add(() => {
+            target.x += vx;
+            target.y += vy;
+            //文字边缘碰到画布边缘时反弹
+            if (target.x > app.screen.width - target.width / 2) {
+                vx = -vx;
+                target.x = app.screen.width - target.width / 2;
+            } else if (target.x < target.width / 2) {
+                vx = -vx;
+                target.x = target.width / 2;
+            }
+            if (target.y > app.screen.height - target.height / 2) {
+                vy = -vy;
+                target.y = app.screen.height - target.height / 2;
+            } else if (target.y < target.height / 2) {
+                vy = -vy;
+                target.y = target.height / 2;
+            }
+            hue += 1;
+
+            target.style = new PIXI.TextStyle({
+                fontFamily: "Arial",
+                fontSize: 36,
+                fill: `hsl(${hue}, 100%, 50%)`,
+                wordWrap: true,
+                wordWrapWidth: 440,
+                align: "center",
+            });
+            //hue超出范围时重置
+            if (hue > 360) {
+                hue = 0;
+            }
+        });
+
+        target.interactive = true;
+        target.on('pointerdown', () => {
+            score += 1;
+            target.text = `提升\n${score}\n智商`;
+            vx = Math.random() > 0.5 ? Math.abs(vx) : -Math.abs(vx);
+            vy = Math.random() > 0.5 ? Math.abs(vy) : -Math.abs(vy);
+            vx *= 1.01;
+            vy *= 1.01;
+            
+
+        });
+
+        //点击到屏幕空白位置时分数归零速度还原 点击文字位置时则不会
+        app.stage.interactive = true;
+        app.stage.on('pointerdown', (e) => {
+            if (e.target == app.stage) {
+                score = 0;
+                vx = 1;
+                vy = 1;
+                target.text = `提升\n${score}\n智商`;
+            }
+        });
+        //当窗口大小改变时重新设置画布大小
+        window.onresize = () => {
+            app.renderer.resize(window.innerWidth, window.innerHeight);
+            target.x = app.screen.width / 2;
+            target.y = app.screen.height / 2;
+        };
+        //每秒score减1 最低减到8
+        // setInterval(() => {
+        //     if (score > 8) {
+        //         score -= 1;
+        //     }
+        //     if (score < 8) {
+        //         score += 1;
+        //     }
+        //     target.text = `提升\n${score}\n智商`;
+        // }, 1000);
+    </script>
+</body>
+</html>
