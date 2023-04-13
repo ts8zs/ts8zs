@@ -87,11 +87,16 @@
         });
 
     });
-
+    let highscore=8;
     target.interactive = true;
     target.on('pointerdown', () => {
         score += 1;
         target.text = `${lost}\n${score}\n智商`;
+        if score>highscore{
+            highscore=score;
+            document.title = `Ts{highscore}zs - 提升${highscore}智商`;
+        }
+
         vx = Math.random() > 0.5 ? Math.abs(vx) : -Math.abs(vx);
         vy = Math.random() > 0.5 ? Math.abs(vy) : -Math.abs(vy);
         vx *= 1.01;
