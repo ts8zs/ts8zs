@@ -35,7 +35,7 @@ https://www.youtube.com/watch?v=3J8t8rLmoXg
 另一种艺术风格是简单形状平面阴影的多边形风格(lowpoly)。角色有自己的艺术风格分类。  
   
 # 组件  
-  
+![fish](image.png)
 ## 加载项  
   
 https://wiki.hypehype.com/en/editor/components/meta/add-ons  
