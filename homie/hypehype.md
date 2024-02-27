@@ -1,4 +1,4 @@
-# GBG，但更难 —— HypeHype(EA).md  
+# GBG，但更难 —— HypeHype(EA)
 大体是GBG的威力加强版 关于节点编程的优劣势可参考GBG一文  
 
 # 优点  
