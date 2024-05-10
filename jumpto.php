@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jump To Page</title>
+    <script>
+        // 使用JavaScript在页面加载时处理跳转
+        window.onload = function() {
+            // 获取URL参数
+            function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+            }
+
+            // 读取jumpto参数
+            var jumpto = getURLParameter('jumpto');
+
+            // 如果jumpto参数存在，则跳转到该网址
+            if (jumpto) {
+                // 注意：为了安全起见，应验证URL的有效性，这里简化处理直接跳转
+                window.location.href = jumpto;
+            } else {
+                // 如果没有jumpto参数，可以设定一个默认行为，比如显示提示信息
+                alert("缺少jumpto参数！");
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- 这里可以添加一些内容或者提示信息，但因为页面会立即跳转，实际上用户可能看不到这些内容 -->
+    <h1>正在跳转中...</h1>
+</body>
+</html>
