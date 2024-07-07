@@ -2,7 +2,12 @@
 ## 转译自 https://www.fortressofdoors.com/so-you-want-to-compete-with-roblox/
 
 > 译者: qwen2 & ts8zs.com  
-> steam 有人翻了就不翻了
+> Steam 有人翻了就不翻了
+> 可以看一下前文  
+> [如果你想和Steam竞争](https://www.fortressofdoors.com/so-you-want-to-compete-with-steam/)  
+> [如果你想和Steam竞争2](https://www.fortressofdoors.com/so-you-want-to-compete-with-steam-2/)
+
+> 明知不可为而为之,成则谓之勇,败之则愚至极
 
 我的收件箱里塞满了初创公司的提案，他们想与价值 410 亿美元的 Roblox 竞争，那是一款勇敢的、类似于乐高的多人游戏创作平台。他们不应该尝试，但如果坚持要试，这里是如何可能不失败的方法。
 —— [拉尔斯·杜切特](https://www.fortressofdoors.com/author/lars-doucet/)
