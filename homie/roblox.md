@@ -8,7 +8,7 @@
 > [如果你想和Steam竞争2](https://www.fortressofdoors.com/so-you-want-to-compete-with-steam-2/)
 
 > 明知不可为而为之,成则谓之勇,败之则愚至极
-
+> 很久之前在内网翻译过 现在借助AI重新翻译一遍
 
 > roblox 建设的早有用户积累->给流量,大家分抢流量  
 元梦初期 没流量->花钱给游戏带来流量->回到roblox模式  
