@@ -17,6 +17,7 @@
     var num = 0;
     mermaid.initialize({ startOnLoad: false });
     window.$docsify = {
+      loadSidebar: true,
       markdown: {
         renderer: {
           code: function (code, lang) {
@@ -28,8 +29,7 @@
             return this.origin.code.apply(this, arguments);
           }
         }
-      },
-      loadSidebar: true
+      }
     }
   </script>
   <div style="position: fixed;bottom: 0;right:0;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
