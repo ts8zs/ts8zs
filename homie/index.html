@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
   <meta charset="UTF-8">
   <title>Ts8zs - 提升8智商的代码存放处</title>
@@ -7,19 +8,35 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="//unpkg.com/mermaid/dist/mermaid.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
 </head>
+
 <body>
   <div id="app">加载中</div>
   <script>
+    var num = 0;
+    mermaid.initialize({ startOnLoad: false });
     window.$docsify = {
-
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === "mermaid") {
+              return (
+                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+              );
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
       loadSidebar: true
     }
   </script>
-  <div style="position: fixed;bottom: 0;right:0;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a></div>
+  <div style="position: fixed;bottom: 0;right:0;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
+  </div>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script type="text/javascript" src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </body>
+
 </html>
