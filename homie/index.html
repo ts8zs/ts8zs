@@ -7,6 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/mermaid/dist/mermaid.min.css" />
 </head>
 <body>
   <div id="app">加载中</div>
@@ -19,5 +20,44 @@
   <div style="position: fixed;bottom: 0;right:0;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a></div>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script type="text/javascript" src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    window.$docsify = {
+      search: 'auto', // 默认值
+  
+      search : [
+        '/',            // => /README.md
+        '/guide',       // => /guide.md
+        '/get-started', // => /get-started.md
+        '/zh-cn/',      // => /zh-cn/README.md
+      ],
+  
+      // 完整配置参数
+      search: {
+        maxAge: 864000000, // 过期时间，单位毫秒，默认一天
+        paths: [], // or 'auto'
+        placeholder: 'Type to search',
+  
+        // 支持本地化
+        placeholder: {
+          '/zh-cn/': '搜索',
+          '/': 'Type to search'
+        },
+  
+        noData: 'No Results!',
+  
+        // 支持本地化
+        noData: {
+          '/zh-cn/': '找不到结果',
+          '/': 'No Results'
+        },
+  
+        // 搜索标题的最大程级, 1 - 6
+        depth: 2
+      }
+    }
+  </script>
+  <script src="//unpkg.com/docsify"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
 </body>
 </html>
