@@ -14,10 +14,13 @@
 <body>
   <div id="app">加载中</div>
   <script>
+    window.$docsify = {
+      loadSidebar: true,
+
+    }
     var num = 0;
     mermaid.initialize({ startOnLoad: false });
     window.$docsify = {
-      loadSidebar: true,
       markdown: {
         renderer: {
           code: function (code, lang) {
@@ -31,7 +34,6 @@
         }
       }
     }
-    
   </script>
   <div style="position: fixed;bottom: 0;right:0;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
   </div>
