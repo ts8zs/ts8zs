@@ -10,3 +10,4 @@
   * [有这么高速运转的AI进入中国](/highspeed)  
   * [TerrorFlow](/terrorflow)
   * [如何评价奥运会开幕式](/olympics)
+  * [gal改动画为什么多暴死](/galani)
