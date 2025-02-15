@@ -50,6 +50,29 @@
     Idear by ts8zs. Powered by deepseeker. <br />
     url参数儿支持 ?tier= 出题儿
     <script>
+      // base64编码Unicode
+      function b64EncodeUnicode(str) {
+        return btoa(
+          encodeURIComponent(str).replace(
+            /%([0-9A-F]{2})/g,
+            function (match, p1) {
+              return String.fromCharCode("0x" + p1);
+            }
+          )
+        );
+      }
+      // base64解码Unicode
+      function b64DecodeUnicode(str) {
+        return decodeURIComponent(
+          atob(str)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+      }
+
       let originalText =
         "这儿有个小胡同儿，门口儿坐个老头儿，手里拿个烟袋锅儿，嘴里念叨着今儿的天儿不错。小孩儿们追着跑，一会儿到东边儿，一会儿到西边儿，真是有意思。";
 
@@ -59,17 +82,24 @@
       let correctPositions = new Set();
       let charMap = []; // 记录显示文本字符对应的原始位置
       let gameText = originalText; // 默认文本
-      let highestscore=0;
+      let highestscore = 0;
       function initGame() {
         const urlParams = new URLSearchParams(window.location.search);
-  
+
         // 从URL读取参数
         if (urlParams.has("tier")) {
           try {
-            gameText = urlParams.get("tier").replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
+            gameText = b64DecodeUnicode(urlParams.get("tier"))
+              .replace(/</g, "＜")
+              .replace(/>/g, "＞"); // 防XSS
           } catch (e) {
-            console.error("解码失败，使用默认文本");
-            gameText = originalText;
+            gameText = b64EncodeUnicode(urlParams.get("tier"))
+              .replace(/</g, "＜")
+              .replace(/>/g, "＞");
+            //如果tier不是base64将url的tier修改为base64并在地址栏显示
+            urlParams.set("tier", b64EncodeUnicode(urlParams.get("tier")));
+            //修改url
+            window.history.replaceState(null, null, "?" + urlParams.toString());
           }
         }
 
@@ -88,7 +118,7 @@
             charMap.push(i); // 记录显示文本位置对应的原始位置
           }
         }
-        highestscore=correctPositions.size;
+        highestscore = correctPositions.size;
         // 生成处理后的文本
         let gameDiv = document.getElementById("gameText");
         processedChars.forEach((char, index) => {
@@ -133,15 +163,15 @@
       }
 
       function checkGameEnd() {
-        let ren="您是地道北京人儿!";
-        if (score < highestscore*10){
-            ren="您是外地人儿吧?";
+        let ren = "您是地道北京人儿!";
+        if (score < highestscore * 10) {
+          ren = "您是外地人儿吧?";
         }
-        if (score < 0){
-            ren="您是外星人儿吧?";
+        if (score < 0) {
+          ren = "您是外星人儿吧?";
         }
-        if (score < -100){
-            ren="逗我玩儿?";
+        if (score < -100) {
+          ren = "逗我玩儿?";
         }
 
         if (remaining === 0) {
