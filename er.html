@@ -1,209 +1,203 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>儿化音小游戏</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        #gameText {
-            font-size: 18px;
-            line-height: 1.6;
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin: 20px 0;
-        }
-
-        .char {
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-block;
-            margin: 2px;
-        }
-
-        .char:hover {
-            background: #ffeeba;
-        }
-
-        .correct {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .wrong {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        #scoreBoard {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      #gameText {
+        font-size: 18px;
+        line-height: 1.6;
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      .char {
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-block;
+        margin: 2px;
+      }
+      .char:hover {
+        background: #ffeeba;
+      }
+      .correct {
+        color: #28a745;
+        font-weight: bold;
+      }
+      .wrong {
+        color: #dc3545;
+        font-weight: bold;
+      }
+      #scoreBoard {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <div id="scoreBoard">
-        得分儿：<span id="score">0</span> | 还有几个儿：<span id="remaining">0</span>
+      得分儿：<span id="score">0</span> | 剩余几个儿：<span id="remaining"
+        >0</span
+      >
     </div>
     <div id="gameText"></div>
     <div id="result"></div>
-    idear by ts8zs. coder is deepseeker. <br>
+    Idear by ts8zs. Powered by deepseeker. <br />
     url参数儿支持?tier={base64}出题儿
     <script>
-        let originalText =
-            "这儿有个小胡同儿，门口儿坐个老头儿，手里拿个烟袋锅儿，嘴里念叨着今儿的天儿不错。小孩儿们追着跑，一会儿到东边儿，一会儿到西边儿，真是有意思。";
+      let originalText =
+        "这儿有个小胡同儿，门口儿坐个老头儿，手里拿个烟袋锅儿，嘴里念叨着今儿的天儿不错。小孩儿们追着跑，一会儿到东边儿，一会儿到西边儿，真是有意思。";
 
-        // 在原有代码前加入Base64编解码类（来自参考内容）
-        class Base64 {
-            constructor() {
-                this._keyStr =
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-            }
-
-            decode(input) {
-                let output = "";
-                let chr1, chr2, chr3;
-                let enc1, enc2, enc3, enc4;
-                let i = 0;
-                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-                while (i < input.length) {
-                    enc1 = this._keyStr.indexOf(input.charAt(i++));
-                    enc2 = this._keyStr.indexOf(input.charAt(i++));
-                    enc3 = this._keyStr.indexOf(input.charAt(i++));
-                    enc4 = this._keyStr.indexOf(input.charAt(i++));
-                    chr1 = (enc1 << 2) | (enc2 >> 4);
-                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                    chr3 = ((enc3 & 3) << 6) | enc4;
-                    output += String.fromCharCode(chr1);
-                    if (enc3 != 64) output += String.fromCharCode(chr2);
-                    if (enc4 != 64) output += String.fromCharCode(chr3);
-                }
-                return this._utf8_decode(output);
-            }
-
-            _utf8_decode(utftext) {
-                let string = "";
-                let i = 0;
-                while (i < utftext.length) {
-                    let c = utftext.charCodeAt(i);
-                    if (c < 128) {
-                        string += String.fromCharCode(c);
-                        i++;
-                    } else if (c > 191 && c < 224) {
-                        let c2 = utftext.charCodeAt(i + 1);
-                        string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                        i += 2;
-                    } else {
-                        let c2 = utftext.charCodeAt(i + 1);
-                        let c3 = utftext.charCodeAt(i + 2);
-                        string += String.fromCharCode(
-                            ((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
-                        );
-                        i += 3;
-                    }
-                }
-                return string;
-            }
+      // 在原有代码前加入Base64编解码类（来自参考内容）
+      class Base64 {
+        constructor() {
+          this._keyStr =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
         }
 
-        // 初始化游戏
-        let score = 0;
-        let remaining = 0;
-        let correctPositions = new Set();
-        let charMap = []; // 记录显示文本字符对应的原始位置
-
-        function initGame() {
-            const base64 = new Base64();
-            const urlParams = new URLSearchParams(window.location.search);
-            let gameText = originalText; // 默认文本
-
-            // 从URL读取base64参数
-            if (urlParams.has("tier")) {
-                try {
-                    const decoded = base64.decode(urlParams.get("tier"));
-                    gameText = decoded.replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
-                } catch (e) {
-                    console.error("Base64解码失败，使用默认文本");
-                    gameText = originalText;
-                }
-            }
-
-            let processedChars = [];
-            let rawChars = gameText.split("");
-
-            // 构建字符映射关系
-            for (let i = 0; i < rawChars.length; i++) {
-                if (rawChars[i] === "儿") {
-                    if (i > 0) {
-                        correctPositions.add(processedChars.length - 1);
-                        remaining++;
-                    }
-                } else {
-                    processedChars.push(rawChars[i]);
-                    charMap.push(i); // 记录显示文本位置对应的原始位置
-                }
-            }
-
-            // 生成处理后的文本
-            let gameDiv = document.getElementById("gameText");
-            processedChars.forEach((char, index) => {
-                const span = document.createElement("span");
-                span.className = "char";
-                span.textContent = char;
-                span.dataset.originalIndex = charMap[index]; // 保存原始位置
-                span.onclick = handleClick;
-                gameDiv.appendChild(span);
-            });
-
-            updateDisplay();
+        decode(input) {
+          let output = "";
+          let chr1, chr2, chr3;
+          let enc1, enc2, enc3, enc4;
+          let i = 0;
+          input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+          while (i < input.length) {
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+            output += String.fromCharCode(chr1);
+            if (enc3 != 64) output += String.fromCharCode(chr2);
+            if (enc4 != 64) output += String.fromCharCode(chr3);
+          }
+          return this._utf8_decode(output);
         }
 
-        function handleClick(event) {
-            const originalIndex = parseInt(event.target.dataset.originalIndex);
-            const nextChar = originalText[originalIndex + 1];
-            const index = parseInt(event.target.dataset.index);
-            if (nextChar === "儿") {
-                score += 10;
-                remaining--;
-                correctPositions.delete(index);
-                event.target.classList.add("correct");
-                event.target.insertAdjacentHTML(
-                    "afterend",
-                    '<span class="correct">儿</span>'
-                );
+        _utf8_decode(utftext) {
+          let string = "";
+          let i = 0;
+          while (i < utftext.length) {
+            let c = utftext.charCodeAt(i);
+            if (c < 128) {
+              string += String.fromCharCode(c);
+              i++;
+            } else if (c > 191 && c < 224) {
+              let c2 = utftext.charCodeAt(i + 1);
+              string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+              i += 2;
             } else {
-                score -= 5;
-                event.target.classList.add("wrong");
-                setTimeout(() => event.target.classList.remove("wrong"), 500);
+              let c2 = utftext.charCodeAt(i + 1);
+              let c3 = utftext.charCodeAt(i + 2);
+              string += String.fromCharCode(
+                ((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
+              );
+              i += 3;
             }
+          }
+          return string;
+        }
+      }
 
-            updateDisplay();
-            checkGameEnd();
+      // 初始化游戏
+      let score = 0;
+      let remaining = 0;
+      let correctPositions = new Set();
+      let charMap = []; // 记录显示文本字符对应的原始位置
+
+      function initGame() {
+        const base64 = new Base64();
+        const urlParams = new URLSearchParams(window.location.search);
+        let gameText = originalText; // 默认文本
+
+        // 从URL读取base64参数
+        if (urlParams.has("tier")) {
+          try {
+            const decoded = base64.decode(urlParams.get("tier"));
+            gameText = decoded.replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
+          } catch (e) {
+            console.error("Base64解码失败，使用默认文本");
+            gameText = originalText;
+          }
         }
 
-        function updateDisplay() {
-            document.getElementById("score").textContent = score;
-            document.getElementById("remaining").textContent = remaining;
+        let processedChars = [];
+        let rawChars = gameText.split("");
+
+        // 构建字符映射关系
+        for (let i = 0; i < rawChars.length; i++) {
+          if (rawChars[i] === "儿") {
+            if (i > 0) {
+              correctPositions.add(processedChars.length - 1);
+              remaining++;
+            }
+          } else {
+            processedChars.push(rawChars[i]);
+            charMap.push(i); // 记录显示文本位置对应的原始位置
+          }
         }
 
-        function checkGameEnd() {
-            if (remaining === 0) {
-                document.getElementById("result").innerHTML = `
+        // 生成处理后的文本
+        let gameDiv = document.getElementById("gameText");
+        processedChars.forEach((char, index) => {
+          const span = document.createElement("span");
+          span.className = "char";
+          span.textContent = char;
+          span.dataset.originalIndex = charMap[index]; // 保存原始位置
+          span.onclick = handleClick;
+          gameDiv.appendChild(span);
+        });
+
+        updateDisplay();
+      }
+
+      function handleClick(event) {
+        const originalIndex = parseInt(event.target.dataset.originalIndex);
+        const nextChar = originalText[originalIndex + 1];
+        const index = parseInt(event.target.dataset.index);
+        if (!event.target.classList.contains("correct")) {
+          if (nextChar === "儿") {
+            score += 10;
+            remaining--;
+            correctPositions.delete(index);
+            event.target.classList.add("correct");
+            event.target.insertAdjacentHTML(
+              "afterend",
+              '<span class="correct">儿</span>'
+            );
+          } else {
+            score -= 5;
+            event.target.classList.add("wrong");
+            setTimeout(() => event.target.classList.remove("wrong"), 500);
+          }
+
+          updateDisplay();
+          checkGameEnd();
+        }
+      }
+      function updateDisplay() {
+        document.getElementById("score").textContent = score;
+        document.getElementById("remaining").textContent = remaining;
+      }
+
+      function checkGameEnd() {
+        if (remaining === 0) {
+          document.getElementById("result").innerHTML = `
                     <h3>游戏结束！最终得分：${score}</h3>
                     <button onclick="location.reload()">再玩一次</button>
                 `;
-            }
         }
+      }
 
-        // 启动游戏
-        initGame();
+      // 启动游戏
+      initGame();
     </script>
-</body>
-
+  </body>
 </html>
