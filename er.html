@@ -124,7 +124,7 @@
             let gameText = originalText; // 默认文本
 
             // 从URL读取base64参数
-            if (urlParams.has("t")) {
+            if (urlParams.has("tier")) {
                 try {
                     const decoded = base64.decode(urlParams.get("tier"));
                     gameText = decoded.replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
