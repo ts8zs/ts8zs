@@ -48,63 +48,10 @@
     <div id="gameText"></div>
     <div id="result"></div>
     Idear by ts8zs. Powered by deepseeker. <br />
-    url参数儿支持?tier={base64}出题儿
+    url参数儿支持 ?tier= 出题儿
     <script>
       let originalText =
         "这儿有个小胡同儿，门口儿坐个老头儿，手里拿个烟袋锅儿，嘴里念叨着今儿的天儿不错。小孩儿们追着跑，一会儿到东边儿，一会儿到西边儿，真是有意思。";
-
-      // 在原有代码前加入Base64编解码类（来自参考内容）
-      class Base64 {
-        constructor() {
-          this._keyStr =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        }
-
-        decode(input) {
-          let output = "";
-          let chr1, chr2, chr3;
-          let enc1, enc2, enc3, enc4;
-          let i = 0;
-          input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-          while (i < input.length) {
-            enc1 = this._keyStr.indexOf(input.charAt(i++));
-            enc2 = this._keyStr.indexOf(input.charAt(i++));
-            enc3 = this._keyStr.indexOf(input.charAt(i++));
-            enc4 = this._keyStr.indexOf(input.charAt(i++));
-            chr1 = (enc1 << 2) | (enc2 >> 4);
-            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-            chr3 = ((enc3 & 3) << 6) | enc4;
-            output += String.fromCharCode(chr1);
-            if (enc3 != 64) output += String.fromCharCode(chr2);
-            if (enc4 != 64) output += String.fromCharCode(chr3);
-          }
-          return this._utf8_decode(output);
-        }
-
-        _utf8_decode(utftext) {
-          let string = "";
-          let i = 0;
-          while (i < utftext.length) {
-            let c = utftext.charCodeAt(i);
-            if (c < 128) {
-              string += String.fromCharCode(c);
-              i++;
-            } else if (c > 191 && c < 224) {
-              let c2 = utftext.charCodeAt(i + 1);
-              string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-              i += 2;
-            } else {
-              let c2 = utftext.charCodeAt(i + 1);
-              let c3 = utftext.charCodeAt(i + 2);
-              string += String.fromCharCode(
-                ((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
-              );
-              i += 3;
-            }
-          }
-          return string;
-        }
-      }
 
       // 初始化游戏
       let score = 0;
@@ -113,17 +60,15 @@
       let charMap = []; // 记录显示文本字符对应的原始位置
 
       function initGame() {
-        const base64 = new Base64();
         const urlParams = new URLSearchParams(window.location.search);
         let gameText = originalText; // 默认文本
 
-        // 从URL读取base64参数
+        // 从URL读取参数
         if (urlParams.has("tier")) {
           try {
-            const decoded = base64.decode(urlParams.get("tier"));
-            gameText = decoded.replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
+            gameText = urlParams.get("tier").replace(/</g, "＜").replace(/>/g, "＞"); // 防XSS
           } catch (e) {
-            console.error("Base64解码失败，使用默认文本");
+            console.error("解码失败，使用默认文本");
             gameText = originalText;
           }
         }
@@ -190,8 +135,8 @@
       function checkGameEnd() {
         if (remaining === 0) {
           document.getElementById("result").innerHTML = `
-                    <h3>游戏结束！最终得分：${score}</h3>
-                    <button onclick="location.reload()">再玩一次</button>
+                    <h3>游戏结束！最终得分儿：${score}</h3>
+                    <button onclick="location.reload()">再玩儿一次</button>
                 `;
         }
       }
