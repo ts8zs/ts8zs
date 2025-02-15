@@ -58,11 +58,11 @@
       let remaining = 0;
       let correctPositions = new Set();
       let charMap = []; // 记录显示文本字符对应的原始位置
-
+      let gameText = originalText; // 默认文本
+      let highestscore=0;
       function initGame() {
         const urlParams = new URLSearchParams(window.location.search);
-        let gameText = originalText; // 默认文本
-
+  
         // 从URL读取参数
         if (urlParams.has("tier")) {
           try {
@@ -88,7 +88,7 @@
             charMap.push(i); // 记录显示文本位置对应的原始位置
           }
         }
-
+        highestscore=correctPositions.size;
         // 生成处理后的文本
         let gameDiv = document.getElementById("gameText");
         processedChars.forEach((char, index) => {
@@ -105,7 +105,7 @@
 
       function handleClick(event) {
         const originalIndex = parseInt(event.target.dataset.originalIndex);
-        const nextChar = originalText[originalIndex + 1];
+        const nextChar = gameText[originalIndex + 1];
         const index = parseInt(event.target.dataset.index);
         if (!event.target.classList.contains("correct")) {
           if (nextChar === "儿") {
@@ -133,9 +133,21 @@
       }
 
       function checkGameEnd() {
+        let ren="您是地道北京人儿!";
+        if (score < highestscore*10){
+            ren="您是外地人儿吧?";
+        }
+        if (score < 0){
+            ren="您是外星人儿吧?";
+        }
+        if (score < -100){
+            ren="逗我玩儿?";
+        }
+
         if (remaining === 0) {
           document.getElementById("result").innerHTML = `
                     <h3>游戏结束！最终得分儿：${score}</h3>
+                    ${ren}
                     <button onclick="location.reload()">再玩儿一次</button>
                 `;
         }
