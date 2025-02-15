@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>几个儿字儿</title>
+    <title>儿化音小游戏</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -93,7 +93,7 @@
               .replace(/</g, "＜")
               .replace(/>/g, "＞"); // 防XSS
           } catch (e) {
-            gameText = b64EncodeUnicode(urlParams.get("tier"))
+            gameText = urlParams.get("tier")
               .replace(/</g, "＜")
               .replace(/>/g, "＞");
             //如果tier不是base64将url的tier修改为base64并在地址栏显示
