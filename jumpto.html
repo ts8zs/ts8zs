@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Jump To Page</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZKG5VG2NM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-QZKG5VG2NM');
+    </script>
     <script>
         // 使用JavaScript在页面加载时处理跳转
-        window.onload = function() {
+        window.onload = function () {
             // 获取URL参数
             function getURLParameter(name) {
                 return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -25,8 +35,10 @@
         };
     </script>
 </head>
+
 <body>
     <!-- 这里可以添加一些内容或者提示信息，但因为页面会立即跳转，实际上用户可能看不到这些内容 -->
     <h1>正在跳转中...</h1>
 </body>
+
 </html>
