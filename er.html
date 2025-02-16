@@ -1,190 +1,213 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>几个儿字儿</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-      }
-      #gameText {
-        font-size: 18px;
-        line-height: 1.6;
-        border: 1px solid #ccc;
-        padding: 15px;
-        margin: 20px 0;
-      }
-      .char {
-        cursor: pointer;
-        transition: all 0.2s;
-        display: inline-block;
-        margin: 2px;
-      }
-      .char:hover {
-        background: #ffeeba;
-      }
-      .correct {
-        color: #28a745;
-        font-weight: bold;
-      }
-      .wrong {
-        color: #dc3545;
-        font-weight: bold;
-      }
-      #scoreBoard {
-        font-size: 20px;
-        margin-bottom: 15px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="scoreBoard">
-      得分儿：<span id="score">0</span> | 剩余几个儿：<span id="remaining"
-        >0</span
-      >
-    </div>
-    <div id="gameText"></div>
-    <div id="result"></div>
-    Idear by ts8zs. Powered by deepseeker. <br />
-    url参数儿支持 ?tier= 出题儿
-    <script>
-      // base64编码Unicode
-      function b64EncodeUnicode(str) {
-        return btoa(
-          encodeURIComponent(str).replace(
-            /%([0-9A-F]{2})/g,
-            function (match, p1) {
-              return String.fromCharCode("0x" + p1);
-            }
-          )
-        );
-      }
-      // base64解码Unicode
-      function b64DecodeUnicode(str) {
-        return decodeURIComponent(
-          atob(str)
-            .split("")
-            .map(function (c) {
-              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join("")
-        );
-      }
 
-      let originalText =
-        "这儿有个小胡同儿，门口儿坐个老头儿，手里拿个烟袋锅儿，嘴里念叨着今儿的天儿不错。小孩儿们追着跑，一会儿到东边儿，一会儿到西边儿，真是有意思。";
+<head>
+  <title>几个儿字儿</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
 
-      // 初始化游戏
-      let score = 0;
-      let remaining = 0;
-      let correctPositions = new Set();
-      let charMap = []; // 记录显示文本字符对应的原始位置
-      let gameText = originalText; // 默认文本
-      let highestscore = 0;
-      function initGame() {
-        const urlParams = new URLSearchParams(window.location.search);
+    #gameText {
+      font-size: 18px;
+      line-height: 1.6;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 20px 0;
+    }
 
-        // 从URL读取参数
-        if (urlParams.has("tier")) {
-          try {
-            gameText = b64DecodeUnicode(urlParams.get("tier"))
-              .replace(/</g, "＜")
-              .replace(/>/g, "＞"); // 防XSS
-          } catch (e) {
-            gameText = urlParams.get("tier")
-              .replace(/</g, "＜")
-              .replace(/>/g, "＞");
-            //如果tier不是base64将url的tier修改为base64并在地址栏显示
-            urlParams.set("tier", b64EncodeUnicode(urlParams.get("tier")));
-            //修改url
-            window.history.replaceState(null, null, "?" + urlParams.toString());
+    .char {
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      margin: 2px;
+    }
+
+    .char:hover {
+      background: #ffeeba;
+    }
+
+    .correct {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    #scoreBoard {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="scoreBoard">
+    得分儿：<span id="score">0</span> | 剩余几个儿：<span id="remaining">0</span>
+  </div>
+  <div id="gameText"></div>
+  <div id="result"></div>
+  Idear by ts8zs. Powered by deepseeker. <br />
+  url参数儿支持 ?tier= 出题儿
+  <script>
+    // base64编码Unicode
+    function b64EncodeUnicode(str) {
+      return btoa(
+        encodeURIComponent(str).replace(
+          /%([0-9A-F]{2})/g,
+          function (match, p1) {
+            return String.fromCharCode("0x" + p1);
           }
+        )
+      );
+    }
+    // base64解码Unicode
+    function b64DecodeUnicode(str) {
+      return decodeURIComponent(
+        atob(str)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+    }
+
+    let originalText =
+      `张大爷跟李大妈胡同口儿碰上了，俩人儿站路灯底下唠嗑儿。
+张大爷："今儿个天儿够热的嘿！我刚从后海遛弯儿回来，半道儿买了根儿冰棍儿，您猜怎么着？化得比我家孙子写作业还快！"
+
+李大妈乐得直拍大腿："您这比喻儿绝了！我晌午头儿蒸窝头儿，掀锅盖儿一瞅——好家伙，面没发起来，愣是蒸出一屉死面疙瘩儿！"
+
+这时候隔壁王婶儿蹬着三轮儿打旁边儿过，车斗儿里摞着十几个痰盂儿，叮铃哐啷响得跟打击乐似的。张大爷眯缝眼儿一瞅，突然拍脑门儿："哎哟喂！敢情我家夜壶儿让收废品儿的顺走了！"
+
+李大妈赶紧拽他袖子："您先甭急！前儿个我瞅见您家夜壶儿在拐角儿电线杆子底下当花盆儿使呢！"
+张大爷一跺脚："嗐！我说最近浇花儿老闻见一股子六必居酱菜味儿！"
+
+王婶儿在三轮儿上扯嗓子喊："老张头儿！夜壶儿我给你拾掇回来了，搁你家窗根儿底下了！"
+张大爷冲那边儿作揖："得嘞！赶明儿我请您喝豆汁儿配焦圈儿！"
+
+李大妈突然一拍手："等会儿！您家夜壶儿当花盆儿，那您现在用啥啊？"
+张大爷神秘一笑，从裤兜儿掏出个二锅头空瓶儿："这玩意儿口儿小，不容易溅脚面上！"
+
+胡同里顿时炸开一片"嚯——"的起哄声儿，惊得树梢儿上的家雀儿扑棱棱全飞了。`;
+
+    // 初始化游戏
+    let score = 0;
+    let remaining = 0;
+    let correctPositions = new Set();
+    let charMap = []; // 记录显示文本字符对应的原始位置
+    let gameText = originalText; // 默认文本
+    let highestscore = 0;
+    function initGame() {
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // 从URL读取参数
+      if (urlParams.has("tier")) {
+        try {
+          gameText = b64DecodeUnicode(urlParams.get("tier"))
+            .replace(/</g, "＜")
+            .replace(/>/g, "＞"); // 防XSS
+        } catch (e) {
+          gameText = urlParams.get("tier")
+            .replace(/</g, "＜")
+            .replace(/>/g, "＞");
+          //如果tier不是base64将url的tier修改为base64并在地址栏显示
+          urlParams.set("tier", b64EncodeUnicode(urlParams.get("tier")));
+          //修改url
+          window.history.replaceState(null, null, "?" + urlParams.toString());
         }
+      }
 
-        let processedChars = [];
-        let rawChars = gameText.split("");
+      let processedChars = [];
+      let rawChars = gameText.split("");
 
-        // 构建字符映射关系
-        for (let i = 0; i < rawChars.length; i++) {
-          if (rawChars[i] === "儿") {
-            if (i > 0) {
-              correctPositions.add(processedChars.length - 1);
-              remaining++;
-            }
-          } else {
-            processedChars.push(rawChars[i]);
-            charMap.push(i); // 记录显示文本位置对应的原始位置
+      // 构建字符映射关系
+      for (let i = 0; i < rawChars.length; i++) {
+        if (rawChars[i] === "儿") {
+          if (i > 0) {
+            correctPositions.add(processedChars.length - 1);
+            remaining++;
           }
+        } else {
+          processedChars.push(rawChars[i]);
+          charMap.push(i); // 记录显示文本位置对应的原始位置
         }
-        highestscore = correctPositions.size;
-        // 生成处理后的文本
-        let gameDiv = document.getElementById("gameText");
-        processedChars.forEach((char, index) => {
-          const span = document.createElement("span");
-          span.className = "char";
-          span.textContent = char;
-          span.dataset.originalIndex = charMap[index]; // 保存原始位置
-          span.onclick = handleClick;
-          gameDiv.appendChild(span);
-        });
+      }
+      highestscore = correctPositions.size;
+      // 生成处理后的文本
+      let gameDiv = document.getElementById("gameText");
+      processedChars.forEach((char, index) => {
+        const span = document.createElement("span");
+        span.className = "char";
+        span.textContent = char;
+        span.dataset.originalIndex = charMap[index]; // 保存原始位置
+        span.onclick = handleClick;
+        gameDiv.appendChild(span);
+      });
+
+      updateDisplay();
+    }
+
+    function handleClick(event) {
+      const originalIndex = parseInt(event.target.dataset.originalIndex);
+      const nextChar = gameText[originalIndex + 1];
+      const index = parseInt(event.target.dataset.index);
+      if (!event.target.classList.contains("correct")) {
+        if (nextChar === "儿") {
+          score += 10;
+          remaining--;
+          correctPositions.delete(index);
+          event.target.classList.add("correct");
+          event.target.insertAdjacentHTML(
+            "afterend",
+            '<span class="correct">儿</span>'
+          );
+        } else {
+          score -= 5;
+          event.target.classList.add("wrong");
+          setTimeout(() => event.target.classList.remove("wrong"), 500);
+        }
 
         updateDisplay();
+        checkGameEnd();
+      }
+    }
+    function updateDisplay() {
+      document.getElementById("score").textContent = score;
+      document.getElementById("remaining").textContent = remaining;
+    }
+
+    function checkGameEnd() {
+      let ren = "您是地道北京人儿!";
+      if (score < highestscore * 10) {
+        ren = "您是外地人儿吧?";
+      }
+      if (score < 0) {
+        ren = "您是外星人儿吧?";
+      }
+      if (score < -100) {
+        ren = "逗我玩儿?";
       }
 
-      function handleClick(event) {
-        const originalIndex = parseInt(event.target.dataset.originalIndex);
-        const nextChar = gameText[originalIndex + 1];
-        const index = parseInt(event.target.dataset.index);
-        if (!event.target.classList.contains("correct")) {
-          if (nextChar === "儿") {
-            score += 10;
-            remaining--;
-            correctPositions.delete(index);
-            event.target.classList.add("correct");
-            event.target.insertAdjacentHTML(
-              "afterend",
-              '<span class="correct">儿</span>'
-            );
-          } else {
-            score -= 5;
-            event.target.classList.add("wrong");
-            setTimeout(() => event.target.classList.remove("wrong"), 500);
-          }
-
-          updateDisplay();
-          checkGameEnd();
-        }
-      }
-      function updateDisplay() {
-        document.getElementById("score").textContent = score;
-        document.getElementById("remaining").textContent = remaining;
-      }
-
-      function checkGameEnd() {
-        let ren = "您是地道北京人儿!";
-        if (score < highestscore * 10) {
-          ren = "您是外地人儿吧?";
-        }
-        if (score < 0) {
-          ren = "您是外星人儿吧?";
-        }
-        if (score < -100) {
-          ren = "逗我玩儿?";
-        }
-
-        if (remaining === 0) {
-          document.getElementById("result").innerHTML = `
+      if (remaining === 0) {
+        document.getElementById("result").innerHTML = `
                     <h3>游戏结束！最终得分儿：${score}</h3>
                     ${ren}
                     <button onclick="location.reload()">再玩儿一次</button>
                 `;
-        }
       }
+    }
 
-      // 启动游戏
-      initGame();
-    </script>
-  </body>
+    // 启动游戏
+    initGame();
+  </script>
+</body>
+
 </html>
