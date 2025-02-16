@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3; url=/index.html"> <!-- 3 秒后跳转 -->
+    <title>提升?智商</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 5%;
+        }
+        h1 {
+            color: #ff0000;
+        }
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>抱歉，您访问的页面不存在。</h1>
+    <p>将在<span id="countdown">3</span>秒后返回<a href="/index.html">首页</a>.</p>
+
+    <script>
+        var countdownElement = document.getElementById('countdown');
+        var countDownTime = parseInt(countdownElement.innerText);
+
+        setInterval(function () {
+            if (countDownTime > 0) {
+                countDownTime--;
+                countdownElement.textContent = countDownTime.toString();
+            } else {
+                window.location.href = '/index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
