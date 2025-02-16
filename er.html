@@ -6,17 +6,25 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 100%;
+      margin: 20px;
       padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     #gameText {
-      font-size: 18px;
+      font-size: 1.2em;
       line-height: 1.6;
       border: 1px solid #ccc;
       padding: 15px;
       margin: 20px 0;
+      word-wrap: break-word;
     }
 
     .char {
@@ -41,20 +49,74 @@
     }
 
     #scoreBoard {
-      font-size: 20px;
+      font-size: 1.2em;
       margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #gameText {
+        font-size: 1.1em;
+      }
+
+      #scoreBoard {
+        font-size: 1em;
+      }
+
+      .char {
+        margin: 1px;
+      }
+
+      h1 {
+        font-size: 1.2em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.1em;
+      }
+
+      #gameText {
+        font-size: 1em;
+        padding: 10px;
+      }
+
+      .char {
+        margin: 1px;
+        font-size: 1.2em;
+      }
+
+      #scoreBoard {
+        font-size: 1em;
+      }
+
+      #result button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>北京儿话模拟器儿</h1>点击需要加儿的字儿
+  <h1>北京儿话模拟器儿</h1>
   <div id="scoreBoard">
     得分儿：<span id="score">0</span> | 剩余几个儿：<span id="remaining">0</span>
   </div>
   <div id="gameText"></div>
   <div id="result"></div>
-  Idear by ts8zs. Powered by deepseeker. <br />
+  点击需要加儿的字儿 Idear by ts8zs. Powered by deepseeker. <br />
   url参数儿支持 <a href="er.html?tier=出题儿">?tier=出题儿</a>
   <script>
     // base64编码Unicode
