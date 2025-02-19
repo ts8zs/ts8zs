@@ -164,6 +164,7 @@
                     window.history.replaceState(null, null, "?" + urlParams.toString());
                 }
             }
+
             const chars = gameText.split('');
             corrections = [];
 
@@ -189,9 +190,6 @@
                 if (corrections.some(c => c.index === index)) {
                     span.dataset.correct = corrections.find(c => c.index === index).correct;
                     span.onclick = handleClick;
-                } else {
-                    score -= 5;
-                    event.target.classList.add("wrong");
                 }
 
                 gameDiv.appendChild(span);
@@ -213,8 +211,8 @@
                 score += 10;
                 remaining--;
             } else {
-                score = Math.max(0, score - 5);
-                target.classList.add('wrong');
+                score -= 5;
+                event.target.classList.add("wrong");
             }
 
             updateDisplay();
