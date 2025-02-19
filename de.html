@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>的地得大挑战</title>
+    <link rel="icon"
+        href="data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><text x='50%' y='50%' style='dominant-baseline:middle;text-anchor:start;font-family:sans-serif;' transform-origin=center scale=0.1,0.1 translate(5,-4)>的</text></svg>"
+        type="image/svg+xml" />
+    <style>
+        /* 保持原有样式不变 */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 100%;
+            margin: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #gameText {
+            font-size: 1.2em;
+            line-height: 1.6;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 20px 0;
+            word-wrap: break-word;
+        }
+
+        .char {
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+            margin: 2px;
+        }
+
+        .char:hover {
+            background: #ffeeba;
+        }
+
+        .correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        #scoreBoard {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            #gameText {
+                font-size: 1.1em;
+            }
+
+            #scoreBoard {
+                font-size: 1em;
+            }
+
+            .char {
+                margin: 1px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.1em;
+            }
+
+            #gameText {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            .char {
+                margin: 1px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>的地得大挑战</h1>
+    <div id="scoreBoard">
+        得分：<span id="score">0</span> | 剩余错误：<span id="remaining">0</span>
+    </div>
+    <div id="gameText"></div>
+    <div id="result"></div>
+    点击纠正错误使用的地得。 Idea by ts8zs. Powered by deepseek<br />
+    <script>
+        // base64编码Unicode
+        function b64EncodeUnicode(str) {
+            return btoa(
+                encodeURIComponent(str).replace(
+                    /%([0-9A-F]{2})/g,
+                    function (match, p1) {
+                        return String.fromCharCode("0x" + p1);
+                    }
+                )
+            );
+        }
+        // base64解码Unicode
+        function b64DecodeUnicode(str) {
+            return decodeURIComponent(
+                atob(str)
+                    .split("")
+                    .map(function (c) {
+                        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                    })
+                    .join("")
+            );
+        }
+
+        // 示例文本（包含正确使用的地得）
+        let originalText =
+            "这是一个美丽的地方，他高兴地跳起来，认真地写字。这里的天气让人心情愉快，大家得努力才能成功。小明飞快地跑着，激动得说不出话，手中的水杯不停地晃动。记得要把房间打扫得干干净净，开心地笑才能让生活更美好。";
+            let gameText = originalText; // 默认文本
+        let score = 0;
+        let remaining = 0;
+        let highestscore = 0;
+        let corrections = [];
+
+        function initGame() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // 从URL读取参数
+            if (urlParams.has("ti")) {
+                try {
+                    gameText = b64DecodeUnicode(urlParams.get("ti"))
+                        .replace(/</g, "＜")
+                        .replace(/>/g, "＞"); // 防XSS
+                } catch (e) {
+                    gameText = urlParams.get("ti")
+                        .replace(/</g, "＜")
+                        .replace(/>/g, "＞");
+                    //如果ti不是base64将url的ti修改为base64并在地址栏显示
+                    urlParams.set("ti", b64EncodeUnicode(urlParams.get("ti")));
+                    //修改url
+                    window.history.replaceState(null, null, "?" + urlParams.toString());
+                }
+            }
+            const chars = gameText.split('');
+            corrections = [];
+
+            // 生成替换文本并记录正确答案
+            chars.forEach((char, index) => {
+                if (['的', '地', '得'].includes(char)) {
+                    const wrongOptions = ['的', '地', '得'].filter(c => c !== char);
+                    const replacement = wrongOptions[Math.floor(Math.random() * 2)];
+                    corrections.push({ index, correct: char });
+                    chars[index] = replacement; // 替换为错误用法
+                }
+            });
+
+            // 生成游戏文本
+            const gameDiv = document.getElementById('gameText');
+            gameDiv.innerHTML = '';
+            chars.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = char;
+
+                // 如果是需要纠正的位置
+                if (corrections.some(c => c.index === index)) {
+                    span.dataset.correct = corrections.find(c => c.index === index).correct;
+                    span.onclick = handleClick;
+                }
+
+                gameDiv.appendChild(span);
+            });
+
+            remaining = corrections.length;
+            highestscore = remaining * 10;
+            updateDisplay();
+        }
+
+        function handleClick(event) {
+            const target = event.target;
+            if (target.classList.contains('correct')) return;
+
+            const correctChar = target.dataset.correct;
+            if (correctChar) {
+                target.textContent = correctChar;
+                target.classList.add('correct');
+                score += 10;
+                remaining--;
+            } else {
+                score = Math.max(0, score - 5);
+                target.classList.add('wrong');
+            }
+
+            updateDisplay();
+            checkGameEnd();
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('remaining').textContent = remaining;
+        }
+
+        function checkGameEnd() {
+            if (remaining === 0) {
+                let comment = "太棒了！语文大师！";
+                if (score < highestscore * 0.8) comment = "还不错，继续努力！";
+                if (score < highestscore * 0.6) comment = "有些进步空间哦！";
+
+                document.getElementById('result').innerHTML = `
+          <h3>游戏结束！最终得分：${score}</h3>
+          ${comment}<br/>
+          <button onclick="location.reload()">再玩一次</button>
+        `;
+            }
+        }
+
+        // 启动游戏
+        initGame();
+    </script>
+</body>
+
+</html>
