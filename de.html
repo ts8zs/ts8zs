@@ -190,8 +190,11 @@
                 if (corrections.some(c => c.index === index)) {
                     span.dataset.correct = corrections.find(c => c.index === index).correct;
                     span.onclick = handleClick;
+                }else{
+                    span.onclick = wrongClick;
                 }
 
+                
                 gameDiv.appendChild(span);
             });
 
@@ -200,6 +203,11 @@
             updateDisplay();
         }
 
+        function wrongClick(event) {
+            score -= 5;
+            event.target.classList.add("wrong");
+        }   
+        
         function handleClick(event) {
             const target = event.target;
             if (target.classList.contains('correct')) return;
@@ -210,9 +218,6 @@
                 target.classList.add('correct');
                 score += 10;
                 remaining--;
-            } else {
-                score -= 5;
-                event.target.classList.add("wrong");
             }
 
             updateDisplay();
