@@ -13,3 +13,4 @@
   * [gal改动画为什么多暴死](/galani)
   * [做游戏就是竹篮打水](/talkgamewithdeepseek)
   * [儿化音小游戏](https://www.ts8zs.com/er.html)
+  * [的地得小游戏](https://www.ts8zs.com/de.html)
