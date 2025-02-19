@@ -111,7 +111,7 @@
     <div id="gameText"></div>
     <div id="result"></div>
     点击纠正被错误地使用得的的地得。 Idea by ts8zs. Powered by deepseek<br />
-    url参数支持 <a href="de.html?ti=我稍微地觉得这个题的答案有点简单">?ti=出题</a>
+    url参数支持 <a href="de.html?ti=作者稍微地觉得这个题的答案有点简单">?ti=出题</a>
     <script>
         // base64编码Unicode
         function b64EncodeUnicode(str) {
@@ -206,6 +206,8 @@
         function wrongClick(event) {
             score -= 5;
             event.target.classList.add("wrong");
+            updateDisplay();
+            checkGameEnd();
         }   
         
         function handleClick(event) {
