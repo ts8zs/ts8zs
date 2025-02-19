@@ -188,7 +188,7 @@
 
       // 构建字符映射关系
       for (let i = 0; i < rawChars.length; i++) {
-        if (rawChars[i] === "儿") {
+        if (rawChars[i] === "儿"&&i!=0) {
           if (i > 0) {
             correctPositions.add(processedChars.length - 1);
             remaining++;
