@@ -111,6 +111,7 @@
     <div id="gameText"></div>
     <div id="result"></div>
     点击纠正错误使用的地得。 Idea by ts8zs. Powered by deepseek<br />
+    url参数支持 <a href="de.html?ti=我稍微地觉得这个题的答案有点简单">?ti=出题</a>
     <script>
         // base64编码Unicode
         function b64EncodeUnicode(str) {
@@ -138,7 +139,7 @@
         // 示例文本（包含正确使用的地得）
         let originalText =
             "这是一个美丽的地方，他高兴地跳起来，认真地写字。这里的天气让人心情愉快，大家得努力才能成功。小明飞快地跑着，激动得说不出话，手中的水杯不停地晃动。记得要把房间打扫得干干净净，开心地笑才能让生活更美好。";
-            let gameText = originalText; // 默认文本
+        let gameText = originalText; // 默认文本
         let score = 0;
         let remaining = 0;
         let highestscore = 0;
@@ -188,6 +189,9 @@
                 if (corrections.some(c => c.index === index)) {
                     span.dataset.correct = corrections.find(c => c.index === index).correct;
                     span.onclick = handleClick;
+                } else {
+                    score -= 5;
+                    event.target.classList.add("wrong");
                 }
 
                 gameDiv.appendChild(span);
@@ -224,7 +228,7 @@
 
         function checkGameEnd() {
             if (remaining === 0) {
-                let comment = "太棒了！语文大师！";
+                let comment = "您表现得就像的地得的大师！";
                 if (score < highestscore * 0.8) comment = "还不错，继续努力！";
                 if (score < highestscore * 0.6) comment = "有些进步空间哦！";
 
