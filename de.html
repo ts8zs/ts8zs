@@ -3,6 +3,10 @@
 
 <head>
     <title>的地得扫雷</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZKG5VG2NM"></script>
+
     <link rel="icon"
         href="data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><text x='50%' y='50%' style='dominant-baseline:middle;text-anchor:start;font-family:sans-serif;' transform-origin=center scale=0.1,0.1 translate(5,-4)>的</text></svg>"
         type="image/svg+xml" />
@@ -190,11 +194,11 @@
                 if (corrections.some(c => c.index === index)) {
                     span.dataset.correct = corrections.find(c => c.index === index).correct;
                     span.onclick = handleClick;
-                }else{
+                } else {
                     span.onclick = wrongClick;
                 }
 
-                
+
                 gameDiv.appendChild(span);
             });
 
@@ -208,8 +212,8 @@
             event.target.classList.add("wrong");
             updateDisplay();
             checkGameEnd();
-        }   
-        
+        }
+
         function handleClick(event) {
             const target = event.target;
             if (target.classList.contains('correct')) return;
