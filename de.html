@@ -10,9 +10,15 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-    
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("ti"){
+            gtag('event', 'de', {
+                'app_name': 'de',
+                'ti': urlParams.get("ti")
+            });
+        }
         gtag('config', 'G-QZKG5VG2NM');
-      </script>
+    </script>
     <link rel="icon"
         href="data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'><text x='50%' y='50%' style='dominant-baseline:middle;text-anchor:start;font-family:sans-serif;' transform-origin=center scale=0.1,0.1 translate(5,-4)>的</text></svg>"
         type="image/svg+xml" />

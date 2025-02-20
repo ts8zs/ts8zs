@@ -114,7 +114,13 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
+    const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("tier"){
+            gtag('event', 'er', {
+                'app_name': 'er',
+                'ti': urlParams.get("tier")
+            });
+        }
     gtag('config', 'G-QZKG5VG2NM');
   </script>
 </head>
