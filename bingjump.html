@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>手气不错 - 自动跳转首条结果</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        // 从 URL 获取搜索参数（例如：?q=要搜索的关键词）
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+
+        // 配置 Bing API（需自行申请密钥）
+        const bingApiKey = 'YOUR_BING_API_KEY'; // 替换为你的API密钥
+        const endpoint = 'https://api.bing.microsoft.com/v7.0/search';
+
+        if (searchQuery) {
+            fetch(`${endpoint}?q=${encodeURIComponent(searchQuery)}`, {
+                headers: {
+                    'Ocp-Apim-Subscription-Key': bingApiKey
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.webPages && data.webPages.value.length > 0) {
+                    // 获取首条结果并跳转
+                    const firstResult = data.webPages.value[0].url;
+                    window.location.href = firstResult;
+                } else {
+                    document.body.innerHTML = '未找到相关结果';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.body.innerHTML = '搜索服务暂时不可用';
+            });
+        } else {
+            document.body.innerHTML = '请输入搜索参数（例如：?q=关键词）';
+        }
+    </script>
+</body>
+</html>

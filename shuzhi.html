@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>数织游戏生成器</title>
+    <style>
+      /* 基础样式 */
+      .play-mode.filled {
+        background: #999 !important; /* 玩家填充的颜色 */
+        transition: background 0.2s;
+      }
+      .play-mode.filled.correct {
+        background: #333 !important; /* 正确时的颜色 */
+      }
+      .incorrect {
+        background-color: red;
+        border-radius: 4px;
+      }
+
+      .correct {
+        color: green;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .controls {
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .grid {
+        display: inline-grid;
+        gap: 1px;
+        background: #333;
+        padding: 2px;
+        width: fit-content;
+      }
+      .cell {
+        width: 30px;
+        height: 30px;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .cell.filled {
+        background: black;
+      }
+      /* 增加提示区域样式 */
+      .game-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        overflow: auto; /* 防止内容溢出 */
+      }
+      .col-hints {
+        grid-column: 2;
+        display: grid;
+        gap: 1px;
+        padding-left: 2px;
+        max-height: 100%; /* 限制最大高度 */
+        overflow-y: auto; /* 允许垂直滚动 */
+      }
+      .row-hints {
+        grid-row: 2;
+        display: grid;
+        gap: 1px;
+        padding-top: 2px;
+      }
+      .col-hint-cell {
+        display: flex;
+        align-items: flex-end; /* 纵数字靠下对齐 */
+        justify-content: center;
+        font-size: 1em;
+        margin: 2px;
+      }
+      .row-hint-cell {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* 横数字靠右对齐 */
+        padding-right: 2px;
+        font-size: 1em;
+        margin: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="controls">
+        <div>
+          <label
+            >宽度: <input type="number" id="width" value="5" min="3" max="15"
+          /></label>
+          <label
+            >高度: <input type="number" id="height" value="5" min="3" max="15"
+          /></label>
+        </div>
+        <button onclick="generateGrid()">新游戏</button>
+        <button onclick="showAnswer()">放弃</button>
+        <button onclick="shareGrid()">分享</button>
+        <!-- 新增分享按钮 -->
+      </div>
+      <div id="gameArea"></div>
+    </div>
+
+    <script>
+      let isCustomMode = false;
+
+      let answerGrid = []; // 正确答案
+      let playerGrid = []; // 玩家当前状态
+      let isPlayingMode = true; // 当前模式
+
+      // 修改后的生成网格函数
+      function generateGrid() {
+        const width = parseInt(document.getElementById("width").value);
+        const height = parseInt(document.getElementById("height").value);
+
+        // 生成答案
+        answerGrid = Array(height)
+          .fill()
+          .map(() =>
+            Array(width)
+              .fill()
+              .map(() => Math.random() > 0.7)
+          );
+
+        // 初始化玩家状态
+        playerGrid = Array(height)
+          .fill()
+          .map(() => Array(width).fill(false));
+
+        renderGrid();
+      }
+
+      // 渲染游戏界面
+      // 增强渲染函数
+      function renderGrid() {
+        const gameArea = document.getElementById("gameArea");
+        gameArea.innerHTML = "";
+
+        // 创建提示区域
+        const hints = calculateHints();
+
+        // 列提示
+        const colHints = document.createElement("div");
+        colHints.className = "col-hints";
+        colHints.style.gridTemplateColumns = `repeat(${answerGrid[0].length}, 30px)`;
+        hints.cols.forEach((col) => {
+          const div = document.createElement("div");
+          div.className = "col-hint-cell";
+          div.innerHTML = col.join("<br>");
+          colHints.appendChild(div);
+        });
+
+        // 行提示
+        const rowHints = document.createElement("div");
+        rowHints.className = "row-hints";
+        rowHints.style.gridTemplateRows = `repeat(${answerGrid.length}, 30px)`;
+        hints.rows.forEach((row) => {
+          const div = document.createElement("div");
+          div.className = "row-hint-cell";
+          div.textContent = row.join(" ");
+          rowHints.appendChild(div);
+        });
+
+        // 游戏网格
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        grid.style.gridTemplateColumns = `repeat(${answerGrid[0].length}, 30px)`;
+        playerGrid.forEach((row, i) => {
+          row.forEach((cell, j) => {
+            const div = document.createElement("div");
+            div.className = `cell${cell ? " filled" : ""} ${
+              isPlayingMode ? "play-mode" : ""
+            }`;
+            if (isPlayingMode) {
+              div.onclick = () => toggleCell(i, j);
+              div.ontouchstart = () => toggleCell(i, j);
+            }
+            grid.appendChild(div);
+          });
+        });
+
+        // 组装容器
+        const container = document.createElement("div");
+        container.className = "game-container";
+        container.appendChild(colHints);
+        container.appendChild(rowHints);
+        container.appendChild(grid);
+
+        gameArea.appendChild(container);
+      }
+
+      // 计算提示数字
+      function calculateHints() {
+        const getHint = (arr) => {
+          const hints = arr
+            .join("")
+            .split(/false+/g)
+            .filter((s) => s.includes("true"))
+            .map((s) => s.match(/true/g).length);
+          return hints.length > 0 ? hints : [0]; // 如果提示为空，返回[0]
+        };
+
+        return {
+          rows: answerGrid.map((row) => getHint(row)),
+          cols: answerGrid[0].map((_, i) =>
+            getHint(answerGrid.map((row) => row[i]))
+          ),
+        };
+      }
+
+      // 切换格子状态
+      // 修改后的切换格子函数
+      function toggleCell(row, col) {
+        if (!isPlayingMode) return;
+        playerGrid[row][col] = !playerGrid[row][col];
+        renderGrid();
+
+        if (checkVictory()) {
+          setTimeout(() => alert("恭喜！你解开了这个谜题！"), 100);
+        }
+      }
+
+      // 检查胜利条件
+      function checkVictory() {
+        const hints = calculateHints();
+        const playerHints = calculatePlayerHints();
+
+        // 获取所有提示单元格
+        const colHintCells = document.querySelectorAll(".col-hint-cell");
+        const rowHintCells = document.querySelectorAll(".row-hint-cell");
+
+        // 重置所有提示单元格的颜色
+        colHintCells.forEach((cell) =>
+          cell.classList.remove("correct", "incorrect")
+        );
+        rowHintCells.forEach((cell) =>
+          cell.classList.remove("correct", "incorrect")
+        );
+
+        let allMatch = true;
+
+        // 检查行提示是否匹配
+        for (let i = 0; i < hints.rows.length; i++) {
+          const playerRowHints = playerHints.rows[i];
+          const answerRowHints = hints.rows[i];
+          if (
+            JSON.stringify(playerRowHints) === JSON.stringify(answerRowHints) ||
+            (playerRowHints.length === 0 &&
+              answerRowHints.length === 1 &&
+              answerRowHints[0] === 0)
+          ) {
+            rowHintCells[i].classList.add("correct"); // 匹配的行提示添加correct类
+          } else {
+            allMatch = false;
+            // 检查连续块数量是否超过提示最大数或行列总数是否超过提示的总和
+            if (
+              playerRowHints.some(
+                (hint, index) => hint > answerRowHints[index]
+              ) ||
+              playerRowHints.reduce((a, b) => a + b, 0) >
+                answerRowHints.reduce((a, b) => a + b, 0)
+            ) {
+              rowHintCells[i].classList.add("incorrect"); // 不匹配且条件满足的行提示添加incorrect类
+            }
+          }
+        }
+
+        // 检查列提示是否匹配
+        for (let j = 0; j < hints.cols.length; j++) {
+          const playerColHints = playerHints.cols[j];
+          const answerColHints = hints.cols[j];
+          if (
+            JSON.stringify(playerColHints) === JSON.stringify(answerColHints) ||
+            (playerColHints.length === 0 &&
+              answerColHints.length === 1 &&
+              answerColHints[0] === 0)
+          ) {
+            colHintCells[j].classList.add("correct"); // 匹配的列提示添加correct类
+          } else {
+            allMatch = false;
+            // 检查连续块数量是否超过提示最大数或行列总数是否超过提示的总和
+            if (
+              playerColHints.some(
+                (hint, index) => hint > answerColHints[index]
+              ) ||
+              playerColHints.reduce((a, b) => a + b, 0) >
+                answerColHints.reduce((a, b) => a + b, 0)
+            ) {
+              colHintCells[j].classList.add("incorrect"); // 不匹配且条件满足的列提示添加incorrect类
+            }
+          }
+        }
+
+        return allMatch;
+      }
+
+      // 计算玩家当前状态的提示数字
+      function calculatePlayerHints() {
+        const getHint = (arr) => {
+          return arr
+            .join("")
+            .split(/false+/g)
+            .filter((s) => s.includes("true"))
+            .map((s) => s.match(/true/g).length);
+        };
+
+        return {
+          rows: playerGrid.map((row) => getHint(row)),
+          cols: playerGrid[0].map((_, i) =>
+            getHint(playerGrid.map((row) => row[i]))
+          ),
+        };
+      }
+
+      // 增加显示答案函数
+      function showAnswer() {
+        playerGrid = answerGrid.map((row) => [...row]);
+        renderGrid();
+        checkVictory(); // 调用checkVictory函数来触发提示数字的上色逻辑
+      }
+
+      // 修改后的分享函数
+      function shareGrid() {
+        // 收集所有黑色格子坐标
+        const blackCells = [];
+        playerGrid.forEach((row, i) => {
+          row.forEach((cell, j) => {
+            if (cell) blackCells.push(`${i}x${j}`);
+          });
+        });
+
+        // 包含尺寸信息和坐标
+        const width = document.getElementById("width").value;
+        const height = document.getElementById("height").value;
+        const data = `${width}x${height}b${blackCells.join("c")}`;
+
+        const url = new URL(window.location.href);
+        url.searchParams.set("grid", data);
+        navigator.clipboard.writeText(url.toString()).then(() => {
+          alert("谜题链接已复制！");
+        });
+      }
+
+      // 修改初始化函数
+      function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gridData = urlParams.get("grid");
+
+        if (gridData) {
+          const [size, cells = ""] = gridData.split("b");
+          const [width, height] = size.split("x").map(Number);
+
+          // 设置尺寸
+          document.getElementById("width").value = width;
+          document.getElementById("height").value = height;
+
+          // 初始化空白答案
+          answerGrid = Array(height)
+            .fill()
+            .map(() => Array(width).fill(false));
+
+          // 填充黑格子
+          cells.split("c").forEach((coord) => {
+            const [i, j] = coord.split("x").map(Number);
+            if (i < height && j < width) answerGrid[i][j] = true;
+          });
+
+          playerGrid = Array(height)
+            .fill()
+            .map(() => Array(width).fill(false));
+        } else {
+          generateGrid();
+        }
+        renderGrid();
+      }
+
+      init();
+    </script>
+  </body>
+</html>
