@@ -314,6 +314,7 @@
             allMatch = false;
             // 检查连续块数量是否超过提示最大数或行列总数是否超过提示的总和
             if (
+              playerRowHints.length > answerRowHints.length || // 新增：检查不连续的块数量是否超过提示数量
               playerRowHints.some(
                 (hint, index) => hint > answerRowHints[index]
               ) ||
@@ -340,6 +341,7 @@
             allMatch = false;
             // 检查连续块数量是否超过提示最大数或行列总数是否超过提示的总和
             if (
+              playerColHints.length > answerColHints.length || // 新增：检查不连续的块数量是否超过提示数量
               playerColHints.some(
                 (hint, index) => hint > answerColHints[index]
               ) ||
