@@ -140,12 +140,9 @@
     <div class="container">
       <div class="controls">
         <div>
-          <label
-            >宽度: <input type="number" id="width" value="5" min="3" max="150"
-          /></label>
-          <label
-            >高度: <input type="number" id="height" value="5" min="3" max="150"
-          /></label>
+          <label>宽度: <input type="number" id="width" value="5" min="3" max="150" /></label>
+          <label>高度: <input type="number" id="height" value="5" min="3" max="150" /></label>
+          <label>黑度: <input type="number" id="blackty" value="0.65" min="0" max="100" step="0.01" /></label> <!-- 新增难度输入框 -->
         </div>
         <button onclick="generateGrid()">新游戏</button>
         <button onclick="showAnswer()">放弃</button>
@@ -166,6 +163,7 @@
       function generateGrid() {
         const width = parseInt(document.getElementById("width").value);
         const height = parseInt(document.getElementById("height").value);
+        const blackty = parseFloat(document.getElementById("blackty").value); // 获取难度值
 
         // 生成答案
         answerGrid = Array(height)
@@ -173,7 +171,7 @@
           .map(() =>
             Array(width)
               .fill()
-              .map(() => Math.random() > 0.7)
+              .map(() => Math.random() < blackty) // 使用难度值控制随机生成的概率
           );
 
         // 初始化玩家状态
