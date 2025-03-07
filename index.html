@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Ts8zs - 提升8智商的代码存放处</title>
@@ -11,20 +12,27 @@
             overflow: hidden;
             background: black;
         }
-        a{color: #fff;text-decoration:none;user-select: none;}
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            user-select: none;
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.svg">
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "qk8jzgjvf7");
+    </script>
 </head>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "qk8jzgjvf7");
-</script>
+
 <body>
-    <div style="position: fixed;bottom: 0;user-select: none;padding: 10px;"><a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a></div>
+    <div style="position: fixed;bottom: 0;user-select: none;padding: 10px;"><a
+            href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a></div>
     <div style="position: fixed;bottom: 0;right:0;user-select: none;padding: 10px;"><a href="/homie">进入主页</a></div>
 </body>
 <script>
@@ -89,13 +97,13 @@
         });
 
     });
-    let highscore=8;
+    let highscore = 8;
     target.interactive = true;
     target.on('pointerdown', () => {
         score += 1;
         target.text = `${lost}\n${score}\n智商`;
-        if (score>highscore){
-            highscore=score;
+        if (score > highscore) {
+            highscore = score;
             document.title = `Ts${highscore}zs - 提升${highscore}智商`;
         }
 
@@ -108,7 +116,7 @@
     //点击到屏幕空白位置时分数归8速度还原 点击文字位置时则不会
     app.stage.interactive = true;
     app.stage.on('pointerdown', (e) => {
-        if (e.target == app.stage && die<10) {
+        if (e.target == app.stage && die < 10) {
             score = 8;
             vx = 1;
             vy = 1;
@@ -116,9 +124,9 @@
             background.beginFill(0x000000);
             background.drawRect(0, 0, app.screen.width, app.screen.height);
             background.endFill();
-            die+=1;
-            if(die==10){
-                lost='降低'
+            die += 1;
+            if (die == 10) {
+                lost = '降低'
             }
             target.text = `${lost}\n${score}\n智商`;
         }
@@ -145,4 +153,5 @@
     //     target.text = `提升\n${score}\n智商`;
     // }, 1000);
 </script>
+
 </html>
