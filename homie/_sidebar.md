@@ -15,5 +15,8 @@
   * [如何评价奥运会开幕式](/olympics)
   * [gal改动画为什么多暴死](/galani)
   * [做游戏就是竹篮打水](/talkgamewithdeepseek)
+
+### AI做的小游戏
   * [儿化音小游戏](https://www.ts8zs.com/er.html)
   * [的地得小游戏](https://www.ts8zs.com/de.html)
+  * [数织](https://www.ts8zs.com/shuzhi.html)
