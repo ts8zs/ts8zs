@@ -135,20 +135,13 @@
         user-select: none;
       }
     </style>
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "qk8jzgjvf7");
-  </script>
   </head>
   <body>
     <div class="container">
       <div class="controls">
         <div>
-          <label>宽度: <input type="number" id="width" value="5" min="3" max="150" /></label>
-          <label>高度: <input type="number" id="height" value="5" min="3" max="150" /></label>
+          <label>宽度: <input type="number" id="width" value="7" min="3" max="150" /></label>
+          <label>高度: <input type="number" id="height" value="7" min="3" max="150" /></label>
           <label>黑度: <input type="number" id="blackty" value="0.65" min="0" max="100" step="0.01" /></label> <!-- 新增难度输入框 -->
         </div>
         <button onclick="generateGrid()">新游戏</button>
@@ -160,6 +153,9 @@
     </div>
 
     <script>
+      let isDragging = false; // 新增：用于跟踪拖动状态
+      let dragStartState = false; // 新增：用于记录拖动起始格子的状态
+
       let isCustomMode = false;
 
       let answerGrid = []; // 正确答案
@@ -190,7 +186,6 @@
       }
 
       // 渲染游戏界面
-      // 增强渲染函数
       function renderGrid() {
         const gameArea = document.getElementById("gameArea");
         gameArea.innerHTML = "";
@@ -230,23 +225,57 @@
             div.className = `cell${cell ? " filled" : ""} ${
               isPlayingMode ? "play-mode" : ""
             }`;
+
             if (isPlayingMode) {
-              div.onclick = () => toggleCell(i, j);
-              div.ontouchstart = () => toggleCell(i, j);
+                // 鼠标按下事件
+                div.addEventListener("mousedown", (e) => {
+                    e.preventDefault(); // 防止默认行为
+                    isDragging = true;
+                    dragStartState = playerGrid[i][j]; // 记录起始格子状态
+                    toggleCell(i, j); // 切换当前格子状态
+                });
             }
+
             grid.appendChild(div);
-          });
         });
+    });
 
-        // 组装容器
-        const container = document.createElement("div");
-        container.className = "game-container";
-        container.appendChild(colHints);
-        container.appendChild(rowHints);
-        container.appendChild(grid);
+    // 组装容器
+    const container = document.createElement("div");
+    container.className = "game-container";
+    container.appendChild(colHints);
+    container.appendChild(rowHints);
+    container.appendChild(grid);
 
-        gameArea.appendChild(container);
-      }
+    gameArea.appendChild(container);
+
+    // 将 mousemove 和 mouseup 事件绑定到整个网格容器上
+    grid.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+            const target = document.elementFromPoint(e.clientX, e.clientY);
+            if (target && target.classList.contains("cell")) {
+                const index = Array.from(grid.children).indexOf(target);
+                const row = Math.floor(index / answerGrid[0].length);
+                const col = index % answerGrid[0].length;
+                if (dragStartState) {
+                    // 起始格子为黑色时擦除
+                    if (playerGrid[row][col]) toggleCell(row, col);
+                } else {
+                    // 起始格子为白色时填涂
+                    if (!playerGrid[row][col]) toggleCell(row, col);
+                }
+            }
+        }
+    });
+
+    grid.addEventListener("mouseup", () => {
+        isDragging = false; // 结束拖动
+    });
+
+    grid.addEventListener("mouseleave", () => {
+        isDragging = false; // 鼠标离开网格时停止拖动
+    });
+}
 
       // 计算提示数字
       function calculateHints() {
@@ -394,7 +423,7 @@
         const url = new URL(window.location.href);
         url.searchParams.set("grid", data);
         navigator.clipboard.writeText(url.toString()).then(() => {
-          alert("谜题链接已复制！");
+          alert("当前已填格子作为谜题链接已复制！");
         });
       }
 
