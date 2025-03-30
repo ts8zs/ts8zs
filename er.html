@@ -155,7 +155,10 @@
     }
 
     let originalText =
-      `老北京胡同儿的夏天可热闹了！张大爷拎着茶壶儿坐在门口儿，瞧见隔壁小王举着冰棍儿边跑边喊：“您家猫儿蹿上房顶儿啦！”李婶儿端着一碗儿炸酱面追出来：“这小祖宗，刚买的鞋儿又蹭脏了！”拐角儿处卖糖人儿的老赵头乐呵呵插嘴：“要我说啊，胡同角儿那树儿底下凉快，您抱个西瓜儿过去啃，保准蝈蝈儿都给您唱曲儿！”`;
+      `直接来点儿顺口溜儿总不会错吧。
+星期六的晚上开校门儿，里边出来个小美人儿，红脸蛋儿，绿嘴唇儿，头上扣着个骚尿盆儿。小小子儿，坐门墩儿，哭着喊着要媳妇儿，要媳妇儿干嘛啊？点灯说话儿，吹灯就伴儿，早晨起来梳小辫儿。
+青豆嘴儿、香椿芽儿，韭菜焯好切成段儿；芹菜末儿、莴笋片儿，狗牙蒜要掰两瓣儿；豆芽儿菜、去掉根儿，顶花带刺儿的黄瓜要切细丝儿；心儿里美，切几批儿，焯完江豆剁碎丁儿，小水萝卜带绿缨儿；辣椒麻油淋一点儿，芥末泼到辣鼻眼儿。炸酱面虽只一小碗，七碟八碗是面码儿。
+`;
 
     // 初始化游戏
     let score = 0;
@@ -203,6 +206,11 @@
       // 生成处理后的文本
       let gameDiv = document.getElementById("gameText");
       processedChars.forEach((char, index) => {
+        if (char === "\n") {
+          const br = document.createElement("br");
+          gameDiv.appendChild(br);
+          return;
+        }
         const span = document.createElement("span");
         span.className = "char";
         span.textContent = char;
