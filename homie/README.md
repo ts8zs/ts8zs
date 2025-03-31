@@ -2,6 +2,9 @@
 没见过把docsify当博客用的吧()  
 懒得build是这样的
 
+Email: ts8zs@这个域名.com
+QQ: @qq.com
+WX: IQPLUS8
 
 <!-- 恭喜你发现了首页游戏的秘辛!
 尝试了AI编程实现呢 我只写了注释部分
