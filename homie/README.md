@@ -4,11 +4,12 @@
 
 音游和逻辑解谜游戏爱好者
 
-Email: ts8zs@这个域名  
+
+Email: 这个域名@这个域名  
 QQ: 这个域名@qq.com  
 WX: IQPLUS8  
-OSU!: [ts8zs](https://osu.ppy.sh/users/838176)  
-Steam: [ts8zs](https://steamcommunity.com/id/ts8zs/)
+osu!: [Ts8zs](https://osu.ppy.sh/users/838176)  
+Steam: [Ts8zs](https://steamcommunity.com/id/ts8zs/)
 
 <!-- 恭喜你发现了首页游戏的秘辛!
 尝试了AI编程实现呢 我只写了注释部分
