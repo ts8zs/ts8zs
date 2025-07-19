@@ -17,6 +17,8 @@
   * [做游戏就是竹篮打水](/talkgamewithdeepseek)
   * [人月神话的攻受关系](/m2m)
   * [音乐游戏的难度定数](/ahardmug)
+  * [平等与公平](/equalnotfair)
+
 ### AI做的小游戏
   * [儿化音小游戏](https://www.ts8zs.com/er.html)
   * [的地得小游戏](https://www.ts8zs.com/de.html)
