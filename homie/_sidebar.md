@@ -23,3 +23,4 @@
   * [儿化音小游戏](https://www.ts8zs.com/er.html)
   * [的地得小游戏](https://www.ts8zs.com/de.html)
   * [数织](https://www.ts8zs.com/shuzhi.html)
+  * [不限字母数量的WORDLE](https://www.ts8zs.com/anywordle.html)
