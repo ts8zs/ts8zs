@@ -383,6 +383,10 @@
 
           board.appendChild(row);
         }
+        
+        // 重置当前行和当前格子计数器
+        currentRow = 0;
+        currentTile = 0;
       }
 
       // 处理物理键盘输入
@@ -724,14 +728,9 @@
         }
 
       // 重新开始游戏
-      function restartGame() {
-            gameOver = false;
-            currentRow = 0;
-            currentTile = 0;
-            // 清理提示信息
-            showMessage('');
-            // 重新初始化游戏
-            initGame();
+        function restartGame() {
+            // 直接刷新页面，避免复杂的状态重置问题
+            location.reload();
         }
 
       // 放弃游戏
