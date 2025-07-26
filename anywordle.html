@@ -610,15 +610,19 @@
                     tile.classList.add(result[i], 'flip');
                 }
 
-                // 更新虚拟键盘状态
+                // 更新虚拟键盘状态 - 修复颜色更新逻辑
                 const keyElement = document.querySelector(`.key[data-key="${guess[i]}"]`);
-                if (guess[i] && !keyElement.classList.contains('correct') && 
-                    !keyElement.classList.contains('present') && 
-                    !keyElement.classList.contains('absent')) {
-                    if (result[i] === 'invalid') {
-                        keyElement.classList.add('absent');
-                    } else {
-                        keyElement.classList.add(result[i]);
+                if (guess[i] && keyElement) {
+                    // 移除旧的状态类
+                    keyElement.classList.remove('correct', 'present', 'absent');
+                    
+                    // 根据当前结果设置新状态
+                    if (result[i] === 'correct') {
+                        keyElement.classList.add('correct');
+                    } else if (result[i] === 'present' && !keyElement.classList.contains('correct')) {
+                        keyElement.classList.add('present');
+                    } else if (!keyElement.classList.contains('correct') && !keyElement.classList.contains('present')) {
+                        keyElement.classList.add(result[i] === 'invalid' ? 'absent' : result[i]);
                     }
                 }
 
