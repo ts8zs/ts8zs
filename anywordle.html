@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANYWORDLE</title>
+        <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "qk8jzgjvf7");
+  </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      header {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 2.5rem;
+        margin: 20px 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .board {
+        display: flex;
+        grid-template-rows: repeat(6, 1fr);
+        gap: 5px;
+        margin-bottom: 30px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+      }
+
+      .tile {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid #d3d6da;
+        text-transform: uppercase;
+        transition: transform 0.1s ease;
+      }
+
+      .tile.filled {
+        border-color: #939598;
+      }
+
+      .tile.correct {
+        background-color: #6aaa64;
+        border-color: #6aaa64;
+        color: white;
+      }
+
+      .tile.present {
+        background-color: #c9b458;
+        border-color: #c9b458;
+        color: white;
+      }
+
+      .tile.absent {
+        background-color: #787c7e;
+        border-color: #787c7e;
+        color: white;
+      }
+
+      .tile.invalid {
+        background-color: #ff4d4d;
+        border-color: #ff4d4d;
+        color: white;
+      }
+
+      .tile.flip {
+        animation: flip 0.5s ease forwards;
+      }
+
+      @keyframes flip {
+        0% {
+          transform: rotateX(0);
+        }
+        45% {
+          transform: rotateX(90deg);
+        }
+        55% {
+          transform: rotateX(90deg);
+        }
+        100% {
+          transform: rotateX(0);
+        }
+      }
+
+      .keyboard {
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .keyboard-row {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .key {
+        flex: 1;
+        max-width: 40px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 3px;
+        background-color: #d3d6da;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+      }
+
+      .key.wide {
+        flex: 1.5;
+        max-width: 65px;
+        font-size: 0.7rem;
+      }
+
+      .key:hover {
+        background-color: #bbbdc1;
+      }
+
+      .key.correct {
+        background-color: #6aaa64;
+        color: white;
+      }
+
+      .key.present {
+        background-color: #c9b458;
+        color: white;
+      }
+
+      .key.absent {
+        background-color: #787c7e;
+        color: white;
+      }
+
+      .message {
+        height: 30px;
+        margin: 10px 0;
+        font-weight: bold;
+        text-align: center;
+        color: #333;
+      }
+
+      .win {
+        color: #6aaa64;
+      }
+
+      .lose {
+        color: #c9b458;
+      }
+
+      @media (max-width: 500px) {
+        .tile {
+          font-size: 1.5rem;
+        }
+
+        .key {
+          height: 40px;
+          max-width: 25px;
+          font-size: 0.8rem;
+        }
+
+        .key.wide {
+          max-width: 45px;
+          font-size: 0.6rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ANYWORDLE</h1>
+    </header>
+
+    <div class="game-container">
+      <div class="message" id="message"></div>
+      <div class="board" id="board">
+        <!-- 游戏板将通过JavaScript生成 -->
+      </div>
+
+      <div class="keyboard">
+        <div class="keyboard-row">
+          <div class="key" data-key="Q">Q</div>
+          <div class="key" data-key="W">W</div>
+          <div class="key" data-key="E">E</div>
+          <div class="key" data-key="R">R</div>
+          <div class="key" data-key="T">T</div>
+          <div class="key" data-key="Y">Y</div>
+          <div class="key" data-key="U">U</div>
+          <div class="key" data-key="I">I</div>
+          <div class="key" data-key="O">O</div>
+          <div class="key" data-key="P">P</div>
+        </div>
+        <div class="keyboard-row">
+          <div class="key" data-key="A">A</div>
+          <div class="key" data-key="S">S</div>
+          <div class="key" data-key="D">D</div>
+          <div class="key" data-key="F">F</div>
+          <div class="key" data-key="G">G</div>
+          <div class="key" data-key="H">H</div>
+          <div class="key" data-key="J">J</div>
+          <div class="key" data-key="K">K</div>
+          <div class="key" data-key="L">L</div>
+        </div>
+        <div class="keyboard-row">
+          <div class="key wide" data-key="Backspace">⌫</div>
+          <div class="key" data-key="Z">Z</div>
+          <div class="key" data-key="X">X</div>
+          <div class="key" data-key="C">C</div>
+          <div class="key" data-key="V">V</div>
+          <div class="key" data-key="B">B</div>
+          <div class="key" data-key="N">N</div>
+          <div class="key" data-key="M">M</div>
+          <div class="key wide" data-key="Enter">ENTER</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 游戏配置
+      const COMMON_WORDS_FILE = "commonwords.txt";
+      const ALL_WORDS_FILE = "allwords.txt";
+      let commonWords = []; // 常用词库（用于出题）
+      let allWords = []; // 全部词库（用于验证）
+      // 游戏状态
+      let targetWord = "";
+      let currentRow = 0;
+      let currentTile = 0;
+      let gameOver = false;
+      let wordsLoaded = false; // 标记单词是否已加载
+
+      // 初始化游戏
+      async function initGame() {
+        // 如果单词尚未加载，则加载单词库
+        if (!wordsLoaded) {
+          // 从两个文件并行加载单词
+          const [common, all] = await Promise.all([
+            loadWordsFromFile(COMMON_WORDS_FILE),
+            loadWordsFromFile(ALL_WORDS_FILE),
+          ]);
+
+          commonWords = common;
+          allWords = all;
+          wordsLoaded = true;
+
+          // 如果任一词库为空，显示错误消息
+          if (commonWords.length === 0 || allWords.length === 0) {
+            showMessage("词库加载失败，请检查文件格式", "lose");
+            return;
+          }
+        }
+
+        // 从常用词库中随机选择一个单词
+        targetWord =
+          commonWords[Math.floor(Math.random() * commonWords.length)];
+        console.log("目标单词:", targetWord); // 用于调试
+
+        // 创建游戏板
+        createBoard();
+
+        // 绑定事件
+        document.addEventListener("keydown", handleKeyPress);
+
+        // 绑定虚拟键盘事件
+        document.querySelectorAll(".key").forEach((key) => {
+          key.addEventListener("click", () => {
+            handleVirtualKeyPress(key.dataset.key);
+          });
+        });
+      }
+
+      // 创建游戏板
+      function createBoard() {
+        const board = document.getElementById("board");
+        board.innerHTML = "";
+
+        for (let i = 0; i < 10; i++) {
+          const row = document.createElement("div");
+          row.classList.add("row");
+          row.id = `row-${i}`;
+
+          // 初始只显示第一个格子
+          const tile = document.createElement("div");
+          tile.classList.add("tile");
+          tile.id = `tile-${i}-0`;
+          row.appendChild(tile);
+
+          // 设置初始网格布局
+          row.style.gridTemplateColumns = "repeat(1, 1fr)";
+
+          board.appendChild(row);
+        }
+      }
+
+      // 处理物理键盘输入
+      function handleKeyPress(e) {
+        if (gameOver) return;
+
+        const key = e.key.toUpperCase();
+        // 处理粘贴操作
+        if (e.ctrlKey && key === "V") {
+          handlePaste();
+        }
+        // 处理字母输入
+        else if (/^[A-Z]$/.test(key)) {
+          addLetter(key);
+        }
+        // 处理退格键
+        else if (key === "BACKSPACE") {
+          removeLetter();
+        }
+        // 处理回车键
+        else if (key === "ENTER" && currentTile >= 1) {
+          // 至少输入一个字母即可提交
+          submitGuess();
+        }
+      }
+
+      // 处理粘贴操作
+      async function handlePaste() {
+        try {
+          const text = await navigator.clipboard.readText();
+          const letters = text.toUpperCase().replace(/[^A-Z]/g, "");
+
+          // 添加每个字母
+          for (const letter of letters) {
+            if (/^[A-Z]$/.test(letter)) {
+              addLetter(letter);
+              // 添加小延迟以获得更好的视觉效果
+              await new Promise((resolve) => setTimeout(resolve, 50));
+            }
+          }
+        } catch (err) {
+          console.error("粘贴操作失败:", err);
+        }
+      }
+
+      // 处理虚拟键盘输入
+      function handleVirtualKeyPress(key) {
+        if (gameOver) return;
+
+        if (key === "Enter") {
+          if (currentTile >= 1) {
+            // 至少输入一个字母即可提交
+            submitGuess();
+          }
+        } else if (key === "Backspace") {
+          if (currentTile > 0) {
+            removeLetter();
+          }
+        } else {
+          if (/^[A-Z]$/.test(key)) {
+            addLetter(key);
+          }
+        }
+      }
+
+      // 添加字母到当前格子
+      function addLetter(letter) {
+        const row = document.getElementById(`row-${currentRow}`);
+
+        // 确保当前格子存在
+        if (currentTile >= row.children.length) {
+          const tile = document.createElement("div");
+          tile.classList.add("tile");
+          tile.id = `tile-${currentRow}-${row.children.length}`;
+          row.appendChild(tile);
+        }
+
+        // 获取当前格子并填充字母
+        const tile = document.getElementById(
+          `tile-${currentRow}-${currentTile}`
+        );
+        tile.textContent = letter;
+        tile.classList.add("filled");
+
+        // 增加一个空格子用于提示
+        if (currentTile + 1 >= row.children.length) {
+          const newTile = document.createElement("div");
+          newTile.classList.add("tile");
+          newTile.id = `tile-${currentRow}-${row.children.length}`;
+          row.appendChild(newTile);
+
+          // 更新网格布局
+          row.style.gridTemplateColumns = `repeat(${row.children.length}, 1fr)`;
+        }
+
+        currentTile++;
+      }
+
+      // 删除当前行的最后一个字母
+      function removeLetter() {
+        if (currentTile > 0) {
+          currentTile--;
+          const tile = document.getElementById(
+            `tile-${currentRow}-${currentTile}`
+          );
+          tile.textContent = "";
+          tile.classList.remove("filled");
+        }
+        // 移除当前行最后一个空格子
+        removeEmptyTile();
+      }
+
+      // 移除当前行最后一个空格子
+      function removeEmptyTile() {
+        const row = document.getElementById(`row-${currentRow}`);
+
+        // 如果最后一个格子是空的，且不是唯一的格子，则移除它
+        if (row.children.length > currentTile && row.children.length > 1) {
+          row.removeChild(row.lastChild);
+          // 更新网格布局
+          row.style.gridTemplateColumns = `repeat(${row.children.length}, 1fr)`;
+        }
+      }
+
+      // 提交猜测
+      function submitGuess() {
+        // 获取当前行的单词
+        let guess = "";
+        const row = document.getElementById(`row-${currentRow}`);
+
+        // 收集所有已填充的格子内容（排除最后一个空格子）
+        for (let i = 0; i < row.children.length - 1; i++) {
+          const tile = document.getElementById(`tile-${currentRow}-${i}`);
+          guess += tile.textContent;
+        }
+
+        // 检查单词是否在全部词库中
+        if (!allWords.includes(guess)) {
+          showMessage("Word not in word list!");
+          // 抖动效果
+          row.style.animation = "shake 0.5s";
+          setTimeout(() => {
+            row.style.animation = "";
+          }, 500);
+          return;
+        }
+
+        // 检查结果
+        checkGuess(guess);
+      }
+
+      // 检查猜测结果
+      function checkGuess(guess) {
+        // 创建目标单词字母计数
+        const targetCounts = {};
+        for (let i = 0; i < targetWord.length; i++) {
+          const char = targetWord[i];
+          targetCounts[char] = (targetCounts[char] || 0) + 1;
+        }
+
+        // 第1轮：标记正确位置的字母（绿色）
+        const result = Array(guess.length).fill(null);
+        for (let i = 0; i < Math.min(guess.length, targetWord.length); i++) {
+          if (guess[i] === targetWord[i]) {
+            result[i] = "correct";
+            targetCounts[guess[i]]--;
+          }
+        }
+
+        // 第2轮：标记存在但位置错误的字母（黄色）
+        for (let i = 0; i < guess.length; i++) {
+          if (result[i] === null) {
+            if (targetCounts[guess[i]] > 0) {
+              result[i] = "present";
+              targetCounts[guess[i]]--;
+            }
+          }
+        }
+
+        // 第3轮：标记剩余的字母（灰色或红色）
+        for (let i = 0; i < guess.length; i++) {
+          if (result[i] === null) {
+            if (i >= targetWord.length) {
+              result[i] = "invalid"; // 超出长度的字母标记为红色
+            } else {
+              result[i] = "absent"; // 其他未标记的字母标记为灰色
+            }
+          }
+        }
+
+        // 显示结果
+        let correctCount = 0;
+        // 同时显示所有格子的结果，而不是逐个显示
+        for (let i = 0; i < result.length; i++) {
+          const tile = document.getElementById(`tile-${currentRow}-${i}`);
+          if (result[i]) {
+            tile.classList.add(result[i], "flip");
+          }
+
+          // 更新虚拟键盘状态
+          const keyElement = document.querySelector(
+            `.key[data-key="${guess[i]}"]`
+          );
+          if (
+            guess[i] &&
+            !keyElement.classList.contains("correct") &&
+            !keyElement.classList.contains("present") &&
+            !keyElement.classList.contains("absent")
+          ) {
+            if (result[i] === "invalid") {
+              keyElement.classList.add("absent");
+            } else {
+              keyElement.classList.add(result[i]);
+            }
+          }
+
+          if (result[i] === "correct") {
+            correctCount++;
+          }
+        }
+
+        // 在所有动画完成后判断游戏状态
+        setTimeout(() => {
+          // 检查游戏是否结束
+          if (
+            correctCount === targetWord.length &&
+            guess.length <= targetWord.length
+          ) {
+            showMessage("Congratulations! You guessed it!", "win");
+            gameOver = true;
+          } else if (currentRow === 9) {
+            showMessage(
+              `Game over! The correct answer is: ${targetWord}`,
+              "lose"
+            );
+            gameOver = true;
+          } else {
+            // 准备下一行
+            currentRow++;
+            currentTile = 0;
+          }
+        }, 500); // 等待动画完成
+      }
+
+      // 显示消息
+      function showMessage(text, className = "") {
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = text;
+        messageElement.className = "message " + className;
+      }
+
+      // 从文件加载单词库
+      async function loadWordsFromFile(filePath) {
+        try {
+          const response = await fetch(filePath);
+          if (!response.ok) {
+            throw new Error(`Unable to load file: ${filePath}`);
+          }
+          const text = await response.text();
+          // 按行分割并清理数据（去除空行和空白字符，转换为大写）
+          return text
+            .split("\n")
+            .map((word) => word.trim().toUpperCase())
+            .filter((word) => word.length > 0);
+        } catch (error) {
+          console.error(error);
+          showMessage(`Failed to load word list: ${filePath}`, "lose");
+          return []; // 返回空数组作为后备
+        }
+      }
+
+      // 重新开始游戏
+      function restartGame() {
+        gameOver = false;
+        currentRow = 0;
+        currentTile = 0;
+        // 清理提示信息
+        showMessage("");
+        // 重新初始化游戏
+        initGame();
+      }
+
+      // 放弃游戏
+      function giveUp() {
+        if (!gameOver) {
+          showMessage(
+            `You gave up! The correct answer is: ${targetWord}`,
+            "lose"
+          );
+          gameOver = true;
+        }
+      }
+
+      // 添加抖动动画样式
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                20%, 60% { transform: translateX(-5px); }
+                40%, 80% { transform: translateX(5px); }
+            }
+            
+            // 动态调整行的网格布局
+            .row {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+                gap: 5px;
+            }
+        `;
+      document.head.appendChild(style);
+
+      // 初始化游戏
+      window.onload = async function () {
+        // 初始化游戏
+        await initGame();
+
+        // 添加重新开始按钮事件监听
+        const restartButton = document.createElement("button");
+        restartButton.textContent = "Restart";
+        restartButton.style.position = "absolute";
+        restartButton.style.top = "10px";
+        restartButton.style.right = "10px";
+        restartButton.style.padding = "8px 16px";
+        restartButton.style.backgroundColor = "#6aaa64";
+        restartButton.style.color = "white";
+        restartButton.style.border = "none";
+        restartButton.style.borderRadius = "4px";
+        restartButton.style.cursor = "pointer";
+        restartButton.style.zIndex = "1000";
+
+        restartButton.addEventListener("click", () => {
+          restartGame();
+        });
+
+        document.body.appendChild(restartButton);
+
+        // 添加放弃按钮
+        const giveUpButton = document.createElement("button");
+        giveUpButton.textContent = "Give Up";
+        giveUpButton.style.position = "absolute";
+        giveUpButton.style.top = "10px";
+        giveUpButton.style.right = "100px";
+        giveUpButton.style.padding = "8px 16px";
+        giveUpButton.style.backgroundColor = "#787c7e";
+        giveUpButton.style.color = "white";
+        giveUpButton.style.border = "none";
+        giveUpButton.style.borderRadius = "4px";
+        giveUpButton.style.cursor = "pointer";
+        giveUpButton.style.zIndex = "1000";
+
+        giveUpButton.addEventListener("click", () => {
+          giveUp();
+        });
+
+        document.body.appendChild(giveUpButton);
+      };
+    </script>
+  </body>
+</html>
