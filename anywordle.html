@@ -620,19 +620,27 @@
         // 更新虚拟键盘状态 - 修复颜色更新逻辑
         const keyElement = document.querySelector(`.key[data-key="${guess[i]}"]`);
         if (guess[i] && keyElement) {
-
-          // 根据当前结果设置新状态
-          if (result[i] === 'correct' && !keyElement.classList.contains('correct')) {
-            keyElement.classList.add('correct');
-          } else if (result[i] === 'present' && !keyElement.classList.contains('correct')) {
-            // 移除旧的状态类
+          // 定义优先级顺序
+          const priority = {
+            'correct': 3,
+            'present': 2,
+            'absent': 1,
+            'invalid': 1
+          };
+          
+          // 获取当前状态的优先级
+          const currentState = keyElement.classList.contains('correct') ? 'correct' :
+                              keyElement.classList.contains('present') ? 'present' :
+                              keyElement.classList.contains('absent') ? 'absent' : null;
+          
+          const currentPriority = currentState ? priority[currentState] : 0;
+          const newPriority = priority[result[i]];
+          
+          // 只有当新状态优先级更高时才更新
+          if (newPriority > currentPriority) {
+            // 移除所有状态类
             keyElement.classList.remove('correct', 'present', 'absent');
-
-            keyElement.classList.add('present');
-          } else if (!keyElement.classList.contains('correct') && !keyElement.classList.contains('present')) {
-            // 移除旧的状态类
-            keyElement.classList.remove('correct', 'present', 'absent');
-
+            // 添加新状态类
             keyElement.classList.add(result[i] === 'invalid' ? 'absent' : result[i]);
           }
         }
