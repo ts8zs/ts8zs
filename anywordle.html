@@ -133,26 +133,6 @@
       }
     }
 
-    /* 添加闪烁边框动画 */
-    @keyframes blink {
-      0% {
-        border-color: #6aaa64;
-        box-shadow: 0 0 5px #6aaa64;
-      }
-      50% {
-        border-color: #c9b458;
-        box-shadow: 0 0 10px #c9b458;
-      }
-      100% {
-        border-color: #6aaa64;
-        box-shadow: 0 0 5px #6aaa64;
-      }
-    }
-
-    .tile.editing {
-      animation: blink 1s infinite;
-    }
-
     .keyboard {
       width: 100%;
       max-width: 500px;
@@ -307,7 +287,6 @@
     let gameOver = false;
     let wordsLoaded = false;  // 标记单词是否已加载
     let isAnimating = false;  // 标记是否正在播放动画
-    let isEditing = false;    // 标记是否正在编辑格子
 
     // 每日谜题状态
     let dailyPuzzleDate = '';  // 当前每日谜题的日期
@@ -352,7 +331,7 @@
         isDailyPuzzle = false; // 标记为随机谜题模式
       }
 
-      console.log('目标单词:', targetWord); // 用于调试
+      // console.log('目标单词:', targetWord); // 用于调试
 
       // 创建游戏板
       createBoard();
@@ -406,10 +385,6 @@
         const tile = document.createElement("div");
         tile.classList.add("tile");
         tile.id = `tile-${i}-0`;
-        // 为初始格子添加点击事件监听器
-        tile.addEventListener('click', () => {
-          editTile(tile, i, 0);
-        });
         row.appendChild(tile);
 
         // 设置初始网格布局
@@ -425,8 +400,7 @@
 
     // 处理物理键盘输入
     function handleKeyPress(e) {
-      // 如果正在编辑格子，则不处理全局键盘事件
-      if (isEditing || gameOver || isAnimating) return;  // 添加对动画状态的检查
+      if (gameOver || isAnimating) return;  // 添加对动画状态的检查
 
       const key = e.key.toUpperCase();
       // 处理粘贴操作
@@ -468,8 +442,7 @@
 
     // 处理虚拟键盘输入
     function handleVirtualKeyPress(key) {
-      // 如果正在编辑格子，则不处理虚拟键盘事件
-      if (isEditing || gameOver || isAnimating) return;  // 添加对动画状态的检查
+      if (gameOver || isAnimating) return;  // 添加对动画状态的检查
 
       if (key === 'Enter') {
         if (currentTile >= 1) {  // 至少输入一个字母即可提交
@@ -495,10 +468,6 @@
         const tile = document.createElement("div");
         tile.classList.add("tile");
         tile.id = `tile-${currentRow}-${row.children.length}`;
-        // 为新格子添加点击事件监听器
-        tile.addEventListener('click', () => {
-          editTile(tile, currentRow, row.children.length);
-        });
         row.appendChild(tile);
       }
 
@@ -514,10 +483,6 @@
         const newTile = document.createElement("div");
         newTile.classList.add("tile");
         newTile.id = `tile-${currentRow}-${row.children.length}`;
-        // 为新格子添加点击事件监听器
-        newTile.addEventListener('click', () => {
-          editTile(newTile, currentRow, row.children.length);
-        });
         row.appendChild(newTile);
 
         // 更新网格布局
@@ -525,85 +490,6 @@
       }
 
       currentTile++;
-    }
-
-    // 点击格子进行编辑
-    function editTile(tileElement, rowIndex, tileIndex) {
-      // 只能编辑当前行的格子
-      if (rowIndex !== currentRow || gameOver || isAnimating) return;
-      
-      // 移除其他格子的编辑状态
-      document.querySelectorAll('.tile.editing').forEach(tile => {
-        tile.classList.remove('editing');
-      });
-      
-      // 添加编辑状态到当前格子
-      tileElement.classList.add('editing');
-      
-      // 设置编辑状态标志位，防止全局键盘事件处理
-      isEditing = true;
-      
-      // 监听键盘输入，用于替换字母
-      const editHandler = function(e) {
-        const key = e.key.toUpperCase();
-        
-        // 处理字母输入
-        if (/^[A-Z]$/.test(key)) {
-          tileElement.textContent = key;
-          tileElement.classList.add("filled");
-          finishEditing();
-        }
-        // 处理退格键（清空格子）
-        else if (key === 'BACKSPACE' || key === 'DELETE') {
-          tileElement.textContent = '';
-          tileElement.classList.remove("filled");
-          finishEditing();
-        }
-        // 处理ESC键退出编辑
-        else if (key === 'ESCAPE') {
-          finishEditing();
-        }
-        
-        // 阻止默认行为和事件冒泡，避免干扰其他处理
-        e.preventDefault();
-        e.stopPropagation();
-      };
-      
-      // 完成编辑的函数
-      function finishEditing() {
-        tileElement.classList.remove('editing');
-        document.removeEventListener('keydown', editHandler, true);
-        // 重置编辑状态标志位
-        isEditing = false;
-        
-        // 更新currentTile为当前行最后一个字母的下一个位置
-        const row = document.getElementById(`row-${currentRow}`);
-        let lastFilledTileIndex = -1;
-        for (let i = 0; i < row.children.length - 1; i++) { // 排除最后一个空格子
-          const tile = document.getElementById(`tile-${currentRow}-${i}`);
-          if (tile && tile.textContent) {
-            lastFilledTileIndex = i;
-          }
-        }
-        currentTile = lastFilledTileIndex + 1;
-        
-        // 确保至少有一个空格子在当前行末尾
-        if (currentTile >= row.children.length) {
-          const newTile = document.createElement("div");
-          newTile.classList.add("tile");
-          newTile.id = `tile-${currentRow}-${row.children.length}`;
-          // 为新格子添加点击事件监听器
-          newTile.addEventListener('click', () => {
-            editTile(newTile, currentRow, row.children.length);
-          });
-          row.appendChild(newTile);
-          // 更新网格布局
-          row.style.gridTemplateColumns = `repeat(${row.children.length}, 1fr)`;
-        }
-      }
-      
-      // 添加键盘事件监听器
-      document.addEventListener('keydown', editHandler, true);
     }
 
     // 删除当前行的最后一个字母
@@ -615,10 +501,9 @@
         );
         tile.textContent = "";
         tile.classList.remove("filled");
-        
-        // 移除当前行最后一个空格子
-        removeEmptyTile();
       }
+      // 移除当前行最后一个空格子
+      removeEmptyTile();
     }
 
     // 移除当前行最后一个空格子
@@ -742,15 +627,15 @@
             'absent': 1,
             'invalid': 1
           };
-          
+
           // 获取当前状态的优先级
           const currentState = keyElement.classList.contains('correct') ? 'correct' :
-                              keyElement.classList.contains('present') ? 'present' :
-                              keyElement.classList.contains('absent') ? 'absent' : null;
-          
+            keyElement.classList.contains('present') ? 'present' :
+              keyElement.classList.contains('absent') ? 'absent' : null;
+
           const currentPriority = currentState ? priority[currentState] : 0;
           const newPriority = priority[result[i]];
-          
+
           // 只有当新状态优先级更高时才更新
           if (newPriority > currentPriority) {
             // 移除所有状态类
