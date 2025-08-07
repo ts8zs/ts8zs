@@ -530,7 +530,7 @@
         dailyPuzzleDate = dateParam;
         isDailyPuzzle = true;
         targetWord = getDailyPuzzleAnswer(dateParam, commonWords);
-        console.log('目标单词(来自日期):', targetWord);
+        // console.log('目标单词(来自日期):', targetWord);
       }
       // 否则，如果有puzzle参数，则使用该参数作为目标单词
       else if (puzzleParam) {
@@ -538,7 +538,7 @@
         if (unscrambledWord && unscrambledWord.match(/^[A-Z]+$/)) {
           targetWord = unscrambledWord;
           isDailyPuzzle = false; // 标记为随机谜题模式
-          console.log('目标单词(来自链接):', targetWord);
+          // console.log('目标单词(来自链接):', targetWord);
         } else {
           console.error('Invalid puzzle parameter in URL');
         }
@@ -565,7 +565,7 @@
         }
       }
 
-      console.log('目标单词:', targetWord); // 用于调试
+      // console.log('目标单词:', targetWord); // 用于调试
 
       // 创建游戏板
       createBoard();
@@ -1245,7 +1245,7 @@
         isDailyPuzzle = false; // 标记为随机谜题模式
       }
 
-      console.log('新目标单词:', targetWord); // 用于调试
+      // console.log('新目标单词:', targetWord); // 用于调试
 
       // 清除消息
       showMessage('');
