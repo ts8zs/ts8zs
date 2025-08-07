@@ -927,8 +927,16 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`Congratulations! You guessed it! [${modeText}]`, 'win');
         gameOver = true;
-        // 添加分享按钮并记录每日谜题完成状态
-        addSharePuzzleButton(); // 为所有模式添加分享按钮
+        // 添加分享按钮
+        if (isDailyPuzzle || !gameOver) {
+          // 移除旧的分享按钮（如果存在）
+          const existingContainer = document.querySelector('.share-button-container');
+          if (existingContainer) {
+            existingContainer.remove();
+          }
+          // 创建新的分享按钮
+          addSharePuzzleButton();
+        }
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
@@ -944,6 +952,16 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`Game over! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
+        // 添加分享按钮
+        if (isDailyPuzzle || !gameOver) {
+          // 移除旧的分享按钮（如果存在）
+          const existingContainer = document.querySelector('.share-button-container');
+          if (existingContainer) {
+            existingContainer.remove();
+          }
+          // 创建新的分享按钮
+          addSharePuzzleButton();
+        }
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
@@ -964,21 +982,22 @@
     }
 
 
-    // 为随机谜题完成后添加分享按钮
+    // 添加分享按钮
     function addSharePuzzleButton() {
-      // 如果已经存在分享按钮，先移除它
-      const existingContainer = document.querySelector('.share-button-container');
-      if (existingContainer) {
-        existingContainer.remove();
-      }
+      try {
+        // 如果已经存在分享按钮，先移除它
+        const existingContainer = document.querySelector('.share-button-container');
+        if (existingContainer) {
+          existingContainer.remove();
+        }
 
-      // 创建容器
-      const container = document.createElement("div");
-      container.classList.add('share-button-container');
+        // 创建容器
+        const container = document.createElement("div");
+        container.classList.add('share-button-container');
       
-      const shareLink = document.createElement("a");
-      shareLink.textContent = "Share this puzzle";
-      shareLink.classList.add('share-button');
+        const shareLink = document.createElement("a");
+        shareLink.textContent = "Share this puzzle";
+        shareLink.classList.add('share-button');
       shareLink.href = "#";
       
       shareLink.addEventListener("click", (e) => {
@@ -990,7 +1009,14 @@
       
       // 将分享按钮添加到键盘下方
       const keyboard = document.querySelector('.keyboard');
-      keyboard.parentNode.insertBefore(container, keyboard.nextSibling);
+      if (keyboard && keyboard.parentNode) {
+        keyboard.parentNode.insertBefore(container, keyboard.nextSibling);
+      } else {
+        console.error('Cannot find keyboard element or its parent');
+      }
+    } catch (error) {
+      console.error('Error adding share button:', error);
+    }
     }
 
     // 生成随机谜题分享链接并分享或复制到剪贴板
