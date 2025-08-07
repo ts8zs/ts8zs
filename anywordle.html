@@ -1094,8 +1094,8 @@
 
     // 出题
     function generatePuzzle(puzzleWord) {
-      var p= caesarCipher(puzzleWord, 3); // 使用凯撒密码加密
-      console.log(p); 
+      var p= caesarCipher(puzzleWord.toUpperCase(), 3); // 使用凯撒密码加密
+      console.log(`${window.location.origin}${window.location.pathname}?p=` + p);
     }
 
     // 显示消息
