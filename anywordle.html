@@ -221,13 +221,13 @@
       opacity: 0.9;
     }
 
-    .game-button.give-up {
-      background-color: #787c7e;
-      right: 100px;
-    }
-
     .game-button.restart {
       background-color: #6aaa64;
+      right: 10px;
+    }
+
+    .game-button.give-up {
+      background-color: #787c7e;
       right: 10px;
     }
 
@@ -928,15 +928,7 @@
         showMessage(`Congratulations! You guessed it! [${modeText}]`, 'win');
         gameOver = true;
         // 添加分享按钮
-        if (isDailyPuzzle || !gameOver) {
-          // 移除旧的分享按钮（如果存在）
-          const existingContainer = document.querySelector('.share-button-container');
-          if (existingContainer) {
-            existingContainer.remove();
-          }
-          // 创建新的分享按钮
-          addSharePuzzleButton();
-        }
+        addSharePuzzleButton();
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
@@ -944,6 +936,8 @@
         // 清除保存的游戏状态，因为游戏已经结束
         clearGameState();
         isAnimating = false;
+        // 更新按钮状态
+        updateActionButton();
         return;
       }
 
@@ -953,15 +947,7 @@
         showMessage(`Game over! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
         // 添加分享按钮
-        if (isDailyPuzzle || !gameOver) {
-          // 移除旧的分享按钮（如果存在）
-          const existingContainer = document.querySelector('.share-button-container');
-          if (existingContainer) {
-            existingContainer.remove();
-          }
-          // 创建新的分享按钮
-          addSharePuzzleButton();
-        }
+        addSharePuzzleButton();
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
@@ -969,6 +955,8 @@
         // 清除保存的游戏状态，因为游戏已经结束
         clearGameState();
         isAnimating = false;
+        // 更新按钮状态
+        updateActionButton();
         return;
       }
 
@@ -1257,9 +1245,15 @@
         const confirmRestart = confirm(message);
         if (!confirmRestart) {
           return;
-        }else{ 
-          recordPuzzleCompletion()
+        } else { 
+          recordPuzzleCompletion();
         }
+      }
+      
+      // 移除分享按钮
+      const shareContainer = document.querySelector('.share-button-container');
+      if (shareContainer) {
+        shareContainer.remove();
       }
 
       // 清除保存的游戏状态
@@ -1335,12 +1329,18 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`You gave up! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
+        
+        // 放弃时添加分享按钮
+        addSharePuzzleButton();
+        
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
         }
         // 清除保存的游戏状态，因为游戏已经结束
         clearGameState();
+        // 更新按钮状态
+        updateActionButton();
       }
     }
 
@@ -1370,27 +1370,37 @@
       // 在控制台打印接下来10天的每日谜题答案
       // printNext10DaysAnswers();
 
-      // 添加重新开始按钮事件监听
-      const restartButton = document.createElement('button');
-      restartButton.textContent = 'Restart';
-      restartButton.classList.add('game-button', 'restart');
+      // 添加组合按钮（Give Up/Restart）
+      const actionButton = document.createElement('button');
+      actionButton.id = 'actionButton';
+      actionButton.textContent = 'Give Up';
+      actionButton.classList.add('game-button', 'give-up');
 
-      restartButton.addEventListener('click', () => {
-        restartGame();
+      actionButton.addEventListener('click', () => {
+        if (!gameOver) {
+          giveUp();
+        } else {
+          restartGame();
+        }
       });
 
-      document.body.appendChild(restartButton);
+      document.body.appendChild(actionButton);
 
-      // 添加放弃按钮
-      const giveUpButton = document.createElement('button');
-      giveUpButton.textContent = 'Give Up';
-      giveUpButton.classList.add('game-button', 'give-up');
-
-      giveUpButton.addEventListener('click', () => {
-        giveUp();
-      });
-
-      document.body.appendChild(giveUpButton);
+      // 更新按钮状态的函数
+      window.updateActionButton = function() {
+        const button = document.getElementById('actionButton');
+        if (button) {
+          if (gameOver) {
+            button.textContent = 'Restart';
+            button.classList.remove('give-up');
+            button.classList.add('restart');
+          } else {
+            button.textContent = 'Give Up';
+            button.classList.remove('restart');
+            button.classList.add('give-up');
+          }
+        }
+      };
 
     };
   </script>
