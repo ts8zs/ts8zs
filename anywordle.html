@@ -1021,8 +1021,8 @@
           // 复制成功后，尝试使用系统分享API
           if (navigator.share) {
             return navigator.share({
-              title: 'ANYWORDLE',
-              text: emojiGrid,
+              title: '#ANYWORDLE',
+              text: '#ANYWORDLE',
               url: url
             });
           } else {
@@ -1041,7 +1041,7 @@
           // 如果分享成功，显示相应消息
           if (navigator.share) {
             const originalText = document.getElementById("message").textContent;
-            showMessage("Shared and copied to clipboard!", "win");
+            showMessage("Emoji copied to clipboard!", "win");
             setTimeout(() => {
               showMessage(originalText, "win");
             }, 2000);
