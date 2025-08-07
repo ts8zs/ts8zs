@@ -237,7 +237,7 @@
     }
 
     /* 分享按钮样式 */
-    .share-button-container {
+    .share-container {
       width: 100%;
       max-width: 500px;
       display: flex;
@@ -245,7 +245,7 @@
       margin-top: 20px;
     }
 
-    .share-button {
+    .share {
       padding: 10px 20px;
       background-color: #6aaa64;
       color: white;
@@ -256,7 +256,7 @@
       font-weight: bold;
     }
 
-    .share-button:hover {
+    .share:hover {
       opacity: 0.9;
     }
 
@@ -1202,19 +1202,19 @@
     // 添加分享按钮
     function addSharePuzzleButton() {
       // 如果已经存在分享按钮，先移除它
-      const existingContainer = document.querySelector('.share-button-container');
+      const existingContainer = document.querySelector('.share-container');
       if (existingContainer) {
         existingContainer.remove();
       }
 
       // 创建新的分享按钮容器
       const shareContainer = document.createElement('div');
-      shareContainer.classList.add('share-button-container');
+      shareContainer.classList.add('share-container');
 
       // 创建分享按钮
       const shareButton = document.createElement('button');
       shareButton.textContent = 'Share Puzzle';
-      shareButton.classList.add('share-button');
+      shareButton.classList.add('share');
       shareButton.addEventListener('click', copyPuzzleLinkToClipboard);
 
       // 将按钮添加到容器中
@@ -1241,7 +1241,7 @@
       }
       
       // 移除分享按钮
-      const shareContainer = document.querySelector('.share-button-container');
+      const shareContainer = document.querySelector('.share-container');
       if (shareContainer) {
         shareContainer.remove();
       }
@@ -1303,7 +1303,7 @@
       });
       
       // 移除分享按钮（如果存在）
-      const existingContainer = document.querySelector('.share-button-container');
+      const existingContainer = document.querySelector('.share-container');
       if (existingContainer) {
         existingContainer.remove();
       }
