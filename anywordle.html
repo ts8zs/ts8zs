@@ -929,7 +929,8 @@
         gameOver = true;
         // 添加分享按钮并记录每日谜题完成状态
         addSharePuzzleButton(); // 为所有模式添加分享按钮
-        if (isDailyPuzzle) {
+        // 只有当是每日谜题且日期是当天时，才记录完成状态
+        if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
         }
         // 清除保存的游戏状态，因为游戏已经结束
@@ -943,7 +944,8 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`Game over! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
-        if (isDailyPuzzle) {
+        // 只有当是每日谜题且日期是当天时，才记录完成状态
+        if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
         }
         // 清除保存的游戏状态，因为游戏已经结束
@@ -1242,6 +1244,7 @@
       
       // 删除p参数（如果存在）
       url.searchParams.delete('p');
+      url.searchParams.delete('d');
       
       // 更新浏览器历史记录，不重新加载页面
       window.history.replaceState({}, '', url);
@@ -1306,8 +1309,8 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`You gave up! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
-        // 记录当日谜题完成状态（即使是放弃也算完成）
-        if (isDailyPuzzle) {
+        // 只有当是每日谜题且日期是当天时，才记录完成状态
+        if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
         }
         // 清除保存的游戏状态，因为游戏已经结束
