@@ -332,7 +332,7 @@
       </div>
     </div>
   </div>
-  by <a href="https://ts8zs.com">ts8zs.com</a> with qwen-coder
+  BY <a href="https://ts8zs.com">TS8ZS.COM</a> WITH QWEN-CODER
   <script>
     // 游戏配置
 
@@ -506,7 +506,7 @@
 
         // 如果任一词库为空，显示错误消息
         if (commonWords.length === 0 || allWords.length === 0) {
-          showMessage('Failed to load word list, please check file format', 'lose');
+          showMessage('FAILED TO LOAD WORD LIST, PLEASE CHECK FILE FORMAT', 'lose');
           return;
         }
       }
@@ -598,19 +598,19 @@
       const dateStr = dailyPuzzleDate;
       if (isDailyPuzzle) {
         if (puzzleCompleted) {
-          showMessage(`Daily Puzzle ${dailyPuzzleDate} (Completed)`, 'win');
+          showMessage(`DAILY PUZZLE ${dailyPuzzleDate} (COMPLETED)`, 'win');
         } else {
-          showMessage(`Daily Puzzle ${dailyPuzzleDate}`, 'win');
+          showMessage(`DAILY PUZZLE ${dailyPuzzleDate}`, 'win');
         }
       } else {
-        showMessage('Random Puzzle', 'win');
+        showMessage('RANDOM PUZZLE', 'win');
       }
     }
 
     // 切换游戏模式
     function toggleGameMode() {
       if (isDailyPuzzle && puzzleCompleted) {
-        showMessage("You've already completed today's puzzle!", 'lose');
+        showMessage("YOU'VE ALREADY COMPLETED TODAY'S PUZZLE!", 'lose');
         return;
       }
 
@@ -810,7 +810,7 @@
 
       // 检查单词是否在全部词库中
       if (!allWords.includes(guess) && !commonWords.includes(guess) && targetWord !== guess) {
-        showMessage("Word not in word list!");
+        showMessage("WORD NOT IN WORD LIST!");
         // 抖动效果
         row.style.animation = "shake 0.5s";
         setTimeout(() => {
@@ -951,8 +951,8 @@
 
       // 检查是否胜利
       if (guess === targetWord) {
-        const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
-        showMessage(`Congratulations! You guessed it! [${modeText}]`, 'win');
+        const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
+        showMessage(`CONGRATULATIONS! YOU GUESSED IT! [${modeText}]`, 'win');
         gameOver = true;
         // 添加分享按钮
         addSharePuzzleButton();
@@ -970,8 +970,8 @@
 
       // 检查是否用尽所有机会
       if (currentRow === 9) {
-        const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
-        showMessage(`Game over! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
+        const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
+        showMessage(`GAME OVER! THE CORRECT ANSWER IS: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
         // 添加分享按钮
         addSharePuzzleButton();
@@ -1055,7 +1055,7 @@
           } else {
             // 如果不支持分享API，显示复制成功消息
             const originalText = document.getElementById("message").textContent;
-            showMessage("Results and link copied to clipboard!", "win");
+            showMessage("RESULTS AND LINK COPIED TO CLIPBOARD!", "win");
             return new Promise(resolve => {
               setTimeout(() => {
                 showMessage(originalText, "win");
@@ -1068,7 +1068,7 @@
           // 如果分享成功，显示相应消息
           if (navigator.share) {
             const originalText = document.getElementById("message").textContent;
-            showMessage("Shared and copied to clipboard!", "win");
+            showMessage("SHARED AND COPIED TO CLIPBOARD!", "win");
             setTimeout(() => {
               showMessage(originalText, "win");
             }, 2000);
@@ -1094,8 +1094,8 @@
           console.error('Failed to copy:', err);
           showMessage("Failed to copy to clipboard", "lose");
           setTimeout(() => {
-            const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
-            showMessage(`Congratulations! You guessed it! [${modeText}]`, 'win');
+            const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
+            showMessage(`CONGRATULATIONS! YOU GUESSED IT! [${modeText}]`, 'win');
           }, 2000);
         });
     }
@@ -1147,7 +1147,7 @@
           .filter(word => word.length > 0);
       } catch (error) {
         console.error(error);
-        showMessage(`Failed to load word list: ${filePath}`, 'lose');
+        showMessage(`FAILED TO LOAD WORD LIST: ${filePath}`, 'lose');
         return [];  // 返回空数组作为后备
       }
     }
@@ -1240,7 +1240,7 @@
 
       // 创建分享按钮
       const shareButton = document.createElement('button');
-      shareButton.textContent = 'Share Puzzle';
+      shareButton.textContent = 'SHARE PUZZLE';
       shareButton.classList.add('share');
       shareButton.addEventListener('click', copyPuzzleLinkToClipboard);
 
@@ -1257,8 +1257,8 @@
       // 如果是每日谜题且游戏未结束，显示警告
       if (isDailyPuzzle && !gameOver) {
         let message = puzzleCompleted ? 
-          "Daily puzzle already completed. Start a random puzzle?" :
-          "Are you sure you want to skip today's daily puzzle?";
+          "DAILY PUZZLE ALREADY COMPLETED. START A RANDOM PUZZLE?" :
+          "ARE YOU SURE YOU WANT TO SKIP TODAY'S DAILY PUZZLE?";
         const confirmRestart = confirm(message);
         if (!confirmRestart) {
           return;
@@ -1343,8 +1343,8 @@
     // 放弃游戏
     function giveUp() {
       if (!gameOver) {
-        const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
-        showMessage(`You gave up! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
+        const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
+        showMessage(`YOU GAVE UP! THE CORRECT ANSWER IS: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
         
         // 放弃时添加分享按钮
@@ -1390,7 +1390,7 @@
       // 添加组合按钮（Give Up/Restart）
       const actionButton = document.createElement('button');
       actionButton.id = 'actionButton';
-      actionButton.textContent = 'Give Up';
+      actionButton.textContent = 'GIVE UP';
       actionButton.classList.add('game-button', 'give-up');
 
       actionButton.addEventListener('click', () => {
@@ -1408,11 +1408,11 @@
         const button = document.getElementById('actionButton');
         if (button) {
           if (gameOver) {
-            button.textContent = 'Restart';
+            button.textContent = 'RESTART';
             button.classList.remove('give-up');
             button.classList.add('restart');
           } else {
-            button.textContent = 'Give Up';
+            button.textContent = 'GIVE UP';
             button.classList.remove('restart');
             button.classList.add('give-up');
           }
