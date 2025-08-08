@@ -157,7 +157,8 @@
       border-radius: 4px;
       font-weight: bold;
       cursor: pointer;
-      -webkit-user-select: none; /* Safari兼容性 */
+      -webkit-user-select: none;
+      /* Safari兼容性 */
       user-select: none;
       transition: all 0.2s ease;
     }
@@ -214,7 +215,8 @@
       cursor: pointer;
       z-index: 1000;
       top: 10px;
-      text-decoration: none; /* 去除链接下划线 */
+      text-decoration: none;
+      /* 去除链接下划线 */
     }
 
     .game-button:hover {
@@ -437,7 +439,7 @@
           if (i < gameState.rows.length) {
             // 恢复已有行
             const rowData = gameState.rows[i];
-            
+
             for (let j = 0; j < rowData.tiles.length; j++) {
               const tileData = rowData.tiles[j];
               const tile = document.createElement("div");
@@ -446,7 +448,7 @@
               tile.textContent = tileData.text;
               row.appendChild(tile);
             }
-            
+
             // 更新网格布局
             row.style.gridTemplateColumns = `repeat(${rowData.tiles.length}, 1fr)`;
           } else {
@@ -455,7 +457,7 @@
             tile.classList.add("tile");
             tile.id = `tile-${i}-0`;
             row.appendChild(tile);
-            
+
             // 设置初始网格布局
             row.style.gridTemplateColumns = "repeat(1, 1fr)";
           }
@@ -532,7 +534,7 @@
       }
       const puzzleParam = urlParams.get('p');
       const dateParam = urlParams.get('d');
-      
+
       // 如果有日期参数，优先使用日期参数（忽略每日谜题是否完成的检查）
       if (dateParam) {
         dailyPuzzleDate = dateParam;
@@ -561,7 +563,7 @@
 
         // 默认使用每日谜题（仅在没有通过URL指定单词时）
         isDailyPuzzle = true;
-        
+
         // 选择目标单词
         if (isDailyPuzzle && !puzzleCompleted) {
           // 使用每日谜题答案
@@ -737,7 +739,7 @@
       }
 
       currentTile++;
-      
+
       // 保存游戏状态
       saveGameState();
     }
@@ -754,7 +756,7 @@
       }
       // 移除当前行最后一个空格子
       removeEmptyTile();
-      
+
       // 保存游戏状态
       saveGameState();
     }
@@ -794,7 +796,7 @@
     function submitGuess() {
       // 如果正在播放动画，不处理提交
       if (isAnimating) return;
-      
+
       // 获取当前行的单词
       let guess = "";
       const row = document.getElementById(`row-${currentRow}`);
@@ -870,7 +872,7 @@
       let correctCount = 0;
       // 添加动画完成计数器
       let animationCount = 0;
-      
+
       // 同时显示所有格子的结果，但要等待动画完成
       for (let i = 0; i < result.length; i++) {
         const tile = document.getElementById(`tile-${currentRow}-${i}`);
@@ -896,15 +898,15 @@
             'absent': 1,
             'invalid': 1
           };
-          
+
           // 获取当前状态的优先级
           const currentState = keyElement.classList.contains('correct') ? 'correct' :
-                              keyElement.classList.contains('present') ? 'present' :
-                              keyElement.classList.contains('absent') ? 'absent' : null;
-          
+            keyElement.classList.contains('present') ? 'present' :
+              keyElement.classList.contains('absent') ? 'absent' : null;
+
           const currentPriority = currentState ? priority[currentState] : 0;
           const newPriority = priority[result[i]];
-          
+
           // 只有当新状态优先级更高时才更新
           if (newPriority > currentPriority) {
             // 移除所有状态类
@@ -964,7 +966,7 @@
       currentRow++;
       currentTile = 0;
       isAnimating = false;
-      
+
       // 保存游戏状态
       saveGameState();
     }
@@ -984,11 +986,11 @@
 
       // 生成emoji网格
       let emojiGrid = `#ANYWORDLE ${isDailyPuzzle ? dailyPuzzleDate : ''}\n`;
-      
+
       for (let i = 0; i <= currentRow; i++) {
         const row = document.getElementById(`row-${i}`);
         let rowEmojis = "";
-        
+
         // 收集所有格子的结果
         for (let j = 0; j < row.children.length; j++) {
           const tile = document.getElementById(`tile-${i}-${j}`);
@@ -1006,15 +1008,15 @@
             }
           }
         }
-        
+
         if (rowEmojis) {
           emojiGrid += rowEmojis + "\n";
         }
       }
-      
+
       // 添加网址和分享链接
       emojiGrid += `\n${url}`;
-      
+
       // 总是先尝试复制到剪贴板
       navigator.clipboard.writeText(emojiGrid)
         .then(() => {
@@ -1095,7 +1097,7 @@
 
     // 出题
     function generatePuzzle(puzzleWord) {
-      var p= caesarCipher(puzzleWord.toUpperCase(), 3); // 使用凯撒密码加密
+      var p = caesarCipher(puzzleWord.toUpperCase(), 3); // 使用凯撒密码加密
       console.log(`${window.location.origin}${window.location.pathname}?p=` + p);
     }
 
@@ -1159,19 +1161,19 @@
       // 这个算法结合了多个技术来获得更好的分布
       let hash = 0;
       const len = dateString.length;
-      
+
       // 使用不同的质数和位运算组合来提高随机性
       for (let i = 0; i < len; i++) {
         const char = dateString.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
         hash = hash & hash; // 转换为32位整数
       }
-      
+
       // 添加一个额外的步骤来进一步打乱哈希值
       hash = ((hash >> 16) ^ hash) * 0x45d9f3b;
       hash = ((hash >> 16) ^ hash) * 0x45d9f3b;
       hash = (hash >> 16) ^ hash;
-      
+
       // 使用哈希值选择单词列表中的单词
       const index = Math.abs(hash) % wordList.length;
       return wordList[index];
@@ -1180,19 +1182,19 @@
     // 调试功能：在控制台查看接下来10天的每日谜题答案
     function printNext10DaysAnswers() {
       console.log("接下来10天的每日谜题答案：");
-      
+
       const today = new Date();
       for (let i = 0; i < 10; i++) {
         // 计算未来第i天的日期
         const nextDate = new Date(today);
         nextDate.setDate(today.getDate() + i);
-        
+
         // 格式化为 YYYY-MM-DD 字符串
         const year = nextDate.getFullYear();
         const month = String(nextDate.getMonth() + 1).padStart(2, '0');
         const day = String(nextDate.getDate()).padStart(2, '0');
         const dateString = `${year}-${month}-${day}`;
-        
+
         // 获取该日期的每日谜题答案
         const answer = getDailyPuzzleAnswer(dateString, commonWords);
         console.log(`${dateString}: ${answer}`);
@@ -1229,17 +1231,17 @@
     function restartGame() {
       // 如果是每日谜题且游戏未结束，显示警告
       if (isDailyPuzzle && !gameOver) {
-        let message = puzzleCompleted ? 
+        let message = puzzleCompleted ?
           "Daily puzzle already completed. Start a random puzzle?" :
           "Are you sure you want to skip today's daily puzzle?";
         const confirmRestart = confirm(message);
         if (!confirmRestart) {
           return;
-        } else { 
+        } else {
           recordPuzzleCompletion();
         }
       }
-      
+
       // 移除分享按钮
       const shareContainer = document.querySelector('.share-container');
       if (shareContainer) {
@@ -1251,11 +1253,11 @@
 
       // 创建新的URL对象
       const url = new URL(window.location);
-      
+
       // 删除p参数（如果存在）
       url.searchParams.delete('p');
       url.searchParams.delete('d');
-      
+
       // 更新浏览器历史记录，不重新加载页面
       window.history.replaceState({}, '', url);
 
@@ -1264,12 +1266,12 @@
       currentTile = 0;
       gameOver = false;
       isAnimating = false;
-      
+
       // 选择目标单词（使用每日谜题）
       dailyPuzzleDate = getCurrentUTC8Date();
       puzzleCompleted = isPuzzleCompletedForToday();
       isDailyPuzzle = true;
-      
+
       if (isDailyPuzzle && !puzzleCompleted) {
         // 使用每日谜题答案
         targetWord = getDailyPuzzleAnswer(dailyPuzzleDate, commonWords);
@@ -1301,13 +1303,13 @@
           handleVirtualKeyPress(clone.dataset.key);
         });
       });
-      
+
       // 移除分享按钮（如果存在）
       const existingContainer = document.querySelector('.share-container');
       if (existingContainer) {
         existingContainer.remove();
       }
-      
+
       // 重新绑定键盘事件
       document.removeEventListener('keydown', handleKeyPress);
       document.addEventListener('keydown', handleKeyPress);
@@ -1319,10 +1321,10 @@
         const modeText = isDailyPuzzle ? `Daily Puzzle ${dailyPuzzleDate}` : 'Random Puzzle';
         showMessage(`You gave up! The correct answer is: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
-        
+
         // 放弃时添加分享按钮
         addSharePuzzleButton();
-        
+
         // 只有当是每日谜题且日期是当天时，才记录完成状态
         if (isDailyPuzzle && dailyPuzzleDate === getCurrentUTC8Date()) {
           recordPuzzleCompletion();
@@ -1356,7 +1358,7 @@
     window.onload = async function () {
       // 初始化游戏
       await initGame();
-      
+
       // 在控制台打印接下来10天的每日谜题答案
       // printNext10DaysAnswers();
 
@@ -1377,7 +1379,7 @@
       document.body.appendChild(actionButton);
 
       // 更新按钮状态的函数
-      window.updateActionButton = function() {
+      window.updateActionButton = function () {
         const button = document.getElementById('actionButton');
         if (button) {
           if (gameOver) {
