@@ -134,6 +134,16 @@
       }
     }
 
+    /* 纸片烟花特效样式 */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 9999;
+    }
+
     .keyboard {
       width: 100%;
       max-width: 500px;
@@ -347,6 +357,7 @@
     let gameOver = false;
     let wordsLoaded = false;  // 标记单词是否已加载
     let isAnimating = false;  // 标记是否正在播放动画
+    let maxGuesses = 8;  // 最大猜测次数
 
     // 每日谜题状态
     let dailyPuzzleDate = '';  // 当前每日谜题的日期
@@ -623,7 +634,7 @@
       const board = document.getElementById("board");
       board.innerHTML = "";
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < maxGuesses; i++) {
         const row = document.createElement("div");
         row.classList.add("row");
         row.id = `row-${i}`;
@@ -709,7 +720,13 @@
 
     // 添加字母到当前格子
     function addLetter(letter) {
+      // 如果游戏已经结束或者正在播放动画，则不处理输入
+      if (gameOver || isAnimating) return;
+      
       const row = document.getElementById(`row-${currentRow}`);
+      
+      // 如果找不到对应的行元素，则不处理输入
+      if (!row) return;
 
       // 确保当前格子存在
       if (currentTile >= row.children.length) {
@@ -954,6 +971,8 @@
         const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
         showMessage(`CONGRATULATIONS! YOU GUESSED IT! [${modeText}]`, 'win');
         gameOver = true;
+        // 添加纸片烟花特效
+        createConfetti();
         // 添加分享按钮
         addSharePuzzleButton();
         // 只有当是每日谜题且日期是当天时，才记录完成状态
@@ -969,7 +988,7 @@
       }
 
       // 检查是否用尽所有机会
-      if (currentRow === 9) {
+      if (currentRow > maxGuesses) {
         const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
         showMessage(`GAME OVER! THE CORRECT ANSWER IS: ${targetWord} [${modeText}]`, 'lose');
         gameOver = true;
@@ -1338,6 +1357,9 @@
       // 重新绑定键盘事件
       document.removeEventListener('keydown', handleKeyPress);
       document.addEventListener('keydown', handleKeyPress);
+      
+      // 更新按钮状态
+      updateActionButton();
     }
 
     // 放弃游戏
@@ -1376,8 +1398,83 @@
                 grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
                 gap: 5px;
             }
+            
+            /* 纸片烟花特效样式 */
+            .confetti {
+              position: fixed;
+              width: 10px;
+              height: 10px;
+              background-color: #f00;
+              opacity: 0;
+              z-index: 9999;
+            }
         `;
     document.head.appendChild(style);
+
+    // 纸片烟花特效函数
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
+      const confettiCount = Math.min(targetWord.length * targetWord.length, 200);
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        document.body.appendChild(confetti);
+        
+        // 设置初始位置（屏幕顶部中央）
+        const startX = window.innerWidth / 2;
+        const startY = -10;
+        confetti.style.left = startX + 'px';
+        confetti.style.top = startY + 'px';
+        confetti.style.opacity = '1';
+        
+        // 随机生成运动参数
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 2 + Math.random() * 3;
+        const velocityX = Math.cos(angle) * velocity * (0.5 + Math.random());
+        const velocityY = Math.sin(angle) * velocity * (0.5 + Math.random());
+        const gravity = 0.05 + Math.random() * 0.1;
+        const rotation = Math.random() * 360;
+        const rotationSpeed = -10 + Math.random() * 20;
+        const drag = 0.98;
+        
+        // 动画循环
+        let x = startX;
+        let y = startY;
+        let vx = velocityX;
+        let vy = velocityY;
+        let rot = rotation;
+        
+        const animate = () => {
+          vy += gravity;
+          vx *= drag;
+          vy *= drag;
+          
+          x += vx;
+          y += vy;
+          rot += rotationSpeed;
+          
+          confetti.style.left = x + 'px';
+          confetti.style.top = y + 'px';
+          confetti.style.transform = `rotate(${rot}deg)`;
+          
+          // 检查是否仍在视窗内
+          if (y < window.innerHeight && x > -20 && x < window.innerWidth + 20) {
+            requestAnimationFrame(animate);
+          } else {
+            // 移除纸片
+            confetti.remove();
+          }
+        };
+        
+        // 开始动画
+        requestAnimationFrame(animate);
+      }
+    }
 
     // 初始化游戏
     window.onload = async function () {
