@@ -44,6 +44,15 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
+    /* 添加链接样式 */
+    a {
+      color: #87CEEB; /* 天蓝色 */
+    }
+
+    a:visited {
+      color: #800080; /* 暗紫色 */
+    }
+
     .game-container {
       display: flex;
       flex-direction: column;
@@ -827,7 +836,8 @@
 
       // 检查单词是否在全部词库中
       if (!allWords.includes(guess) && !commonWords.includes(guess) && targetWord !== guess) {
-        showMessage("WORD NOT IN WORD LIST!");
+        const cambridgeLink = `https://dictionary.cambridge.org/dictionary/english/${guess.toLowerCase()}`;
+        showMessage(`WORD NOT IN WORD LIST! CHECK <a href="${cambridgeLink}" target="_blank">${guess}</a> ON CAMBRIDGE DICTIONARY.`, 'lose');
         // 抖动效果
         row.style.animation = "shake 0.5s";
         setTimeout(() => {
@@ -969,7 +979,8 @@
       // 检查是否胜利
       if (guess === targetWord) {
         const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
-        showMessage(`CONGRATULATIONS! YOU GUESSED IT! [${modeText}]`, 'win');
+        const cambridgeLink = `https://dictionary.cambridge.org/dictionary/english/${targetWord.toLowerCase()}`;
+        showMessage(`CONGRATULATIONS! YOU GUESSED IT! THE WORD IS: <a href="${cambridgeLink}" target="_blank">${targetWord}</a> [${modeText}]`, 'win');
         gameOver = true;
         // 添加纸片烟花特效
         createConfetti();
@@ -988,9 +999,10 @@
       }
 
       // 检查是否用尽所有机会
-      if (currentRow > maxGuesses) {
+      if (currentRow >= maxGuesses - 1) {
         const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
-        showMessage(`GAME OVER! THE CORRECT ANSWER IS: ${targetWord} [${modeText}]`, 'lose');
+        const cambridgeLink = `https://dictionary.cambridge.org/dictionary/english/${targetWord.toLowerCase()}`;
+        showMessage(`GAME OVER! THE CORRECT ANSWER IS: <a href="${cambridgeLink}" target="_blank">${targetWord}</a> [${modeText}]`, 'lose');
         gameOver = true;
         // 添加分享按钮
         addSharePuzzleButton();
@@ -1148,7 +1160,7 @@
     // 显示消息
     function showMessage(text, className = '') {
       const messageElement = document.getElementById('message');
-      messageElement.textContent = text;
+      messageElement.innerHTML = text;
       messageElement.className = 'message ' + className;
     }
 
@@ -1366,7 +1378,8 @@
     function giveUp() {
       if (!gameOver) {
         const modeText = isDailyPuzzle ? `DAILY PUZZLE ${dailyPuzzleDate}` : 'RANDOM PUZZLE';
-        showMessage(`YOU GAVE UP! THE CORRECT ANSWER IS: ${targetWord} [${modeText}]`, 'lose');
+        const cambridgeLink = `https://dictionary.cambridge.org/dictionary/english/${targetWord.toLowerCase()}`;
+        showMessage(`YOU GAVE UP! THE CORRECT ANSWER IS: <a href="${cambridgeLink}" target="_blank">${targetWord}</a> [${modeText}]`, 'lose');
         gameOver = true;
         
         // 放弃时添加分享按钮
@@ -1414,8 +1427,8 @@
     // 纸片烟花特效函数
     function createConfetti() {
       const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
-      const confettiCount = Math.min(targetWord.length * targetWord.length, 200);
-      
+      const confettiCount = Math.floor(Math.min(targetWord.length * (maxGuesses-currentRow), 200));
+
       for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
