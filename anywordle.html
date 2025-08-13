@@ -1147,7 +1147,11 @@
               } else if (tile.classList.contains("invalid")) {
                 rowEmojis += "🟥";
               } else if (tile.classList.contains("absent")) {
-                rowEmojis += "⬜";
+                if (tile.textContent === "?") {
+                  rowEmojis += "❔";
+                }else{
+                  rowEmojis += "⬜";
+                }
               } else {
                 break;
               }
