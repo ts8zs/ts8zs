@@ -256,8 +256,12 @@
         color: #6aaa64;
       }
 
-      .lose {
+      .hint {
         color: #c9b458;
+      }
+      
+      .lose {
+        color: #ff4d4d;
       }
 
       /* 按钮样式 */
@@ -1186,40 +1190,15 @@
             if (navigator.share) {
               const originalText = document.getElementById("message").innerHTML;
               showMessage("SHARED AND EMOJI COPIED TO CLIPBOARD!", "win");
+              alert("SHARED AND EMOJI COPIED TO CLIPBOARD!");
               setTimeout(() => {
-                showMessage(originalText, "win");
+                showMessage(originalText, "hint");
               }, 5000);
             }
           })
           .catch((err) => {
             console.error("Operation failed:", err);
-            fallbackToCopyClipboard(emojiGrid);
-          });
-      }
 
-      // 复制到剪贴板的回退方案
-      function fallbackToCopyClipboard(content) {
-        navigator.clipboard
-          .writeText(content)
-          .then(() => {
-            const originalText = document.getElementById("message").innerHTML;
-            showMessage("Results and link copied to clipboard!", "win");
-            setTimeout(() => {
-              showMessage(originalText, "win");
-            }, 2000);
-          })
-          .catch((err) => {
-            console.error("Failed to copy:", err);
-            showMessage("Failed to copy to clipboard", "lose");
-            setTimeout(() => {
-              const modeText = isDailyPuzzle
-                ? `DAILY PUZZLE ${dailyPuzzleDate}`
-                : "RANDOM PUZZLE";
-              showMessage(
-                `CONGRATULATIONS! YOU GUESSED IT! [${modeText}]`,
-                "win"
-              );
-            }, 2000);
           });
       }
 
