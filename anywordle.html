@@ -321,6 +321,94 @@
         opacity: 0.9;
       }
 
+      /* 模态框样式 */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        position: relative;
+        animation: modalopen 0.4s;
+      }
+
+      @keyframes modalopen {
+        from {opacity: 0; transform: translateY(-60px);}
+        to {opacity: 1; transform: translateY(0);}
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 15px;
+        top: 0;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-header {
+        margin-bottom: 15px;
+      }
+
+      .modal-body {
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .modal-button {
+        background-color: #6aaa64;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .modal-button:hover {
+        opacity: 0.9;
+      }
+
+      /* textarea最小尺寸 */
+      textarea {
+        min-height: 150px;
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 14px;
+        resize: vertical;
+        margin-top: 10px;
+        background-color: #f9f9f9;
+      }
+
       @media (max-width: 500px) {
         .tile {
           font-size: 1.5rem;
@@ -348,6 +436,22 @@
     <header>
       <h1>ANYWORDLE</h1>
     </header>
+
+    <!-- 模态框 -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-header">
+          <h2 id="modal-title"></h2>
+        </div>
+        <div class="modal-body">
+          <p id="modal-message"></p>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-button" id="modal-ok-button">OK</button>
+        </div>
+      </div>
+    </div>
 
     <div class="game-container">
       <div class="message" id="message"></div>
@@ -557,8 +661,71 @@
         localStorage.removeItem("wordleGameState");
       }
 
+      // 显示模态框
+      function showModal(title, message, callback) {
+        const modal = document.getElementById("modal");
+        const modalTitle = document.getElementById("modal-title");
+        const modalMessage = document.getElementById("modal-message");
+        const modalOkButton = document.getElementById("modal-ok-button");
+        const closeBtn = document.querySelector(".close");
+
+        modalTitle.textContent = title;
+        modalMessage.innerHTML = message;
+
+        // 点击确定按钮
+        modalOkButton.onclick = function() {
+          modal.style.display = "none";
+          if (callback) callback();
+        };
+
+        // 点击关闭按钮
+        closeBtn.onclick = function() {
+          modal.style.display = "none";
+          if (callback) callback();
+        };
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+            if (callback) callback();
+          }
+        };
+
+        // 显示模态框
+        modal.style.display = "block";
+      }
+
+      // 检查并显示游戏玩法提示
+      function checkAndShowGameGuide() {
+        // 检查是否已经显示过游戏指南
+        const hasShownGuide = localStorage.getItem("wordleHasShownGuide");
+        
+        if (!hasShownGuide) {
+
+            showModal("WELCOME TO ANYWORDLE!", 
+              "HOW TO PLAY:<br><br>" +
+              "1. GUESS THE HIDDEN WORD<br>" +
+              "2. EACH GUESS MUST BE A VALID WORD.<br>" +
+              "3. AFTER EACH GUESS, THE COLOR OF THE TILES WILL CHANGE TO SHOW HOW CLOSE YOUR GUESS WAS TO THE WORD.<br><br>" +
+              "TILE COLORS:<br>" +
+              "- 🟩: LETTER IS IN THE WORD AND IN THE CORRECT POSITION<br>" +
+              "- 🟨: LETTER IS IN THE WORD BUT IN THE WRONG POSITION<br>" +
+              "- ⬛️: LETTER IS NOT IN THE WORD<br>" +
+              "- 🟥: LETTER IS OUT OF BOUNDS OF AND NOT IN THE WORD<br><br>" +
+              "GOOD LUCK!", 
+              null);
+          }
+          // 标记已经显示过游戏指南
+          localStorage.setItem("wordleHasShownGuide", "true");
+        }
+      
+
       // 初始化游戏
       async function initGame() {
+        // 检查是否首次进入游戏，如果是则显示玩法提示
+        checkAndShowGameGuide();
+
         // 优先加载单词库
         if (!wordsLoaded) {
           // 从两个文件并行加载单词
@@ -1147,11 +1314,7 @@
               } else if (tile.classList.contains("invalid")) {
                 rowEmojis += "🟥";
               } else if (tile.classList.contains("absent")) {
-                if (tile.textContent === "?") {
-                  rowEmojis += "❔";
-                }else{
-                  rowEmojis += "⬜";
-                }
+                rowEmojis += "⬛️";
               } else {
                 break;
               }
@@ -1170,36 +1333,11 @@
         navigator.clipboard
           .writeText(emojiGrid)
           .then(() => {
-            // 复制成功后，尝试使用系统分享API
-            if (navigator.share) {
-              return navigator.share({
-                title: "#ANYWORDLE",
-                text: "#ANYWORDLE",
-                url: url,
-              });
-            } else {
-              // 如果不支持分享API，显示复制成功消息
               const originalText = document.getElementById("message").innerHTML;
               showMessage("EMOJI COPIED TO CLIPBOARD!", "win");
-              return new Promise((resolve) => {
-                // setTimeout(() => {
-                //   showMessage(originalText, "win");
-                //   resolve();
-                // }, 2000);
-              });
+              showModal("SUCCESS", "EMOJI COPIED TO CLIPBOARD!<br><textarea>"+emojiGrid+"</textarea>", null);
             }
-          })
-          .then(() => {
-            // 如果分享成功，显示相应消息
-            if (navigator.share) {
-              const originalText = document.getElementById("message").innerHTML;
-              showMessage("SHARED AND EMOJI COPIED TO CLIPBOARD!", "win");
-              alert("SHARED AND EMOJI COPIED TO CLIPBOARD!");
-              setTimeout(() => {
-                showMessage(originalText, "hint");
-              }, 5000);
-            }
-          })
+          )
           .catch((err) => {
             console.error("Operation failed:", err);
 
@@ -1244,6 +1382,7 @@
       // 从文件加载单词库
       async function loadWordsFromFile(filePath) {
         try {
+          showMessage("LOADING DICTIONARY...", "hint");
           const response = await fetch(filePath);
           if (!response.ok) {
             throw new Error(`Unable to load file: ${filePath}`);
