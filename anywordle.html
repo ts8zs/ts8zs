@@ -411,6 +411,8 @@
 
       @media (max-width: 500px) {
         .tile {
+          width: 40px;
+          height: 40px;
           font-size: 1.5rem;
         }
 
@@ -427,6 +429,36 @@
 
         h1 {
           font-size: 2rem;
+        }
+      }
+
+      /* 针对更小屏幕的优化 */
+      @media (max-width: 400px) {
+        .tile {
+          width: 35px;
+          height: 35px;
+          font-size: 1.3rem;
+        }
+
+
+
+        h1 {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* 针对超小屏幕的优化 */
+      @media (max-width: 350px) {
+        .tile {
+          width: 30px;
+          height: 30px;
+          font-size: 1.1rem;
+        }
+
+
+
+        h1 {
+          font-size: 1.5rem;
         }
       }
     </style>
