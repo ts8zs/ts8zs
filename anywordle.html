@@ -1335,7 +1335,7 @@
           .then(() => {
               const originalText = document.getElementById("message").innerHTML;
               showMessage("EMOJI COPIED TO CLIPBOARD!", "win");
-              showModal("SUCCESS", "EMOJI COPIED TO CLIPBOARD!<br><textarea>"+emojiGrid+"</textarea>", null);
+              showModal("EMOJI COPIED TO CLIPBOARD!", "<textarea>"+emojiGrid+"</textarea>", null);
             }
           )
           .catch((err) => {
