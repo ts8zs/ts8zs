@@ -808,8 +808,16 @@
           dailyPuzzleDate = dateParam;
           isDailyPuzzle = true;
           targetWord = getDailyPuzzleAnswer(dateParam, commonWords);
+          if (puzzleParam) {
+          const unscrambledWord = caesarDecipher(puzzleParam, 3); // 使用位移3的凯撒密码解密
+          if (unscrambledWord && unscrambledWord.match(/^[A-Z]+$/)) {
+            targetWord = unscrambledWord;
+            // console.log('目标单词(来自链接):', targetWord);
+          } else {
+            console.error("Invalid puzzle parameter in URL");
+          }
           // console.log('目标单词(来自日期):', targetWord);
-        }
+        }}
         // 否则，如果有puzzle参数，则使用该参数作为目标单词
         else if (puzzleParam) {
           const unscrambledWord = caesarDecipher(puzzleParam, 3); // 使用位移3的凯撒密码解密
@@ -1322,7 +1330,7 @@
         // 创建链接，每日谜题只需要日期，随机谜题需要使用凯撒密码混淆单词
         let url;
         if (isDailyPuzzle) {
-          url = `${window.location.origin}${window.location.pathname}?d=${dailyPuzzleDate}`;
+          url = `${window.location.origin}${window.location.pathname}?p=${scrambledWord}&d=${dailyPuzzleDate}`;
         } else {
           const scrambledWord = caesarCipher(targetWord, 3); // 使用位移3的凯撒密码
           url = `${window.location.origin}${window.location.pathname}?p=${scrambledWord}`;
