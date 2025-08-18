@@ -1329,10 +1329,10 @@
       function copyPuzzleLinkToClipboard() {
         // 创建链接，每日谜题只需要日期，随机谜题需要使用凯撒密码混淆单词
         let url;
+        let scrambledWord = caesarCipher(targetWord, 3); // 使用位移3的凯撒密码
         if (isDailyPuzzle) {
           url = `${window.location.origin}${window.location.pathname}?p=${scrambledWord}&d=${dailyPuzzleDate}`;
         } else {
-          const scrambledWord = caesarCipher(targetWord, 3); // 使用位移3的凯撒密码
           url = `${window.location.origin}${window.location.pathname}?p=${scrambledWord}`;
         }
 
