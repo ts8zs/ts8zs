@@ -195,6 +195,53 @@
         max-width: 500px;
       }
 
+      /* 添加Hard Mode选项样式 */
+      .hard-mode-option {
+        margin-top: 15px;
+        text-align: center;
+      }
+
+      .hard-mode-option label {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: #e6f7ff;
+        border: 1px solid #91d5ff;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .hard-mode-option label:hover {
+        background-color: #ff4d4f;
+        border-color: #f5222d;
+      }
+
+      .hard-mode-option label:has(input:checked) {
+        background-color: #ff4d4f;
+        border-color: #f5222d;
+        color: white;
+      }
+
+      .hard-mode-option label:has(input:checked):hover {
+        background-color: #f5222d;
+        border-color: #cf1322;
+      }
+
+      .hard-mode-option label:has(input:disabled) {
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+        color: #999;
+        cursor: not-allowed;
+      }
+
+      .hard-mode-option input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+      }
+
       .keyboard-row {
         display: flex;
         justify-content: center;
@@ -527,6 +574,14 @@
           <div class="key wide" data-key="Enter">ENTER</div>
         </div>
       </div>
+      
+      <!-- 添加hardmode选项 -->
+      <div class="hard-mode-option">
+        <label>
+          <input type="checkbox" id="hardModeToggle"> 
+          <span>HARD MODE - ONLY LETTERS NOT MARKED GRAY USEABLE</span>
+        </label>
+      </div>
     </div>
     BY <a href="https://ts8zs.com">TS8ZS.COM</a> WITH QWEN-CODER
     <script>
@@ -545,6 +600,7 @@
       let isAnimating = false; // 标记是否正在播放动画
       let maxGuesses = 8;
       let recommendGuesses = 8; // 推荐猜测次数
+      let hardMode = false; // Hard Mode 状态
 
       // 每日谜题状态
       let dailyPuzzleDate = ""; // 当前每日谜题的日期
@@ -565,6 +621,7 @@
           puzzleCompleted,
           isDailyPuzzle,
           maxGuesses, // 保存当前最大行数
+          hardMode, // 保存hardMode状态
           // 保存所有行的数据
           rows: [],
         };
@@ -625,6 +682,7 @@
           puzzleCompleted = gameState.puzzleCompleted;
           isDailyPuzzle = gameState.isDailyPuzzle;
           maxGuesses = gameState.maxGuesses || 6; // 恢复最大行数，默认为6
+          hardMode = gameState.hardMode || false; // 恢复hardMode状态，默认为false
 
           // 恢复游戏板
           const board = document.getElementById("board");
@@ -676,6 +734,14 @@
                 keyElement.classList.add(...gameState.keyboardState[keyValue]);
               }
             });
+          }
+
+          // 恢复hardMode复选框状态
+          document.getElementById('hardModeToggle').checked = hardMode;
+          
+          // 当第二行hardmode未开启时 disable it
+          if (currentRow > 0 && !hardMode) {
+            document.getElementById('hardModeToggle').disabled = true;
           }
 
           // 更新游戏模式信息
@@ -757,6 +823,33 @@
       async function initGame() {
         // 检查是否首次进入游戏，如果是则显示玩法提示
         checkAndShowGameGuide();
+
+        // 初始化hardMode复选框
+        const hardModeToggle = document.getElementById('hardModeToggle');
+        hardModeToggle.checked = hardMode;
+        hardModeToggle.addEventListener('change', function() {
+          // 如果当前在第一行，可以随意切换hard mode
+          if (currentRow === 0) {
+            hardMode = this.checked;
+            saveGameState(); // 保存游戏状态
+          } else {
+            // 如果不在第一行，只能关闭hard mode，不能开启
+            if (hardMode && !this.checked) {
+              // 允许关闭hard mode
+              hardMode = false;
+              saveGameState(); // 保存游戏状态
+              // 当在第二行或之后关闭hard mode时，禁用复选框
+              if (currentRow >= 1) {
+                this.disabled = true;
+              }
+            } else if (!hardMode && this.checked) {
+              // 不允许在非第一行开启hard mode
+              this.checked = false;
+              showMessage("HARD MODE CAN ONLY BE ENABLED ON THE FIRST ROW", "hint");
+            }
+            // 如果已经是开启状态且尝试保持开启状态，则不做任何操作
+          }
+        });
 
         // 优先加载单词库
         if (!wordsLoaded) {
@@ -935,6 +1028,15 @@
         }
         // 处理字母输入
         else if (/^[A-Z]$/.test(key)) {
+          // 如果启用了hardMode，检查字母是否可用
+          if (hardMode) {
+            const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+            // 如果字母被标记为absent（灰色），则不允许输入
+            if (keyElement && keyElement.classList.contains('absent')) {
+              showMessage("HARD MODE: CANNOT USE LETTERS MARKED GRAY", "lose");
+              return;
+            }
+          }
           addLetter(key);
         }
         // 处理退格键
@@ -983,6 +1085,15 @@
           }
         } else {
           if (/^[A-Z]$/.test(key)) {
+            // 如果启用了hardMode，检查字母是否可用
+            if (hardMode) {
+              const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+              // 如果字母被标记为absent（灰色），则不允许输入
+              if (keyElement && keyElement.classList.contains('absent')) {
+                showMessage("HARD MODE: CANNOT USE LETTERS MARKED GRAY", "lose");
+                return;
+              }
+            }
             addLetter(key);
           }
         }
@@ -1122,6 +1233,11 @@
       function checkGuess(guess) {
         // 设置动画状态
         isAnimating = true;
+
+        // 当第二行hardmode未开启时 disable it
+        if (currentRow >= 1 && !hardMode) {
+          document.getElementById('hardModeToggle').disabled = true;
+        }
 
         // 创建目标单词字母计数
         const targetCounts = {};
@@ -1321,13 +1437,18 @@
         currentTile = 0;
         isAnimating = false;
 
+        // 当第二行hardmode未开启时 disable it
+        if (currentRow > 0 && !hardMode) {
+          document.getElementById('hardModeToggle').disabled = true;
+        }
+
         // 保存游戏状态
         saveGameState();
       }
 
       // 生成随机谜题分享链接并分享或复制到剪贴板
       function copyPuzzleLinkToClipboard() {
-        // 创建链接，每日谜题只需要日期，随机谜题需要使用凯撒密码混淆单词
+        // 创建链接，每日谜题需要日期，随机谜题需要使用凯撒密码混淆单词
         let url;
         let scrambledWord = caesarCipher(targetWord, 3); // 使用位移3的凯撒密码
         if (isDailyPuzzle) {
@@ -1337,7 +1458,7 @@
         }
 
         // 生成emoji网格
-        let emojiGrid = `#ANYWORDLE ${isDailyPuzzle ? dailyPuzzleDate : ""}\n`;
+        let emojiGrid = `#ANYWORDLE ${isDailyPuzzle ? dailyPuzzleDate : ""}${hardMode ? " HARD!" : ""}\n`;
 
         for (let i = 0; i <= currentRow; i++) {
           const row = document.getElementById(`row-${i}`);
@@ -1554,7 +1675,8 @@
             recordPuzzleCompletion();
           }
         }
-
+        document.getElementById('hardModeToggle').disabled = false;
+        
         // 移除分享按钮
         const shareContainer = document.querySelector(".share-container");
         if (shareContainer) {
@@ -1580,6 +1702,7 @@
         gameOver = false;
         isAnimating = false;
         maxGuesses = recommendGuesses; // 重置为推荐猜测次数
+        hardMode = false; // 重置hardMode状态
 
         // 选择目标单词（使用每日谜题）
         dailyPuzzleDate = getCurrentUTC8Date();
@@ -1631,6 +1754,9 @@
 
         // 更新按钮状态
         updateActionButton();
+        
+        // 重置hardMode复选框
+        document.getElementById('hardModeToggle').checked = false;
       }
 
       // 放弃游戏
