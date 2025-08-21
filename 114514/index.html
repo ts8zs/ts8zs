@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>114514生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            transition: all 0.3s;
+        }
+        
+        h1:hover {
+            color: #ff6b6b;
+        }
+        
+        h1.clicked {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+        
+        .container {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .cell {
+            width: 80px;
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+        }
+        
+        .pinyin-label {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            padding: 4px 0;
+            background-color: #f0f0f0;
+        }
+        
+        .char-container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .cell:hover {
+            background-color: #e6f3ff;
+            transform: scale(1.05);
+        }
+        
+        .cell.selected {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        
+        .selector {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 500px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .selector.visible {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .char-option {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .char-option:hover {
+            background-color: #4CAF50;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .char-definition {
+            visibility: hidden;
+            width: 400px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -200px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            font-weight: normal;
+            pointer-events: none;
+        }
+        
+        .char-option:hover .char-definition {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .char-definition.adjust-position {
+            left: auto;
+            right: 0;
+            margin-left: 0;
+        }
+        
+        .char-definition.adjust-position-left {
+            left: 0;
+            margin-left: 0;
+        }
+        
+        .char-definition::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        
+        .char-definition.adjust-position::after {
+            left: auto;
+            right: 10%;
+        }
+        
+        .char-definition.adjust-position-left::after {
+            left: 10%;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .reset-btn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #ff5252;
+        }
+        
+        .copy-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .copy-btn.copied {
+            background-color: #2196F3;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* 添加页脚样式 */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            width: 100%;
+            max-width: 500px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        /* 悬浮显示释义样式 */
+        .definition-tooltip {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 100;
+            max-width: 300px;
+            display: none;
+            pointer-events: none;
+        }
+        
+        /* 严格模式开关样式 */
+        .strict-mode-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .switch-label {
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "qk8jzgjvf7");
+</script>
+</head>
+<body>
+    <div class="main-content">
+        <h1 id="title">114514生成器</h1>
+        
+        <div class="container">
+            <div class="cell" data-index="0" data-pinyin="yi">
+                <div class="pinyin-label">yi</div>
+                <div class="char-container">
+                    <div class="char">一</div>
+                </div>
+            </div>
+            <div class="cell" data-index="1" data-pinyin="yi">
+                <div class="pinyin-label">yi</div>
+                <div class="char-container">
+                    <div class="char">一</div>
+                </div>
+            </div>
+            <div class="cell" data-index="2" data-pinyin="si/shi">
+                <div class="pinyin-label">si/shi</div>
+                <div class="char-container">
+                    <div class="char">四</div>
+                </div>
+            </div>
+            <div class="cell" data-index="3" data-pinyin="wu">
+                <div class="pinyin-label">wu</div>
+                <div class="char-container">
+                    <div class="char">五</div>
+                </div>
+            </div>
+            <div class="cell" data-index="4" data-pinyin="yi">
+                <div class="pinyin-label">yi</div>
+                <div class="char-container">
+                    <div class="char">一</div>
+                </div>
+            </div>
+            <div class="cell" data-index="5" data-pinyin="si/shi">
+                <div class="pinyin-label">si/shi</div>
+                <div class="char-container">
+                    <div class="char">四</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="strict-mode-switch">
+                <span class="switch-label">严格模式</span>
+                <label class="switch">
+                    <input type="checkbox" id="strictModeSwitch" aria-label="严格模式开关">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button class="btn reset-btn" onclick="resetAll()">重置所有</button>
+            <button class="btn copy-btn" id="copyBtn" onclick="copyText()">复制全文</button>
+        </div>
+        
+        <div class="selector" id="selector">
+            <!-- 选项将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="notification" id="notification">已复制到剪贴板!</div>
+        <div class="footer">by <a href="http://ts8zs.com">Ts8zs</a><br>Thanks To <a href="http://yedict.com/">叶典</a></div>
+    </div>
+    
+    <!-- 悬浮显示释义的元素 -->
+    <div id="definitionTooltip" class="definition-tooltip"></div>
+    
+    <script>
+        // 标题点击功能
+        const title = document.getElementById('title');
+        let clickCount = 0;
+        title.addEventListener('click', function() {
+            clickCount++;
+            this.textContent = clickCount + 114515 + '啊'.repeat(4 + clickCount); //十分生草的类型转换
+            this.classList.add('clicked');
+        });
+        
+        // 严格模式开关
+        const strictModeSwitch = document.getElementById('strictModeSwitch');
+        let strictMode = false;
+        
+        strictModeSwitch.addEventListener('change', function() {
+            strictMode = this.checked;
+            updatePinyinLabels();
+            // 刷新当前选中的文字选区
+            refreshCurrentSelection();
+        });
+        
+        // 更新拼音标签显示
+        function updatePinyinLabels() {
+            // 先恢复所有单元格到初始状态
+            const allCells = document.querySelectorAll('.cell');
+            allCells.forEach(cell => {
+                const index = cell.getAttribute('data-index');
+                if (index === '2' || index === '5') { // 第3和第6个单元格
+                    const label = cell.querySelector('.pinyin-label');
+                    if (strictMode) {
+                        label.textContent = 'si';
+                        cell.setAttribute('data-pinyin', 'si');
+                    } else {
+                        label.textContent = 'si/shi';
+                        cell.setAttribute('data-pinyin', 'si/shi');
+                    }
+                }
+            });
+        }
+        
+        // 刷新当前选中的文字选区
+        function refreshCurrentSelection() {
+            // 如果当前有选中的单元格，则刷新其选择器
+            if (selectedIndex >= 0) {
+                const selectedCell = document.querySelector(`.cell[data-index="${selectedIndex}"]`);
+                if (selectedCell) {
+                    // 重新显示选择器
+                    showSelector(selectedCell.getAttribute('data-pinyin'));
+                }
+            }
+        }
+        
+        // 悬浮显示释义元素
+        const definitionTooltip = document.getElementById('definitionTooltip');
+        
+        // 从dictionary.json加载字典数据
+        let charOptions = {};
+        
+        fetch('114514.json')
+            .then(response => response.json())
+            .then(data => {
+                charOptions = data;
+                console.log('字典数据加载完成');
+            })
+            .catch(error => {
+                console.error('加载字典数据失败:', error);
+                // 使用默认数据
+                charOptions = {
+                    'yi': [
+                        {char: '一', definition: '数目，最小的正整数。', frequency: 100},
+                        {char: '义', definition: '合宜的事情。正道、正理。死节、殉难。法则。意思。功用。姓。', frequency: 80},
+                        {char: '仪', definition: '礼节；仪式：礼仪｜司仪。', frequency: 75},
+                        {char: '宜', definition: '合适；适当：事宜｜因地制宜。', frequency: 70},
+                        {char: '依', definition: '依靠；依赖：依傍｜依违。', frequency: 65}
+                    ],
+                    'si': [
+                        {char: '四', definition: '数名，四加一（在钞票和单据上常用大写"伍"代）', frequency: 100},
+                        {char: '思', definition: '想，考虑，动脑筋：思考｜思索。', frequency: 85},
+                        {char: '死', definition: '生存的反面；失去生命；不活着：死亡｜牺牲。', frequency: 80},
+                        {char: '丝', definition: '蚕丝；像丝的东西；形容极小或极少。', frequency: 75},
+                        {char: '撕', definition: '用手把东西扯裂：撕开｜撕破。', frequency: 70}
+                    ],
+                    'shi': [
+                        {char: '是', definition: '对；合理：是古非今｜实事求是。', frequency: 100},
+                        {char: '时', definition: '时间；时候：时间｜时刻。', frequency: 95},
+                        {char: '事', definition: '自然界和社会中的现象和活动：事情｜事件。', frequency: 90},
+                        {char: '十', definition: '数目，九加一的和：十分｜十里。', frequency: 85},
+                        {char: '世', definition: '一个时代；世代：世纪｜世界。', frequency: 80}
+                    ],
+                    'wu': [
+                        {char: '五', definition: '数目，四加一的和。', frequency: 100},
+                        {char: '无', definition: '没有；与"有"相对：无力｜无从。', frequency: 90},
+                        {char: '物', definition: '东西；事物：物品｜动物。', frequency: 85},
+                        {char: '务', definition: '从事；致力：务农｜服务。', frequency: 80},
+                        {char: '误', definition: '错误；耽误：误差｜误点。', frequency: 70}
+                    ]
+                };
+            });
+
+        let selectedIndex = -1;
+        const cells = document.querySelectorAll('.cell');
+        const selector = document.getElementById('selector');
+
+        // 为每个格子添加点击事件
+        cells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                // 移除之前选中格子的高亮
+                cells.forEach(c => c.classList.remove('selected'));
+                
+                // 高亮当前选中的格子
+                this.classList.add('selected');
+                
+                // 记录选中索引
+                selectedIndex = parseInt(this.getAttribute('data-index'));
+                
+                // 显示选择器
+                showSelector(this.getAttribute('data-pinyin'));
+            });
+            
+            // // 添加鼠标悬停事件显示释义
+            // cell.addEventListener('mouseenter', function(e) {
+            //     const char = this.querySelector('.char').textContent;
+            //     showDefinition(e, char);
+            // });
+            
+            // cell.addEventListener('mouseleave', function() {
+            //     hideDefinition();
+            // });
+        });
+
+        // 显示字符选择器
+        function showSelector(pinyin) {
+            // 清空选择器
+            selector.innerHTML = '';
+            
+            // 处理多个拼音的情况，如 si/shi
+            let pinyins = pinyin.split('/');
+            
+            // 如果是严格模式，只使用si
+            if (strictMode) {
+                // 检查是否包含si，而不是shi
+                if (pinyins.includes('si') && !pinyins.includes('shi')) {
+                    pinyins = ['si'];
+                } else {
+                    // 如果同时包含si/shi，则只保留非严格模式下的拼音
+                    pinyins = pinyins.filter(p => p !== 'shi');
+                }
+            }
+            
+            // 收集所有匹配的拼音选项
+            let options = [];
+            pinyins.forEach(p => {
+                if (charOptions[p]) {
+                    options = options.concat(charOptions[p]);
+                }
+            });
+            
+            // 去重
+            const uniqueOptionsMap = new Map();
+            options.forEach(item => {
+                if (!uniqueOptionsMap.has(item.char)) {
+                    uniqueOptionsMap.set(item.char, item);
+                }
+            });
+            
+            // 转换为数组并按频率排序
+            const uniqueOptions = Array.from(uniqueOptionsMap.values());
+            uniqueOptions.sort((a, b) => b.frequency - a.frequency);
+            
+            // 添加选项
+            uniqueOptions.forEach(option => {
+                const charOption = document.createElement('div');
+                charOption.className = 'char-option';
+                charOption.textContent = option.char;
+                
+                // 添加释义提示
+                const definition = document.createElement('div');
+                definition.className = 'char-definition';
+                definition.textContent = option.definition;
+                
+                // 监听鼠标进入事件以调整位置
+                charOption.addEventListener('mouseenter', function(e) {
+                    // 延迟一小段时间以确保元素已渲染
+                    setTimeout(() => {
+                        const rect = definition.getBoundingClientRect();
+                        const optionRect = charOption.getBoundingClientRect();
+                        
+                        // 检查右侧是否超出屏幕
+                        if (rect.right > window.innerWidth) {
+                            definition.classList.add('adjust-position');
+                        } 
+                        // 检查左侧是否超出屏幕
+                        else if (rect.left < 0) {
+                            definition.classList.add('adjust-position-left');
+                        }
+                    }, 10);
+                });
+                
+                // 监听鼠标离开事件以重置位置类
+                charOption.addEventListener('mouseleave', function() {
+                    definition.classList.remove('adjust-position');
+                    definition.classList.remove('adjust-position-left');
+                });
+                
+                charOption.appendChild(definition);
+                
+                charOption.addEventListener('click', function() {
+                    selectChar(option.char);
+                });
+                
+                // // 添加鼠标悬停事件
+                // charOption.addEventListener('mouseenter', function(e) {
+                //     showDefinition(e, option.char, option.definition);
+                // });
+                
+                // charOption.addEventListener('mouseleave', hideDefinition);
+                
+                selector.appendChild(charOption);
+            });
+            
+            // 显示选择器
+            selector.classList.add('visible');
+        }
+
+        // 选择字符
+        function selectChar(char) {
+            if (selectedIndex >= 0) {
+                const cell = document.querySelector(`.cell[data-index="${selectedIndex}"] .char`);
+                cell.textContent = char;
+                selector.classList.remove('visible');
+                cells.forEach(c => c.classList.remove('selected'));
+                selectedIndex = -1;
+            }
+        }
+
+        // 重置所有格子
+        function resetAll() {
+            const defaultChars = ['一', '一', '四', '五', '一', '四'];
+            cells.forEach((cell, index) => {
+                cell.querySelector('.char').textContent = defaultChars[index];
+            });
+            selector.classList.remove('visible');
+            cells.forEach(c => c.classList.remove('selected'));
+            selectedIndex = -1;
+        }
+        
+        // 复制全文
+        function copyText() {
+            // 获取所有格子中的文字
+            let text = '';
+            cells.forEach(cell => {
+                text += cell.querySelector('.char').textContent;
+            });
+            
+            // 复制到剪贴板
+            navigator.clipboard.writeText(text).then(() => {
+                // 显示通知
+                const notification = document.getElementById('notification');
+                notification.style.display = 'block';
+                
+                // 改变按钮文本和样式
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.textContent = '已复制!';
+                copyBtn.classList.add('copied');
+                
+                // 3秒后恢复
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    copyBtn.textContent = '复制全文';
+                    copyBtn.classList.remove('copied');
+                }, 3000);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+                alert('复制失败，请手动复制: ' + text);
+            });
+        }
+        
+        // 显示释义
+        function showDefinition(event, char, definitionText = null) {
+            // 如果没有提供释义文本，则尝试从字典中查找
+            let definition = definitionText;
+            if (!definition) {
+                // 查找字符的释义
+                for (const pinyin in charOptions) {
+                    const charItem = charOptions[pinyin].find(item => item.char === char);
+                    if (charItem) {
+                        definition = charItem.definition;
+                        break;
+                    }
+                }
+            }
+            
+            if (definition) {
+                definitionTooltip.textContent = definition;
+                definitionTooltip.style.display = 'block';
+                updateTooltipPosition(event);
+            }
+        }
+        
+        // 更新提示框位置
+        function updateTooltipPosition(event) {
+            const tooltipWidth = definitionTooltip.offsetWidth;
+            const tooltipHeight = definitionTooltip.offsetHeight;
+            
+            let x = event.pageX;
+            let y = event.pageY - tooltipHeight - 10;
+            
+            // 防止提示框超出屏幕边界
+            if (x + tooltipWidth > window.innerWidth) {
+                x = window.innerWidth - tooltipWidth - 10;
+            }
+            
+            if (y < 10) {
+                y = event.pageY + 20;
+            }
+            
+            definitionTooltip.style.left = x + 'px';
+            definitionTooltip.style.top = y + 'px';
+        }
+        
+        // 隐藏释义
+        function hideDefinition() {
+            definitionTooltip.style.display = 'none';
+        }
+        
+        // 监听鼠标移动以更新提示框位置
+        document.addEventListener('mousemove', function(e) {
+            if (definitionTooltip.style.display !== 'none') {
+                updateTooltipPosition(e);
+            }
+        });
+    </script>
+</body>
+</html>

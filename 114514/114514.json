@@ -1,0 +1,5158 @@
+{
+  "yi": [
+    {
+      "char": "一",
+      "pinyin": "yī",
+      "definition": "1. 数名，最小的正整数（在钞票和单据上常用大写“壹”代）。\n2. 纯；专：专～。～心～意。\n3. 全；满：～生。～地水。\n4. 相同：～样。颜色不～。\n5. 另外的：蟋蟀～名促织。\n6. 表示动作短暂，或是一次，或具试探性：算～算。试～试。\n7. 乃；竞：～至于此。\n8. 部分联成整体：统～。整齐划～。\n9. 或者：～胜～负。\n10. 初次：～见如故。\n11. 中国古代乐谱记音符号，相当于简谱中的低音“7”。",
+      "frequency": 114514
+    },
+    {
+      "char": "以",
+      "pinyin": "yǐ",
+      "definition": "1. 用，拿，把，将：～一当十。～苦为乐。～身作则。～邻为壑。～讹传讹。～往鉴来。\n2. 依然，顺，按照：～时启闭。物～类聚。\n3. 因为：～人废言。勿～善小而不为。不～物喜，不～己悲。\n4. 在，于（指时日）：“子厚～元和十四年十一月八日卒，年四十七”。\n5. 目的在于：～待时机。～儆效尤。\n6. 文言连词，与“而”用法相同：梦寐～求。\n7. 用在方位词前，表明时间、方位、方向或数量的界限：～前。～内。\n8. 用在动词后，类似词的后缀：可～。得～。\n9. 古同“已”，已经。\n10. 太，甚：不～急乎？\n11. 及，连及：富～其邻。",
+      "frequency": 10944
+    },
+    {
+      "char": "义",
+      "pinyin": "yì",
+      "definition": "1. 公正合宜的道理或举动：正～。～不容辞。～无反顾。仗～直言。\n2. 合乎正义或公益的：～举。～务。～愤。～演。见～勇为。\n3. 情谊：～气。恩～。～重如山。\n4. 意思，人对事物认识到的内容：意～。含～。释～。微言大～。\n5. 指认为亲属的：～父。\n6. 人工制造的（人体的部分）：～齿。～肢。\n7. 姓。",
+      "frequency": 10657
+    },
+    {
+      "char": "意",
+      "pinyin": "yì",
+      "definition": "1. 心思：～思。～见。～义。～味。～念。～志（为了达到既定目的而自觉努力的心理状态）。注～。同～。～在笔先。～在言外。\n2. 心愿，愿望：～愿。愿～。～向。～图。～皆。好～。“醉翁之～不在酒”。\n3. 人或事物流露的情态：春～。诗～。惬～。情～。～境。\n4. 料想，猜想：～料。～想。～外。",
+      "frequency": 3403
+    },
+    {
+      "char": "亦",
+      "pinyin": "yì",
+      "definition": "1. 副词，也，表示同样、也是：～无不可。～步～趋。\n2. 又：“先君何罪？其嗣～何罪？”\n3. 不过，只是：“王～不好土也，何患无士？”\n4. 表示加强或委婉的语气：“呜呼，～盛矣哉！”“学而时习之，不～说乎？”\n5. 姓。",
+      "frequency": 3204
+    },
+    {
+      "char": "食",
+      "pinyin": "yì",
+      "definition": "◎ 用于人名：郦～其（jī）（中国汉代人）。",
+      "frequency": 2879
+    },
+    {
+      "char": "衣",
+      "pinyin": "yī",
+      "definition": "1. 人穿在身上用以蔽体的东西：～服。～着（zhuó）。～冠。～架。～锦还（huān）乡。\n2. 披或包在物体外面的东西：炮～。糖～。肠～。\n3. 中医把胎盘和胎膜统称为“胞衣”。\n4. 姓。",
+      "frequency": 2437
+    },
+    {
+      "char": "易",
+      "pinyin": "yì",
+      "definition": "1. 不费力，与“难”相对：容～。～与（容易对付）。～于。\n2. 和悦：平～（ａ．态度谦逊和蔼；ｂ．指语言文字浅显）。\n3. 改变：～手。～地。变～。\n4. 交换：交～。贸～。\n5. 轻慢：贵货～土。\n6. 芟治草木：～墓（除治墓地的草木）。～其田畴。\n7. 古书名，《周易》的简称（亦称“易经”）。\n8. 姓。",
+      "frequency": 1975
+    },
+    {
+      "char": "异",
+      "pinyin": "yì",
+      "definition": "1. 不同的：～乎。～说。～常。～己（与自己意见不同或利害相冲突的人）。～端（旧时指不符合正统思想的主张或教义，如“～～邪说”）。～化。～性。～样。大同小～。～曲同工。\n2. 分开：离～。～居。\n3. 另外的，别的：～日。～地。～国。～乡。～类。\n4. 特别的：奇～。～闻。～彩。奇才～能（特殊的才能）。\n5. 奇怪：惊～。诧～。怪～。",
+      "frequency": 1209
+    },
+    {
+      "char": "仪",
+      "pinyin": "yí",
+      "definition": "1. 人的外表或举动：～态。～表。威～（使人敬畏的严肃容貌和举止）。\n2. 按程序进行的礼节：～式。～仗。司～。\n3. 礼物：贺～。谢～。\n4. 供测量、绘图、实验用的器具：～器。\n5. 法制，准则：～刑。“设～立度，可以为准则”。\n6. 姓。",
+      "frequency": 1196
+    },
+    {
+      "char": "矣",
+      "pinyin": "yǐ",
+      "definition": "◎ 文言助词（ａ．用于句末，与“了”相同，如“由来久～”，“悔之晚～”；ｂ．表示感叹，如“大～哉”）。",
+      "frequency": 1045
+    },
+    {
+      "char": "已",
+      "pinyin": "yǐ",
+      "definition": "1. 止，罢了：学不可以～。死而后～。\n2. 表示过去：～经。事～至此。～往。业～。\n3. 后来，过了一些时间，不多时：～忽不见。\n4. 太，过：不为～甚。\n5. 古同“以”。",
+      "frequency": 942
+    },
+    {
+      "char": "射",
+      "pinyin": "yì",
+      "definition": "◎ 〔无～〕a.中国古代音乐十二律之一；b.中国春秋时景王所铸钟名。",
+      "frequency": 759
+    },
+    {
+      "char": "依",
+      "pinyin": "yī",
+      "definition": "1. 靠，仗赖：～靠。～傍（a.依靠；b.摹仿，多指艺术、学问）。～恋。～偎。～存。～附。归～。\n2. 按照：～照。～旧。～据。～次。\n3. 顺从，答应：～从。～顺。～允。\n4. 亲密的样子：“有～其士”。",
+      "frequency": 739
+    },
+    {
+      "char": "尾",
+      "pinyin": "yǐ",
+      "definition": "1. 特指马尾（wěi  ）巴上的毛：马～罗。马～儿提豆腐―提溜不起来。\n2. 特指蟋蟀等尾部的针状物：三～儿（雌蟋蟀）。",
+      "frequency": 720
+    },
+    {
+      "char": "议",
+      "pinyin": "yì",
+      "definition": "1. 意见，言论：～论。提～。建～。\n2. 讨论，商量：商～。会～。协～。～案。～决。～价。\n3. 评论是非，多指责备：非～。恐招物～。\n4. 旧时文体的一种，用以论事说理或陈述意见：奏～。驳～。",
+      "frequency": 564
+    },
+    {
+      "char": "邑",
+      "pinyin": "yì",
+      "definition": "1. 城市，都城：城～。都～。\n2. 旧指县：～人（同乡的人）。～庠（明清时称县学）。～宰。\n3. 古代诸侯分给大夫的封地：采～。\n4. 古同“悒”，愁闷不安。",
+      "frequency": 532
+    },
+    {
+      "char": "疑",
+      "pinyin": "yí",
+      "definition": "1. 不信，猜度（duó）：～惑。～问。～心。～团。～虑。～窦。～点。～端。猜～。怀～。半信半～。\n2. 不能解决的，不能断定的：～案。～难。～义。存～。",
+      "frequency": 527
+    },
+    {
+      "char": "役",
+      "pinyin": "yì",
+      "definition": "1. 服兵务，从军：从～。现～。\n2. 战事：战～。\n3. 服劳力之事：劳～。徭～。\n4. 使唤：～使。奴～。\n5. 被役使的人：～夫。～徒。仆～。杂～。",
+      "frequency": 516
+    },
+    {
+      "char": "益",
+      "pinyin": "yì",
+      "definition": "1. 增加：～寿延年。增～。损～。\n2. 好处，有好处：利～。～处。公～。权～。受～非浅。\n3. 更加：～发。日～壮大。\n4. 古同“溢”，水漫出来。",
+      "frequency": 501
+    },
+    {
+      "char": "逸",
+      "pinyin": "yì",
+      "definition": "1. 跑，逃跑，逃～。奔～。\n2. 散失：～散。～史。～事。～闻。\n3. 安闲，安乐：安～。～乐（安乐）。以～待劳。闲情～致。\n4. 超过一般：超～。～兴（xìng ）（超逸豪放的兴致）。～趣。～致。～品（超脱绝俗的艺术品）。～珠（特异的珍珠，喻人的品德）。\n5. 隐遁：～士（隐居之士）。～民（ａ．旧时称遁世隐居不做官的人；ｂ．亡国后不在新朝代做官的人，亦作“佚民”）。\n6. 放任，不受拘束：～荡。飘～。骄奢淫～。",
+      "frequency": 475
+    },
+    {
+      "char": "遗",
+      "pinyin": "yí",
+      "definition": "1. 丢失：～失。～落。\n2. 漏掉：～忘。～漏。\n3. 丢失的东西，漏掉的部分：补～。路不拾～。\n4. 余，留：～留。～俗。～闻。～址。～风。～憾。～老（ａ．经历世变的老人；ｂ．仍然效忠前一朝代的老人）。\n5. 死人留下的：～骨。～言。～嘱。\n6. 不自觉地排泄：～尿。～精。\n7. 生物体的构造和生理机能由上一代传给下一代：～传。\n8. 抛弃：～弃。",
+      "frequency": 453
+    },
+    {
+      "char": "医",
+      "pinyin": "yī",
+      "definition": "1. 治病：～疗。～术。～务。～道。\n2. 治病的人：～士。～生。～德。\n3. 治病的科学：西～。中～。",
+      "frequency": 450
+    },
+    {
+      "char": "艺",
+      "pinyin": "yì",
+      "definition": "1. 才能，技能，技术：工～。技～。文～。～人。～术（ａ．戏剧、曲艺、音乐、美术、建筑、舞蹈、电影、诗和文学等的总称；ｂ．指富有创造性的方式、方法；ｃ．形状独特而美观的）。～苑奇葩。～高人胆大。\n2. 种植：园～。\n3. 准则、法度、限度：“骄泰奢侈，贪欲无～。”",
+      "frequency": 440
+    },
+    {
+      "char": "蛇",
+      "pinyin": "yí",
+      "definition": "◎ 〔委（wěi ）～〕见“委2”。",
+      "frequency": 438
+    },
+    {
+      "char": "谊",
+      "pinyin": "yì",
+      "definition": "◎ 交情：友～。交～。情～。",
+      "frequency": 426
+    },
+    {
+      "char": "移",
+      "pinyin": "yí",
+      "definition": "1. 挪动：～交。～植。～刻（过一段时间）。～晷（日影移动，犹言经过了一段时间）。～民。迁～。转～。～樽就教（端着酒去别人跟前以便求教，泛指主动前去向人请教）。\n2. 改变，变动：～居。～易。～情（变易人的情志）。～动。潜～默化。\n3. 旧时公文的一种，行文不相统属的官署间：～文。檄～。",
+      "frequency": 396
+    },
+    {
+      "char": "夷",
+      "pinyin": "yí",
+      "definition": "1. 中国古代称东部的民族：东～。九～（古时称东夷有九种）。\n2. 中国旧时指外国或外国的：华～杂处（chǔ ㄔㄨˇ）。\n3. 平，平坦，平安：化险为～。\n4. 弄平：～为平地。\n5. 消灭：～灭。族～（诛杀犯罪者家族）。\n6. 等辈：“诸将皆陛下故等～”。\n7. 古代的锄类工具。\n8. 古同“怡”，喜悦。\n9. 古同“痍”，创伤。\n10. 姓。",
+      "frequency": 391
+    },
+    {
+      "char": "宜",
+      "pinyin": "yí",
+      "definition": "1. 适合，适当：～人。～于。合～。权～。适～。相～。\n2. 应该，应当：事不～迟。\n3. 当然，无怪：～其无往而不利也。\n4. 姓。",
+      "frequency": 367
+    },
+    {
+      "char": "翼",
+      "pinyin": "yì",
+      "definition": "1. 翅膀：～翅。比～双飞。卵～。羽～。～护。～蔽。\n2. 左右两侧中的一侧：左～。侧～。\n3. 帮助，辅佐：～助。\n4. 古同“翌”，明天，明年。\n5. 星名，二十八宿之一。\n6. 〔～～〕a.谨慎，如“小心～～”；b.严整有秩序；c.繁盛，众多。\n7. 姓。",
+      "frequency": 312
+    },
+    {
+      "char": "译",
+      "pinyin": "yì",
+      "definition": "◎ 把一种语言文字依照原义改变成另一种语言文字：～本。～文。～注。～著。～制。～音。口～。笔～。意～。直～。翻～。",
+      "frequency": 305
+    },
+    {
+      "char": "毅",
+      "pinyin": "yì",
+      "definition": "◎ 果决，志向坚定而不动摇：沉～。刚～。坚～。～力（坚强持久的意志）。～然。～勇。",
+      "frequency": 303
+    },
+    {
+      "char": "抑",
+      "pinyin": "yì",
+      "definition": "1. 压，压制：～制。～止。压～。～强扶弱。～扬（a.音调的高低起伏；b.沉浮；c.褒贬）。\n2. 忧闷：～郁。～塞（sè）。\n3. 文言连词（a.表选择，相当于或是、还是，如“～或”；b.表转折，相当于可是、但是，如“多则多矣，～君似鼠”）。\n4. 文言发语词：“～齐人不盟，若之何”。\n5. 古同“噫”，叹词。",
+      "frequency": 285
+    },
+    {
+      "char": "倚",
+      "pinyin": "yǐ",
+      "definition": "1. 靠着，～靠。～赖。～傍。～托。～重。\n2. 仗恃：～势。～恃。～仗。\n3. 偏，歪：不偏不～。\n4. 随着，和着：“使慎夫人鼓瑟，上自～瑟而歌”。",
+      "frequency": 194
+    },
+    {
+      "char": "溢",
+      "pinyin": "yì",
+      "definition": "1. 充满而流出来：～流。河水四～。洋～。充～。～于言表。\n2. 过分：～美。～恶。～誉。\n3. 超出：～出此数。\n4. 古同“镒”，古代重量单位。",
+      "frequency": 190
+    },
+    {
+      "char": "泄",
+      "pinyin": "yì",
+      "definition": "◎ 〔～～〕ａ．缓飞的样子，如“雄雉于飞，～～其羽”；ｂ．闲散自得，如“十亩外兮，桑者～～兮”；ｃ．弛缓的样子，如“天之方噘，无然～～”。",
+      "frequency": 186
+    },
+    {
+      "char": "驿",
+      "pinyin": "yì",
+      "definition": "1. 旧时供传递公文的人中途休息、换马的地方，亦指供传递公文用的马：～站。～馆。～丞（掌管驿站的官员）。～吏。\n2. 现为地名用字：龙泉～（在中国四川省）。\n3. 古同“绎”，络绎。",
+      "frequency": 153
+    },
+    {
+      "char": "伊",
+      "pinyin": "yī",
+      "definition": "1. 彼，他，她：～说。～人（那个人，多指女性）。\n2. 文言助词：下车～始。～谁之力？～于胡底（到什么地步为止，不堪设想的意思）。\n3. 姓。",
+      "frequency": 136
+    },
+    {
+      "char": "佚",
+      "pinyin": "yì",
+      "definition": "1. 同“逸”。\n2. 放荡：淫～。～游。\n3. 美：～女。\n4. 姓。",
+      "frequency": 131
+    },
+    {
+      "char": "乙",
+      "pinyin": "yǐ",
+      "definition": "1. 天干的第二位，用于作顺序第二的代称。\n2. 指代一方：甲方～方。～型脑炎。\n3. 中国古代乐谱的记音符号，相当于简谱“7”。\n4. 姓。",
+      "frequency": 120
+    },
+    {
+      "char": "颐",
+      "pinyin": "yí",
+      "definition": "1. 面颊，腮：支～。解（jiě）～。～指气使。\n2. 休养，保养：～神。～养。\n3. 文言助词，无义：“夥～！涉之为王沈沈者”。",
+      "frequency": 112
+    },
+    {
+      "char": "疫",
+      "pinyin": "yì",
+      "definition": "◎ 流行性急性传染病：瘟～。鼠～。防～。检～。～情。免～。",
+      "frequency": 108
+    },
+    {
+      "char": "洢",
+      "pinyin": "yī",
+      "definition": "◎ 〔～水〕水名，今中国河南省伊河的古称。",
+      "frequency": 103
+    },
+    {
+      "char": "蚁",
+      "pinyin": "yǐ",
+      "definition": "1. 〔蚂～〕昆虫的一科，种类很多，一般体小，呈黑、褐红等色，多在地下做窝，群居生活。简称“蚁”：～封（蚁穴外隆起的小土堆）。～聚。～命（喻微贱的生命）。～民（旧时人民对官府的自称，多用于诉状呈文）。\n2. （蟻）",
+      "frequency": 103
+    },
+    {
+      "char": "蛾",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“蚁”。",
+      "frequency": 91
+    },
+    {
+      "char": "壹",
+      "pinyin": "yī",
+      "definition": "◎ “一”的大写。",
+      "frequency": 87
+    },
+    {
+      "char": "忆",
+      "pinyin": "yì",
+      "definition": "1. 回想，想念：回～。追～。～苦思甜。\n2. 记得，记住：记～。记～犹新。",
+      "frequency": 85
+    },
+    {
+      "char": "義",
+      "pinyin": "yì",
+      "definition": "1. 合宜的事情。《論語·為政》：“見義不為，無勇也。”《淮南子·齊俗》：“為義者，布施而德。”\n2. 正道、正理。《孟子·公孫丑上》：“其為氣也，配義與道，無是餒也。”\n3. 死節、殉難。《禮記·禮運》：“故國有患，君死社稷謂之義。”《宋史·卷四五○·忠義傳五·尹穀傳》：“尹務實，男子也，先我就義矣。”\n4. 法則。《呂氏春秋·孟春紀·貴公》：“無偏無頗，遵王之義。”\n5. 意思。如：“意義”、“字義”。漢·孔安國《尚書序》：“以所聞伏生之書，考論文義，定其可知者，為隸古定。”\n6. 功用。《左傳·昭公三十一年》：“故君子動則思禮，行則思義，不為利回，不為義疚。”\n7. 姓。如漢代有義縱。\n8. 合於正義的。如：“義民”、“義婦”、“義舉”。《書經·康誥》：“汝陳時臬事，罰蔽殷彝，用其義刑義殺，勿庸以次汝封。”\n9. 用來周濟公眾的。如：“義莊”、“義塾”、“義舍”。《三國志·卷八·魏書·張魯傳》：“諸祭酒皆作義舍，如今之亭傳。”\n10. 假的，有其名而非真﹑非親的。如：“義父”﹑“義子”﹑“義肢”﹑“義齒”。",
+      "frequency": 80
+    },
+    {
+      "char": "揖",
+      "pinyin": "yī",
+      "definition": "◎ 古代的拱手礼：作（zuō）～。～让（宾主相见的礼节）。～客。～别。",
+      "frequency": 80
+    },
+    {
+      "char": "翳",
+      "pinyin": "yì",
+      "definition": "1. 用羽毛做的华盖。\n2. 遮蔽，障蔽：荫～。～蔽。～障。～然。\n3. 掩蔽物：“兵不解～”。\n4. 眼角膜上所生障碍视线的白斑：白～。\n5. 古同“殪”，树木枯死，倒伏于地。",
+      "frequency": 80
+    },
+    {
+      "char": "亿",
+      "pinyin": "yì",
+      "definition": "◎ 数目，一万万；古代指十万：～万（泛指极大的数目）。～万斯年（形容无限长远的年代）。",
+      "frequency": 76
+    },
+    {
+      "char": "诣",
+      "pinyin": "yì",
+      "definition": "1. 到，旧时特指到尊长那里去：～阙。～前请教。\n2. （学业或技艺）所达到的程度：造～。苦心孤～（指刻苦钻研，达到别人不及的境地）。",
+      "frequency": 71
+    },
+    {
+      "char": "奕",
+      "pinyin": "yì",
+      "definition": "1. 光明：“奕～”\n2. 累，重：““～世载德，不忝前人。”\n3. 大：“息金消石，往小来～。”\n4. 美貌：“张华短章，～～清畅。”",
+      "frequency": 71
+    },
+    {
+      "char": "弋",
+      "pinyin": "yì",
+      "definition": "1. 用带绳子的箭射鸟：～获。～人何篡（“篡”，取，鸿雁飞得很高，射鸟的人无所施其技）。\n2. 姓。",
+      "frequency": 67
+    },
+    {
+      "char": "裔",
+      "pinyin": "yì",
+      "definition": "1. 衣服的边缘。\n2. 边，边远的地方：海～。四～。\n3. 后代子孙：后～。华～。\n4. 〔～～〕ａ．四散流布的样子，如“淫淫～～，缘陵流泽”；ｂ．形容舞姿或步履袅娜；如“纡长袖而屡舞，翩跹跹以～～”。\n5. 姓。",
+      "frequency": 66
+    },
+    {
+      "char": "绎",
+      "pinyin": "yì",
+      "definition": "1. 抽出，理出头绪：寻～。演～（由一般原理推出关于个别事物、现象的结论的推理方法）。\n2. 连续不绝：～如（连续不断的样子）。络～不绝。",
+      "frequency": 66
+    },
+    {
+      "char": "彝",
+      "pinyin": "yí",
+      "definition": "1. 古代盛酒的器具，亦泛指古代宗庙常用的祭器：～器。～鼎。～尊。\n2. 常理，法理：～训（指长辈对后辈的日常训诲）。～伦。～常。～章。\n3. 中国少数民族，主要分布于四川省、云南省和贵川省：～族。～人。",
+      "frequency": 64
+    },
+    {
+      "char": "怡",
+      "pinyin": "yí",
+      "definition": "◎ 和悦，愉快：～色（容色和悦）。～声（语声和悦）。～和。～乐（lè）。～神。～悦。～目（快意于所见，悦目）。心旷神～。",
+      "frequency": 63
+    },
+    {
+      "char": "刈",
+      "pinyin": "yì",
+      "definition": "◎ 割（草或谷类）：～除。",
+      "frequency": 62
+    },
+    {
+      "char": "臆",
+      "pinyin": "yì",
+      "definition": "1. 胸：胸～（心里，多指心里的话或想法，如“直抒～～”）。\n2. 主观地，缺乏客观依据的：～造。～测。～度（duó ）。～断。～见。",
+      "frequency": 59
+    },
+    {
+      "char": "椅",
+      "pinyin": "yǐ",
+      "definition": "◎ 有靠背的坐具：～子。坐～。木～。躺～。",
+      "frequency": 58
+    },
+    {
+      "char": "猗",
+      "pinyin": "yī",
+      "definition": "1. 美好盛大的样子。晉·陸雲·《高岡詩四首之一》：“瞻彼高岡，有猗其桐。”\n2. 助词。犹“兮”。相当于“啊”，用于句末，表示语气。《詩經·魏風·伐檀》：“坎坎伐檀兮，寘之河之干兮，河水清且漣猗。”\n3. 叹词。常用于句首，表示赞叹。 相当於“啊”。《詩經·齊風·猗嗟》：“猗嗟昌兮，頎而長兮。”唐·王維《暮春太師左右丞相諸公於韋氏逍遙谷讌集序》：“猗哉至理之代也！吾徒可以酒合讌樂，考擊鍾鼓。”\n4. 姓。如春秋時魯有猗頓。",
+      "frequency": 58
+    },
+    {
+      "char": "姨",
+      "pinyin": "yí",
+      "definition": "1. 称母亲的姊妹：～母。～妈。～父。\n2. 妻的姊妹：大～子。小～子。\n3. 妾：～太太。",
+      "frequency": 50
+    },
+    {
+      "char": "挹",
+      "pinyin": "yì",
+      "definition": "1. 舀，把液体盛出来：～取。～彼注兹。～注（喻从有余的地方取出来，以补不足）。\n2. 拉。\n3. 古同“抑”，抑制，谦退。\n4. 古同“揖”，作揖。",
+      "frequency": 49
+    },
+    {
+      "char": "贻",
+      "pinyin": "yí",
+      "definition": "1. 赠给。\n2. 遗留，留下：～害。～误（使受到坏的影响）。～训。～笑大方（让内行见笑）。",
+      "frequency": 48
+    },
+    {
+      "char": "疙",
+      "pinyin": "yì",
+      "definition": "◎ 痴呆的样子。",
+      "frequency": 47
+    },
+    {
+      "char": "懿",
+      "pinyin": "yì",
+      "definition": "◎ 美好（多指德行，指有关女子的）：嘉言～行。～范。～德。～旨（皇后或太后的诏令）。",
+      "frequency": 44
+    },
+    {
+      "char": "弈",
+      "pinyin": "yì",
+      "definition": "1. 古代称围棋：～楸（棋盘）。\n2. 下棋：对～。～林。",
+      "frequency": 44
+    },
+    {
+      "char": "轶",
+      "pinyin": "yì",
+      "definition": "1. 超过：～伦（超过同辈）。～才（出众的才能）。～材（不平凡的人才）。\n2. 散失：～事。～闻。\n3. 古同“溢”，充满而流出。",
+      "frequency": 43
+    },
+    {
+      "char": "沂",
+      "pinyin": "yí",
+      "definition": "◎ 〔～河〕水名，源出中国山东省，至江苏省入海。",
+      "frequency": 41
+    },
+    {
+      "char": "噫",
+      "pinyin": "yī",
+      "definition": "◎ 文言叹词，表示感慨、悲痛、叹息：“～！微斯人，吾谁与归”。～鸣。～嘻。",
+      "frequency": 41
+    },
+    {
+      "char": "迤",
+      "pinyin": "yǐ",
+      "definition": "1. 地势斜着延长。\n2. 〔～逦〕曲折连绵。\n3. 延伸，向：天安门～东（向东一带）。",
+      "frequency": 41
+    },
+    {
+      "char": "荑",
+      "pinyin": "yí",
+      "definition": "◎ 割除田里的野草，引申为削平：芟～。",
+      "frequency": 38
+    },
+    {
+      "char": "缢",
+      "pinyin": "yì",
+      "definition": "◎ 吊死，用绳子勒死：～杀。自～。",
+      "frequency": 38
+    },
+    {
+      "char": "嶷",
+      "pinyin": "yí",
+      "definition": "◎ 〔九～〕山名，在湖南省。相传是舜安葬的地方；又指九嶷山之神，如：“～～缤兮并迎。”。亦作“九疑”。",
+      "frequency": 34
+    },
+    {
+      "char": "瘗",
+      "pinyin": "yì",
+      "definition": "◎ 掩埋，埋葬：～埋。～藏（cáng ）（殉葬的金玉器物）。～玉埋香（旧指美女死去）。",
+      "frequency": 34
+    },
+    {
+      "char": "翊",
+      "pinyin": "yì",
+      "definition": "1. 辅佐，帮助：～戴（辅佐拥戴）。～赞。\n2. 古同“翌”，明日。",
+      "frequency": 34
+    },
+    {
+      "char": "饴",
+      "pinyin": "yí",
+      "definition": "1. 用麦芽制成的糖浆，糖稀：～糖。甘之如～。\n2. 某种糖果：高粱～。\n3. 古同“贻”，赠送。",
+      "frequency": 32
+    },
+    {
+      "char": "羿",
+      "pinyin": "yì",
+      "definition": "1. 古人名，传说是中国夏代有穷国的君主，善于射箭。亦称“后羿”、“夷羿”。\n2. 姓。",
+      "frequency": 32
+    },
+    {
+      "char": "佾",
+      "pinyin": "yì",
+      "definition": "◎ 古代乐舞的行列：八～（八行八列，共六十四人）。",
+      "frequency": 30
+    },
+    {
+      "char": "怿",
+      "pinyin": "yì",
+      "definition": "◎ 欢喜：“辞之～矣”。",
+      "frequency": 30
+    },
+    {
+      "char": "悒",
+      "pinyin": "yì",
+      "definition": "◎ 忧愁，不安：忧～。郁～。～怏。～愤。～闷。～～不乐。",
+      "frequency": 30
+    },
+    {
+      "char": "翌",
+      "pinyin": "yì",
+      "definition": "◎ 明（天，年）：～日。～晨（明天早晨）。～年。",
+      "frequency": 26
+    },
+    {
+      "char": "嗌",
+      "pinyin": "yì",
+      "definition": "◎ 咽喉。",
+      "frequency": 26
+    },
+    {
+      "char": "殪",
+      "pinyin": "yì",
+      "definition": "1. 死：“左骖～兮右刃伤”。\n2. 杀死：“～此大兕”。\n3. 跌倒：“奔～百余里间”。",
+      "frequency": 26
+    },
+    {
+      "char": "異",
+      "pinyin": "yì",
+      "definition": "◎ 见“异”。",
+      "frequency": 25
+    },
+    {
+      "char": "乂",
+      "pinyin": "yì",
+      "definition": "1. 治理，安定：～安（太平无事）。\n2. 贤才：俊～在官。\n3. 割：～草。～麦。",
+      "frequency": 24
+    },
+    {
+      "char": "蜴",
+      "pinyin": "yì",
+      "definition": "◎ 〔蜥～〕见“蜥”。",
+      "frequency": 23
+    },
+    {
+      "char": "漪",
+      "pinyin": "yī",
+      "definition": "◎ 水波纹：～沦。～澜。清～。涟～（细小的波纹）。",
+      "frequency": 21
+    },
+    {
+      "char": "呓",
+      "pinyin": "yì",
+      "definition": "◎ 梦中说话：～语（梦话）。梦～（梦话）。",
+      "frequency": 20
+    },
+    {
+      "char": "杙",
+      "pinyin": "yì",
+      "definition": "1. 古书上说的树，果实像梨，味酸甜，核坚实。\n2. 小木桩；亦泛指木桩：“椓～者有数。”\n3. 拴系在木桩上：“杨柳中间～小舟。”\n4. 尖锐的小木棍儿：“以～抉其伤而死。”\n5. 戳；刺。",
+      "frequency": 19
+    },
+    {
+      "char": "劓",
+      "pinyin": "yì",
+      "definition": "1. 古代割掉鼻子的一种酷刑。\n2. 割除。",
+      "frequency": 19
+    },
+    {
+      "char": "藝",
+      "pinyin": "yì",
+      "definition": "◎ 见“艺”。",
+      "frequency": 18
+    },
+    {
+      "char": "屹",
+      "pinyin": "yì",
+      "definition": "◎ 山势高耸，喻坚定不可动摇：～～（高耸的样子）。～立。～然不动。",
+      "frequency": 18
+    },
+    {
+      "char": "仡",
+      "pinyin": "yì",
+      "definition": "◎ 勇猛雄壮的样子：～～（a.壮勇。b.高大）。～然。～栗（迅速的样子）。",
+      "frequency": 18
+    },
+    {
+      "char": "泆",
+      "pinyin": "yì",
+      "definition": "1. 古同“逸”。\n2. 古通“溢”。",
+      "frequency": 17
+    },
+    {
+      "char": "貤",
+      "pinyin": "yì",
+      "definition": "1. 重复：“兼重悂以～缪。”\n2. 古通“迤”，延展；延续：“～丘陵，下平原。”",
+      "frequency": 16
+    },
+    {
+      "char": "咿",
+      "pinyin": "yī",
+      "definition": "1. 〔～唔〕象声词，形容读书的声音。\n2. 〔～哑（yǎ ㄧㄚˇ）〕a.象声词，小孩学话的声音；b.象声词，摇桨的声音。均亦作“咿呀”。",
+      "frequency": 16
+    },
+    {
+      "char": "痍",
+      "pinyin": "yí",
+      "definition": "◎ 伤，创伤：疮～。",
+      "frequency": 16
+    },
+    {
+      "char": "酏",
+      "pinyin": "yǐ",
+      "definition": "1. 酿酒所用的清粥。\n2. 米酒，甜酒，黍酒。",
+      "frequency": 16
+    },
+    {
+      "char": "鷁",
+      "pinyin": "yì",
+      "definition": "◎ 见“鹢”。",
+      "frequency": 16
+    },
+    {
+      "char": "匜",
+      "pinyin": "yí",
+      "definition": "1. 古代一种盛水洗手的用具。\n2. 古代一种盛酒的器具。",
+      "frequency": 15
+    },
+    {
+      "char": "肄",
+      "pinyin": "yì",
+      "definition": "◎ 学习，练习：～业。～习。",
+      "frequency": 15
+    },
+    {
+      "char": "薏",
+      "pinyin": "yì",
+      "definition": "◎ 〔～苡〕多年生草本植物，颖果卵形，灰白色，像珍珠，供食用、药用称“薏米”、“薏仁米”、“苡米”、“苡仁”。",
+      "frequency": 15
+    },
+    {
+      "char": "钇",
+      "pinyin": "yǐ",
+      "definition": "◎ 一种金属元素，稀土金属。灰黑色粉末，有金属光泽。可制特种玻璃和合金。",
+      "frequency": 15
+    },
+    {
+      "char": "鹢",
+      "pinyin": "yì",
+      "definition": "1. 古书上说的一种似鹭的水鸟。\n2. 头上画着鹢的船，亦泛指船。",
+      "frequency": 15
+    },
+    {
+      "char": "诒",
+      "pinyin": "yí",
+      "definition": "1. 传给：～训。\n2. 赠与，给与：“～尔多福。”",
+      "frequency": 14
+    },
+    {
+      "char": "鶂",
+      "pinyin": "yì",
+      "definition": "◎ 古同“鷁”。",
+      "frequency": 14
+    },
+    {
+      "char": "鷖",
+      "pinyin": "yī",
+      "definition": "◎ 见“鹥”。",
+      "frequency": 14
+    },
+    {
+      "char": "斁",
+      "pinyin": "yì",
+      "definition": "1. 解除。\n2. 厌倦；懈怠；厌弃：“为絺为綌，服之无～。”\n3. 盛大的样子：“庸鼓有～，万舞有奕。”\n4. 终止。",
+      "frequency": 13
+    },
+    {
+      "char": "胰",
+      "pinyin": "yí",
+      "definition": "◎ 人或高等动物体内的腺体之一，在胃的后下方（亦称“胰腺”）：～液。～脂酶。～蛋白酶。～淀粉酶。～子（ａ．猪羊等的胰；ｂ．肥皂）。",
+      "frequency": 13
+    },
+    {
+      "char": "苡",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔薏～〕见“薏”。",
+      "frequency": 13
+    },
+    {
+      "char": "醫",
+      "pinyin": "yī",
+      "definition": "◎ 见“医”。",
+      "frequency": 13
+    },
+    {
+      "char": "儀",
+      "pinyin": "yí",
+      "definition": "◎ 见“仪”。",
+      "frequency": 12
+    },
+    {
+      "char": "叆",
+      "pinyin": "yǐ",
+      "definition": "1. 〔～\n2. 〕义同“依稀”，仿佛，不很分明的样子。\n3. （靉）",
+      "frequency": 12
+    },
+    {
+      "char": "扆",
+      "pinyin": "yǐ",
+      "definition": "1. 古代宫殿内门和窗之间的地方。\n2. 古代宫殿内设在门和窗之间的大屏风。\n3. 姓。",
+      "frequency": 12
+    },
+    {
+      "char": "攲",
+      "pinyin": "yǐ",
+      "definition": "◎ 古通“倚”，斜靠着：“～枕听鸣蛙。”",
+      "frequency": 12
+    },
+    {
+      "char": "曀",
+      "pinyin": "yì",
+      "definition": "◎ 阴沉而有风；昏暗：“雾雨天昏～。”",
+      "frequency": 12
+    },
+    {
+      "char": "枻",
+      "pinyin": "yì",
+      "definition": "1. 船舷：“桂櫂兮兰～。”\n2. 短浆：“浮文鷁，扬桂～。”",
+      "frequency": 12
+    },
+    {
+      "char": "熠",
+      "pinyin": "yì",
+      "definition": "◎ 光耀，鲜明：～～。～耀。～煜。",
+      "frequency": 12
+    },
+    {
+      "char": "黟",
+      "pinyin": "yī",
+      "definition": "1. 黑木。\n2. 黑。",
+      "frequency": 12
+    },
+    {
+      "char": "柂",
+      "pinyin": "yí",
+      "definition": "◎ 椴树，落叶乔木。",
+      "frequency": 11
+    },
+    {
+      "char": "浥",
+      "pinyin": "yì",
+      "definition": "1. 湿润：“渭城朝雨～轻尘”。\n2. 坑洼地。",
+      "frequency": 11
+    },
+    {
+      "char": "睪",
+      "pinyin": "yì",
+      "definition": "◎ 暗中察看。",
+      "frequency": 11
+    },
+    {
+      "char": "镒",
+      "pinyin": "yì",
+      "definition": "◎ 古代重量单位，合二十两（一说二十四两）。",
+      "frequency": 11
+    },
+    {
+      "char": "鹥",
+      "pinyin": "yī",
+      "definition": "1. 鸥的别称。\n2. 凤凰。\n3. 青黑色的缯。",
+      "frequency": 11
+    },
+    {
+      "char": "佁",
+      "pinyin": "yǐ",
+      "definition": "1. 〔～然〕静止的样子，如“～～不动”。\n2. 痴痴呆呆。",
+      "frequency": 10
+    },
+    {
+      "char": "儗",
+      "pinyin": "yì",
+      "definition": "1. 《廣韻》魚記切，去志，疑。\n2. 迟滞；迟疑。参见“儔儗”。",
+      "frequency": 10
+    },
+    {
+      "char": "勚",
+      "pinyin": "yì",
+      "definition": "1. 劳苦：莫知我～（无人知道我的劳苦）。\n2. 器物逐渐磨损失去棱角、锋芒等：螺丝扣～了。",
+      "frequency": 10
+    },
+    {
+      "char": "杝",
+      "pinyin": "yí",
+      "definition": "1. 椴树，落叶乔木：“～棺一，梓棺二。”\n2. 山桃：“梅杏～桃则华。”",
+      "frequency": 10
+    },
+    {
+      "char": "瘞",
+      "pinyin": "yì",
+      "definition": "1. 埋葬。 晉·潘嶽 《西征賦》：“夭赤子於新安 ，坎路側而瘞之。” 唐·韓愈 《祭十二兄文》：“生不偕居，疾藥不親，斂不摩棺，瘞不繞墳。”\n2. 埋藏；隱藏。《新唐書·魏徵傳》：“大理卿馬曙有犀鎧數十首，懼而瘞之。” 元·張可久 《紅繡鞋·三衢山中》曲：“仙橋藏老樹，石筍瘞蒼雲。”\n3. 審；明白。古方言。《方言·第六》“瘞，審也。齊楚曰瘞。”",
+      "frequency": 10
+    },
+    {
+      "char": "繄",
+      "pinyin": "yī",
+      "definition": "1. 文言助词，惟：“尔有母遗，～我独无”。\n2. 相当于“是”：“君王之于越也，～起死人而肉白骨也”。",
+      "frequency": 10
+    },
+    {
+      "char": "旖",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔～旎〕ａ．旌旗随风飘扬的样子；ｂ．柔和美丽。",
+      "frequency": 10
+    },
+    {
+      "char": "眙",
+      "pinyin": "yí",
+      "definition": "◎ 〔盱～〕地名，在中国江苏省。",
+      "frequency": 10
+    },
+    {
+      "char": "檥",
+      "pinyin": "yǐ",
+      "definition": "◎ 同“舣”。",
+      "frequency": 9
+    },
+    {
+      "char": "祎",
+      "pinyin": "yī",
+      "definition": "◎ 美好（多用于人名）。",
+      "frequency": 9
+    },
+    {
+      "char": "迆",
+      "pinyin": "yǐ",
+      "definition": "◎ 同“迤”。",
+      "frequency": 9
+    },
+    {
+      "char": "饐",
+      "pinyin": "yì",
+      "definition": "◎ （食物）腐败发臭：“食～而餲。”",
+      "frequency": 9
+    },
+    {
+      "char": "舣",
+      "pinyin": "yǐ",
+      "definition": "◎ 停船靠岸：～舟。",
+      "frequency": 9
+    },
+    {
+      "char": "鹝",
+      "pinyin": "yì",
+      "definition": "1. 古书上指“吐绶鸡”，俗称“火鸡”。\n2. 古书上指一种草。",
+      "frequency": 9
+    },
+    {
+      "char": "齮",
+      "pinyin": "yǐ",
+      "definition": "1. 〔～齕（hé）〕ａ．毁坏，如“且秦复得志于天下，则～～用事者坟墓矣。”ｂ．倾轧，如“室家何抢攘，朝士亦～～。”\n2. 咬：“～嚼午忘饥。”",
+      "frequency": 9
+    },
+    {
+      "char": "椸",
+      "pinyin": "yí",
+      "definition": "1. 衣架：“某氏室无完器，～无完衣。”\n2. 床前的几案。",
+      "frequency": 8
+    },
+    {
+      "char": "裛",
+      "pinyin": "yì",
+      "definition": "1. 书套。\n2. 缠绕：“～以藻绣，络以纶连。”\n3. 用香熏：“麝～战袍香。”\n4. 古同“浥”，沾湿。",
+      "frequency": 8
+    },
+    {
+      "char": "圯",
+      "pinyin": "yí",
+      "definition": "◎ 桥。",
+      "frequency": 8
+    },
+    {
+      "char": "乚",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“乙”。",
+      "frequency": 7
+    },
+    {
+      "char": "寱",
+      "pinyin": "yì",
+      "definition": "1. 古同“呓”，梦话。\n2. 惊。",
+      "frequency": 7
+    },
+    {
+      "char": "洟",
+      "pinyin": "yí",
+      "definition": "1. 鼻涕：“待于庙，垂涕～。”\n2. 擤鼻涕：“不敢唾～。”",
+      "frequency": 7
+    },
+    {
+      "char": "艗",
+      "pinyin": "yì",
+      "definition": "◎ 〔～艏〕船头。因古代富贵人家常在船头画鷁（一种水鸟）形而得名。亦作“艗首”。",
+      "frequency": 7
+    },
+    {
+      "char": "議",
+      "pinyin": "yì",
+      "definition": "◎ 见“议”。",
+      "frequency": 7
+    },
+    {
+      "char": "埸",
+      "pinyin": "yì",
+      "definition": "1. 田界。\n2. 疆界，边境：疆～。",
+      "frequency": 7
+    },
+    {
+      "char": "咦",
+      "pinyin": "yí",
+      "definition": "◎ 叹词，表示惊讶：～！这是怎么回事？",
+      "frequency": 7
+    },
+    {
+      "char": "镱",
+      "pinyin": "yì",
+      "definition": "◎ 一种金属元素，属稀土金属。",
+      "frequency": 7
+    },
+    {
+      "char": "宧",
+      "pinyin": "yí",
+      "definition": "1. 屋子里的东北角。\n2. 养育：“东北者阳气始起，养育万物，故曰～。”",
+      "frequency": 6
+    },
+    {
+      "char": "昳",
+      "pinyin": "yì",
+      "definition": "◎ 〔～丽〕美丽，如“邹忌脩八尺有余，而形貌～～。”",
+      "frequency": 6
+    },
+    {
+      "char": "苢",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔芣～〕见“芣”。",
+      "frequency": 6
+    },
+    {
+      "char": "螘",
+      "pinyin": "yǐ",
+      "definition": "◎ 同“蚁”。",
+      "frequency": 6
+    },
+    {
+      "char": "袘",
+      "pinyin": "yí",
+      "definition": "◎ 衣袖：“扬～卹削。”",
+      "frequency": 6
+    },
+    {
+      "char": "鮧",
+      "pinyin": "yí",
+      "definition": "◎ 〔～鱼〕体小，头、体平扁，眼小，口上有四对小须，体灰白色，背上和体侧各有一条白线。",
+      "frequency": 6
+    },
+    {
+      "char": "嫛",
+      "pinyin": "yī",
+      "definition": "◎ 〔～婗（ní ㄋㄧˊ）〕婴儿。",
+      "frequency": 5
+    },
+    {
+      "char": "掜",
+      "pinyin": "yì",
+      "definition": "◎ 拳曲：“（儿子）终日握而手不～。”",
+      "frequency": 5
+    },
+    {
+      "char": "栘",
+      "pinyin": "yí",
+      "definition": "1. 即“唐棣”。\n2. 中国汉代称马厩。",
+      "frequency": 5
+    },
+    {
+      "char": "箷",
+      "pinyin": "yí",
+      "definition": "◎ 古同“椸”。",
+      "frequency": 5
+    },
+    {
+      "char": "铱",
+      "pinyin": "yī",
+      "definition": "◎ 一种金属元素，高温时可压成薄片或拉成丝。它的合金用来制坩埚和金笔笔尖等。",
+      "frequency": 5
+    },
+    {
+      "char": "迻",
+      "pinyin": "yí",
+      "definition": "◎ 同“移”：“屡惩艾而不～。”",
+      "frequency": 5
+    },
+    {
+      "char": "峄",
+      "pinyin": "yì",
+      "definition": "1. 〔～山〕山名，在中国山东省邹县东南。亦称“邹山”。\n2. （嶧）",
+      "frequency": 5
+    },
+    {
+      "char": "頤",
+      "pinyin": "yí",
+      "definition": "◎ 见“颐”。",
+      "frequency": 5
+    },
+    {
+      "char": "鮨",
+      "pinyin": "yì",
+      "definition": "1. 鱼，体细长而侧扁，红色或褐色，有斑纹。口大，可以伸缩，牙细而尖。生活于海洋中，有的进入淡水。\n2. 古指鲵鱼：“（北嶽之山）诸怀之水出焉……其中多～鱼。鱼身而犬首，其音如婴儿。”",
+      "frequency": 5
+    },
+    {
+      "char": "黳",
+      "pinyin": "yī",
+      "definition": "1. 黑痣。\n2. 黑：“我髯～数寸，君发白千茎。”\n3. 黑玉石：“子石如琢玉，远烟真削～。”",
+      "frequency": 5
+    },
+    {
+      "char": "億",
+      "pinyin": "yì",
+      "definition": "◎ 见“亿”。",
+      "frequency": 4
+    },
+    {
+      "char": "叕",
+      "pinyin": "yǐ",
+      "definition": "◎ 张网的样子。",
+      "frequency": 4
+    },
+    {
+      "char": "埶",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艺”。",
+      "frequency": 4
+    },
+    {
+      "char": "嫕",
+      "pinyin": "yì",
+      "definition": "◎ 柔顺；和善：“婉～有妇德。”",
+      "frequency": 4
+    },
+    {
+      "char": "懌",
+      "pinyin": "yì",
+      "definition": "◎ 见“怿”。",
+      "frequency": 4
+    },
+    {
+      "char": "懝",
+      "pinyin": "yì",
+      "definition": "◎ 有见识，懂事。",
+      "frequency": 4
+    },
+    {
+      "char": "扅",
+      "pinyin": "yí",
+      "definition": "◎ 〔扊～〕见“扊”。",
+      "frequency": 4
+    },
+    {
+      "char": "枍",
+      "pinyin": "yì",
+      "definition": "◎ 〔～栺（zhī）〕ａ．一种树，即檍树。ｂ．中国汉代建章宫中一个宫殿的名称。ｃ．泛指宫殿，如“水亭通～～，石路接堂皇。”均亦作“枍诣”。",
+      "frequency": 4
+    },
+    {
+      "char": "檍",
+      "pinyin": "yì",
+      "definition": "◎ 古书上说的一种树，木材坚韧，可做弓弩等：“凡取幹之道七，柘为上，～次之。”",
+      "frequency": 4
+    },
+    {
+      "char": "殹",
+      "pinyin": "yì",
+      "definition": "1. 呻吟声。\n2. 蒙幕。\n3. 句尾语气词，相当于“也”、“兮”：“礼使介老将之以自救～。”",
+      "frequency": 4
+    },
+    {
+      "char": "毉",
+      "pinyin": "yī",
+      "definition": "◎ 同“医”。",
+      "frequency": 4
+    },
+    {
+      "char": "蛜",
+      "pinyin": "yī",
+      "definition": "◎ 〔～蝛（wēi）〕同“伊威”，一种小虫。体椭圆形，灰褐色，生活在阴暗潮湿处。俗称“地鸡”、“地虱子”或“地虱婆”。",
+      "frequency": 4
+    },
+    {
+      "char": "蟻",
+      "pinyin": "yǐ",
+      "definition": "◎ 见“蚁”。",
+      "frequency": 4
+    },
+    {
+      "char": "誃",
+      "pinyin": "yí",
+      "definition": "◎ 台名；门名。",
+      "frequency": 4
+    },
+    {
+      "char": "貽",
+      "pinyin": "yí",
+      "definition": "◎ 见“贻”。",
+      "frequency": 4
+    },
+    {
+      "char": "癔",
+      "pinyin": "yì",
+      "definition": "◎ 〔～病〕一种精神病，患者平时喜怒无常，感觉过敏。此病多由心理上剧烈的矛盾和巨大的压力引起。亦称“歇斯底里”。",
+      "frequency": 4
+    },
+    {
+      "char": "驛",
+      "pinyin": "yì",
+      "definition": "◎ 见“驿”。",
+      "frequency": 4
+    },
+    {
+      "char": "鯣",
+      "pinyin": "yì",
+      "definition": "◎ 〔～鲡〕古书上说的一种鱼。",
+      "frequency": 4
+    },
+    {
+      "char": "鴺",
+      "pinyin": "yí",
+      "definition": "1. 《廣韻》以脂切，平脂，以。见“鴟鴺”。\n2. 〔～",
+      "frequency": 4
+    },
+    {
+      "char": "鸃",
+      "pinyin": "yì",
+      "definition": "◎ 〔鵔～〕见“鵔”。",
+      "frequency": 4
+    },
+    {
+      "char": "吚",
+      "pinyin": "yī",
+      "definition": "◎ 同“咿”。",
+      "frequency": 3
+    },
+    {
+      "char": "唈",
+      "pinyin": "yì",
+      "definition": "1. 〔呜～〕义同“呜咽”，低声哭泣。\n2. 〔～缓〕抑郁不舒畅的样子。",
+      "frequency": 3
+    },
+    {
+      "char": "囈",
+      "pinyin": "yì",
+      "definition": "1. “呓”的繁体字。\n2. 說夢話。《列子·周穆王》：“眠中啽囈呻呼，徹旦息焉。”",
+      "frequency": 3
+    },
+    {
+      "char": "妷",
+      "pinyin": "yì",
+      "definition": "◎ 放荡：“有～者女，颜如舜英。",
+      "frequency": 3
+    },
+    {
+      "char": "嶧",
+      "pinyin": "yì",
+      "definition": "◎ 见“峄”。",
+      "frequency": 3
+    },
+    {
+      "char": "帟",
+      "pinyin": "yì",
+      "definition": "◎ 小帐幕，亦指幄中座上的帐子：“掌帷幕幄～绶之事”。",
+      "frequency": 3
+    },
+    {
+      "char": "憶",
+      "pinyin": "yì",
+      "definition": "◎ 见“忆”。",
+      "frequency": 3
+    },
+    {
+      "char": "扡",
+      "pinyin": "yǐ",
+      "definition": "1. 施加。\n2. 迁徙。",
+      "frequency": 3
+    },
+    {
+      "char": "拸",
+      "pinyin": "yí",
+      "definition": "◎ 加。",
+      "frequency": 3
+    },
+    {
+      "char": "敧",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“攲”。",
+      "frequency": 3
+    },
+    {
+      "char": "栧",
+      "pinyin": "yì",
+      "definition": "◎ 古同“枻”。",
+      "frequency": 3
+    },
+    {
+      "char": "栺",
+      "pinyin": "yì",
+      "definition": "◎ 〔枍～〕见“枍”。",
+      "frequency": 3
+    },
+    {
+      "char": "煕",
+      "pinyin": "yí",
+      "definition": "◎ 古人名用字。",
+      "frequency": 3
+    },
+    {
+      "char": "狋",
+      "pinyin": "yí",
+      "definition": "1. 狗发怒的样子。\n2. 狗相争斗。",
+      "frequency": 3
+    },
+    {
+      "char": "繹",
+      "pinyin": "yì",
+      "definition": "◎ 见“绎”。",
+      "frequency": 3
+    },
+    {
+      "char": "肊",
+      "pinyin": "yì",
+      "definition": "◎ 同“臆”。",
+      "frequency": 3
+    },
+    {
+      "char": "蓺",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艺”。",
+      "frequency": 3
+    },
+    {
+      "char": "蛦",
+      "pinyin": "yí",
+      "definition": "◎ 〔",
+      "frequency": 3
+    },
+    {
+      "char": "觺",
+      "pinyin": "yí",
+      "definition": "◎ 〔～～〕（兽角）尖锐的样子，如“土伯九约，其角～～些。”",
+      "frequency": 3
+    },
+    {
+      "char": "詣",
+      "pinyin": "yì",
+      "definition": "◎ 见“诣”。",
+      "frequency": 3
+    },
+    {
+      "char": "誼",
+      "pinyin": "yì",
+      "definition": "◎ 见“谊”。",
+      "frequency": 3
+    },
+    {
+      "char": "譯",
+      "pinyin": "yì",
+      "definition": "◎ 见“译”。",
+      "frequency": 3
+    },
+    {
+      "char": "顗",
+      "pinyin": "yǐ",
+      "definition": "1. 安静。\n2. 庄重恭谨的样子。",
+      "frequency": 3
+    },
+    {
+      "char": "鶃",
+      "pinyin": "yì",
+      "definition": "◎ 古同“鶂”。",
+      "frequency": 3
+    },
+    {
+      "char": "鷊",
+      "pinyin": "yì",
+      "definition": "◎ 见“鹝”。",
+      "frequency": 3
+    },
+    {
+      "char": "乁",
+      "pinyin": "yí",
+      "definition": "◎ 古同“移”。",
+      "frequency": 2
+    },
+    {
+      "char": "乛",
+      "pinyin": "yǐ",
+      "definition": "◎ 同“乙”，汉字部首。",
+      "frequency": 2
+    },
+    {
+      "char": "伇",
+      "pinyin": "yì",
+      "definition": "◎ 古同“役”。",
+      "frequency": 2
+    },
+    {
+      "char": "兿",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艺”。",
+      "frequency": 2
+    },
+    {
+      "char": "勩",
+      "pinyin": "yì",
+      "definition": "◎ 见“勚”。",
+      "frequency": 2
+    },
+    {
+      "char": "呹",
+      "pinyin": "yì",
+      "definition": "1. 牛羊嚼草的样子。\n2. 疾速的样子。",
+      "frequency": 2
+    },
+    {
+      "char": "坄",
+      "pinyin": "yì",
+      "definition": "◎ 砖瓦窑的烟囱。",
+      "frequency": 2
+    },
+    {
+      "char": "墿",
+      "pinyin": "yì",
+      "definition": "◎ 道路。",
+      "frequency": 2
+    },
+    {
+      "char": "媐",
+      "pinyin": "yí",
+      "definition": "1. 喜悦：“鸳鸯戢梁，凫鷖～渚。”\n2. 善。",
+      "frequency": 2
+    },
+    {
+      "char": "崺",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔峛～〕见“峛”。",
+      "frequency": 2
+    },
+    {
+      "char": "弌",
+      "pinyin": "yī",
+      "definition": "◎ 同“壹”。",
+      "frequency": 2
+    },
+    {
+      "char": "彜",
+      "pinyin": "yí",
+      "definition": "◎ 同“彝”。",
+      "frequency": 2
+    },
+    {
+      "char": "彵",
+      "pinyin": "yí",
+      "definition": "◎ 〔逶～〕古同“逶迤”。",
+      "frequency": 2
+    },
+    {
+      "char": "忔",
+      "pinyin": "yì",
+      "definition": "◎ 厌烦：“数～食饮。”",
+      "frequency": 2
+    },
+    {
+      "char": "悘",
+      "pinyin": "yī",
+      "definition": "◎ 审。",
+      "frequency": 2
+    },
+    {
+      "char": "悥",
+      "pinyin": "yì",
+      "definition": "◎ 古同“意”。",
+      "frequency": 2
+    },
+    {
+      "char": "暆",
+      "pinyin": "yí",
+      "definition": "1. 〔～～〕太阳缓慢移动的样子。\n2. （太阳）西斜：“坐待日～。”",
+      "frequency": 2
+    },
+    {
+      "char": "桋",
+      "pinyin": "yí",
+      "definition": "◎ 古书上说的一种树，叶细而歧锐，皮理错戾，多丛生于山中，木材可做车辋：“山有蕨薇，隰有杞～。”",
+      "frequency": 2
+    },
+    {
+      "char": "欥",
+      "pinyin": "yì",
+      "definition": "◎ 辞。又作“喜”解。",
+      "frequency": 2
+    },
+    {
+      "char": "欭",
+      "pinyin": "yì",
+      "definition": "◎ 气逆。",
+      "frequency": 2
+    },
+    {
+      "char": "沶",
+      "pinyin": "yí",
+      "definition": "◎ 古河名，在今中国湖北省。",
+      "frequency": 2
+    },
+    {
+      "char": "潩",
+      "pinyin": "yì",
+      "definition": "◎ 〔～水〕今中国河南省清潩河的古称。",
+      "frequency": 2
+    },
+    {
+      "char": "焬",
+      "pinyin": "yì",
+      "definition": "◎ 古同“焲”，火光。",
+      "frequency": 2
+    },
+    {
+      "char": "焲",
+      "pinyin": "yì",
+      "definition": "◎ 火光。",
+      "frequency": 2
+    },
+    {
+      "char": "熤",
+      "pinyin": "yì",
+      "definition": "◎ 古人名用字。",
+      "frequency": 2
+    },
+    {
+      "char": "狏",
+      "pinyin": "yí",
+      "definition": "◎ 古书上说的一种兽。",
+      "frequency": 2
+    },
+    {
+      "char": "珆",
+      "pinyin": "yí",
+      "definition": "1. 似玉的石。\n2. 玉石。",
+      "frequency": 2
+    },
+    {
+      "char": "禕",
+      "pinyin": "yī",
+      "definition": "◎ 见“祎”。",
+      "frequency": 2
+    },
+    {
+      "char": "秇",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艺”，种植。",
+      "frequency": 2
+    },
+    {
+      "char": "籎",
+      "pinyin": "yí",
+      "definition": "◎ 义未详。",
+      "frequency": 2
+    },
+    {
+      "char": "縊",
+      "pinyin": "yì",
+      "definition": "◎ 见“缢”。",
+      "frequency": 2
+    },
+    {
+      "char": "羛",
+      "pinyin": "yì",
+      "definition": "◎ 古同“义”。",
+      "frequency": 2
+    },
+    {
+      "char": "羠",
+      "pinyin": "yí",
+      "definition": "1. 阄割过的羊。\n2. 母野羊。",
+      "frequency": 2
+    },
+    {
+      "char": "艤",
+      "pinyin": "yǐ",
+      "definition": "◎ 见“舣”。",
+      "frequency": 2
+    },
+    {
+      "char": "苅",
+      "pinyin": "yì",
+      "definition": "◎ 古同“刈”。",
+      "frequency": 2
+    },
+    {
+      "char": "萓",
+      "pinyin": "yí",
+      "definition": "◎ 〔～莮〕同“宜男”，即“萱草”。一种草本植物，花即黄花菜，供食用，根入药。",
+      "frequency": 2
+    },
+    {
+      "char": "虉",
+      "pinyin": "yì",
+      "definition": "◎ 盘龙参，古称“绶草”。",
+      "frequency": 2
+    },
+    {
+      "char": "蛡",
+      "pinyin": "yì",
+      "definition": "◎ 蜂房。",
+      "frequency": 2
+    },
+    {
+      "char": "螠",
+      "pinyin": "yì",
+      "definition": "◎ 无脊椎动物的一纲，生活在海底泥沙中，有很多种类。",
+      "frequency": 2
+    },
+    {
+      "char": "襼",
+      "pinyin": "yì",
+      "definition": "◎ 衣袖：“掎裳连～。”",
+      "frequency": 2
+    },
+    {
+      "char": "詍",
+      "pinyin": "yì",
+      "definition": "◎ 多言。",
+      "frequency": 2
+    },
+    {
+      "char": "讉",
+      "pinyin": "yí",
+      "definition": "◎ 译恶言。",
+      "frequency": 2
+    },
+    {
+      "char": "讛",
+      "pinyin": "yì",
+      "definition": "◎ 同“呓”。",
+      "frequency": 2
+    },
+    {
+      "char": "豷",
+      "pinyin": "yì",
+      "definition": "◎ 猪喘气。",
+      "frequency": 2
+    },
+    {
+      "char": "迱",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“迤”。",
+      "frequency": 2
+    },
+    {
+      "char": "醳",
+      "pinyin": "yì",
+      "definition": "1. 酒；醇酒：“觞～泛波。”\n2. 赏赐酒食：“百里之内，牛酒日至，以饗士大夫，～兵。”",
+      "frequency": 2
+    },
+    {
+      "char": "釔",
+      "pinyin": "yǐ",
+      "definition": "◎ 见“钇”。",
+      "frequency": 2
+    },
+    {
+      "char": "釶",
+      "pinyin": "yí",
+      "definition": "◎ 古同“匜”，古代一种盛酒或水的器具。",
+      "frequency": 2
+    },
+    {
+      "char": "銥",
+      "pinyin": "yī",
+      "definition": "◎ 见“铱”。",
+      "frequency": 2
+    },
+    {
+      "char": "鎰",
+      "pinyin": "yì",
+      "definition": "◎ 见“镒”。",
+      "frequency": 2
+    },
+    {
+      "char": "鐿",
+      "pinyin": "yì",
+      "definition": "◎ 见“镱”。",
+      "frequency": 2
+    },
+    {
+      "char": "陭",
+      "pinyin": "yī",
+      "definition": "1. 〔～氏阪〕古阪名，在今山西省安泽县。\n2. 不正。\n3. 梯子",
+      "frequency": 2
+    },
+    {
+      "char": "衤",
+      "pinyin": "yī",
+      "definition": "◎ 同“衣”。用作偏旁。俗称“衣字旁”。",
+      "frequency": 2
+    },
+    {
+      "char": "骮",
+      "pinyin": "yì",
+      "definition": "1. 小骨。\n2. 锁骨上窝。",
+      "frequency": 2
+    },
+    {
+      "char": "鳦",
+      "pinyin": "yǐ",
+      "definition": "◎ 燕子：“柳色绿初成，絮语来新～。”",
+      "frequency": 2
+    },
+    {
+      "char": "鶍",
+      "pinyin": "yì",
+      "definition": "◎ 日本的一种交嘴鸟（日本汉字）。",
+      "frequency": 2
+    },
+    {
+      "char": "鷧",
+      "pinyin": "yì",
+      "definition": "◎ 鸬鹚：“人有鱼池，苦群～窃啄食之。”",
+      "frequency": 2
+    },
+    {
+      "char": "鷾",
+      "pinyin": "yì",
+      "definition": "◎ 〔～鴯（ér）〕燕子，如“鸟莫知于～～。”",
+      "frequency": 2
+    },
+    {
+      "char": "黓",
+      "pinyin": "yì",
+      "definition": "◎ 黑色：“（太岁）在壬曰玄～。”",
+      "frequency": 2
+    },
+    {
+      "char": "齸",
+      "pinyin": "yì",
+      "definition": "1. 麋鹿反刍。\n2. 麋鹿的胃。",
+      "frequency": 2
+    },
+    {
+      "char": "乊",
+      "pinyin": "yī",
+      "definition": "◎ 同“伊”。",
+      "frequency": 1
+    },
+    {
+      "char": "亄",
+      "pinyin": "yì",
+      "definition": "◎ 又贪婪又吝啬。",
+      "frequency": 1
+    },
+    {
+      "char": "伿",
+      "pinyin": "yì",
+      "definition": "◎ 怠慢不敬。",
+      "frequency": 1
+    },
+    {
+      "char": "侇",
+      "pinyin": "yí",
+      "definition": "1. 辈；类。\n2. 古同“夷”。",
+      "frequency": 1
+    },
+    {
+      "char": "俋",
+      "pinyin": "yì",
+      "definition": "◎ 〔～～〕a.用力的样子。b.勇壮的样子。",
+      "frequency": 1
+    },
+    {
+      "char": "偯",
+      "pinyin": "yǐ",
+      "definition": "1. 哭的余声：“童子哭不～”。\n2. 曲折委婉。",
+      "frequency": 1
+    },
+    {
+      "char": "冝",
+      "pinyin": "yí",
+      "definition": "◎ 古同“宜”。",
+      "frequency": 1
+    },
+    {
+      "char": "劮",
+      "pinyin": "yì",
+      "definition": "◎ 古同“逸”，安乐。",
+      "frequency": 1
+    },
+    {
+      "char": "匇",
+      "pinyin": "yì",
+      "definition": "◎ 义未详。",
+      "frequency": 1
+    },
+    {
+      "char": "呭",
+      "pinyin": "yì",
+      "definition": "1. 〔～～〕罗嗦，话多。\n2. 乐。",
+      "frequency": 1
+    },
+    {
+      "char": "圛",
+      "pinyin": "yì",
+      "definition": "◎ （云气）连接不断。",
+      "frequency": 1
+    },
+    {
+      "char": "垼",
+      "pinyin": "yì",
+      "definition": "◎ 古同“坄”，砖瓦窑的烟囱；也指用土坯临时搭成的灶。",
+      "frequency": 1
+    },
+    {
+      "char": "壱",
+      "pinyin": "yī",
+      "definition": "◎ 古同“壹”。",
+      "frequency": 1
+    },
+    {
+      "char": "夁",
+      "pinyin": "yī",
+      "definition": "◎ 古同“壹”。",
+      "frequency": 1
+    },
+    {
+      "char": "嬄",
+      "pinyin": "yī",
+      "definition": "◎ 〔～厥〕妇人貌。",
+      "frequency": 1
+    },
+    {
+      "char": "嬑",
+      "pinyin": "yì",
+      "definition": "◎ 古女子人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "嬟",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔～婍（qǐ ㄑㄧˇ）〕美好的样子。",
+      "frequency": 1
+    },
+    {
+      "char": "宐",
+      "pinyin": "yí",
+      "definition": "◎ 古同“宜”。",
+      "frequency": 1
+    },
+    {
+      "char": "寲",
+      "pinyin": "yí",
+      "definition": "1. 察。\n2. 便。\n3. 难。",
+      "frequency": 1
+    },
+    {
+      "char": "峓",
+      "pinyin": "yí",
+      "definition": "◎ 〔嵎（yú）～〕山名。亦作“嵎夷”。",
+      "frequency": 1
+    },
+    {
+      "char": "嶬",
+      "pinyin": "yí",
+      "definition": "◎ 〔崎～〕a.高耸险峻，如“（殿宇结构）上～～而重注。”b.喻骨瘦如柴，如“形枯槁以～～。”",
+      "frequency": 1
+    },
+    {
+      "char": "巸",
+      "pinyin": "yí",
+      "definition": "1. 宽下巴。\n2. 成长；壮大。\n3. 美好。",
+      "frequency": 1
+    },
+    {
+      "char": "帠",
+      "pinyin": "yì",
+      "definition": "◎ 〔何～〕义同“何为”，为什么。",
+      "frequency": 1
+    },
+    {
+      "char": "幆",
+      "pinyin": "yì",
+      "definition": "◎ 古代妇女上衣的直领。",
+      "frequency": 1
+    },
+    {
+      "char": "庡",
+      "pinyin": "yǐ",
+      "definition": "1. 隐蔽。\n2. 徘徊。",
+      "frequency": 1
+    },
+    {
+      "char": "廙",
+      "pinyin": "yì",
+      "definition": "1. 蒙古包一类的帐篷。\n2. 恭敬。",
+      "frequency": 1
+    },
+    {
+      "char": "弬",
+      "pinyin": "yi",
+      "definition": "◎ 弓名。",
+      "frequency": 1
+    },
+    {
+      "char": "彛",
+      "pinyin": "yí",
+      "definition": "◎ 同“彝”。",
+      "frequency": 1
+    },
+    {
+      "char": "彞",
+      "pinyin": "yí",
+      "definition": "◎ 同“彝”。",
+      "frequency": 1
+    },
+    {
+      "char": "怈",
+      "pinyin": "yì",
+      "definition": "1. 习。\n2. 明。",
+      "frequency": 1
+    },
+    {
+      "char": "恞",
+      "pinyin": "yí",
+      "definition": "◎ 喜悦。",
+      "frequency": 1
+    },
+    {
+      "char": "撎",
+      "pinyin": "yī",
+      "definition": "◎ 古同“揖”，拱手行礼：“率军礼以长～。”",
+      "frequency": 1
+    },
+    {
+      "char": "攺",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔?（gāi）～〕古代用以驱鬼避邪的佩物，用金属或玉制成。",
+      "frequency": 1
+    },
+    {
+      "char": "敡",
+      "pinyin": "yì",
+      "definition": "1. 轻侮；怠慢。\n2. 改变；变易。",
+      "frequency": 1
+    },
+    {
+      "char": "敼",
+      "pinyin": "yǐ",
+      "definition": "◎ 嬉戏。",
+      "frequency": 1
+    },
+    {
+      "char": "旑",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“旖”。",
+      "frequency": 1
+    },
+    {
+      "char": "晹",
+      "pinyin": "yì",
+      "definition": "1. 太阳在云层里忽隐忽现。\n2. 太阳无光。",
+      "frequency": 1
+    },
+    {
+      "char": "曎",
+      "pinyin": "yì",
+      "definition": "1. 光明。\n2. 姓。",
+      "frequency": 1
+    },
+    {
+      "char": "棭",
+      "pinyin": "yì",
+      "definition": "◎ 古书上说的一种树。",
+      "frequency": 1
+    },
+    {
+      "char": "椬",
+      "pinyin": "yí",
+      "definition": "◎ 〔～梧〕地名，在中国台湾省云林县口湖乡。",
+      "frequency": 1
+    },
+    {
+      "char": "榏",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艗”。",
+      "frequency": 1
+    },
+    {
+      "char": "槸",
+      "pinyin": "yì",
+      "definition": "◎ 树枝因摇曳而相摩擦。",
+      "frequency": 1
+    },
+    {
+      "char": "檹",
+      "pinyin": "yī",
+      "definition": "1. 〔～施〕树木茂盛或枝条长而柔软。\n2. 古书上说的一种树。",
+      "frequency": 1
+    },
+    {
+      "char": "歝",
+      "pinyin": "yì",
+      "definition": "◎ 古同“斁”。",
+      "frequency": 1
+    },
+    {
+      "char": "殔",
+      "pinyin": "yì",
+      "definition": "◎ 埋柩。",
+      "frequency": 1
+    },
+    {
+      "char": "浂",
+      "pinyin": "yì",
+      "definition": "1. 古同“泆”。\n2. 涯。",
+      "frequency": 1
+    },
+    {
+      "char": "浳",
+      "pinyin": "yì",
+      "definition": "1. 肥泽。\n2. 润。",
+      "frequency": 1
+    },
+    {
+      "char": "渏",
+      "pinyin": "yī",
+      "definition": "◎ 古同“漪”。",
+      "frequency": 1
+    },
+    {
+      "char": "湙",
+      "pinyin": "yì",
+      "definition": "◎ 〔浟（yóu）～〕水流动的样子，如“尔其为状也，则乃～～潋滟，浮天无岸。”",
+      "frequency": 1
+    },
+    {
+      "char": "澺",
+      "pinyin": "yì",
+      "definition": "◎ 〔～水〕中国河南省上蔡县以下洪河的古称。",
+      "frequency": 1
+    },
+    {
+      "char": "瀷",
+      "pinyin": "yì",
+      "definition": "1. 雨后地面的积水：“泽受～而无源者。”\n2. 水流急。\n3. 水名。",
+      "frequency": 1
+    },
+    {
+      "char": "炈",
+      "pinyin": "yì",
+      "definition": "◎ 砖瓦窑的烟囱。也指用土坯临时搭成的灶。",
+      "frequency": 1
+    },
+    {
+      "char": "熪",
+      "pinyin": "yí",
+      "definition": "◎ 〔熑（qiān）～〕火不绝的样子。",
+      "frequency": 1
+    },
+    {
+      "char": "熼",
+      "pinyin": "yì",
+      "definition": "◎ 火光。",
+      "frequency": 1
+    },
+    {
+      "char": "燚",
+      "pinyin": "yì",
+      "definition": "◎ 火貌。",
+      "frequency": 1
+    },
+    {
+      "char": "燡",
+      "pinyin": "yì",
+      "definition": "1. 〔～～〕光明，如“赫～～而烛坤。”\n2. 光耀：“园蘅眩红花，湖荇～黄华。”",
+      "frequency": 1
+    },
+    {
+      "char": "燱",
+      "pinyin": "yì",
+      "definition": "◎ 古人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "獈",
+      "pinyin": "yì",
+      "definition": "◎ 义未详。",
+      "frequency": 1
+    },
+    {
+      "char": "玴",
+      "pinyin": "yì",
+      "definition": "◎ 像玉的美石。",
+      "frequency": 1
+    },
+    {
+      "char": "瑿",
+      "pinyin": "yī",
+      "definition": "1. 黑色的美石。\n2. 黑玉：“玉有九色，元（玄）如澄水曰～。”\n3. 黑色的琥珀：“琥珀最贵者名曰～，红而微带黑，然昼见则黑，灯光下则红甚也。”",
+      "frequency": 1
+    },
+    {
+      "char": "瓵",
+      "pinyin": "yí",
+      "definition": "◎ 瓮、缶一类瓦器。",
+      "frequency": 1
+    },
+    {
+      "char": "畩",
+      "pinyin": "yī",
+      "definition": "◎ 日本汉字。用于地名。",
+      "frequency": 1
+    },
+    {
+      "char": "痬",
+      "pinyin": "yì",
+      "definition": "1. 狂疾。\n2. 传染病。",
+      "frequency": 1
+    },
+    {
+      "char": "瘱",
+      "pinyin": "yì",
+      "definition": "1. 文静；安静：“为人婉～有节操。”\n2. 深邃：“其妙声，则清静厌～。”\n3. 明白；审。",
+      "frequency": 1
+    },
+    {
+      "char": "瞖",
+      "pinyin": "yì",
+      "definition": "◎ 古同“翳”（ａ．眼角膜上所生的障蔽视线的白斑；ｂ．眼生白内障）。",
+      "frequency": 1
+    },
+    {
+      "char": "礒",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔碕～〕见“碕”。",
+      "frequency": 1
+    },
+    {
+      "char": "稦",
+      "pinyin": "yī",
+      "definition": "◎ 禾苗茂盛。",
+      "frequency": 1
+    },
+    {
+      "char": "穓",
+      "pinyin": "yì",
+      "definition": "◎ 耕。",
+      "frequency": 1
+    },
+    {
+      "char": "竩",
+      "pinyin": "yì",
+      "definition": "◎ 古同“谊”。",
+      "frequency": 1
+    },
+    {
+      "char": "笖",
+      "pinyin": "yǐ",
+      "definition": "◎ 笋。",
+      "frequency": 1
+    },
+    {
+      "char": "篒",
+      "pinyin": "yì",
+      "definition": "◎ 同“饐”。",
+      "frequency": 1
+    },
+    {
+      "char": "簃",
+      "pinyin": "yí",
+      "definition": "◎ 楼阁旁边的小屋。",
+      "frequency": 1
+    },
+    {
+      "char": "繶",
+      "pinyin": "yì",
+      "definition": "1. 用丝线编织成的带子。\n2. 系束。\n3. 古代酒器口与足底之间的篆文装饰。",
+      "frequency": 1
+    },
+    {
+      "char": "耴",
+      "pinyin": "yì",
+      "definition": "◎ 〔聱～〕a.众多的声音；b.鱼鸟的状态。",
+      "frequency": 1
+    },
+    {
+      "char": "膉",
+      "pinyin": "yì",
+      "definition": "1. 脖子上的肉：“肤祭三，取诸左～上。”\n2. 肥。",
+      "frequency": 1
+    },
+    {
+      "char": "芅",
+      "pinyin": "yì",
+      "definition": "◎ 〔铫～〕古书上说的一种植物，即猕猴桃。",
+      "frequency": 1
+    },
+    {
+      "char": "萟",
+      "pinyin": "yì",
+      "definition": "◎ 古同“艺”。",
+      "frequency": 1
+    },
+    {
+      "char": "藙",
+      "pinyin": "yì",
+      "definition": "◎ 即“食茱萸”，果实味辛，可作调料。",
+      "frequency": 1
+    },
+    {
+      "char": "蘙",
+      "pinyin": "yì",
+      "definition": "1. 古书上说的一种草。\n2. 古同“翳”，遮蔽：“先是斯境，～于榛薄。”",
+      "frequency": 1
+    },
+    {
+      "char": "螔",
+      "pinyin": "yí",
+      "definition": "◎ 〔～蝓（yú）〕蜗牛（一说是一种跟蜗牛近似的软体动物）。",
+      "frequency": 1
+    },
+    {
+      "char": "衪",
+      "pinyin": "yì",
+      "definition": "◎ 古同“袘”。",
+      "frequency": 1
+    },
+    {
+      "char": "袣",
+      "pinyin": "yì",
+      "definition": "◎ 衣袖：“曳独茧之褕～。”",
+      "frequency": 1
+    },
+    {
+      "char": "裿",
+      "pinyin": "yǐ",
+      "definition": "◎ 〔～?〕衣好貌。",
+      "frequency": 1
+    },
+    {
+      "char": "褹",
+      "pinyin": "yì",
+      "definition": "◎ 古同“襼”。",
+      "frequency": 1
+    },
+    {
+      "char": "訲",
+      "pinyin": "yì",
+      "definition": "◎ 古同“啻”，快。",
+      "frequency": 1
+    },
+    {
+      "char": "訳",
+      "pinyin": "yì",
+      "definition": "◎ 古同“译”。",
+      "frequency": 1
+    },
+    {
+      "char": "謻",
+      "pinyin": "yí",
+      "definition": "◎ 〔～门〕a.古代冰室门名，如“～～曲榭。”b.古代宫殿的侧门，如“未央朝寂，～～旦空。”",
+      "frequency": 1
+    },
+    {
+      "char": "譩",
+      "pinyin": "yī",
+      "definition": "1. 古同“噫”，叹词。\n2. 应答。",
+      "frequency": 1
+    },
+    {
+      "char": "豙",
+      "pinyin": "yì",
+      "definition": "1. 猪发怒，毛竖起。\n2. 删夷，剔除。",
+      "frequency": 1
+    },
+    {
+      "char": "豛",
+      "pinyin": "yì",
+      "definition": "◎ 中国汉代上谷郡（在今河北省）对猪的称呼。",
+      "frequency": 1
+    },
+    {
+      "char": "貖",
+      "pinyin": "yì",
+      "definition": "◎ 古同“",
+      "frequency": 1
+    },
+    {
+      "char": "贀",
+      "pinyin": "yì",
+      "definition": "◎ 益。",
+      "frequency": 1
+    },
+    {
+      "char": "跇",
+      "pinyin": "yì",
+      "definition": "◎ 超越：“～峦阬，超唐陂。”",
+      "frequency": 1
+    },
+    {
+      "char": "跠",
+      "pinyin": "yí",
+      "definition": "◎ 踞，蹲。",
+      "frequency": 1
+    },
+    {
+      "char": "輢",
+      "pinyin": "yǐ",
+      "definition": "1. 古代车箱两旁人可以倚靠的木板。\n2. 凭倚，靠近：“枕～交趾。”",
+      "frequency": 1
+    },
+    {
+      "char": "轙",
+      "pinyin": "yǐ",
+      "definition": "1. 车衡上贯穿缰绳的大环：“龙輈华～。”\n2. 整车待发。",
+      "frequency": 1
+    },
+    {
+      "char": "辷",
+      "pinyin": "yī",
+      "definition": "◎ 日本地名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "逘",
+      "pinyin": "yǐ",
+      "definition": "◎ 进。",
+      "frequency": 1
+    },
+    {
+      "char": "郼",
+      "pinyin": "yī",
+      "definition": "◎ 中国殷商国名。",
+      "frequency": 1
+    },
+    {
+      "char": "鄓",
+      "pinyin": "yì",
+      "definition": "◎ 臭。",
+      "frequency": 1
+    },
+    {
+      "char": "醷",
+      "pinyin": "yì",
+      "definition": "1. 梅浆：“或以酏为醴、黍酏、浆、水、～、滥。”\n2. 酪的一种：“酥之精曰醍醐。……生而陈之曰～”。",
+      "frequency": 1
+    },
+    {
+      "char": "釴",
+      "pinyin": "yì",
+      "definition": "1. 附耳在唇外的方鼎。\n2. 姓。",
+      "frequency": 1
+    },
+    {
+      "char": "鈘",
+      "pinyin": "yǐ",
+      "definition": "◎ 古同“",
+      "frequency": 1
+    },
+    {
+      "char": "鈠",
+      "pinyin": "yì",
+      "definition": "1. 器。\n2. 小矛：“（章）苟遂以～斫之，蛇便走去。”",
+      "frequency": 1
+    },
+    {
+      "char": "鉯",
+      "pinyin": "yǐ",
+      "definition": "◎ 未经证实的化学元素名。1926年，美国化学家霍布津斯宣称发现了第61号元素，并将其实验地点伊利诺斯大学作为该元素的命名。但该项发现后未得到公认。",
+      "frequency": 1
+    },
+    {
+      "char": "鏔",
+      "pinyin": "yí",
+      "definition": "◎ 无刃的戟。",
+      "frequency": 1
+    },
+    {
+      "char": "阣",
+      "pinyin": "yì",
+      "definition": "◎ 古同“屹”。",
+      "frequency": 1
+    },
+    {
+      "char": "隿",
+      "pinyin": "yì",
+      "definition": "◎ 古同“戈”，用带绳子的箭射猎。",
+      "frequency": 1
+    },
+    {
+      "char": "霬",
+      "pinyin": "yì",
+      "definition": "◎ 古人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "頉",
+      "pinyin": "yí",
+      "definition": "◎ 古同“颐”。",
+      "frequency": 1
+    },
+    {
+      "char": "頥",
+      "pinyin": "yí",
+      "definition": "◎ 古同“颐”。",
+      "frequency": 1
+    },
+    {
+      "char": "顊",
+      "pinyin": "yí",
+      "definition": "◎ 古同“颐”：“白公胜虑乱，罢朝倒杖而策，锐贯～。”",
+      "frequency": 1
+    },
+    {
+      "char": "駅",
+      "pinyin": "yì",
+      "definition": "◎ 同“驿”（日本汉字）。",
+      "frequency": 1
+    }
+  ],
+  "si": [
+    {
+      "char": "食",
+      "pinyin": "sì",
+      "definition": "◎ 拿东西给人吃：～母（乳母）。",
+      "frequency": 2879
+    },
+    {
+      "char": "四",
+      "pinyin": "sì",
+      "definition": "1. 数名，三加一（在钞票和单据上常用大写“肆”代）：～方。～边。～序（即“四季”）。～体（ａ．指人的四肢；ｂ．指楷、草、隶、篆四种字体）。～库（古籍经、史、子、集四部的代称。亦称“四部”）。～君子（中国画中对梅、兰、竹、菊四种花卉题材的总称）。\n2. 中国古代乐谱的记音符号，相当于简谱中的低音“6”。",
+      "frequency": 114514
+    },
+    {
+      "char": "死",
+      "pinyin": "sǐ",
+      "definition": "1. 丧失生命，与“生”、“活”相对：～亡。～讯。～刑。～囚。～棋。～地。生离～别。～有余辜。\n2. 不顾生命：～志（牺牲生命的决心）。～士（敢死的武士）。～战。\n3. 固执，坚持到底：～心塌地。～卖力气。\n4. 无知觉：睡得～。\n5. 不活动，不灵活：～结。～理。～板。\n6. 不通达：～胡同。～路一条。\n7. 过时，失去作用：～文字。\n8. 极，甚：乐～人。",
+      "frequency": 1937
+    },
+    {
+      "char": "思",
+      "pinyin": "sī",
+      "definition": "1. 想，考虑，动脑筋：～想（ａ．客观存在反映在人的意识中经过思维活动而产生的结果；ｂ．想法，念头；ｃ．思量）。～忖。～索。～维。沉～。寻～。见异～迁。\n2. 想念，挂念：～念。～恋。相～。\n3. 想法：～绪。～致（新颖独到的构思、意趣）。构～。\n4. 姓。",
+      "frequency": 1727
+    },
+    {
+      "char": "司",
+      "pinyin": "sī",
+      "definition": "1. 主管，操作：～法。～机。～令。～南（古代用磁石做成的辨别方向的仪器，为现在指南针的始祖）。～空（ａ．古代中央政府中掌管工程的长官；ｂ．复姓）。～徒（ａ．古代中央政府中掌管土地和徒役的长官，后为丞相；ｂ．复姓）。～马（ａ．古代中央政府中掌管军务的长官；ｂ．复姓）。～寇（ａ．古代中央政府中掌管刑狱、纠察的长官；ｂ．复姓）。\n2. 官署名称：人事～。\n3. 视察：～日月之长短。\n4. 姓。",
+      "frequency": 1318
+    },
+    {
+      "char": "丝",
+      "pinyin": "sī",
+      "definition": "1. 蚕吐出的像线的东西，是织绸缎等的原料：蚕～。～绸。缂（kè）～（中国特有的一种丝织的手工艺品。亦作“刻丝”）。\n2. 像丝的东西：铁～。菌～。肉～。游～。\n3. 细微，极小：一～不苟。\n4. 绵长的思绪或感情：情～。愁～。\n5. 中国市制重量单位（一丝等于千分之一分）：～毫（喻极少，极小，一点儿）。～恩发（fà）怨（指极小的恩怨）。\n6. 公制长度单位，一米的十万分之一（亦称“忽米”、“道”）。\n7. 指弦乐器：～竹（琴、瑟、箫、笛等乐器的总称。“竹”指管乐器）。\n8. 中国古代乐器八音之一。",
+      "frequency": 1094
+    },
+    {
+      "char": "似",
+      "pinyin": "sì",
+      "definition": "1. 相类，像：相（xiāng ）～。类～。～是而非。\n2. 好像，表示不确定：～乎。～应如此。\n3. 表示比较，有超过的意思：一个高～一个。",
+      "frequency": 878
+    },
+    {
+      "char": "祀",
+      "pinyin": "sì",
+      "definition": "1. 祭：祭～。～天。～祖。\n2. 中国殷代指年：十有三～。",
+      "frequency": 655
+    },
+    {
+      "char": "私",
+      "pinyin": "sī",
+      "definition": "1. 个人的，自己的，与“公”相对：～人。～有。～见。～仇。～情。～营。～欲。\n2. 不公开的，秘密而又不合法的：～自。～刑。～货。走～。～生子。\n3. 暗地里：～议。～奔。隐～。窃窃～语。",
+      "frequency": 520
+    },
+    {
+      "char": "斯",
+      "pinyin": "sī",
+      "definition": "1. 这，这个，这里：～人。～时。以至于～。\n2. 乃，就：有备～可以无患。\n3. 劈：“墓门有棘，斧以～之”。\n4. 古同“厮”，卑贱。\n5. 古同“澌”，尽。\n6. 姓。",
+      "frequency": 340
+    },
+    {
+      "char": "嗣",
+      "pinyin": "sì",
+      "definition": "1. 接续，继承：～后（以后）。～岁（来年）。～响（继承前人之业，如回声之相应）。～徽（继承先人的美德、声誉）。\n2. 子孙：后～。～子。",
+      "frequency": 277
+    },
+    {
+      "char": "肆",
+      "pinyin": "sì",
+      "definition": "1. 放纵，任意行事：～口。～虐。～意。放～。～无忌惮。\n2. 尽，极：～力（尽力）。～目。～勤。\n3. 陈列，陈设：～筵。\n4. 古代指人处死刑后暴尸示众：～诸市朝。\n5. 店铺：市～。茶坊酒～。\n6. “四”的大写。",
+      "frequency": 270
+    },
+    {
+      "char": "寺",
+      "pinyin": "sì",
+      "definition": "1. 古代官署名：太常～（古代掌管宗庙礼仪的官署）。鸿胪～（略同于现代的礼宾司）。\n2. 佛教出家人居住的地方：佛～。～观（guàn ）。\n3. 伊斯兰教徒礼拜、讲经的地方：清真～。",
+      "frequency": 265
+    },
+    {
+      "char": "糸",
+      "pinyin": "sī",
+      "definition": "◎ 古同“丝”。",
+      "frequency": 186
+    },
+    {
+      "char": "伺",
+      "pinyin": "sì",
+      "definition": "◎ 观察，侦候：窥～。～机。～察。～应（yìng ）（等候响应）。",
+      "frequency": 117
+    },
+    {
+      "char": "饲",
+      "pinyin": "sì",
+      "definition": "1. 喂养：～鸟。～育。～料。～草。～养。\n2. 喂家畜、家禽的食物：打草储～。",
+      "frequency": 102
+    },
+    {
+      "char": "厮",
+      "pinyin": "sī",
+      "definition": "1. 古代干粗杂活的男奴隶或小役：～役。小～。\n2. 古代对人的称呼（宋代以来的小说中常用）：这～。那～。",
+      "frequency": 101
+    },
+    {
+      "char": "嘶",
+      "pinyin": "sī",
+      "definition": "1. 马叫：～叫。～鸣。人喊马～。\n2. 声音哑：～哑。声～力竭。",
+      "frequency": 69
+    },
+    {
+      "char": "耜",
+      "pinyin": "sì",
+      "definition": "◎ 原始翻土农具“耒耜”的下端，形状像今的铁锹和铧，最早是木制的，后用金属制。",
+      "frequency": 66
+    },
+    {
+      "char": "驷",
+      "pinyin": "sì",
+      "definition": "1. 古代同驾一辆车的四匹马；或套着四匹马的车：～介（由四匹披甲的马所驾的战车）。～马高车。一言既出，～马难追（喻话说出后无法再收回，说话要算数）。\n2. 古星名（亦作“天驷”、“天龙”）。\n3. 古同“四”。",
+      "frequency": 64
+    },
+    {
+      "char": "俟",
+      "pinyin": "sì",
+      "definition": "◎ 等待：～机进攻。〔～次〕依次。",
+      "frequency": 59
+    },
+    {
+      "char": "泗",
+      "pinyin": "sì",
+      "definition": "1. 〔～河〕水名，在中国山东省。\n2. 鼻涕：涕～（眼泪和鼻涕）。",
+      "frequency": 56
+    },
+    {
+      "char": "撕",
+      "pinyin": "sī",
+      "definition": "◎ 用手把东西扯裂：～开。～破。～碎。～扯。～毁。～票（绑票的匪徒因勒索金钱的要求没得到满足而把掳去的人杀死）。～心裂肺（形容极度悲伤）。",
+      "frequency": 39
+    },
+    {
+      "char": "巳",
+      "pinyin": "sì",
+      "definition": "1. 地支的第六位，属蛇。\n2. 用于计时：～时（上午九点至十一点）。",
+      "frequency": 33
+    },
+    {
+      "char": "姒",
+      "pinyin": "sì",
+      "definition": "1. 古代称丈夫的嫂子或年长之妾：娣～（a.妯娌，兄妻为“姒”，弟妻为“娣”；b.同夫诸妾，年长者为“姒”，年少者为“娣”）。\n2. 古代称姐姐。\n3. 姓。",
+      "frequency": 30
+    },
+    {
+      "char": "笥",
+      "pinyin": "sì",
+      "definition": "◎ 盛饭或衣物的方形竹器。",
+      "frequency": 29
+    },
+    {
+      "char": "兕",
+      "pinyin": "sì",
+      "definition": "1. 〔～觥〕古代一种酒器。\n2. 古书上所说的雌犀牛。",
+      "frequency": 28
+    },
+    {
+      "char": "汜",
+      "pinyin": "sì",
+      "definition": "1. 水决后又流入。\n2. 〔～水〕水名，在中国河南省。\n3. 不流通的小沟渠。",
+      "frequency": 27
+    },
+    {
+      "char": "缌",
+      "pinyin": "sī",
+      "definition": "◎ 细的麻布：～麻服（古代一种丧服，死者远亲穿用）。",
+      "frequency": 19
+    },
+    {
+      "char": "澌",
+      "pinyin": "sī",
+      "definition": "1. 尽：～灭。\n2. 流水：“候吏还白，河水流～”。\n3. 古同“嘶”，声音沙哑。",
+      "frequency": 18
+    },
+    {
+      "char": "涘",
+      "pinyin": "sì",
+      "definition": "◎ 水边：“在水之～”。",
+      "frequency": 15
+    },
+    {
+      "char": "厶",
+      "pinyin": "sī",
+      "definition": "◎ 古同“私”。",
+      "frequency": 15
+    },
+    {
+      "char": "騃",
+      "pinyin": "sì",
+      "definition": "◎ 〔",
+      "frequency": 15
+    },
+    {
+      "char": "咝",
+      "pinyin": "sī",
+      "definition": "◎ 象声词：子弹～～～地从头上飞过。",
+      "frequency": 11
+    },
+    {
+      "char": "虒",
+      "pinyin": "sī",
+      "definition": "◎ 〔委～〕古书上说的一种似虎有角的兽。",
+      "frequency": 10
+    },
+    {
+      "char": "蛳",
+      "pinyin": "sī",
+      "definition": "◎ 〔螺～〕见“螺”。",
+      "frequency": 10
+    },
+    {
+      "char": "傂",
+      "pinyin": "sī",
+      "definition": "1. 《廣韻》息移切，平支，心。\n2.  傂祁 ，古地名。《广韵·平支》：“ 傂祁 ，地名。在 絳 西，臨 汾水 。”",
+      "frequency": 9
+    },
+    {
+      "char": "絲",
+      "pinyin": "sī",
+      "definition": "◎ 见“丝”。",
+      "frequency": 9
+    },
+    {
+      "char": "飔",
+      "pinyin": "sī",
+      "definition": "1. 凉：“秋风肃肃晨风～，东方须臾高知之”。\n2. 疾风：“一举必千里，乘～举帆幢”。",
+      "frequency": 9
+    },
+    {
+      "char": "偲",
+      "pinyin": "sī",
+      "definition": "◎ 〔～～〕相互勉励，相互督促，如“朋友切切～～”。",
+      "frequency": 7
+    },
+    {
+      "char": "罳",
+      "pinyin": "sī",
+      "definition": "◎ 〔罘～〕见“罘”。",
+      "frequency": 7
+    },
+    {
+      "char": "鸶",
+      "pinyin": "sī",
+      "definition": "◎ 〔鹭～〕见“鹭”。",
+      "frequency": 7
+    },
+    {
+      "char": "覗",
+      "pinyin": "sì",
+      "definition": "◎ 看；探视：窃～。窥～。",
+      "frequency": 6
+    },
+    {
+      "char": "凘",
+      "pinyin": "sī",
+      "definition": "◎ 解冻后随水流动的冰块：“流～纷兮将来下。”",
+      "frequency": 5
+    },
+    {
+      "char": "媤",
+      "pinyin": "sī",
+      "definition": "◎ 古女子人名用字。",
+      "frequency": 5
+    },
+    {
+      "char": "竢",
+      "pinyin": "sì",
+      "definition": "◎ 同“俟1”。",
+      "frequency": 5
+    },
+    {
+      "char": "锶",
+      "pinyin": "sī",
+      "definition": "◎ 一种金属元素，银白色结晶，它的化合物燃烧时发出红色火焰，用来制造焰火等，亦可入药。",
+      "frequency": 5
+    },
+    {
+      "char": "柶",
+      "pinyin": "sì",
+      "definition": "◎ 古代舀取食物的礼器，像勺子，多用角做成：“有筐、实勺、觯、角～。”",
+      "frequency": 4
+    },
+    {
+      "char": "梩",
+      "pinyin": "sì",
+      "definition": "◎ 古同“耜”，古代锹、臿一类的农具，后指犁上的铧。",
+      "frequency": 4
+    },
+    {
+      "char": "蟖",
+      "pinyin": "sī",
+      "definition": "◎ 〔蛅～〕见“蛅”。",
+      "frequency": 4
+    },
+    {
+      "char": "飼",
+      "pinyin": "sì",
+      "definition": "◎ 见“饲”。",
+      "frequency": 4
+    },
+    {
+      "char": "鯣",
+      "pinyin": "sī",
+      "definition": "◎ 日本对乌贼类干制品的总称。",
+      "frequency": 4
+    },
+    {
+      "char": "俬",
+      "pinyin": "sī",
+      "definition": "◎ 〔傢～〕见“傢”。",
+      "frequency": 3
+    },
+    {
+      "char": "廝",
+      "pinyin": "sī",
+      "definition": "◎ 同“厮”。",
+      "frequency": 3
+    },
+    {
+      "char": "愢",
+      "pinyin": "sī",
+      "definition": "◎ 古同“偲”。",
+      "frequency": 3
+    },
+    {
+      "char": "杫",
+      "pinyin": "sì",
+      "definition": "◎ 几案，小桌子：“家贫为郎，常独直台上，无被，枕～，食糟糠。”",
+      "frequency": 3
+    },
+    {
+      "char": "枱",
+      "pinyin": "sì",
+      "definition": "◎ 古同“耜”，耒端；锹、臿一类的起土农具，后指犁上的铧。",
+      "frequency": 3
+    },
+    {
+      "char": "楒",
+      "pinyin": "sī",
+      "definition": "◎ 〔相～树〕即“相思树”，一种种子是红色的树。",
+      "frequency": 3
+    },
+    {
+      "char": "磃",
+      "pinyin": "sī",
+      "definition": "◎ 〔～氏〕中国汉宫苑馆名。",
+      "frequency": 3
+    },
+    {
+      "char": "颸",
+      "pinyin": "sī",
+      "definition": "◎ 见“飔”。",
+      "frequency": 3
+    },
+    {
+      "char": "飴",
+      "pinyin": "sì",
+      "definition": "◎ 均见“饴”。\n---",
+      "frequency": 3
+    },
+    {
+      "char": "鷥",
+      "pinyin": "sī",
+      "definition": "◎ 见“鸶”。",
+      "frequency": 3
+    },
+    {
+      "char": "佀",
+      "pinyin": "sì",
+      "definition": "◎ 古同“似”。",
+      "frequency": 2
+    },
+    {
+      "char": "儩",
+      "pinyin": "sì",
+      "definition": "◎ 完；尽。《新唐书·李密传》：“而稟取不節，敖庾之藏，有時而儩，粟竭人散，胡抑而成功？”",
+      "frequency": 2
+    },
+    {
+      "char": "噝",
+      "pinyin": "sī",
+      "definition": "◎ 见“咝”。",
+      "frequency": 2
+    },
+    {
+      "char": "簛",
+      "pinyin": "sī",
+      "definition": "1. 竹枝。\n2. 竹节。",
+      "frequency": 2
+    },
+    {
+      "char": "糹",
+      "pinyin": "sī",
+      "definition": "◎ 见“纟”。",
+      "frequency": 2
+    },
+    {
+      "char": "緦",
+      "pinyin": "sī",
+      "definition": "◎ 见“缌”。",
+      "frequency": 2
+    },
+    {
+      "char": "耛",
+      "pinyin": "sì",
+      "definition": "◎ 古同“枱”，犁上的铧。",
+      "frequency": 2
+    },
+    {
+      "char": "螄",
+      "pinyin": "sī",
+      "definition": "◎ 见“蛳”。",
+      "frequency": 2
+    },
+    {
+      "char": "銉",
+      "pinyin": "sì",
+      "definition": "◎ 古同“肆”，古代编悬乐器的单位，悬钟十六枚为一肆。",
+      "frequency": 2
+    },
+    {
+      "char": "鋖",
+      "pinyin": "sī",
+      "definition": "◎ 平木器。",
+      "frequency": 2
+    },
+    {
+      "char": "鍶",
+      "pinyin": "sī",
+      "definition": "◎ 见“锶”。",
+      "frequency": 2
+    },
+    {
+      "char": "纟",
+      "pinyin": "sī",
+      "definition": "◎ 同“糸”。用作偏旁。俗称“绞丝旁”。",
+      "frequency": 2
+    },
+    {
+      "char": "飤",
+      "pinyin": "sì",
+      "definition": "◎ 古同“饲”。",
+      "frequency": 2
+    },
+    {
+      "char": "駟",
+      "pinyin": "sì",
+      "definition": "◎ 见“驷”。",
+      "frequency": 2
+    },
+    {
+      "char": "騦",
+      "pinyin": "sī",
+      "definition": "1. 马名。\n2. 马行。",
+      "frequency": 2
+    },
+    {
+      "char": "鼶",
+      "pinyin": "sī",
+      "definition": "◎ 大田鼠。",
+      "frequency": 2
+    },
+    {
+      "char": "亖",
+      "pinyin": "sì",
+      "definition": "◎ 古同“四”。",
+      "frequency": 1
+    },
+    {
+      "char": "価",
+      "pinyin": "sì",
+      "definition": "◎ 古同“似”。",
+      "frequency": 1
+    },
+    {
+      "char": "娰",
+      "pinyin": "sì",
+      "definition": "◎ 古代称丈夫的嫂子：娣～（妯娌）。",
+      "frequency": 1
+    },
+    {
+      "char": "孠",
+      "pinyin": "sì",
+      "definition": "◎ 古同“嗣”。",
+      "frequency": 1
+    },
+    {
+      "char": "恖",
+      "pinyin": "sī",
+      "definition": "◎ 古同“思”。",
+      "frequency": 1
+    },
+    {
+      "char": "榹",
+      "pinyin": "sì",
+      "definition": "1. 〔～桃〕山桃，落叶乔木，核果球形，有毛，果肉干燥，离核，可做嫁接桃树的砧木。\n2. 木盘。",
+      "frequency": 1
+    },
+    {
+      "char": "泀",
+      "pinyin": "sī",
+      "definition": "◎ 古水名。",
+      "frequency": 1
+    },
+    {
+      "char": "泤",
+      "pinyin": "sì",
+      "definition": "◎ 古水名。",
+      "frequency": 1
+    },
+    {
+      "char": "洍",
+      "pinyin": "sì",
+      "definition": "◎ 古同“汜”，从主流分出又流回主流的岔流。",
+      "frequency": 1
+    },
+    {
+      "char": "洠",
+      "pinyin": "sì",
+      "definition": "◎ 古同“涘”。",
+      "frequency": 1
+    },
+    {
+      "char": "瀃",
+      "pinyin": "sì",
+      "definition": "1. 泄水门。\n2. 停水；阻拦水。",
+      "frequency": 1
+    },
+    {
+      "char": "燍",
+      "pinyin": "sī",
+      "definition": "◎ 烧焦的气味。",
+      "frequency": 1
+    },
+    {
+      "char": "牭",
+      "pinyin": "sì",
+      "definition": "1. 四岁的牛。\n2. 牛凶狠。",
+      "frequency": 1
+    },
+    {
+      "char": "禗",
+      "pinyin": "sī",
+      "definition": "◎ 〔～～〕不安而想走。",
+      "frequency": 1
+    },
+    {
+      "char": "禠",
+      "pinyin": "sī",
+      "definition": "◎ 福：“祈～禳灾。”",
+      "frequency": 1
+    },
+    {
+      "char": "禩",
+      "pinyin": "sì",
+      "definition": "◎ 同“祀”。",
+      "frequency": 1
+    },
+    {
+      "char": "肂",
+      "pinyin": "sì",
+      "definition": "1. 棺柩暂葬路旁：“威公薨，～，九月不得葬。”\n2. 埋棺材的坑：“掘～见衽。”",
+      "frequency": 1
+    },
+    {
+      "char": "蕬",
+      "pinyin": "sī",
+      "definition": "1. 〔菟～〕同“菟丝”，一种细茎草本植物，多附着在豆类植物上生长。\n2. 古书上说的一种水草。",
+      "frequency": 1
+    },
+    {
+      "char": "蕼",
+      "pinyin": "sì",
+      "definition": "1. 堇草。\n2. 宽舒：“士君子之容……俨然，壮然，祺然，～然。”\n3. 草初生柔细的样子。",
+      "frequency": 1
+    },
+    {
+      "char": "蜤",
+      "pinyin": "sī",
+      "definition": "◎ 〔～螽（zhōng）〕同“斯螽”，一种蝗虫。",
+      "frequency": 1
+    },
+    {
+      "char": "蟴",
+      "pinyin": "sī",
+      "definition": "◎ 同“蟖”。",
+      "frequency": 1
+    },
+    {
+      "char": "貄",
+      "pinyin": "sì",
+      "definition": "◎ 古书上说的一种兽。",
+      "frequency": 1
+    },
+    {
+      "char": "釲",
+      "pinyin": "sì",
+      "definition": "1. 金子。\n2. 箭头装入箭杆的部分。",
+      "frequency": 1
+    },
+    {
+      "char": "鈶",
+      "pinyin": "sì",
+      "definition": "1. 耒端。\n2. 矛一类的兵器。",
+      "frequency": 1
+    },
+    {
+      "char": "鈻",
+      "pinyin": "sì",
+      "definition": "◎ 箭头装入箭杆的部分。",
+      "frequency": 1
+    },
+    {
+      "char": "鉰",
+      "pinyin": "sī",
+      "definition": "◎ 化学元素“钪”的旧译。",
+      "frequency": 1
+    },
+    {
+      "char": "銯",
+      "pinyin": "sī",
+      "definition": "1. 锔子、扒钉。\n2. 纽带（日本汉字）。",
+      "frequency": 1
+    },
+    {
+      "char": "鐁",
+      "pinyin": "sī",
+      "definition": "◎ 平木器。",
+      "frequency": 1
+    }
+  ],
+  "shi": [
+    {
+      "char": "时",
+      "pinyin": "shí",
+      "definition": "1. 一切事物不断发展变化所经历的过程：～间。～不我与。\n2. 较长的时间：～代。古～。\n3. 泛指一段时间：～光。～令。～分。\n4. 现在的，当前的：当～。～下。～务。～宜。\n5. 常常：～常。学而～习之。\n6. 一年中的一季：～序。四～如春。\n7. 旧时的记时单位，一昼夜十二分之一为一“时辰”，深夜十一点至次日凌晨一点为“子时”，中午十一点至一点为“午时”。\n8. 现在的记时单位，一昼夜的二十四分之一：～钟。～差（chā）。\n9. 某一时刻：按～上班。\n10. 不定时，有时候：～而。～阴～晴。\n11. 机会：～机。待～而动。\n12. 姓。",
+      "frequency": 5610
+    },
+    {
+      "char": "事",
+      "pinyin": "shì",
+      "definition": "1. 自然界和社会中的现象和活动：～情。～件。～业。\n2. 变故：～故（出于某种原因而发生的不幸事情，如工作中的死伤等）。～端。\n3. 职业：谋～（指找职业）。\n4. 关系和责任：你走吧，没你的～了。\n5. 办法：光着急也不是～儿，还得另找出路。\n6. 做，治：不～生产。无所～事。\n7. 服侍：～父母。",
+      "frequency": 5077
+    },
+    {
+      "char": "诗",
+      "pinyin": "shī",
+      "definition": "1. 文学体裁的一种，通过有节奏和韵律的语言反映生活，抒发情感：～歌。～话（ａ．评论诗人、诗歌、诗派以及记录诗人议论、行事的著作；ｂ．古代说唱艺术的一种）。～集。～剧。～篇。～人。～章。～史。吟～。\n2. 中国古书名，《诗经》的简称。",
+      "frequency": 4543
+    },
+    {
+      "char": "十",
+      "pinyin": "shí",
+      "definition": "1. 数名，九加一（在钞票和单据上常用大写“拾”代）。\n2. 表示多、久：～室九空。\n3. 表示达到顶点：～足。～成。",
+      "frequency": 4123
+    },
+    {
+      "char": "是",
+      "pinyin": "shì",
+      "definition": "1. 表示解释或分类：他～工人。《阿Ｑ正传》的作者～鲁迅。\n2. 表示存在：满身～汗。\n3. 表示承认所说的，再转入正意，含有“虽然”的意思：诗～好诗，就是太长了。\n4. 表示适合：来的～时候。\n5. 表示任何：凡～。～活儿他都肯干。\n6. 用于问句：他～走了吗？\n7. 加重语气，有“的确”、“实在”的意思：天气～冷。\n8. 对，合理，与“非”相对：～非。他说的～。实事求～。\n9. 认为对：～古非今。各行其～。深～其言。\n10. 表示应承或同意（单说一个“是”字）：～，我就去。\n11. 这，此：～日。～可忍，孰不可忍。比比皆～。\n12. 助词，把行为对象提前表示只这样做：惟你～问。惟利～图。\n13. 姓。",
+      "frequency": 3966
+    },
+    {
+      "char": "史",
+      "pinyin": "shǐ",
+      "definition": "1. 自然界和人类社会的发展过程，亦指记述、研究这些的文字和学科：历～。通～。断代～。近代～。世界～。文学～。～诗。～部（古代图书分类的一大部类，包括各类历史著作）。～坛。～评。～前（没有书面记录的远古）。～不绝书。\n2. 古代掌管记载史事的官：太～。内～。\n3. 古代官职：刺～。御～。\n4. 姓。",
+      "frequency": 3594
+    },
+    {
+      "char": "使",
+      "pinyin": "shǐ",
+      "definition": "1. 用：～用。～劲。～役。～力。～钱。\n2. 派，差谴：～唤。～命。～女。\n3. 让，令，叫：迫～。\n4. 假若：假～。即～。\n5. 奉命办事的人：～者。大～。公～。～馆。",
+      "frequency": 2903
+    },
+    {
+      "char": "食",
+      "pinyin": "shí",
+      "definition": "1. 吃：～肉。～欲。\n2. 吃的东西：～品。粮～。零～。丰衣足～。\n3. 俸禄：“君子谋道不谋～”。\n4. 日月亏缺或完全不见的现象：日～。月～。",
+      "frequency": 2879
+    },
+    {
+      "char": "示",
+      "pinyin": "shì",
+      "definition": "1. 表明，把事物拿出来或指出来使别人知道：～警。～范。～弱。～威。～众。～意。告～。指～。请～。\n2. 对来信的敬称：赐～。",
+      "frequency": 2696
+    },
+    {
+      "char": "石",
+      "pinyin": "shí",
+      "definition": "1. 构成地壳的矿物质硬块：～破天惊（喻文章议论新奇惊人）。\n2. 指石刻：金～。\n3. 指古代用来治病的针：药～。药～之言（喻规劝别人的话）。\n4. 中国古代乐器八音之一。\n5. 姓。",
+      "frequency": 2561
+    },
+    {
+      "char": "世",
+      "pinyin": "shì",
+      "definition": "1. 一个时代，有时特指三十年：～代（a.很多年代；b.好几辈子）。～纪（指一百年）。流芳百～。\n2. 一辈一辈相传的：～袭。～家（a.封建社会中门第高，世代做官的人家；b.《史记》中诸侯的传记）。\n3. 人间，以与天上相区别：～上。～俗（a.流俗；b.非宗教的）。～故（a.处事待人圆滑，“故”读轻声；b.处世经验）。～态炎凉。\n4. 自然界和人类社会一切事物的总和；全地球、人间或宇宙；宇宙的一部分：～界。举～瞩目。公之于～。\n5. 姓。",
+      "frequency": 2238
+    },
+    {
+      "char": "实",
+      "pinyin": "shí",
+      "definition": "1. 充满：～心。充～。虚～。\n2. 符合客观情况，真，真诚：～话。～惠。～际（真实情况）。～践（实行；履行）。～体。～情。～施。～数。～事求是。名～相符。\n3. 植物结的果：果～。开花结～。\n4. 富足：殷～。富～。",
+      "frequency": 1941
+    },
+    {
+      "char": "士",
+      "pinyin": "shì",
+      "definition": "1. 古代统治阶级中次于卿大夫的一个阶层：～族。～大夫。\n2. 旧时指读书人：～子。～民。学～。\n3. 未婚的男子，泛指男子：～女。\n4. 对人的美称：志～。烈～。女～。\n5. 军衔的一级，在尉以下；亦泛指军人；上～。～兵。～卒。～气。\n6. 称某些专业人员：医～。护～。\n7. 姓。",
+      "frequency": 1656
+    },
+    {
+      "char": "失",
+      "pinyin": "shī",
+      "definition": "1. 丢：遗～。坐～良机。收复～地。流离～所。\n2. 违背：～约。～信。\n3. 找不着：迷～方向。\n4. 没有掌握住：～言。～职。～调（tiáo ）。\n5. 没有达到：～望。～意。\n6. 错误：～误。～策。过～。～之毫厘，谬以千里。\n7. 改变常态：惊慌～色。",
+      "frequency": 1362
+    },
+    {
+      "char": "氏",
+      "pinyin": "shì",
+      "definition": "1. 古代“姓”和“氏”分用。姓是总的，氏是分支，后来姓和氏不分，可以混用。\n2. 古代称呼帝王贵族等，后称呼名人、专家：神农～。太史～。摄～表。",
+      "frequency": 1332
+    },
+    {
+      "char": "师",
+      "pinyin": "shī",
+      "definition": "1. 教人的人：老～。导～。～傅。～生。～徒。～德。良～益友。好（hào ）为人～。\n2. 擅长某种技术的人：工程～。医～。技～。\n3. 效法：～法古人。\n4. 榜样：～范。\n5. 指由师徒或师生关系产生的：～母。～兄。～弟。～妹。\n6. 对和尚或道士的尊称：法～。禅～。\n7. 军队：会～。出～。\n8. 军队的编制单位，团或旅的上一级：～长。～座。\n9. 一国的首都：京～。\n10. 姓。",
+      "frequency": 1276
+    },
+    {
+      "char": "视",
+      "pinyin": "shì",
+      "definition": "1. 看：～觉。～力。～野。鄙～。注～。近～。～而不见。熟～无睹。\n2. 亲临某事：～事。～察。\n3. 看待：藐～。重～。等闲～之。\n4. 看望：探～。省（xǐng ）～。\n5. 比照：“天子之卿受地～侯”。\n6. 古同“示”，表明。",
+      "frequency": 1101
+    },
+    {
+      "char": "释",
+      "pinyin": "shì",
+      "definition": "1. 解说，说明：解～。注～。～文。～义。\n2. 消除，消散：～疑。～怨。涣然冰～（像冰融化了一样，嫌隙和疑虑都完全消除）。\n3. 放开，放下：～放。保～。手不～卷。\n4. 佛教创始人释迦牟尼的简称，后泛指佛教：～氏。～教。～子（和尚）。～藏（zàng ）（佛教经典的总汇，分经、律、论三藏，包括汉译佛经和中国的一些佛教著述）。～典。",
+      "frequency": 1013
+    },
+    {
+      "char": "饰",
+      "pinyin": "shì",
+      "definition": "1. 装点得好看：装～。修～。\n2. 装饰用的东西：首～。银～。\n3. 装扮，扮演角色：～演。\n4. 假托，遮掩：～辞。粉～。掩～。文过～非。",
+      "frequency": 1010
+    },
+    {
+      "char": "室",
+      "pinyin": "shì",
+      "definition": "1. 屋子，房间，亦指家：居～。教～。会客～。温～。引狼入～。\n2. 家，家族：皇～。女有家，男有～。\n3. 机关团体内部的工作单位：档案～。\n4. 古指妻子（亦指为子娶妻或以女嫁人）：妻～。继～。\n5. 刀剑的鞘。\n6. 墓穴。\n7. 星名，二十八宿之一。",
+      "frequency": 924
+    },
+    {
+      "char": "市",
+      "pinyin": "shì",
+      "definition": "1. 做买卖或做买卖的地方：开～。菜～。～井（街，市场）。～曹。～侩（旧指买卖的中间人、唯利是图的奸商；现泛指贪图私利的人）。\n2. 买：～义。～恩（买好，讨好）。\n3. 人口密集的行政中心或工商业、文化发达的地方：城～。都（dū）～。～镇。\n4. 一种行政区划，有中央直辖和省（自治区）辖等：北京～。南京～。\n5. 中国人民习惯使用的度量衡单位：～制。～尺。～斤。",
+      "frequency": 921
+    },
+    {
+      "char": "势",
+      "pinyin": "shì",
+      "definition": "1. 权力，威力：～力。权～。～利。～均力敌。\n2. 表现出来的情况，样子：姿～。气～。山～。局～。虚张声～。守～。～必。～能。～不可挡。因～利导。",
+      "frequency": 886
+    },
+    {
+      "char": "似",
+      "pinyin": "shì",
+      "definition": "◎ 〔～的〕跟某种情况或事物相似，如“他乐得什么～～”。亦作“是的”（“的”均读轻声）。",
+      "frequency": 878
+    },
+    {
+      "char": "始",
+      "pinyin": "shǐ",
+      "definition": "1. 起头，最初，与“终”相对：开～。～终。～祖。～创。周而复～。\n2. 才，刚才：方～。～悟（才觉悟到）。春蚕到死丝方尽，蜡炬成灰泪～干。",
+      "frequency": 819
+    },
+    {
+      "char": "泽",
+      "pinyin": "shì",
+      "definition": "◎ 古同“释”，解散。",
+      "frequency": 687
+    },
+    {
+      "char": "式",
+      "pinyin": "shì",
+      "definition": "1. 物体外形的样子：～样。样～。\n2. 特定的规格：格～。程～。\n3. 典礼，有特定内容的仪式：开幕～。阅兵～。\n4. 自然科学中表明某些关系或规律的一组符号：分子～。算～。公～。\n5. 一种语法范畴，表示说话者对所说事情的主观态度：叙述～。命令～。",
+      "frequency": 675
+    },
+    {
+      "char": "施",
+      "pinyin": "shī",
+      "definition": "1. 实行：～工。～政。设～。～展。～教（jiào ）。～为（wéi）。～威。实～。措～（办法）。发号～令。\n2. 用上，加工：～肥。～粉。\n3. 给予：～礼。～诊。～恩。\n4. 姓。",
+      "frequency": 585
+    },
+    {
+      "char": "识",
+      "pinyin": "shí",
+      "definition": "1. 知道，认得，能辨别：～辨。～破。～相（xiàng ）。～途老马。\n2. 所知道的道理：知～。常～。\n3. 辨别是非的能力：见～。远见卓～。",
+      "frequency": 539
+    },
+    {
+      "char": "适",
+      "pinyin": "shì",
+      "definition": "1. 切合，相合：～当。～龄。～销。～度（dù）（程度适当）。～应（适合客观条件或需要）。\n2. 舒服：～意。舒～。\n3. 刚巧：～中。～值（恰好遇到）。～可而止。\n4. 刚才，方才：～才（刚才）。～间。\n5. 往，归向：无所～从。\n6. 旧称女子出嫁：～人。",
+      "frequency": 496
+    },
+    {
+      "char": "试",
+      "pinyin": "shì",
+      "definition": "1. 按照预定的想法非正式地做：～车。～图。～航。～问。尝～。～金石。\n2. 考，测验：～场。～卷。～题。笔～。考～。口～。",
+      "frequency": 405
+    },
+    {
+      "char": "轼",
+      "pinyin": "shì",
+      "definition": "1. 古代车厢前面用作扶手的横木：凭～。\n2. 凭轼致敬：“魏文侯过其闾而～之”。",
+      "frequency": 382
+    },
+    {
+      "char": "尸",
+      "pinyin": "shī",
+      "definition": "1. 死人的身体：～体。～骸。僵～。借～还魂。\n2. 〔～位〕空占着职位而不做事，如“～～素餐，“～～误国”。\n3. 古代祭祀时，代表死者受祭的人。",
+      "frequency": 345
+    },
+    {
+      "char": "矢",
+      "pinyin": "shǐ",
+      "definition": "1. 箭：流～。弓～。有的（dì）放～。～镞。\n2. 誓：～志不渝（发誓立志，永不改变）。\n3. 正直：～言（正直的言论）。\n4. 陈列：“公～鱼于棠”。\n5. 施布：“～其文德”。\n6. 古代投壶（一种娱乐活动）用的筹。\n7. 古同“屎”，粪便。",
+      "frequency": 330
+    },
+    {
+      "char": "湿",
+      "pinyin": "shī",
+      "definition": "1. 沾了水或是含的水分多，与“干”相对：～度。潮～。～润。～热。～漉漉。\n2. 中医学名词：～气。～邪。～泻。",
+      "frequency": 314
+    },
+    {
+      "char": "侍",
+      "pinyin": "shì",
+      "definition": "◎ 伺候，在旁边陪着：服～。～立。～者（侍奉左右的人）。～从。～读（给帝王讲学的人）。～坐。～役（仆人）。",
+      "frequency": 292
+    },
+    {
+      "char": "什",
+      "pinyin": "shí",
+      "definition": "1. 十（多用于分数或倍数）：～百（十倍和百）。～一（十分之一）。～袭珍藏（形容极其珍重地收藏物品）。\n2. 各种的，各样的：～锦（各种各样东西凑成的食品）。～物。\n3. 诗篇：篇～。雅～。",
+      "frequency": 291
+    },
+    {
+      "char": "誓",
+      "pinyin": "shì",
+      "definition": "1. 当众或共同表示决心，依照说的话实行：～师。～词。～愿。～死。\n2. 表示决心的话：发～。宣～。立～。",
+      "frequency": 273
+    },
+    {
+      "char": "殖",
+      "pinyin": "shi",
+      "definition": "◎ 〔骨～〕尸骨。",
+      "frequency": 269
+    },
+    {
+      "char": "拾",
+      "pinyin": "shí",
+      "definition": "1. 捡，从地上拿起：～草。～粪。～零（捡取某方面的零碎材料，常用于文章标题）。～取。俯～皆是。～人牙慧。\n2. 收，敛，整理：收～。～掇。\n3. “十”的大写。\n4. 旧称射箭人穿在左臂上的皮制护袖。",
+      "frequency": 193
+    },
+    {
+      "char": "仕",
+      "pinyin": "shì",
+      "definition": "1. 做官：出～。～宦。学而优则～。～途。～女（a.宫女，贵族妇女；b.以社会上层妇女为题材的中国画。均亦作“士女”）。\n2. 审察：“弗问弗～”。\n3. 古同“事”，事业。",
+      "frequency": 156
+    },
+    {
+      "char": "逝",
+      "pinyin": "shì",
+      "definition": "1. 过去，往：～去。～川（逝去的流水，喻过去了的岁月或事物）。光阴易～。“子在川上曰：～者如斯夫！”\n2. 死，多用于对死者的敬意：～世。长～。仙～。\n3. 古同“誓”，表决心之词。",
+      "frequency": 155
+    },
+    {
+      "char": "蚀",
+      "pinyin": "shí",
+      "definition": "1. 损伤，亏缺：侵～。腐～。蠹～。～本。\n2. 同“食”。",
+      "frequency": 138
+    },
+    {
+      "char": "詩",
+      "pinyin": "shī",
+      "definition": "◎ 见“诗”。",
+      "frequency": 129
+    },
+    {
+      "char": "恃",
+      "pinyin": "shì",
+      "definition": "◎ 依赖，仗着：仗～。有～无恐。～才傲物。",
+      "frequency": 117
+    },
+    {
+      "char": "時",
+      "pinyin": "shí",
+      "definition": "◎ 见“时”。",
+      "frequency": 115
+    },
+    {
+      "char": "豕",
+      "pinyin": "shǐ",
+      "definition": "◎ 猪：封～长蛇。狼奔～突（喻人奔逃时的惊慌状态，像被追赶的狼和猪那样奔突乱窜）。",
+      "frequency": 108
+    },
+    {
+      "char": "硕",
+      "pinyin": "shí",
+      "definition": "◎ 古同“石”，形容坚固。",
+      "frequency": 107
+    },
+    {
+      "char": "拭",
+      "pinyin": "shì",
+      "definition": "◎ 揩擦：擦～。拂～。～泪。～除。～目以待。",
+      "frequency": 94
+    },
+    {
+      "char": "栅",
+      "pinyin": "shi",
+      "definition": "◎ 〔大～栏〕方言，中国北京市前门外一条热闹街市名。",
+      "frequency": 85
+    },
+    {
+      "char": "谥",
+      "pinyin": "shì",
+      "definition": "1. 古代帝王或大官死后评给的称号：～号。～法。～宝（帝王陵墓中，刻有帝后谥号的印玺）。\n2. 叫作，称为：“身死无名，～为至愚”。",
+      "frequency": 76
+    },
+    {
+      "char": "嗜",
+      "pinyin": "shì",
+      "definition": "◎ 喜欢，爱好：～学。～酒。～好（hào ）。～欲。～痂之癖（形容人的乖僻嗜好。亦称“嗜痂成癖”）。",
+      "frequency": 68
+    },
+    {
+      "char": "筮",
+      "pinyin": "shì",
+      "definition": "◎ 古代用蓍草占卦：“龟为卜，策为～”。～仕（古人将出外做官，先占卦问吉凶。后称初次做官为“筮仕”）。",
+      "frequency": 66
+    },
+    {
+      "char": "噬",
+      "pinyin": "shì",
+      "definition": "◎ 咬，吞：～肤（ａ．喻犯罪受刑的人；ｂ．喻关系亲近）。～贤（嫉害贤能）。～啮。吞～。～脐莫及。",
+      "frequency": 65
+    },
+    {
+      "char": "屎",
+      "pinyin": "shǐ",
+      "definition": "1. 大便，粪。\n2. 眼、耳所分泌的东西：眼～。耳～。\n3. 嘲笑低能的：～棋。～诗。",
+      "frequency": 60
+    },
+    {
+      "char": "峙",
+      "pinyin": "shì",
+      "definition": "◎ 〔繁～〕地名，在中国山西省。",
+      "frequency": 59
+    },
+    {
+      "char": "嘘",
+      "pinyin": "shī",
+      "definition": "◎ 叹词，表示反对，制止等：～，别出声！",
+      "frequency": 58
+    },
+    {
+      "char": "耆",
+      "pinyin": "shì",
+      "definition": "◎ 古同“嗜”，爱好。",
+      "frequency": 57
+    },
+    {
+      "char": "驶",
+      "pinyin": "shǐ",
+      "definition": "1. 马快跑，泛指迅速：急～。流～。\n2. 使行动，开动（多指有发动机的）：驾～。",
+      "frequency": 55
+    },
+    {
+      "char": "虱",
+      "pinyin": "shī",
+      "definition": "1. 寄生在人、畜身上的一种小虫，吸食血液，能传染疾病：～子。头～。视～如轮（表示大与小的相对性，或洞察精微的意思）。精贯～心（赞美某人技艺的高超）。\n2. 喻寄生作恶的人或有害的事物：～官（害国害民的官吏）。",
+      "frequency": 53
+    },
+    {
+      "char": "匙",
+      "pinyin": "shi",
+      "definition": "◎ 〔钥～〕开锁的东西。",
+      "frequency": 46
+    },
+    {
+      "char": "蓍",
+      "pinyin": "shī",
+      "definition": "◎ 〔～草〕多年生草本植物，全草可入药，茎、叶可制香料（通称“蚰蜒草”、“锯齿草”）。古代用其茎占卜，如“～龟”。",
+      "frequency": 46
+    },
+    {
+      "char": "柿",
+      "pinyin": "shì",
+      "definition": "◎ 落叶乔木，果实为扁圆形或圆椎形浆果，黄或橙红色，可食：～子。～饼。～霜。",
+      "frequency": 43
+    },
+    {
+      "char": "視",
+      "pinyin": "shì",
+      "definition": "1. “视”的繁体字。\n2. 看、見。如：“凝視”、“注視”。唐·杜甫《彭衙行》：“從此出妻拏，相視涕闌干。”\n3. 察看、觀察。如：“視察”、“巡視”。《論語·為政》：“視其所以，觀其所由，察其所安，人焉廋哉，人焉廋哉？”《管子·四時》：“令有時，無時則必視，順天之所以來。”\n4. 看待、對待。如：“忽視”、“仇視”、“一視同仁”、“視如己出”。《孟子·離婁下》：“君之視臣如手足，則臣視君如腹心。”\n5. 辦理、治理。如：“就職視事”。《史記·卷五·秦本紀》：“韓王衰絰入弔祠，諸侯皆使其將相來弔祠，視喪事。”\n6. 顯示、表示。通“示”。《詩經·小雅·鹿鳴》：“視民不恌，君子是則是傚。”《漢書·卷三十一·陳勝項籍傳》：“已渡，皆湛舡，破釜甑，燒廬舍，持三日糧，視士必死，無還心。”\n7. 比較、比擬。《孟子·萬章下》：“大夫受地視伯，元士受地視子男。”孫文《黃花岡烈士事略序》：“環顧國內，賊氛方熾，杌隉之象，視清季有加。”\n8. 效法。《書經·太甲中》：“王懋乃德，視乃厥祖，無時豫怠。”《孔安國傳》：“言當勉修其德，法視其祖而行之，無為是逸豫怠惰。”\n9. 眼力。唐·韓愈《祭十二郎文》：“吾年未四十而視茫茫，而髮蒼蒼。”",
+      "frequency": 38
+    },
+    {
+      "char": "弑",
+      "pinyin": "shì",
+      "definition": "◎ 封建时代称臣杀君、子杀父母：～君。～父。",
+      "frequency": 35
+    },
+    {
+      "char": "實",
+      "pinyin": "shí",
+      "definition": "◎ 见“实”。",
+      "frequency": 32
+    },
+    {
+      "char": "贳",
+      "pinyin": "shì",
+      "definition": "1. 出租，出借：～器店（出租婚丧喜庆应用的某些器物的店铺）。\n2. 赊欠：赊～。\n3. 宽纵，赦免：～赦。",
+      "frequency": 31
+    },
+    {
+      "char": "螫",
+      "pinyin": "shì",
+      "definition": "◎ 有毒腺的虫子刺人或动物。",
+      "frequency": 31
+    },
+    {
+      "char": "狮",
+      "pinyin": "shī",
+      "definition": "◎ 哺乳动物，雄的脖子上有长鬣，多产于非洲及印度西北部（通常称“狮子”；古亦作“师子”）：～子舞。～子搏兔（喻对小事情也拿出全部力量，不轻视）。",
+      "frequency": 28
+    },
+    {
+      "char": "師",
+      "pinyin": "shī",
+      "definition": "◎ 见“师”。",
+      "frequency": 25
+    },
+    {
+      "char": "舐",
+      "pinyin": "shì",
+      "definition": "◎ 舔：老牛～犊（喻人爱惜儿女）。～犊情深。",
+      "frequency": 23
+    },
+    {
+      "char": "酾",
+      "pinyin": "shī",
+      "definition": "1. 滤酒。\n2. 斟酒。\n3. 疏导，分流。",
+      "frequency": 22
+    },
+    {
+      "char": "眡",
+      "pinyin": "shì",
+      "definition": "1. 观看，察视。《周礼·天官·太宰》：“及執事，眡滌濯。” 郑玄 注：“眡音視，本又作視。”《汉书·叙传上》：“歷世莫眡，不知其將含景耀，吐英精，曠千載而流夜光也。”\n2. 看待；照顾。 宋 无名氏 《宣政杂录·孝子》：“即以刀付邏卒，束手就執，既行猶回視諸人，曰：‘好眡吾母。’行人皆爲之泣下。”\n3. 如；比。《周礼·天官·食医》：“凡食齊眡春時，羹齊眡夏時，醬齊眡秋時，飲齊眡冬時。” 郑玄 注：“眡音視。”\n4. 治理，处理。参见“ 眡事 ”。\n5. 通“ 示 ”。出示。 明 陈继儒 《读书镜》卷三：“近世持玩好之物眡人者，貪忍之輩，一目而覬覦之心萌焉。”",
+      "frequency": 20
+    },
+    {
+      "char": "寔",
+      "pinyin": "shí",
+      "definition": "1. 同“实”。\n2. 放置。\n3. 此。",
+      "frequency": 15
+    },
+    {
+      "char": "莳",
+      "pinyin": "shì",
+      "definition": "1. 移植：～田。\n2. 栽种：～花。",
+      "frequency": 15
+    },
+    {
+      "char": "奭",
+      "pinyin": "shì",
+      "definition": "1. 盛大的样子。\n2. 红色。\n3. 恼怒。\n4. 消散的样子。\n5. 姓。",
+      "frequency": 14
+    },
+    {
+      "char": "澨",
+      "pinyin": "shì",
+      "definition": "1. 堤岸。\n2. 〔～水〕古河名。\n3. 水边地，涯岸：“夕济兮西～。”",
+      "frequency": 14
+    },
+    {
+      "char": "鲥",
+      "pinyin": "shí",
+      "definition": "1. 〔～鱼〕背黑绿色，鳞下多脂肪，是名贵的食用鱼。\n2. （鰣）",
+      "frequency": 14
+    },
+    {
+      "char": "畤",
+      "pinyin": "shì",
+      "definition": "◎ 古同“蒔”，移栽；分种。",
+      "frequency": 13
+    },
+    {
+      "char": "澤",
+      "pinyin": "shì",
+      "definition": "◎ 均见“泽”。\n---\n-------------",
+      "frequency": 12
+    },
+    {
+      "char": "咶",
+      "pinyin": "shì",
+      "definition": "◎ 古同“舐”，舔。",
+      "frequency": 11
+    },
+    {
+      "char": "軾",
+      "pinyin": "shì",
+      "definition": "◎ 见“轼”。",
+      "frequency": 11
+    },
+    {
+      "char": "乭",
+      "pinyin": "shí",
+      "definition": "1. 〈韩〉人名用字。例：李乭大，乭合，乭今，乭介。\n2. 〈韩〉地名用字。例：曲乭（江原道淮陽），大乭（咸鏡南道北青），小乭（咸鏡南道洪原），上乭（咸鏡南道北青）。\n3. 〈韩〉石。又兒名奴名常用。",
+      "frequency": 10
+    },
+    {
+      "char": "釋",
+      "pinyin": "shì",
+      "definition": "◎ 见“释”。",
+      "frequency": 10
+    },
+    {
+      "char": "溼",
+      "pinyin": "shī",
+      "definition": "◎ 同“湿”。",
+      "frequency": 9
+    },
+    {
+      "char": "絁",
+      "pinyin": "shī",
+      "definition": "1. 一种粗绸：“丁岁输绫～二丈。”\n2. 绢的别称。",
+      "frequency": 9
+    },
+    {
+      "char": "鸤",
+      "pinyin": "shī",
+      "definition": "1. 〔～鸠〕古书上指布谷鸟。\n2. （鳲）",
+      "frequency": 9
+    },
+    {
+      "char": "屍",
+      "pinyin": "shī",
+      "definition": "◎ 同“尸”。",
+      "frequency": 8
+    },
+    {
+      "char": "濕",
+      "pinyin": "shī",
+      "definition": "◎ 见“湿”。",
+      "frequency": 8
+    },
+    {
+      "char": "試",
+      "pinyin": "shì",
+      "definition": "◎ 见“试”。",
+      "frequency": 8
+    },
+    {
+      "char": "埘",
+      "pinyin": "shí",
+      "definition": "◎ 古代称墙壁上挖洞做成的鸡窝。",
+      "frequency": 8
+    },
+    {
+      "char": "飾",
+      "pinyin": "shì",
+      "definition": "◎ 见“饰”。",
+      "frequency": 8
+    },
+    {
+      "char": "湜",
+      "pinyin": "shí",
+      "definition": "◎ 形容水清见底：“～～其沚”。",
+      "frequency": 7
+    },
+    {
+      "char": "铈",
+      "pinyin": "shì",
+      "definition": "◎ 一种金属元素，是优良的还原剂，可用来制合金。",
+      "frequency": 7
+    },
+    {
+      "char": "厔",
+      "pinyin": "shī",
+      "definition": "◎ 室。",
+      "frequency": 6
+    },
+    {
+      "char": "蝕",
+      "pinyin": "shí",
+      "definition": "◎ 见“蚀”。",
+      "frequency": 6
+    },
+    {
+      "char": "鲺",
+      "pinyin": "shī",
+      "definition": "◎ 节肢动物的一属，体扁，呈椭圆形。前端腹侧有吸吻、口刺和吸盘。寄生于淡水鱼类的体表，吸取血液：～病。",
+      "frequency": 6
+    },
+    {
+      "char": "鳲",
+      "pinyin": "shī",
+      "definition": "◎ 见“鸤”。",
+      "frequency": 6
+    },
+    {
+      "char": "鳾",
+      "pinyin": "shī",
+      "definition": "◎ 一种鸟。体型较小，背部青灰色，腹部黄褐色，嘴长而尖，脚短爪硬，善攀援树木。主要啄食树上的昆虫和植物种子。",
+      "frequency": 6
+    },
+    {
+      "char": "祏",
+      "pinyin": "shí",
+      "definition": "◎ 古代宗庙里藏神主的石匣：“使祝史徙主～于周庙。”",
+      "frequency": 5
+    },
+    {
+      "char": "箷",
+      "pinyin": "shī",
+      "definition": "◎ 古书上说的一种竹。",
+      "frequency": 5
+    },
+    {
+      "char": "葹",
+      "pinyin": "shī",
+      "definition": "1. 一种草本植物，即“苍耳”，果实苍耳子入药：“薋菉～以盈室兮。”\n2. 古书上说的一种豆类植物。",
+      "frequency": 5
+    },
+    {
+      "char": "蒔",
+      "pinyin": "shí",
+      "definition": "◎ 均见“莳”。\n---",
+      "frequency": 5
+    },
+    {
+      "char": "饣",
+      "pinyin": "shí",
+      "definition": "◎ 同“食”。用作偏旁。",
+      "frequency": 5
+    },
+    {
+      "char": "鰣",
+      "pinyin": "shí",
+      "definition": "◎ 见“鲥”。",
+      "frequency": 5
+    },
+    {
+      "char": "鼫",
+      "pinyin": "shí",
+      "definition": "◎ 古书上指鼯鼠一类的动物。",
+      "frequency": 5
+    },
+    {
+      "char": "勢",
+      "pinyin": "shì",
+      "definition": "◎ 见“势”。",
+      "frequency": 4
+    },
+    {
+      "char": "埶",
+      "pinyin": "shì",
+      "definition": "◎ 古通“势”。",
+      "frequency": 4
+    },
+    {
+      "char": "昰",
+      "pinyin": "shì",
+      "definition": "◎ 古同“是”。",
+      "frequency": 4
+    },
+    {
+      "char": "柹",
+      "pinyin": "shì",
+      "definition": "◎ 古同“柿”。",
+      "frequency": 4
+    },
+    {
+      "char": "浉",
+      "pinyin": "shī",
+      "definition": "1. 〔～河〕水名，在中国河南省，入淮河。\n2. （溮）",
+      "frequency": 4
+    },
+    {
+      "char": "蒒",
+      "pinyin": "shī",
+      "definition": "1. 一种草本植物，种子像大麦，可食。\n2. 姓。",
+      "frequency": 4
+    },
+    {
+      "char": "襫",
+      "pinyin": "shì",
+      "definition": "◎ 〔襏～〕古代蓑衣一类的用具。",
+      "frequency": 4
+    },
+    {
+      "char": "駛",
+      "pinyin": "shǐ",
+      "definition": "◎ 见“驶”。",
+      "frequency": 4
+    },
+    {
+      "char": "徥",
+      "pinyin": "shì",
+      "definition": "1. 苗条的样子。\n2. 行走的样子。\n3. 古同“是”，准则。\n4. 古同“恃”，依仗。",
+      "frequency": 3
+    },
+    {
+      "char": "楴",
+      "pinyin": "shì",
+      "definition": "◎ 古书上说的一种树。",
+      "frequency": 3
+    },
+    {
+      "char": "檡",
+      "pinyin": "shì",
+      "definition": "◎ 黑枣。",
+      "frequency": 3
+    },
+    {
+      "char": "溮",
+      "pinyin": "shī",
+      "definition": "◎ 见“浉”。",
+      "frequency": 3
+    },
+    {
+      "char": "狶",
+      "pinyin": "shǐ",
+      "definition": "◎ 〔～韦〕a.中国传说中的远古三皇以前帝王名号；b.古代官名；太史官。",
+      "frequency": 3
+    },
+    {
+      "char": "眂",
+      "pinyin": "shì",
+      "definition": "◎ 古同“视”。",
+      "frequency": 3
+    },
+    {
+      "char": "眎",
+      "pinyin": "shì",
+      "definition": "◎ 同“视”。",
+      "frequency": 3
+    },
+    {
+      "char": "碩",
+      "pinyin": "shí",
+      "definition": "◎ 均见“硕”。\n---",
+      "frequency": 3
+    },
+    {
+      "char": "諡",
+      "pinyin": "shì",
+      "definition": "◎ 同“谥”。",
+      "frequency": 3
+    },
+    {
+      "char": "謚",
+      "pinyin": "shì",
+      "definition": "◎ 见“谥”。",
+      "frequency": 3
+    },
+    {
+      "char": "釃",
+      "pinyin": "shī",
+      "definition": "◎ 见“酾”。",
+      "frequency": 3
+    },
+    {
+      "char": "鍦",
+      "pinyin": "shī",
+      "definition": "◎ 短矛：“藏～于人”。",
+      "frequency": 3
+    },
+    {
+      "char": "鯴",
+      "pinyin": "shī",
+      "definition": "◎ 见“鲺”。",
+      "frequency": 3
+    },
+    {
+      "char": "丗",
+      "pinyin": "shì",
+      "definition": "◎ 古同“世”。",
+      "frequency": 2
+    },
+    {
+      "char": "卋",
+      "pinyin": "shì",
+      "definition": "◎ 古同“世”。",
+      "frequency": 2
+    },
+    {
+      "char": "啫",
+      "pinyin": "shì",
+      "definition": "◎ 古同“嗜”。",
+      "frequency": 2
+    },
+    {
+      "char": "塒",
+      "pinyin": "shí",
+      "definition": "◎ 见“埘”。",
+      "frequency": 2
+    },
+    {
+      "char": "宲",
+      "pinyin": "shí",
+      "definition": "◎ 古同“实”。",
+      "frequency": 2
+    },
+    {
+      "char": "峕",
+      "pinyin": "shí",
+      "definition": "◎ “峕（时）”的讹字。",
+      "frequency": 2
+    },
+    {
+      "char": "崻",
+      "pinyin": "shì",
+      "definition": "◎ 古同“峙”。",
+      "frequency": 2
+    },
+    {
+      "char": "崼",
+      "pinyin": "shì",
+      "definition": "◎ 山。",
+      "frequency": 2
+    },
+    {
+      "char": "忕",
+      "pinyin": "shì",
+      "definition": "◎ 习惯于：“诸侯或骄奢，～邪臣计谋为淫乱。”",
+      "frequency": 2
+    },
+    {
+      "char": "忯",
+      "pinyin": "shì",
+      "definition": "◎ 古同“恀”。",
+      "frequency": 2
+    },
+    {
+      "char": "恀",
+      "pinyin": "shì",
+      "definition": "1. 依靠；仗恃：“俭然，～然。”\n2. 古代对母亲的代称。",
+      "frequency": 2
+    },
+    {
+      "char": "旹",
+      "pinyin": "shí",
+      "definition": "◎ 同“时”。",
+      "frequency": 2
+    },
+    {
+      "char": "栻",
+      "pinyin": "shì",
+      "definition": "1. 古代占卜用的器具，形状像罗盘，后来叫星盘。汉书˙卷九十九˙王莽传下：“天文郎按～于前，日时加某，莽旋席随斗柄而坐。”\n2. 古书上说的一种树。",
+      "frequency": 2
+    },
+    {
+      "char": "狧",
+      "pinyin": "shì",
+      "definition": "◎ 古同“舐”，用舌头舔：“语有之曰：‘～糠及米。’”",
+      "frequency": 2
+    },
+    {
+      "char": "獅",
+      "pinyin": "shī",
+      "definition": "◎ 见“狮”。",
+      "frequency": 2
+    },
+    {
+      "char": "痑",
+      "pinyin": "shǐ",
+      "definition": "1. 众多。\n2. 自放纵。",
+      "frequency": 2
+    },
+    {
+      "char": "睗",
+      "pinyin": "shì",
+      "definition": "1. 赐；赏给：“王～乘马。”\n2. 〔睒～〕见“睒”。\n3. 疾视。",
+      "frequency": 2
+    },
+    {
+      "char": "秲",
+      "pinyin": "shì",
+      "definition": "◎ 古同“莳”。",
+      "frequency": 2
+    },
+    {
+      "char": "蝨",
+      "pinyin": "shī",
+      "definition": "◎ 同“虱”。",
+      "frequency": 2
+    },
+    {
+      "char": "諟",
+      "pinyin": "shì",
+      "definition": "◎ 〔～正〕同“是正”，订正，如“～～文字。”",
+      "frequency": 2
+    },
+    {
+      "char": "貰",
+      "pinyin": "shì",
+      "definition": "◎ 见“贳”。",
+      "frequency": 2
+    },
+    {
+      "char": "醳",
+      "pinyin": "shì",
+      "definition": "◎ 古通“释”，释放：“共执张仪，掠笞数百，不服，～之。”",
+      "frequency": 2
+    },
+    {
+      "char": "釶",
+      "pinyin": "shī",
+      "definition": "◎ 古同“鍦”，矛。",
+      "frequency": 2
+    },
+    {
+      "char": "鈰",
+      "pinyin": "shì",
+      "definition": "◎ 见“铈”。",
+      "frequency": 2
+    },
+    {
+      "char": "銴",
+      "pinyin": "shì",
+      "definition": "1. 车樘结。\n2. 铜锈。",
+      "frequency": 2
+    },
+    {
+      "char": "炻",
+      "pinyin": "shí",
+      "definition": "◎ 〔～器〕介于陶器和瓷器之间的一种陶瓷制品。产品如砂锅、水缸和耐酸陶瓷等。",
+      "frequency": 2
+    },
+    {
+      "char": "馶",
+      "pinyin": "shì",
+      "definition": "◎ 马病。",
+      "frequency": 2
+    },
+    {
+      "char": "鮖",
+      "pinyin": "shí",
+      "definition": "◎ 日本地名用字。",
+      "frequency": 2
+    },
+    {
+      "char": "鰘",
+      "pinyin": "shì",
+      "definition": "◎ 日本地名用字。",
+      "frequency": 2
+    },
+    {
+      "char": "鰤",
+      "pinyin": "shī",
+      "definition": "◎ 〔～鱼〕体呈纺槌形，背部蓝褐色，腹部银白色。生活于海洋，春夏游回近岸。",
+      "frequency": 2
+    },
+    {
+      "char": "鶳",
+      "pinyin": "shī",
+      "definition": "◎ 古书上说的一种鸟。",
+      "frequency": 2
+    },
+    {
+      "char": "鼭",
+      "pinyin": "shí",
+      "definition": "◎ 古书上说的一种鼠类动物。",
+      "frequency": 2
+    },
+    {
+      "char": "乨",
+      "pinyin": "shǐ",
+      "definition": "◎ 古同“始”。",
+      "frequency": 1
+    },
+    {
+      "char": "亊",
+      "pinyin": "shì",
+      "definition": "◎ 古同“事”。",
+      "frequency": 1
+    },
+    {
+      "char": "兘",
+      "pinyin": "shǐ",
+      "definition": "◎ 古同“始”。",
+      "frequency": 1
+    },
+    {
+      "char": "冟",
+      "pinyin": "shì",
+      "definition": "◎ 古同“适”，适当；适合。",
+      "frequency": 1
+    },
+    {
+      "char": "呞",
+      "pinyin": "shī",
+      "definition": "◎ （牛）反刍。",
+      "frequency": 1
+    },
+    {
+      "char": "呩",
+      "pinyin": "shì",
+      "definition": "◎ 古同“嗜”。",
+      "frequency": 1
+    },
+    {
+      "char": "姼",
+      "pinyin": "shí",
+      "definition": "1. 〔～～〕美好，如“～～公主，乃女乌孙。”\n2. 美女。引申为美。",
+      "frequency": 1
+    },
+    {
+      "char": "嬕",
+      "pinyin": "shì",
+      "definition": "◎ 古女子人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "実",
+      "pinyin": "shí",
+      "definition": "◎ 古同“实”。",
+      "frequency": 1
+    },
+    {
+      "char": "宩",
+      "pinyin": "shǐ",
+      "definition": "◎ 古同“屎”。",
+      "frequency": 1
+    },
+    {
+      "char": "嵵",
+      "pinyin": "shí",
+      "definition": "◎ 义未详。",
+      "frequency": 1
+    },
+    {
+      "char": "弒",
+      "pinyin": "shì",
+      "definition": "◎ 同“弑”。",
+      "frequency": 1
+    },
+    {
+      "char": "戺",
+      "pinyin": "shì",
+      "definition": "1. 台阶两旁所砌的斜石：“金～玉阶，彤庭辉辉。”\n2. 门槛：“属兵列护门～。”",
+      "frequency": 1
+    },
+    {
+      "char": "揓",
+      "pinyin": "shì",
+      "definition": "◎ 握持：“闲～网，拨刺锦鳞无数。”",
+      "frequency": 1
+    },
+    {
+      "char": "枾",
+      "pinyin": "shì",
+      "definition": "◎ 古同“柿”。",
+      "frequency": 1
+    },
+    {
+      "char": "榁",
+      "pinyin": "shǐ",
+      "definition": "◎ 植物杜松的古名（日本汉字）。",
+      "frequency": 1
+    },
+    {
+      "char": "榯",
+      "pinyin": "shí",
+      "definition": "1. （树木）直立。\n2. 支持门枢的木头：落～。",
+      "frequency": 1
+    },
+    {
+      "char": "湤",
+      "pinyin": "shī",
+      "definition": "◎ 古河名。",
+      "frequency": 1
+    },
+    {
+      "char": "溡",
+      "pinyin": "shí",
+      "definition": "◎ 〔～水〕古河名，在今中国山东省淄博市北。亦作“时水”。",
+      "frequency": 1
+    },
+    {
+      "char": "烒",
+      "pinyin": "shì",
+      "definition": "◎ 火貌。",
+      "frequency": 1
+    },
+    {
+      "char": "煶",
+      "pinyin": "shì",
+      "definition": "◎ 义未详。",
+      "frequency": 1
+    },
+    {
+      "char": "瑡",
+      "pinyin": "shī",
+      "definition": "◎ 玉名。",
+      "frequency": 1
+    },
+    {
+      "char": "竍",
+      "pinyin": "shí",
+      "definition": "◎ 公制容量单位“十升”的旧译。",
+      "frequency": 1
+    },
+    {
+      "char": "笶",
+      "pinyin": "shǐ",
+      "definition": "◎ 古同“矢”。",
+      "frequency": 1
+    },
+    {
+      "char": "簭",
+      "pinyin": "shì",
+      "definition": "1. 古同“噬”，咬。\n2. 古同“筮”。",
+      "frequency": 1
+    },
+    {
+      "char": "籂",
+      "pinyin": "shì",
+      "definition": "◎ 古人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "舓",
+      "pinyin": "shì",
+      "definition": "◎ 古同“舐”。",
+      "frequency": 1
+    },
+    {
+      "char": "褷",
+      "pinyin": "shī",
+      "definition": "◎ 〔离～〕羽毛初生的样子，如“凫雏～～。”",
+      "frequency": 1
+    },
+    {
+      "char": "襹",
+      "pinyin": "shī",
+      "definition": "◎ 〔襳（shēn）～〕见“襳2”。",
+      "frequency": 1
+    },
+    {
+      "char": "觢",
+      "pinyin": "shì",
+      "definition": "◎ 两角直立的牛。",
+      "frequency": 1
+    },
+    {
+      "char": "辻",
+      "pinyin": "shí",
+      "definition": "◎ 日本地名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "遈",
+      "pinyin": "shí",
+      "definition": "◎ 流行貌。",
+      "frequency": 1
+    },
+    {
+      "char": "遾",
+      "pinyin": "shì",
+      "definition": "1. 相及。\n2. 远。",
+      "frequency": 1
+    },
+    {
+      "char": "邿",
+      "pinyin": "shī",
+      "definition": "1. 古国名，中国春秋时属鲁，在今山东省济宁市东南。\n2. 山名，在中国山东省平阴县西。\n3. 姓。",
+      "frequency": 1
+    },
+    {
+      "char": "釈",
+      "pinyin": "shì",
+      "definition": "◎ 同“释”（日本汉字）。",
+      "frequency": 1
+    },
+    {
+      "char": "鉂",
+      "pinyin": "shǐ",
+      "definition": "1. 环。\n2. 刺。",
+      "frequency": 1
+    },
+    {
+      "char": "鉃",
+      "pinyin": "shì",
+      "definition": "◎ 箭头。",
+      "frequency": 1
+    },
+    {
+      "char": "鉇",
+      "pinyin": "shī",
+      "definition": "◎ 古同“鍦”，矛。",
+      "frequency": 1
+    },
+    {
+      "char": "鉐",
+      "pinyin": "shí",
+      "definition": "◎ 〔鍮（tōu）～〕同“鍮石”，黄铜。",
+      "frequency": 1
+    },
+    {
+      "char": "鉽",
+      "pinyin": "shì",
+      "definition": "◎ 鼎一类的器具。",
+      "frequency": 1
+    },
+    {
+      "char": "礻",
+      "pinyin": "shì",
+      "definition": "◎ 同“示”。用作偏旁。俗称“示字旁”。",
+      "frequency": 1
+    },
+    {
+      "char": "飠",
+      "pinyin": "shí",
+      "definition": "◎ 同“食”。用作偏旁。",
+      "frequency": 1
+    },
+    {
+      "char": "餙",
+      "pinyin": "shì",
+      "definition": "◎ 古同“饰”。",
+      "frequency": 1
+    },
+    {
+      "char": "餝",
+      "pinyin": "shì",
+      "definition": "◎ 古同“饰”。",
+      "frequency": 1
+    }
+  ],
+  "wu": [
+    {
+      "char": "物",
+      "pinyin": "wù",
+      "definition": "1. 人以外的具体的东西：事～。生～。～体。货～。礼～。文～。～价。～质。地大～博。～极必反。\n2. 内容，实质：言之有～。\n3. 指自己以外的人或跟自己相对的环境：～议（群众的批评）。待人接～。～望所归（众望所归）。",
+      "frequency": 7266
+    },
+    {
+      "char": "无",
+      "pinyin": "wú",
+      "definition": "◎ 没有，与“有”相对；不：～辜。～偿。～从（没有门径或找不到头绪）。～度。～端（无缘无故）。～方（不得法，与“有方”相对）。～非（只，不过）。～动于衷。～所适从。",
+      "frequency": 4692
+    },
+    {
+      "char": "五",
+      "pinyin": "wǔ",
+      "definition": "1. 数名，四加一（在钞票和单据上常用大写“伍”代）：～彩。～官。～谷。～金。～代（中国朝代名，后梁、后唐、后晋、后汉、后周先后在中原建立政权的时期）。～帝（中国传说中的五个帝王，通常指黄帝、颛顼、帝喾、唐尧、虞舜）。～毒（指蝎、蛇、蜈蚣、壁虎、蟾蜍）。～行（指金、木、水、火、土）。～岭（指越城岭，都庞岭，萌渚岭、骑田岭、大庾岭）。～岳（指东岳泰山、西岳华山、南岳衡山、北岳恒山和中岳嵩山，是中国历史上五大名山）。～脏（指心、肝、脾、肺、肾）。\n2. 中国古代乐谱的记音符号，相当于简谱“6”。",
+      "frequency": 114514
+    },
+    {
+      "char": "武",
+      "pinyin": "wǔ",
+      "definition": "1. 关于军事或技击的，与“文”相对：～装。～器。～警。～林。～坛。～生。～旦。～丑。～净。～举。\n2. 勇猛，猛烈：英～。威～。～断。～士。～夫。\n3. 半步，泛指脚步：步～。踵～。行（xíng ）不数～。\n4. 姓。",
+      "frequency": 1175
+    },
+    {
+      "char": "恶",
+      "pinyin": "wù",
+      "definition": "◎ 讨厌，憎恨，与“好（hào ）”相对：可～。厌～。好（hào）～。",
+      "frequency": 1157
+    },
+    {
+      "char": "屋",
+      "pinyin": "wū",
+      "definition": "1. 房，房间：～子。～宇。房～。\n2. 家：“吴中过客莫思家，江南画船如～里。”\n3. 车盖，覆盖物：黄～（古代帝王所乘车上以黄缯为里的车盖，亦指帝王车）。～社（王朝倾覆的代称）。\n4. 古代井田的区划，一屋合三百亩。",
+      "frequency": 1082
+    },
+    {
+      "char": "吾",
+      "pinyin": "wú",
+      "definition": "1. 我，我的：～身。～国。～辈。\n2. 姓。",
+      "frequency": 844
+    },
+    {
+      "char": "亡",
+      "pinyin": "wú",
+      "definition": "◎ 古同“无”，没有。",
+      "frequency": 771
+    },
+    {
+      "char": "务",
+      "pinyin": "wù",
+      "definition": "1. 事情：事～。任～。公～。特～。不识时～（不认识时代潮流和当前形势）。\n2. 从事，致力：～工。～实（从事或讨论具体的工作）。～虚。当～之急。\n3. 追求：好（hào ）高～远。\n4. 必须，一定：～必。～须。除恶～尽。\n5. 旧时收税的关卡（现多用于地名）：曹家～（在中国河北省）。\n6. 姓。",
+      "frequency": 653
+    },
+    {
+      "char": "吴",
+      "pinyin": "wú",
+      "definition": "1. 中国周代诸侯国名，在今江苏省南部和浙江省北部，后扩展至淮河下游一带：～钩（古代吴地出产的一种弯刀，后泛指锋利的刀剑）。～越同舟（喻过去的仇人由于当前利害一致而成为朋友）。\n2. 中国东汉末年三国之一：～下阿蒙（喻原先学识粗浅的人）。\n3. 泛指中国江苏省南部和浙江省北部一带：～语。～牛喘月（喻见到类似事物就胆怯害怕起来）。\n4. 姓。",
+      "frequency": 586
+    },
+    {
+      "char": "舞",
+      "pinyin": "wǔ",
+      "definition": "1. 按一定的节奏转动身体表演各种姿势：～蹈。～技。～姿。～会。～剑。～女。～曲。～台。\n2. 耍弄：～弊。～文弄墨。",
+      "frequency": 503
+    },
+    {
+      "char": "污",
+      "pinyin": "wū",
+      "definition": "1. 浑浊的水：粪～。血～。\n2. 肮脏，不干净：～水。～泥。～浊。\n3. 肮脏的东西：～渍。～垢。\n4. 不廉洁：贪～。\n5. 弄脏：玷～。～损。～辱。～蔑（ａ．玷污；ｂ．诬蔑）。～染。",
+      "frequency": 426
+    },
+    {
+      "char": "误",
+      "pinyin": "wù",
+      "definition": "1. 错，不正确：错～。失～。笔～。～差（chā）。\n2. 耽搁：耽～。\n3. 因自己做错而使受损害：～国。～人子弟。\n4. 不是故意而有害于人：～伤。",
+      "frequency": 325
+    },
+    {
+      "char": "悟",
+      "pinyin": "wù",
+      "definition": "◎ 理解，明白，觉醒：醒～。领～。参（cān）～。感～。觉～。大彻大～。",
+      "frequency": 233
+    },
+    {
+      "char": "乌",
+      "pinyin": "wū",
+      "definition": "1. 指“乌鸦”：～白马角（喻不可能实现的事情）。～飞兔走（喻日往月来，时间流逝）。～合之众。\n2. 黑色的：～亮。～云。\n3. 无，没有：化为～有。\n4. 文言疑问词，哪，何：～足道哉？\n5. 古同“呜”，呜乎。\n6. 姓。",
+      "frequency": 231
+    },
+    {
+      "char": "午",
+      "pinyin": "wǔ",
+      "definition": "1. 地支的第七位，属马。\n2. 用于计时：～时（白天十一点到一点）。～间。～饭。～睡。～休。～夜（半夜、子夜）。\n3. 古同“忤”、“迕”，逆，背。",
+      "frequency": 210
+    },
+    {
+      "char": "勿",
+      "pinyin": "wù",
+      "definition": "◎ 副词，不，不要：请～动手。～谓言之不预（不要说没有预先说过）。",
+      "frequency": 209
+    },
+    {
+      "char": "於",
+      "pinyin": "wū",
+      "definition": "1. “烏”的本字。《穆天子傳·卷三》：“徂彼西土，爰居其野。虎豹為群，於鵲與處。”郭璞·注：“於，讀曰烏。”\n2. 表示感嘆、讚美的語氣。《詩經·周頌·清廟》：“於穆清廟，肅雝顯相。”《史記·卷二·夏本紀》：“皋陶曰：‘於！慎其身脩。’”",
+      "frequency": 203
+    },
+    {
+      "char": "毋",
+      "pinyin": "wú",
+      "definition": "1. 不要，不可以：～妄言。宁缺～滥。\n2. 不：～庸。～宁（nìng ）。\n3. 姓。",
+      "frequency": 177
+    },
+    {
+      "char": "雾",
+      "pinyin": "wù",
+      "definition": "1. 接近地面的水蒸气，遇冷凝结后飘浮在空气中的小水点：～气。～霭。迷～。云～。～淞（通称“树挂”）。\n2. 像雾的东西：烟～。～剂。喷～器。",
+      "frequency": 170
+    },
+    {
+      "char": "伍",
+      "pinyin": "wǔ",
+      "definition": "1. 古代军队的编制：一～（五人）。\n2. 军队：入～。落～（掉队）。\n3. 同伴的人：羞与为～。\n4. “五”的大写。\n5. 姓。",
+      "frequency": 157
+    },
+    {
+      "char": "巫",
+      "pinyin": "wū",
+      "definition": "1. 以祈祷求神骗取财物的人：～婆。女～。男～。～术。小～见大～（喻小的跟大的一比，就显得小不如大）。\n2. 姓。",
+      "frequency": 144
+    },
+    {
+      "char": "侮",
+      "pinyin": "wǔ",
+      "definition": "1. 欺负，轻慢：～辱（使对方人格或名誉受到损害，蒙受耻辱）。～蔑（轻视，轻蔑）。欺～。不可～。\n2. 古代奴婢的贱称。",
+      "frequency": 139
+    },
+    {
+      "char": "诬",
+      "pinyin": "wū",
+      "definition": "◎ 人没有做坏事，硬说他做了坏事；把没有的事说成有：～蔑。～赖。～陷。",
+      "frequency": 133
+    },
+    {
+      "char": "芜",
+      "pinyin": "wú",
+      "definition": "1. 草长得杂乱：荒～。～城（田地荒芜长满乱草的旧城）。\n2. 乱草丛生的地方：平～。\n3. 喻杂乱（多指文辞）：～杂（杂乱，没有条理）。～词。～劣（杂乱拙劣）。",
+      "frequency": 113
+    },
+    {
+      "char": "無",
+      "pinyin": "wú",
+      "definition": "◎ 见“无”。",
+      "frequency": 102
+    },
+    {
+      "char": "梧",
+      "pinyin": "wú",
+      "definition": "◎ 〔～桐〕落叶乔木。木质轻而坚韧，可制乐器和各种器具，种子可食，亦可榨油。",
+      "frequency": 77
+    },
+    {
+      "char": "兀",
+      "pinyin": "wù",
+      "definition": "1. 高而上平，形容秃山，泛指秃：～鹫。“蜀山～，阿房出。”\n2. 高高地突起：～然（a.高高突起的样子；b.突然；c.昏沉无知的样子）。突～。\n3. 中国元曲中用作发语词：～那。～的（dì）（a.这，这个；b.怎么，怎的；c.突然）。",
+      "frequency": 71
+    },
+    {
+      "char": "呜",
+      "pinyin": "wū",
+      "definition": "1. 〔～呼〕a.文言叹词；b.旧时祭文常用以表示叹息，后借指死亡，如“一命～～”。均亦作“乌呼”、“於呼”、“於戲”。\n2. 象声词：汽笛～～地响。她～～地哭。",
+      "frequency": 62
+    },
+    {
+      "char": "惡",
+      "pinyin": "wù",
+      "definition": "1. 憎恨、討厭。《論語·里仁》：“唯仁者，能好人，能惡人。”唐·杜甫《佳人詩》：“世情惡衰歇，萬事隨轉燭。”\n2. 冒犯、觸怒。《水滸傳·第十回》：“我因惡了高太尉，生事陷害，受了一場官司，刺配到這裡。”《警世通言·卷二十一·趙太祖千里送京娘》：“既在此借宿，惡不得他。”\n3. 害怕、畏懼。《韓非子·八說》：“使人不衣不食，而不飢不寒，又不惡死，則無事上之意。”\n4. 毀謗、中傷。《漢書·卷四十四·衡山王劉賜傳》：“兩人相妒，厥姬乃惡徐來於太子。”\n5. 羞恥。《孟子·公孫丑上》：“無羞惡之心，非人也。”《史記·卷七十六·平原君虞卿傳》：“此百世之怨而趙之所羞，而王弗知惡焉。”",
+      "frequency": 58
+    },
+    {
+      "char": "晤",
+      "pinyin": "wù",
+      "definition": "1. 遇，见面：～面。～谈。～商。会～。\n2. 古同“悟”，明白。",
+      "frequency": 44
+    },
+    {
+      "char": "杌",
+      "pinyin": "wù",
+      "definition": "1. 小凳：～子。\n2. 〔～陧（niè）〕局势、局面、心情等不安，亦作“阢陧”、“兀臬”。\n3. 树没有枝。",
+      "frequency": 41
+    },
+    {
+      "char": "洿",
+      "pinyin": "wū",
+      "definition": "1. 不流动的浊水：“决～而注之江。”\n2. 洼地；池塘：“曲台宣榭，咸变～莱。”\n3. 凹陷：“所居宅～下。”\n4. 挖掘：“～其宫而猪（潴）焉。”\n5. 涂染：“必以其血～其衣。”\n6. 古通“污”：“洗～泥者以水。”",
+      "frequency": 39
+    },
+    {
+      "char": "妩",
+      "pinyin": "wǔ",
+      "definition": "1. 〔～媚〕女子、花木等姿态美好可爱。\n2. （嫵）",
+      "frequency": 37
+    },
+    {
+      "char": "戊",
+      "pinyin": "wù",
+      "definition": "◎ 天干的第五位，用作顺序第五的代称。",
+      "frequency": 35
+    },
+    {
+      "char": "寤",
+      "pinyin": "wù",
+      "definition": "1. 睡醒：“七日而～”。～寐以求。\n2. 古同“悟”，理解，明白。\n3. 古同“牾”，逆。",
+      "frequency": 35
+    },
+    {
+      "char": "忤",
+      "pinyin": "wǔ",
+      "definition": "◎ 逆，不顺从：～耳（逆耳）。～逆（ａ．背犯，违反；ｂ．不孝顺父母）。～视（逆视、抗视、正视相看）。",
+      "frequency": 31
+    },
+    {
+      "char": "骛",
+      "pinyin": "wù",
+      "definition": "1. 乱跑，奔驰：～望（放眼远望）。～骤（急速，急骤）。\n2. 同“务”。",
+      "frequency": 29
+    },
+    {
+      "char": "鹜",
+      "pinyin": "wù",
+      "definition": "◎ 鸭子：趋之若～（喻很多人争着去，含贬义）。",
+      "frequency": 29
+    },
+    {
+      "char": "庑",
+      "pinyin": "wǔ",
+      "definition": "◎ 堂下周围的走廊、廊屋：廊～。～殿。",
+      "frequency": 27
+    },
+    {
+      "char": "烏",
+      "pinyin": "wū",
+      "definition": "1. “乌”的繁体字。\n2. 烏鴉的簡稱。唐·張繼《楓橋夜泊詩》：“月落烏啼霜滿天，江楓漁火對愁眠。”\n3. 俗以為日中有烏，故日稱為“烏”。見“烏兔”條。晉·陶淵明《怨詩楚調示龐主簿鄧治中詩》：“造夕思雞鳴，及晨願烏遷。”\n4. 姓。如春秋時齊有烏餘。\n5. 黑色的。如：“烏雲”、“烏髮”。《史記·卷一一○·匈奴傳》：“北方盡烏驪馬，南方盡騂馬。” 《儒林外史·第十四回》：“馬二先生身子又長，戴一頂高方巾，一幅烏黑的臉。”\n6. 染黑。明·李時珍《本草綱目·卷十六·草部·鱧腸》：“汁塗眉髮，生速而繁。烏髭髮，益腎陰。”\n7. 表示反問的語氣，相當於“何”、“安”、“哪裡”、“怎麼”。《呂氏春秋·季夏紀·明理》：“故亂世之主烏聞至樂？不聞至榮，其樂不樂。” 唐·韓愈《言箴》：“不知言之人，烏可與言？”",
+      "frequency": 26
+    },
+    {
+      "char": "唔",
+      "pinyin": "wú",
+      "definition": "◎ 象声词。",
+      "frequency": 23
+    },
+    {
+      "char": "鹉",
+      "pinyin": "wǔ",
+      "definition": "◎ 〔鹦～〕见“鹦”。",
+      "frequency": 23
+    },
+    {
+      "char": "鼯",
+      "pinyin": "wú",
+      "definition": "◎ 〔～鼠〕哺乳动物，形似松鼠，能从树上飞降下来。住在树洞中，昼伏夜出。",
+      "frequency": 23
+    },
+    {
+      "char": "汙",
+      "pinyin": "wū",
+      "definition": "◎ 同“污”。",
+      "frequency": 22
+    },
+    {
+      "char": "圬",
+      "pinyin": "wū",
+      "definition": "1. 泥瓦工人用的抹（mǒ ㄇㄛˇ）子。\n2. 抹（mǒ）墙。",
+      "frequency": 19
+    },
+    {
+      "char": "迕",
+      "pinyin": "wǔ",
+      "definition": "1. 相遇：相～。\n2. 违背，相抵触：～目（反目，不和睦）。违～。莫敢复～。",
+      "frequency": 19
+    },
+    {
+      "char": "捂",
+      "pinyin": "wǔ",
+      "definition": "1. 严密地遮盖住或封闭起来：～住。～盖子（亦喻掩盖矛盾）。\n2. 古同“迕”，逆，对面。",
+      "frequency": 18
+    },
+    {
+      "char": "蜈",
+      "pinyin": "wú",
+      "definition": "◎ 〔～蚣〕节肢动物，由许多环节构成，每节有脚一对，头部的脚像钩子，能分泌毒液，捕食小虫，中医入药。",
+      "frequency": 18
+    },
+    {
+      "char": "吳",
+      "pinyin": "wú",
+      "definition": "◎ 同“吴”。",
+      "frequency": 17
+    },
+    {
+      "char": "坞",
+      "pinyin": "wù",
+      "definition": "1. 小障蔽物，防卫用的小堡。亦称“庳城”。\n2. 四面高中间凹下的地方：山～。花～。\n3. 水边建筑的停船或修造船只的地方：船～。",
+      "frequency": 17
+    },
+    {
+      "char": "牾",
+      "pinyin": "wǔ",
+      "definition": "◎ 逆，不顺：抵～（抵触，冲突）。",
+      "frequency": 14
+    },
+    {
+      "char": "芴",
+      "pinyin": "wù",
+      "definition": "1. 一年生草本植物，似芜菁，花紫红色，可供观赏，兼作蔬菜。亦称“菲”。\n2. 有机化合物，白色片状晶体，由煤焦油制得。",
+      "frequency": 13
+    },
+    {
+      "char": "怃",
+      "pinyin": "wǔ",
+      "definition": "1. 怅然失意的样子：～然不乐。\n2. 爱怜。",
+      "frequency": 13
+    },
+    {
+      "char": "仵",
+      "pinyin": "wǔ",
+      "definition": "1. 对等，相匹敌。\n2. 违背。\n3. 姓。",
+      "frequency": 12
+    },
+    {
+      "char": "婺",
+      "pinyin": "wù",
+      "definition": "1. 〔～水〕水名，在中国江西省。\n2. 〔～绿〕产于中国江西省婺源县的茶叶，是绿茶中的珍品。\n3. 〔～女〕古星宿名，即“女宿”。\n4. 〔～剧〕中国浙江省地方戏曲剧种之一。",
+      "frequency": 12
+    },
+    {
+      "char": "務",
+      "pinyin": "wù",
+      "definition": "◎ 见“务”。",
+      "frequency": 11
+    },
+    {
+      "char": "鋈",
+      "pinyin": "wù",
+      "definition": "1. 白色金属。\n2. 镀。",
+      "frequency": 10
+    },
+    {
+      "char": "杇",
+      "pinyin": "wū",
+      "definition": "◎ 同“圬”。",
+      "frequency": 8
+    },
+    {
+      "char": "柮",
+      "pinyin": "wù",
+      "definition": "◎ 古同“杌”，树无枝。",
+      "frequency": 8
+    },
+    {
+      "char": "铻",
+      "pinyin": "wú",
+      "definition": "◎ 〔锟～〕见“锟”。",
+      "frequency": 8
+    },
+    {
+      "char": "焐",
+      "pinyin": "wù",
+      "definition": "◎ 用热的东西接触凉的东西，使它变暖：用热水袋～手。",
+      "frequency": 8
+    },
+    {
+      "char": "珷",
+      "pinyin": "wǔ",
+      "definition": "◎ 〔～玞（fū）〕像玉的美石，如“～～乱玉，鱼目间珠。”",
+      "frequency": 7
+    },
+    {
+      "char": "膴",
+      "pinyin": "wǔ",
+      "definition": "1. 肥沃：“周原～～。”\n2. 厚：“琐琐姻亚，则无～仕。”\n3. 盛，多：民蕃物～。",
+      "frequency": 7
+    },
+    {
+      "char": "霧",
+      "pinyin": "wù",
+      "definition": "◎ 见“雾”。",
+      "frequency": 7
+    },
+    {
+      "char": "儛",
+      "pinyin": "wǔ",
+      "definition": "◎ 古同“舞”。",
+      "frequency": 6
+    },
+    {
+      "char": "悮",
+      "pinyin": "wù",
+      "definition": "◎ 同“误”。",
+      "frequency": 6
+    },
+    {
+      "char": "碔",
+      "pinyin": "wǔ",
+      "definition": "◎ 古同“珷”，似玉的美石。",
+      "frequency": 6
+    },
+    {
+      "char": "靰",
+      "pinyin": "wù",
+      "definition": "◎ 〔～鞡〕中国东北地区冬天穿的一种用皮革做的鞋，里面垫着乌拉草。亦作“乌拉”。",
+      "frequency": 6
+    },
+    {
+      "char": "騖",
+      "pinyin": "wù",
+      "definition": "◎ 见“骛”。",
+      "frequency": 6
+    },
+    {
+      "char": "鹀",
+      "pinyin": "wú",
+      "definition": "◎ 鸟类的一属，形体像麻雀，嘴形特殊，闭合时上嘴边缘与下嘴边缘不密接，品种很多。",
+      "frequency": 6
+    },
+    {
+      "char": "嫵",
+      "pinyin": "wǔ",
+      "definition": "◎ 见“妩”。",
+      "frequency": 5
+    },
+    {
+      "char": "屼",
+      "pinyin": "wù",
+      "definition": "1. 山光秃：“（山）嵬嶷嶢～。”\n2. 高耸：“有石峰～立。”",
+      "frequency": 5
+    },
+    {
+      "char": "敄",
+      "pinyin": "wù",
+      "definition": "◎ 强。",
+      "frequency": 5
+    },
+    {
+      "char": "蕪",
+      "pinyin": "wú",
+      "definition": "◎ 见“芜”。",
+      "frequency": 5
+    },
+    {
+      "char": "钨",
+      "pinyin": "wū",
+      "definition": "◎ 一种金属元素，灰黑色的结晶，质硬而脆，熔点很高，可以制成很细的丝和特种合金钢：～丝。～钢。～砂（精造的钨矿石）。",
+      "frequency": 5
+    },
+    {
+      "char": "誤",
+      "pinyin": "wù",
+      "definition": "◎ 见“误”。",
+      "frequency": 5
+    },
+    {
+      "char": "阢",
+      "pinyin": "wù",
+      "definition": "1. 〔～陧（niè）〕局势、局面、心情等不安定。亦作“杌臬”，“兀臬”。\n2. 石山上戴土。",
+      "frequency": 5
+    },
+    {
+      "char": "浯",
+      "pinyin": "wú",
+      "definition": "◎ 〔～水〕水名，在中国山东省。",
+      "frequency": 5
+    },
+    {
+      "char": "嗚",
+      "pinyin": "wū",
+      "definition": "◎ 见“呜”。",
+      "frequency": 4
+    },
+    {
+      "char": "堥",
+      "pinyin": "wǔ",
+      "definition": "◎ 瓦器，供煎药用。",
+      "frequency": 4
+    },
+    {
+      "char": "娒",
+      "pinyin": "wǔ",
+      "definition": "◎ 古同“侮”，轻慢；欺负。",
+      "frequency": 4
+    },
+    {
+      "char": "廡",
+      "pinyin": "wǔ",
+      "definition": "◎ 见“庑”。",
+      "frequency": 4
+    },
+    {
+      "char": "扜",
+      "pinyin": "wū",
+      "definition": "◎ 〔～零〕中国古代西域小宛国地名。",
+      "frequency": 4
+    },
+    {
+      "char": "扤",
+      "pinyin": "wù",
+      "definition": "1. 折磨：“天之～我，如不我克。”\n2. 骚动。\n3. 姓。",
+      "frequency": 4
+    },
+    {
+      "char": "邬",
+      "pinyin": "wū",
+      "definition": "1. 古地名（ａ．在今中国河南省偃师县；ｂ．在今中国山西省介休县）。\n2. 姓。",
+      "frequency": 4
+    },
+    {
+      "char": "鋙",
+      "pinyin": "wú",
+      "definition": "◎ 见“铻”。",
+      "frequency": 4
+    },
+    {
+      "char": "隖",
+      "pinyin": "wù",
+      "definition": "◎ 同“坞”。",
+      "frequency": 4
+    },
+    {
+      "char": "鵐",
+      "pinyin": "wú",
+      "definition": "◎ 见“鹀”。",
+      "frequency": 4
+    },
+    {
+      "char": "鵡",
+      "pinyin": "wǔ",
+      "definition": "◎ 见“鹉”。",
+      "frequency": 4
+    },
+    {
+      "char": "鼿",
+      "pinyin": "wù",
+      "definition": "1. 鼻。\n2. 兽以鼻摇物。\n3. 鼻仰。",
+      "frequency": 4
+    },
+    {
+      "char": "剭",
+      "pinyin": "wū",
+      "definition": "◎ 诛杀（指古代贵族、大臣在屋内受刑，区别于平民在市上受刑）。",
+      "frequency": 3
+    },
+    {
+      "char": "娪",
+      "pinyin": "wú",
+      "definition": "◎ 美女。",
+      "frequency": 3
+    },
+    {
+      "char": "嵍",
+      "pinyin": "wù",
+      "definition": "◎ 〔巏～〕见“巏”。",
+      "frequency": 3
+    },
+    {
+      "char": "扝",
+      "pinyin": "wū",
+      "definition": "◎ 古同“扜2”。",
+      "frequency": 3
+    },
+    {
+      "char": "潕",
+      "pinyin": "wǔ",
+      "definition": "◎ 〔～水〕又作“舞水”，古河名。a.在中国河南省；b.在中国贵州省。",
+      "frequency": 3
+    },
+    {
+      "char": "矹",
+      "pinyin": "wù",
+      "definition": "1. 〔～～〕古同“兀兀”，勤勉，勤奋，如“常山之蛇中首尾，幕中～～何物客。”\n2. 〔硉～〕见“硉”。",
+      "frequency": 3
+    },
+    {
+      "char": "窏",
+      "pinyin": "wū",
+      "definition": "◎ 〔～洝〕湿润。",
+      "frequency": 3
+    },
+    {
+      "char": "誣",
+      "pinyin": "wū",
+      "definition": "◎ 见“诬”。",
+      "frequency": 3
+    },
+    {
+      "char": "郚",
+      "pinyin": "wú",
+      "definition": "◎ 古邑名。在今中国山东省安丘县西南。",
+      "frequency": 3
+    },
+    {
+      "char": "釫",
+      "pinyin": "wū",
+      "definition": "◎ 古同“圬”。",
+      "frequency": 3
+    },
+    {
+      "char": "鋘",
+      "pinyin": "wú",
+      "definition": "◎ 刀名：“两～植吾宫墙”。",
+      "frequency": 3
+    },
+    {
+      "char": "僫",
+      "pinyin": "wū",
+      "definition": "◎ 古同“恶”。",
+      "frequency": 2
+    },
+    {
+      "char": "卼",
+      "pinyin": "wù",
+      "definition": "◎ 〔臲（niè）～〕惶惶不安。",
+      "frequency": 2
+    },
+    {
+      "char": "塢",
+      "pinyin": "wù",
+      "definition": "◎ 见“坞”。",
+      "frequency": 2
+    },
+    {
+      "char": "娬",
+      "pinyin": "wǔ",
+      "definition": "◎ 古同“妩”。",
+      "frequency": 2
+    },
+    {
+      "char": "岉",
+      "pinyin": "wù",
+      "definition": "◎ 〔崛（jué ）～〕（山）高峻，如“屹山峙以纡郁，隆～～乎青云。”",
+      "frequency": 2
+    },
+    {
+      "char": "峿",
+      "pinyin": "wú",
+      "definition": "1. 〔岖～〕崎岖，如“豫章楩柟之可以大斵者，必在夫大山穹谷孱颜～～之区。”\n2. 〔區～〕山名。",
+      "frequency": 2
+    },
+    {
+      "char": "摀",
+      "pinyin": "wǔ",
+      "definition": "◎ 同“捂”。",
+      "frequency": 2
+    },
+    {
+      "char": "旿",
+      "pinyin": "wù",
+      "definition": "◎ 古同“晤”，明白；醒悟。",
+      "frequency": 2
+    },
+    {
+      "char": "杅",
+      "pinyin": "wū",
+      "definition": "◎ 〔焚～〕牵制，如“秦得烧掇～～君之国。”",
+      "frequency": 2
+    },
+    {
+      "char": "歍",
+      "pinyin": "wū",
+      "definition": "1. 恶心；呕吐：“共工之臣名曰相繇，……其所～所尼，即为源泽。”\n2. 古同“呜”：～唈（呜咽）。",
+      "frequency": 2
+    },
+    {
+      "char": "汚",
+      "pinyin": "wū",
+      "definition": "◎ 同“污”。",
+      "frequency": 2
+    },
+    {
+      "char": "沕",
+      "pinyin": "wù",
+      "definition": "◎ 〔～穆〕微妙，如：“～～无穷兮，胡可胜言！”",
+      "frequency": 2
+    },
+    {
+      "char": "渞",
+      "pinyin": "wù",
+      "definition": "◎ 水流出的声音。",
+      "frequency": 2
+    },
+    {
+      "char": "溩",
+      "pinyin": "wù",
+      "definition": "1. 水溩。\n2. 水名。\n3. 水大的样子。",
+      "frequency": 2
+    },
+    {
+      "char": "瞴",
+      "pinyin": "wǔ",
+      "definition": "◎ 微视。",
+      "frequency": 2
+    },
+    {
+      "char": "祦",
+      "pinyin": "wú",
+      "definition": "◎ 福。",
+      "frequency": 2
+    },
+    {
+      "char": "趶",
+      "pinyin": "wù",
+      "definition": "◎ 踞。",
+      "frequency": 2
+    },
+    {
+      "char": "鄔",
+      "pinyin": "wū",
+      "definition": "◎ 见“邬”。",
+      "frequency": 2
+    },
+    {
+      "char": "雺",
+      "pinyin": "wù",
+      "definition": "◎ 古同“雾”。",
+      "frequency": 2
+    },
+    {
+      "char": "痦",
+      "pinyin": "wù",
+      "definition": "◎ 〔～子〕人身上长出的突起的痣。",
+      "frequency": 2
+    },
+    {
+      "char": "鯃",
+      "pinyin": "wú",
+      "definition": "◎ 古书上说的一种鱼。",
+      "frequency": 2
+    },
+    {
+      "char": "鰞",
+      "pinyin": "wū",
+      "definition": "◎ 〔～鰂〕同“乌贼”，亦称墨鱼。",
+      "frequency": 2
+    },
+    {
+      "char": "鴮",
+      "pinyin": "wū",
+      "definition": "◎ 〔～鸅（zé）〕一种水鸟，即“鹈鹕”。",
+      "frequency": 2
+    },
+    {
+      "char": "鶩",
+      "pinyin": "wù",
+      "definition": "◎ 见“鹜”。",
+      "frequency": 2
+    },
+    {
+      "char": "鷡",
+      "pinyin": "wú",
+      "definition": "◎ 〔鴾（móu）～〕古书上说的一种鸟。",
+      "frequency": 2
+    },
+    {
+      "char": "齀",
+      "pinyin": "wù",
+      "definition": "◎ “鼿”的讹字。",
+      "frequency": 2
+    },
+    {
+      "char": "乄",
+      "pinyin": "wǔ",
+      "definition": "1. 合计。\n2. 手鍼，封（日本汉字）。",
+      "frequency": 1
+    },
+    {
+      "char": "俉",
+      "pinyin": "wù",
+      "definition": "◎ 遇。",
+      "frequency": 1
+    },
+    {
+      "char": "倵",
+      "pinyin": "wǔ",
+      "definition": "◎ 古人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "呉",
+      "pinyin": "wú",
+      "definition": "◎ 古同“吴”。",
+      "frequency": 1
+    },
+    {
+      "char": "啎",
+      "pinyin": "wǔ",
+      "definition": "1. 古同“牾”，背逆；抵触。\n2. 相逢；遇。",
+      "frequency": 1
+    },
+    {
+      "char": "墲",
+      "pinyin": "wú",
+      "definition": "◎ 墓地。",
+      "frequency": 1
+    },
+    {
+      "char": "奦",
+      "pinyin": "wù",
+      "definition": "◎ 大。",
+      "frequency": 1
+    },
+    {
+      "char": "嵨",
+      "pinyin": "wù",
+      "definition": "1. 古同“隖”。\n2. 山名。",
+      "frequency": 1
+    },
+    {
+      "char": "弙",
+      "pinyin": "wū",
+      "definition": "1. 拉满弓对准目标。\n2. 引，张。\n3. 持。\n4. 指挥。",
+      "frequency": 1
+    },
+    {
+      "char": "忢",
+      "pinyin": "wù",
+      "definition": "◎ 古同“悟”。",
+      "frequency": 1
+    },
+    {
+      "char": "悞",
+      "pinyin": "wù",
+      "definition": "◎ 同“悮”。",
+      "frequency": 1
+    },
+    {
+      "char": "憮",
+      "pinyin": "wǔ",
+      "definition": "◎ 见“怃”。",
+      "frequency": 1
+    },
+    {
+      "char": "橆",
+      "pinyin": "wú",
+      "definition": "1. 古同“無”。\n2. 古同“蕪”。",
+      "frequency": 1
+    },
+    {
+      "char": "洖",
+      "pinyin": "wú",
+      "definition": "◎ 译音用字。",
+      "frequency": 1
+    },
+    {
+      "char": "熃",
+      "pinyin": "wù",
+      "definition": "◎ 主火。",
+      "frequency": 1
+    },
+    {
+      "char": "熓",
+      "pinyin": "wǔ",
+      "definition": "1. 煮：“烂猪头满锅～。”\n2. 火熄。",
+      "frequency": 1
+    },
+    {
+      "char": "玝",
+      "pinyin": "wǔ",
+      "definition": "◎ 古人名用字。",
+      "frequency": 1
+    },
+    {
+      "char": "珸",
+      "pinyin": "wú",
+      "definition": "◎ 〔琨（kūn）～〕似玉的美石。",
+      "frequency": 1
+    },
+    {
+      "char": "瑦",
+      "pinyin": "wǔ",
+      "definition": "◎ 似玉的美石。",
+      "frequency": 1
+    },
+    {
+      "char": "璑",
+      "pinyin": "wú",
+      "definition": "◎ 三彩玉，是质地较差的玉。",
+      "frequency": 1
+    },
+    {
+      "char": "甒",
+      "pinyin": "wǔ",
+      "definition": "◎ 古代盛酒的有盖的瓦器，口小，腹大，底小，较深：“君尊瓦～。”",
+      "frequency": 1
+    },
+    {
+      "char": "窹",
+      "pinyin": "wù",
+      "definition": "1. 灶。\n2. 古同“寤”：“楚王卧而～，得吴王湛卢之剑。”",
+      "frequency": 1
+    },
+    {
+      "char": "箼",
+      "pinyin": "wū",
+      "definition": "◎ 竹密。",
+      "frequency": 1
+    },
+    {
+      "char": "粅",
+      "pinyin": "wù",
+      "definition": "◎ 〔～～〕粉貌。",
+      "frequency": 1
+    },
+    {
+      "char": "茣",
+      "pinyin": "wú",
+      "definition": "◎ 古书上说的一种草，似艾。",
+      "frequency": 1
+    },
+    {
+      "char": "莁",
+      "pinyin": "wú",
+      "definition": "◎ 〔～荑〕一种落叶小乔木的果实。",
+      "frequency": 1
+    },
+    {
+      "char": "蘁",
+      "pinyin": "wù",
+      "definition": "◎ 违逆，违背：“使人乃以心服而不敢～。”",
+      "frequency": 1
+    },
+    {
+      "char": "螐",
+      "pinyin": "wū",
+      "definition": "◎ 〔～蠋（zhú）〕蛾蝶类的幼虫。",
+      "frequency": 1
+    },
+    {
+      "char": "蟱",
+      "pinyin": "wú",
+      "definition": "◎ 〔～",
+      "frequency": 1
+    },
+    {
+      "char": "誈",
+      "pinyin": "wū",
+      "definition": "◎ 古同“诬”。",
+      "frequency": 1
+    },
+    {
+      "char": "譕",
+      "pinyin": "wú",
+      "definition": "◎ 诱词。",
+      "frequency": 1
+    },
+    {
+      "char": "躌",
+      "pinyin": "wǔ",
+      "definition": "1. 足迹。\n2. 踩，踩在上面。",
+      "frequency": 1
+    },
+    {
+      "char": "逜",
+      "pinyin": "wǔ",
+      "definition": "◎ 古同“牾”：“～下蔽上，使事两乖。”",
+      "frequency": 1
+    },
+    {
+      "char": "鎢",
+      "pinyin": "wū",
+      "definition": "◎ 见“钨”。",
+      "frequency": 1
+    },
+    {
+      "char": "陚",
+      "pinyin": "wǔ",
+      "definition": "◎ 平原。",
+      "frequency": 1
+    },
+    {
+      "char": "霚",
+      "pinyin": "wù",
+      "definition": "◎ 古同“雾”。",
+      "frequency": 1
+    }
+  ]
+}
