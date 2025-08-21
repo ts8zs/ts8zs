@@ -50,6 +50,15 @@
             position: relative;
         }
         
+        .symbol {
+            font-size: 96px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            height: 80px;
+            margin: 0 5px;
+        }
+        
         .pinyin-label {
             text-align: center;
             font-size: 12px;
@@ -63,7 +72,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 42px;
             font-weight: bold;
         }
         
@@ -355,6 +364,7 @@
                     <div class="char">四</div>
                 </div>
             </div>
+            <div class="symbol comma">,</div>
             <div class="cell" data-index="3" data-pinyin="wu">
                 <div class="pinyin-label">wu</div>
                 <div class="char-container">
@@ -373,6 +383,7 @@
                     <div class="char">四</div>
                 </div>
             </div>
+            <div class="symbol exclamation">!</div>
         </div>
         
         <div class="controls">
@@ -392,7 +403,7 @@
         </div>
         
         <div class="notification" id="notification">已复制到剪贴板!</div>
-        <div class="footer">by <a href="http://ts8zs.com">Ts8zs</a> with QWEN-CODER</div>
+        <div class="footer">by <a href="http://ts8zs.com">Ts8zs</a> with qwen3-coder</div>
     </div>
     
     <!-- 悬浮显示释义的元素 -->
@@ -648,8 +659,15 @@
         function copyText() {
             // 获取所有格子中的文字
             let text = '';
-            cells.forEach(cell => {
+            cells.forEach((cell, index) => {
                 text += cell.querySelector('.char').textContent;
+                // 在特定位置添加逗号和感叹号
+                if (index === 2) {  // 在"四"后面添加逗号
+                    text += '，';
+                }
+                if (index === 5) {  // 在第二个"一"后面添加感叹号
+                    text += '！';
+                }
             });
             
             // 复制到剪贴板
