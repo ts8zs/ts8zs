@@ -981,7 +981,7 @@
         comparisonRunning = true;
         startComparisonButton.disabled = false;
         stopComparisonButton.disabled = false;
-        startGameButton.disabled = false; // 启用开始游戏按钮
+        // startGameButton.disabled = false; // 启用开始游戏按钮
         similarityStatus.textContent = "正在比较中...";
 
         // 清空帧缓存
