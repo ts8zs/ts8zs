@@ -1,4 +1,74 @@
+      // 页面元素
+      const referenceFileInput = document.getElementById("referenceFileInput");
+      const loadReferenceButton = document.getElementById(
+        "loadReferenceButton"
+      );
+      const referenceVideo = document.getElementById("referenceVideo");
+      const referenceCanvas = document.getElementById("referenceCanvas");
+      const referenceCtx = referenceCanvas.getContext("2d");
+      const referencePlayButton = document.getElementById(
+        "referencePlayButton"
+      );
+      const referencePauseButton = document.getElementById(
+        "referencePauseButton"
+      );
+      const referenceAnalyzeButton = document.getElementById(
+        "referenceAnalyzeButton"
+      );
+      const referenceCurrentTime = document.getElementById(
+        "referenceCurrentTime"
+      );
+      const referenceTotalTime = document.getElementById("referenceTotalTime");
+      const referenceProgressBar = document.getElementById(
+        "referenceProgressBar"
+      );
+      const referenceAngleData = document.getElementById("referenceAngleData");
+      const loadReferenceExampleButton = document.getElementById("loadReferenceExampleButton");
+      const referenceVideoSection = document.getElementById("referenceVideoSection");
 
+      const targetFileInput = document.getElementById("targetFileInput");
+      const loadTargetButton = document.getElementById("loadTargetButton");
+      const loadTargetExampleButton = document.getElementById("loadTargetExampleButton");
+      const useCameraButton = document.getElementById("useCameraButton");
+      const stopCameraButton = document.getElementById("stopCameraButton");
+      const targetVideoSection = document.getElementById("targetVideoSection");
+      const targetVideo = document.getElementById("targetVideo");
+      const targetCanvas = document.getElementById("targetCanvas");
+      const targetCtx = targetCanvas.getContext("2d");
+      const targetPlayButton = document.getElementById("targetPlayButton");
+      const targetPauseButton = document.getElementById("targetPauseButton");
+      const targetAnalyzeButton = document.getElementById(
+        "targetAnalyzeButton"
+      );
+      const targetCurrentTime = document.getElementById("targetCurrentTime");
+      const targetTotalTime = document.getElementById("targetTotalTime");
+      const targetProgressBar = document.getElementById("targetProgressBar");
+      const targetAngleData = document.getElementById("targetAngleData");
+
+      // 游戏模式相关元素
+      const gameModeContainer = document.getElementById("gameModeContainer");
+      const gameReferenceVideo = document.getElementById("gameReferenceVideo");
+      const gameTargetVideo = document.getElementById("gameTargetVideo");
+      const gameScore = document.getElementById("gameScore");
+      const currentWindowSimilarity = document.getElementById(
+        "currentWindowSimilarity"
+      );
+      const exitGameButton = document.getElementById("exitGameButton");
+      const startGameButton = document.getElementById("startGameButton");
+      const countdownDisplay = document.getElementById("countdown"); // 倒计时显示元素
+
+      // 摄像头相关变量
+      let cameraStream = null;
+
+      // 模型相关变量
+      let referencePoseDetector = null;
+      let targetPoseDetector = null;
+
+      // 视频状态变量
+      let referenceLoaded = false;
+      let targetLoaded = false;
+      let comparisonRunning = false;
+      let gameModeRunning = false; // 游戏模式运行状态
 
       // 帧缓存用于一秒内的上下文比较
       let referenceFrameBuffer = [];
@@ -84,6 +154,14 @@
         right_ankle: "#808080", // 灰色
       };
 
+      // 时间格式化函数
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, "0")}:${secs
+          .toString()
+          .padStart(2, "0")}`;
+      }
 
       // 计算两点之间的角度
       function calculateAngle(parentPoint, childPoint) {
@@ -142,6 +220,125 @@
         return angles;
       }
 
+      // 在canvas上绘制关键点和连线
+      function drawKeypoints(ctx, keypoints, angles, frameBuffer) {
+        // 创建一个关键点映射，方便查找
+        const keypointsMap = {};
+        keypoints.forEach((kp) => {
+          keypointsMap[kp.name] = kp;
+        });
+
+        // 绘制连接线
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+
+        // 绘制骨架连接线
+        const connections = [
+          ["left_shoulder", "right_shoulder"],
+          ["left_shoulder", "left_hip"],
+          ["right_shoulder", "right_hip"],
+          ["left_shoulder", "left_elbow"],
+          ["right_shoulder", "right_elbow"],
+          ["left_elbow", "left_wrist"],
+          ["right_elbow", "right_wrist"],
+          ["left_hip", "right_hip"],
+          ["left_hip", "left_knee"],
+          ["right_hip", "right_knee"],
+          ["left_knee", "left_ankle"],
+          ["right_knee", "right_ankle"],
+        ];
+
+        connections.forEach(([start, end]) => {
+          const startPoint = keypointsMap[start];
+          const endPoint = keypointsMap[end];
+
+          if (
+            startPoint &&
+            endPoint &&
+            startPoint.score >= 0.2 &&
+            endPoint.score >= 0.2
+          ) {
+            ctx.beginPath();
+            ctx.moveTo(startPoint.x, startPoint.y);
+            ctx.lineTo(endPoint.x, endPoint.y);
+            ctx.stroke();
+          }
+        });
+
+        // 绘制关键点和角度
+        for (const keypointName in KEYPOINT_PARENTS) {
+          const keypoint = keypointsMap[keypointName];
+          const parentName = KEYPOINT_PARENTS[keypointName];
+          const parentPoint = parentName ? keypointsMap[parentName] : null;
+
+          if (keypoint && keypoint.score >= 0.2) {
+            // 绘制关键点
+            ctx.fillStyle = KEYPOINT_COLORS[keypointName] || "#ffffff";
+            ctx.beginPath();
+            ctx.arc(keypoint.x, keypoint.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+          }
+        }
+      }
+
+      // 绘制1秒内的运动轨迹
+      function drawTrajectory(ctx, frameBuffer, keypointNames) {
+        // 只绘制指定的关键点轨迹
+        keypointNames.forEach((keypointName) => {
+          const trajectoryPoints = [];
+
+          // 收集1秒内的轨迹点
+          frameBuffer.forEach((frame) => {
+            const keypoint = frame.keypoints.find(
+              (kp) => kp.name === keypointName
+            );
+            if (keypoint && keypoint.score >= 0.2) {
+              trajectoryPoints.push(keypoint);
+            }
+          });
+
+          // 绘制轨迹线（使用贝塞尔曲线）
+          if (trajectoryPoints.length > 1) {
+            ctx.strokeStyle = KEYPOINT_COLORS[keypointName] || "#ffffff";
+            ctx.lineWidth = 10;
+            ctx.beginPath();
+
+            // 如果只有两个点，绘制直线
+            if (trajectoryPoints.length === 2) {
+              ctx.moveTo(trajectoryPoints[0].x, trajectoryPoints[0].y);
+              ctx.lineTo(trajectoryPoints[1].x, trajectoryPoints[1].y);
+            }
+            // 如果有三个或更多点，使用贝塞尔曲线
+            else if (trajectoryPoints.length >= 3) {
+              ctx.moveTo(trajectoryPoints[0].x, trajectoryPoints[0].y);
+
+              // 对于中间的点，使用贝塞尔曲线连接
+              for (let i = 1; i < trajectoryPoints.length - 1; i++) {
+                const xc =
+                  (trajectoryPoints[i].x + trajectoryPoints[i + 1].x) / 2;
+                const yc =
+                  (trajectoryPoints[i].y + trajectoryPoints[i + 1].y) / 2;
+                ctx.quadraticCurveTo(
+                  trajectoryPoints[i].x,
+                  trajectoryPoints[i].y,
+                  xc,
+                  yc
+                );
+              }
+
+              // 连接到最后一个点
+              ctx.quadraticCurveTo(
+                trajectoryPoints[trajectoryPoints.length - 1].x,
+                trajectoryPoints[trajectoryPoints.length - 1].y,
+                trajectoryPoints[trajectoryPoints.length - 1].x,
+                trajectoryPoints[trajectoryPoints.length - 1].y
+              );
+            }
+
+            ctx.stroke();
+          }
+        });
+      }
 
       // 显示角度数据
       function displayAngleData(angleData, container) {
@@ -327,10 +524,6 @@
             if (diff > 180) {
               diff = 360 - diff;
             }
-            // 如果角度差值小于60度，则认为角度相同
-            if (diff < 30) {
-              diff = 0;
-            }
 
             totalDifference += diff;
             validCount++;
@@ -372,10 +565,6 @@
             if (diff > 180) {
               diff = 360 - diff;
             }
-            // 如果角度差值小于20度，则认为角度相同
-            if (diff < 20) {
-              diff = 0;
-            }
 
             totalDifference += diff;
             validCount++;
@@ -399,26 +588,13 @@
         for (const refFrame of referenceBuffer) {
           for (const targetFrame of targetBuffer) {
             if (refFrame.angles && targetFrame.angles) {
-              // 计算上半身和下半身相似度
-              const upperBodySim = calculateUpperBodySimilarity(
+              const comparisonResult = compareAngles(
                 refFrame.angles,
                 targetFrame.angles
               );
-              const lowerBodySim = calculateLowerBodySimilarity(
-                refFrame.angles,
-                targetFrame.angles
-              );
-              
-              // 应用权重：上半身80%，下半身20%
-              const weightedSimilarity = (upperBodySim * 0.8) + (lowerBodySim * 0.2);
-              
-              if (weightedSimilarity > maxSimilarity) {
-                maxSimilarity = weightedSimilarity;
-                bestComparison = {
-                  similarity: weightedSimilarity,
-                  averageDifference: 0, // 可以根据需要计算
-                  validCount: 0 // 可以根据需要计算
-                };
+              if (comparisonResult.similarity > maxSimilarity) {
+                maxSimilarity = comparisonResult.similarity;
+                bestComparison = comparisonResult;
                 bestReferenceAngles = refFrame.angles;
                 bestTargetAngles = targetFrame.angles;
               }
@@ -485,6 +661,502 @@
         return [];
       }
 
+      // 加载参考视频
+      loadReferenceButton.addEventListener("click", () => {
+        if (referenceFileInput.files.length > 0) {
+          const file = referenceFileInput.files[0];
+          const url = URL.createObjectURL(file);
+          referenceVideo.src = url;
+        }
+        if (referenceVideo) {
+          startGameButton.disabled = false;
+        }
+      });
+
+      // 加载对比视频
+      loadTargetButton.addEventListener("click", () => {
+        // 如果正在使用摄像头，先停止摄像头
+        if (cameraStream) {
+          stopCamera();
+        }
+
+        if (targetFileInput.files.length > 0) {
+          const file = targetFileInput.files[0];
+          const url = URL.createObjectURL(file);
+          targetVideo.src = url;
+        }
+      });
+
+      // 加载示例视频函数
+      function loadExampleVideo(videoElement, examplePath) {
+        videoElement.src = examplePath;
+        videoElement.load();
+      }
+
+      // 加载视频文件函数
+      function loadVideoFile(videoElement, fileInput, file) {
+        if (file && file.type.startsWith('video/')) {
+          const url = URL.createObjectURL(file);
+          videoElement.src = url;
+          videoElement.load();
+
+        } else if (file && file.name.endsWith('.flv')) {
+          // 对于.flv文件，可能需要特殊处理
+          const url = URL.createObjectURL(file);
+          videoElement.src = url;
+          videoElement.load();
+
+        } else {
+          alert('请选择视频文件');
+        }
+      }
+
+      // 为参考视频和对比视频区域添加拖拽事件监听
+      referenceVideoSection.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        referenceVideoSection.style.borderColor = "var(--primary-color)";
+        referenceVideoSection.style.borderWidth = "2px";
+        referenceVideoSection.style.borderStyle = "dashed";
+      });
+
+      referenceVideoSection.addEventListener("dragleave", () => {
+        referenceVideoSection.style.borderColor = "";
+        referenceVideoSection.style.borderWidth = "";
+        referenceVideoSection.style.borderStyle = "";
+      });
+
+      referenceVideoSection.addEventListener("drop", (e) => {
+        e.preventDefault();
+        referenceVideoSection.style.borderColor = "";
+        referenceVideoSection.style.borderWidth = "";
+        referenceVideoSection.style.borderStyle = "";
+        if (e.dataTransfer.files.length) {
+          loadVideoFile(referenceVideo, referenceFileInput, e.dataTransfer.files[0]);
+        }
+      });
+
+      targetVideoSection.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        targetVideoSection.style.borderColor = "var(--primary-color)";
+        targetVideoSection.style.borderWidth = "2px";
+        targetVideoSection.style.borderStyle = "dashed";
+      });
+
+      targetVideoSection.addEventListener("dragleave", () => {
+        targetVideoSection.style.borderColor = "";
+        targetVideoSection.style.borderWidth = "";
+        targetVideoSection.style.borderStyle = "";
+      });
+
+      targetVideoSection.addEventListener("drop", (e) => {
+        e.preventDefault();
+        targetVideoSection.style.borderColor = "";
+        targetVideoSection.style.borderWidth = "";
+        targetVideoSection.style.borderStyle = "";
+        if (e.dataTransfer.files.length) {
+          loadVideoFile(targetVideo, targetFileInput, e.dataTransfer.files[0]);
+        }
+      });
+
+
+      // 加载示例参考视频
+      loadReferenceExampleButton.addEventListener("click", () => {
+        loadExampleVideo(referenceVideo, "./res/example.flv");
+      });
+
+
+      // 加载示例对比视频
+      loadTargetExampleButton.addEventListener("click", () => {
+        loadExampleVideo(targetVideo, "./res/example.flv");
+      });
+
+      // 对比视频加载完成事件
+      targetVideo.addEventListener("loadeddata", () => {
+        targetLoaded = true;
+        targetCanvas.width = targetVideo.videoWidth;
+        targetCanvas.height = targetVideo.videoHeight;
+        targetTotalTime.textContent = formatTime(targetVideo.duration);
+        targetPlayButton.disabled = false;
+        // targetAnalyzeButton.disabled = false;
+        if (referenceLoaded) {
+          startComparisonButton.disabled = false;
+        }
+      });
+
+      // 使用摄像头
+      useCameraButton.addEventListener("click", async () => {
+        try {
+          // 如果正在播放视频，先停止播放
+          targetVideo.pause();
+
+          // 获取摄像头流
+          cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              width: { ideal: 640 },
+              height: { ideal: 480 },
+              facingMode: "user",
+            },
+            audio: false,
+          });
+
+          // 设置视频源为摄像头流
+          targetVideo.srcObject = cameraStream;
+          targetVideo.play();
+
+          // 更新按钮状态
+          useCameraButton.disabled = false;
+          stopCameraButton.disabled = false;
+          targetPlayButton.disabled = false;
+          targetPauseButton.disabled = false;
+          targetAnalyzeButton.disabled = false;
+          targetLoaded = true;
+
+          // 设置画布尺寸
+          targetVideo.addEventListener(
+            "loadedmetadata",
+            () => {
+              targetCanvas.width = targetVideo.videoWidth;
+              targetCanvas.height = targetVideo.videoHeight;
+              targetTotalTime.textContent = "Live";
+            },
+            { once: true }
+          );
+
+          // 启用开始比较按钮（如果参考视频已加载）
+          if (referenceLoaded) {
+            startComparisonButton.disabled = false;
+          }
+        } catch (err) {
+          console.error("无法访问摄像头:", err);
+        }
+      });
+
+      // 停止摄像头
+      function stopCamera() {
+        if (cameraStream) {
+          const tracks = cameraStream.getTracks();
+          tracks.forEach((track) => track.stop());
+          cameraStream = null;
+          targetVideo.srcObject = null;
+
+          // 更新按钮状态
+          useCameraButton.disabled = false;
+          stopCameraButton.disabled = false;
+          targetAnalyzeButton.disabled = false;
+          targetLoaded = false;
+
+          // 禁用开始比较按钮
+          if (!targetFileInput.files.length) {
+            startComparisonButton.disabled = false;
+          }
+        }
+      }
+
+      // 停止摄像头按钮事件
+      stopCameraButton.addEventListener("click", stopCamera);
+
+      // 参考视频加载完成事件
+      referenceVideo.addEventListener("loadedmetadata", () => {
+        referenceLoaded = true;
+        referenceCanvas.width = referenceVideo.videoWidth;
+        referenceCanvas.height = referenceVideo.videoHeight;
+        referenceTotalTime.textContent = formatTime(referenceVideo.duration);
+        referencePlayButton.disabled = false;
+        referenceAnalyzeButton.disabled = false;
+        if (targetLoaded) {
+          startComparisonButton.disabled = false;
+        }
+      });
+
+      // 对比视频加载完成事件
+      targetVideo.addEventListener("loadedmetadata", () => {
+        targetLoaded = true;
+        targetCanvas.width = targetVideo.videoWidth;
+        targetCanvas.height = targetVideo.videoHeight;
+        targetTotalTime.textContent = formatTime(targetVideo.duration);
+        targetPlayButton.disabled = false;
+        targetAnalyzeButton.disabled = false;
+        if (referenceLoaded) {
+          startComparisonButton.disabled = false;
+        }
+      });
+
+      // 参考视频播放按钮
+      referencePlayButton.addEventListener("click", () => {
+        referenceVideo.play();
+      });
+
+      // 参考视频暂停按钮
+      referencePauseButton.addEventListener("click", () => {
+        referenceVideo.pause();
+      });
+
+      // 对比视频播放按钮
+      targetPlayButton.addEventListener("click", () => {
+        targetVideo.play();
+      });
+
+      // 对比视频暂停按钮
+      targetPauseButton.addEventListener("click", () => {
+        targetVideo.pause();
+      });
+
+      // 参考视频播放事件
+      referenceVideo.addEventListener("play", () => {
+        referencePlayButton.disabled = false;
+        referencePauseButton.disabled = false;
+      });
+
+      // 参考视频暂停事件
+      referenceVideo.addEventListener("pause", () => {
+        referencePlayButton.disabled = false;
+        referencePauseButton.disabled = false;
+      });
+
+      // 对比视频播放事件
+      targetVideo.addEventListener("play", () => {
+        targetPlayButton.disabled = false;
+        targetPauseButton.disabled = false;
+      });
+
+      // 对比视频暂停事件
+      targetVideo.addEventListener("pause", () => {
+        targetPlayButton.disabled = false;
+        targetPauseButton.disabled = false;
+      });
+
+      // 参考视频时间更新
+      referenceVideo.addEventListener("timeupdate", () => {
+        const currentTime = referenceVideo.currentTime;
+        const duration = referenceVideo.duration;
+        referenceCurrentTime.textContent = formatTime(currentTime);
+        referenceProgressBar.value = (currentTime / duration) * 100;
+      });
+
+      // 对比视频时间更新
+      targetVideo.addEventListener("timeupdate", () => {
+        // 如果正在使用摄像头，不更新进度条
+        if (cameraStream) {
+          targetCurrentTime.textContent = "Live";
+          targetProgressBar.value = 0;
+          return;
+        }
+
+        const currentTime = targetVideo.currentTime;
+        const duration = targetVideo.duration;
+        targetCurrentTime.textContent = formatTime(currentTime);
+        targetProgressBar.value = (currentTime / duration) * 100;
+      });
+
+      // 参考视频进度条拖动
+      referenceProgressBar.addEventListener("input", () => {
+        const duration = referenceVideo.duration;
+        const newTime = (referenceProgressBar.value / 100) * duration;
+        referenceVideo.currentTime = newTime;
+      });
+
+      // 对比视频进度条拖动
+      targetProgressBar.addEventListener("input", () => {
+        const duration = targetVideo.duration;
+        const newTime = (targetProgressBar.value / 100) * duration;
+        targetVideo.currentTime = newTime;
+      });
+
+      // 开始比较按钮
+      startComparisonButton.addEventListener("click", async () => {
+        totalScore = 100; // 初始总分为100
+        scoresPerBeat = [];
+        if (!referenceLoaded || !targetLoaded) return;
+
+        // 获取BPM值
+        const bpm = parseFloat(bpmInput.value) || 120;
+        beatInterval = 60 / bpm;
+
+        // 如果模型尚未加载，先加载模型
+        if (!referencePoseDetector || !targetPoseDetector) {
+          similarityStatus.textContent = "正在加载模型...";
+          await loadMoveNetModel();
+        }
+
+        comparisonRunning = true;
+        startComparisonButton.disabled = false;
+        stopComparisonButton.disabled = false;
+        startGameButton.disabled = false; // 启用开始游戏按钮
+        similarityStatus.textContent = "正在比较中...";
+
+        // 清空帧缓存
+        referenceFrameBuffer = [];
+        targetFrameBuffer = [];
+        currentSecond = -1;
+
+        // 清空上一次角度缓存
+        lastReferenceAngles = {};
+        lastTargetAngles = {};
+
+        // 重置记录时间
+        lastRecordedTime = 0;
+        maxSimilarityInCurrentInterval = 0;
+
+        // 同步播放两个视频
+
+        referenceVideo.play();
+        targetVideo.play();
+
+        // 开始相似度分析
+        startSimilarityAnalysis();
+      });
+
+      // 停止比较按钮
+      stopComparisonButton.addEventListener("click", () => {
+        comparisonRunning = false;
+        startComparisonButton.disabled = false;
+        stopComparisonButton.disabled = false;
+        referenceVideo.pause();
+        targetVideo.pause();
+        similarityStatus.textContent = "比较已停止";
+
+        // 如果正在使用摄像头，停止摄像头
+        if (cameraStream) {
+          stopCamera();
+        }
+      });
+
+      // 开始游戏按钮
+      startGameButton.addEventListener("click", () => {
+        enterGameMode();
+      });
+
+      // 退出游戏按钮
+      exitGameButton.addEventListener("click", () => {
+        exitGameMode();
+      });
+
+      // 进入游戏模式
+      function enterGameMode() {
+        // 检查参考视频是否加载
+        if (!referenceLoaded) {
+          alert("请先加载参考视频！");
+          return;
+        }
+
+        // 设置游戏模式标志
+        gameModeRunning = true;
+
+        // 显示游戏模式容器
+        gameModeContainer.style.display = "block";
+
+        // 复制参考视频源到游戏模式
+        gameReferenceVideo.src = referenceVideo.src;
+
+        // 检查对比视频是否加载，如果没有则使用摄像头
+        if (!targetLoaded) {
+          // 使用摄像头
+          navigator.mediaDevices
+            .getUserMedia({
+              video: {
+                width: { ideal: 640 },
+                height: { ideal: 480 },
+                facingMode: "user",
+              },
+              audio: false,
+            })
+            .then((stream) => {
+              gameTargetVideo.srcObject = stream;
+
+              startGameCountdown();
+            })
+            .catch((err) => {
+              console.error("无法访问摄像头:", err);
+              alert("无法访问摄像头，请确保已授予摄像头权限");
+              exitGameMode();
+            });
+        } else {
+          // 复制对比视频源到游戏模式
+          if (targetVideo.srcObject) {
+            gameTargetVideo.srcObject = targetVideo.srcObject;
+          } else {
+            gameTargetVideo.src = targetVideo.src;
+          }
+          startGameCountdown();
+        }
+      }
+
+      // 开始游戏倒计时
+      function startGameCountdown() {
+        // 显示倒计时
+        let countdownValue = 3;
+        countdownDisplay.style.display = "block";
+        countdownDisplay.textContent = countdownValue;
+
+        // 倒计时函数
+        const countdownInterval = setInterval(() => {
+          countdownValue--;
+          if (countdownValue > 0) {
+            countdownDisplay.textContent = countdownValue;
+          } else {
+            clearInterval(countdownInterval);
+            countdownDisplay.style.display = "none";
+            startSimilarityAnalysis();
+            // 倒计时结束，开始播放视频并启动比较
+            startGameComparison();
+          }
+        }, 1000);
+      }
+
+      // 开始游戏比较
+      function startGameComparison() {
+        // 同步播放状态
+        gameReferenceVideo.play();
+        gameTargetVideo.play();
+
+        // 如果比较尚未运行，则启动比较
+        if (!comparisonRunning) {
+          // 重置分数相关变量
+          totalScore = 120;
+          scoresPerBeat = [];
+
+          // 获取BPM值
+          const bpm = parseFloat(bpmInput.value) || 120;
+          beatInterval = 60 / bpm;
+
+          // 重置记录时间
+          lastRecordedTime = 0;
+          maxSimilarityInCurrentInterval = 0;
+
+          // 如果模型尚未加载，先加载模型
+          if (!referencePoseDetector || !targetPoseDetector) {
+            similarityStatus.textContent = "正在加载模型...";
+            loadMoveNetModel().then(() => {
+              comparisonRunning = true;
+              similarityStatus.textContent = "正在比较中...";
+              startSimilarityAnalysis();
+            });
+          } else {
+            comparisonRunning = true;
+            similarityStatus.textContent = "正在比较中...";
+            startSimilarityAnalysis();
+          }
+        }
+      }
+
+      // 退出游戏模式
+      function exitGameMode() {
+        // 设置游戏模式标志
+        gameModeRunning = false;
+
+        // 隐藏游戏模式容器
+        gameModeContainer.style.display = "none";
+
+        // 暂停游戏视频
+        gameReferenceVideo.pause();
+        gameTargetVideo.pause();
+
+        // 清除可能正在进行的倒计时
+        const countdownElements = document.querySelectorAll("#countdown");
+        countdownElements.forEach((element) => {
+          element.style.display = "none";
+        });
+      }
 
       // 相似度分析
       async function startSimilarityAnalysis() {
@@ -796,3 +1468,38 @@
         }
       }
 
+      // 页面加载完成初始化
+      document.addEventListener("DOMContentLoaded", () => {
+        // 初始化按钮状态
+        referencePlayButton.disabled = false;
+        referencePauseButton.disabled = false;
+        referenceAnalyzeButton.disabled = false;
+
+        targetPlayButton.disabled = false;
+        targetPauseButton.disabled = false;
+        targetAnalyzeButton.disabled = false;
+
+        startComparisonButton.disabled = false;
+        stopComparisonButton.disabled = false;
+        startGameButton.disabled = true; // 初始禁用开始游戏按钮
+
+        // BPM输入事件监听
+        bpmInput.addEventListener("change", () => {
+          const bpm = parseFloat(bpmInput.value) || 120;
+          beatInterval = 60 / bpm;
+        });
+
+        // 向参考视频和对比视频容器添加轨迹提示
+        const referenceWrapper =
+          document.querySelector("#referenceCanvas").parentElement;
+        if (referenceWrapper) {
+          referenceWrapper.appendChild(trajectoryHint.cloneNode(true));
+        }
+
+        const targetWrapper =
+          document.querySelector("#targetCanvas").parentElement;
+        if (targetWrapper) {
+          const targetHint = trajectoryHint.cloneNode(true);
+          targetWrapper.appendChild(targetHint);
+        }
+      });
