@@ -571,9 +571,9 @@
           }
         }
 
-        // 计算下半身相似度 (降低权重到原来的50%)
+        // 计算下半身相似度
         const similarity =
-          validCount > 0 ? Math.max(0, 100 - totalDifference) * 0.5 : 0;
+          validCount > 0 ? Math.max(0, 100 - totalDifference) : 0;
         return similarity;
       }
 
@@ -588,38 +588,13 @@
         for (const refFrame of referenceBuffer) {
           for (const targetFrame of targetBuffer) {
             if (refFrame.angles && targetFrame.angles) {
-              // 计算上半身和下半身相似度
-              const upperBodySim = calculateUpperBodySimilarity(
+              const comparisonResult = compareAngles(
                 refFrame.angles,
                 targetFrame.angles
               );
-              const lowerBodySim = calculateLowerBodySimilarity(
-                refFrame.angles,
-                targetFrame.angles
-              );
-              
-              let weightedSimilarity;
-              
-              // 只计算存在的肢体相似度
-              if (upperBodySim > 0 && lowerBodySim > 0) {
-                // 上下肢都存在时，按权重计算
-                weightedSimilarity = (upperBodySim * 0.7) + (lowerBodySim * 0.3);
-              } else if (upperBodySim > 0) {
-                // 只有上半身存在时，直接使用上半身相似度
-                weightedSimilarity = upperBodySim;
-              } else if (lowerBodySim > 0) {
-                // 只有下半身存在时，直接使用下半身相似度（恢复原始值）
-                weightedSimilarity = lowerBodySim / 0.5;
-              } else {
-                // 都不存在时，返回0
-                weightedSimilarity = 0;
-              }
-              
-              if (weightedSimilarity > maxSimilarity) {
-                maxSimilarity = weightedSimilarity;
-                bestComparison = {
-                  similarity: weightedSimilarity,
-                };
+              if (comparisonResult.similarity > maxSimilarity) {
+                maxSimilarity = comparisonResult.similarity;
+                bestComparison = comparisonResult;
                 bestReferenceAngles = refFrame.angles;
                 bestTargetAngles = targetFrame.angles;
               }
@@ -1507,6 +1482,9 @@
         startComparisonButton.disabled = false;
         stopComparisonButton.disabled = false;
         startGameButton.disabled = true; // 初始禁用开始游戏按钮
+
+        // 提前加载模型
+        loadMoveNetModel();
 
         // BPM输入事件监听
         bpmInput.addEventListener("change", () => {
