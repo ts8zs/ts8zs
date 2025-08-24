@@ -24,3 +24,5 @@
   * [的地得小游戏](https://www.ts8zs.com/de)
   * [数织](https://www.ts8zs.com/shuzhi)
   * [不限字母数量的WORDLE](https://www.ts8zs.com/anywordle)
+  * [114最有文化的一集](https://www.ts8zs.com/114514)
+  * [把所有舞蹈视频都变成跳舞游戏](https://www.ts8zs.com/d4w)
