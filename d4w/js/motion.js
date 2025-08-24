@@ -524,6 +524,10 @@
             if (diff > 180) {
               diff = 360 - diff;
             }
+            // 如果角度差值小于60度，则认为角度相同
+            if (diff < 30) {
+              diff = 0;
+            }
 
             totalDifference += diff;
             validCount++;
@@ -565,6 +569,10 @@
             if (diff > 180) {
               diff = 360 - diff;
             }
+            // 如果角度差值小于20度，则认为角度相同
+            if (diff < 20) {
+              diff = 0;
+            }
 
             totalDifference += diff;
             validCount++;
@@ -588,13 +596,26 @@
         for (const refFrame of referenceBuffer) {
           for (const targetFrame of targetBuffer) {
             if (refFrame.angles && targetFrame.angles) {
-              const comparisonResult = compareAngles(
+              // 计算上半身和下半身相似度
+              const upperBodySim = calculateUpperBodySimilarity(
                 refFrame.angles,
                 targetFrame.angles
               );
-              if (comparisonResult.similarity > maxSimilarity) {
-                maxSimilarity = comparisonResult.similarity;
-                bestComparison = comparisonResult;
+              const lowerBodySim = calculateLowerBodySimilarity(
+                refFrame.angles,
+                targetFrame.angles
+              );
+              
+              // 应用权重：上半身80%，下半身20%
+              const weightedSimilarity = (upperBodySim * 0.8) + (lowerBodySim * 0.2);
+              
+              if (weightedSimilarity > maxSimilarity) {
+                maxSimilarity = weightedSimilarity;
+                bestComparison = {
+                  similarity: weightedSimilarity,
+                  averageDifference: 0, // 可以根据需要计算
+                  validCount: 0 // 可以根据需要计算
+                };
                 bestReferenceAngles = refFrame.angles;
                 bestTargetAngles = targetFrame.angles;
               }
