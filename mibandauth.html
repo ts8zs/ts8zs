@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米运动健康authkey提取器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: #007bff;
+            background-color: #f8f9ff;
+        }
+        
+        .upload-area p {
+            margin: 0;
+            color: #666;
+        }
+        
+        #zipFileInput {
+            display: none;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        
+        .result-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .error {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .success {
+            color: #155724;
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .file-info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .log-file-list {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .log-file-item {
+            margin: 8px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .log-file-item:hover {
+            background-color: #f0f8ff;
+        }
+        
+        .log-file-item.selected {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>小米运动健康authkey提取器</h1>
+        
+        <div class="instructions">
+            <h3>日志提取方法:</h3>
+            <ol>
+                <li>打开小米运动健康APP</li>
+                <li>点击右下角"我的"</li>
+                <li>滑动到最下方选择"关于"</li>
+                <li>连续点击7下"小米运动健康"logo</li>
+                <li>回到这里上传Download/wearablelog/****.zip</li>
+            </ol>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <p>点击选择或拖拽日志ZIP文件到此处</p>
+            <input type="file" id="zipFileInput" accept=".zip">
+        </div>
+        
+        <div class="file-info hidden" id="fileInfo">
+            <strong>已选择文件:</strong> <span id="fileName"></span>
+        </div>
+        
+        <div id="resultContainer"></div>
+    </div>
+
+    <!-- 引入 JSZip 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const zipFileInput = document.getElementById('zipFileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const extractBtn = document.getElementById('extractBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileNameSpan = document.getElementById('fileName');
+            let currentZip = null;
+            let selectedLogFile = null;
+            
+            // 点击上传区域触发文件选择
+            uploadArea.addEventListener('click', () => {
+                zipFileInput.click();
+            });
+            
+            // 监听文件输入变化
+            zipFileInput.addEventListener('change', handleFileSelect);
+            
+            // 拖拽上传功能
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                uploadArea.classList.add('drag-over');
+            }
+            
+            function unhighlight() {
+                uploadArea.classList.remove('drag-over');
+            }
+            
+            uploadArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.name.endsWith('.zip')) {
+                        zipFileInput.files = files;
+                        handleFileSelect();
+                    } else {
+                        alert('请选择ZIP格式的文件');
+                    }
+                }
+            }
+            
+            function handleFileSelect() {
+                if (zipFileInput.files.length > 0) {
+                    const file = zipFileInput.files[0];
+                    fileNameSpan.textContent = file.name;
+                    fileInfo.classList.remove('hidden');
+                    
+                    // 加载ZIP文件并自动选择XiaomiFit.main.log，然后自动提取
+                    loadAndExtract(file);
+                }
+            }
+            
+            async function loadAndExtract(file) {
+                try {
+                    resultContainer.innerHTML = '<div class="loading">正在加载ZIP文件...</div>';
+                    currentZip = await JSZip.loadAsync(file);
+                    
+                    // 查找XiaomiFit.main.log文件（优先级最高）
+                    let mainLogFile = null;
+                    for (const fileName in currentZip.files) {
+                        if (fileName.toLowerCase().includes('xiaomifit.main.log')) {
+                            mainLogFile = fileName;
+                            break;
+                        }
+                    }
+                    
+                    if (mainLogFile) {
+                        selectedLogFile = mainLogFile;
+                        resultContainer.innerHTML = `<div class="loading">已自动选择文件: ${mainLogFile}，正在提取数据...</div>`;
+                        await extractData();
+                    } else {
+                        // 如果没找到main.log，查找其他可能的日志文件
+                        const logFiles = [];
+                        for (const fileName in currentZip.files) {
+                            if (fileName.toLowerCase().includes('.log') && !currentZip.files[fileName].dir) {
+                                logFiles.push(fileName);
+                            }
+                        }
+                        
+                        if (logFiles.length > 0) {
+                            // 选择第一个日志文件
+                            selectedLogFile = logFiles[0];
+                            resultContainer.innerHTML = `<div class="loading">已自动选择文件: ${selectedLogFile}，正在提取数据...</div>`;
+                            await extractData();
+                        } else {
+                            showError('在ZIP文件中未找到任何日志文件');
+                            return;
+                        }
+                    }
+                } catch (error) {
+                    console.error('处理ZIP文件时出错:', error);
+                    showError(`处理ZIP文件时出错: ${error.message}`);
+                }
+            }
+            
+            async function extractData() {
+                if (!currentZip || !selectedLogFile) {
+                    showError('请先选择一个日志文件');
+                    return;
+                }
+                
+                resultContainer.innerHTML = '<div class="loading">正在处理日志文件...</div>';
+                
+                try {
+                    // 获取选中的日志文件内容
+                    const logFile = currentZip.file(selectedLogFile);
+                    if (!logFile) {
+                        throw new Error(`无法找到文件: ${selectedLogFile}`);
+                    }
+                    
+                    const content = await logFile.async('text');
+                    const results = parseLogContent(content);
+                    
+                    if (results.length > 0) {
+                        displayResult(results, selectedLogFile);
+                    } else {
+                        // 尝试另一种格式
+                        const altResults = parseAlternativeFormat(content);
+                        if (altResults.length > 0) {
+                            displayResult(altResults, selectedLogFile);
+                        } else {
+                            showError(`在日志文件 "${selectedLogFile}" 中未找到productname或token信息`);
+                        }
+                    }
+                } catch (error) {
+                    console.error('处理文件时出错:', error);
+                    showError(`处理文件时出错: ${error.message}`);
+                }
+            }
+            
+            function parseLogContent(content) {
+                // 查找可能包含productname和token的JSON结构
+                const results = [];
+                
+                // 尝试匹配各种可能的JSON格式
+                const jsonLineRegex = /({[^{}]*"productName"[^{}]*"token"[^{}]*})|({[^{}]*"token"[^{}]*"productName"[^{}]*})/g;
+                let match;
+                
+                while ((match = jsonLineRegex.exec(content)) !== null) {
+                    try {
+                        const jsonObj = JSON.parse(match[0]);
+                        if (jsonObj.productName || jsonObj.token) {
+                            // 检查是否已经存在相同的设备信息
+                            const exists = results.some(item => 
+                                item.productName === jsonObj.productName && 
+                                item.token === jsonObj.token
+                            );
+                            
+                            if (!exists) {
+                                results.push({
+                                    productName: jsonObj.productName || null,
+                                    token: jsonObj.token || null
+                                });
+                            }
+                        }
+                    } catch (e) {
+                        // 忽略解析失败的行
+                    }
+                }
+                
+                return results;
+            }
+            
+            function parseAlternativeFormat(content) {
+                // 如果标准JSON格式不成功，则尝试其他格式
+                const results = [];
+                
+                // 匹配 "productName":"value" 或 "productName"="value" 等格式
+                const productNameRegex = /["']?productName["']?\s*[=:]\s*["']([^"']+)["']/g;
+                const tokenRegex = /["']?token["']?\s*[=:]\s*["']([^"']+)["']/g;
+                
+                const productNames = [];
+                let productNameMatch;
+                while ((productNameMatch = productNameRegex.exec(content)) !== null) {
+                    productNames.push(productNameMatch[1]);
+                }
+                
+                const tokens = [];
+                let tokenMatch;
+                while ((tokenMatch = tokenRegex.exec(content)) !== null) {
+                    tokens.push(tokenMatch[1]);
+                }
+                
+                // 尝试配对，同时去重
+                const maxLen = Math.max(productNames.length, tokens.length);
+                for (let i = 0; i < maxLen; i++) {
+                    const productName = productNames[i] || null;
+                    const token = tokens[i] || null;
+                    
+                    // 检查是否已存在相同记录
+                    const exists = results.some(item => 
+                        item.productName === productName && 
+                        item.token === token
+                    );
+                    
+                    if (!exists) {
+                        results.push({
+                            productName: productName,
+                            token: token
+                        });
+                    }
+                }
+                
+                return results;
+            }
+            
+            function displayResult(results, fileName) {
+                resultContainer.innerHTML = '';
+                
+                const successDiv = document.createElement('div');
+                successDiv.className = 'result success';
+                successDiv.innerHTML = `<h3>来自文件: ${fileName}</h3><h3>提取结果:</h3>`;
+                
+                if (results.length === 0) {
+                    successDiv.innerHTML += '<p>未找到任何匹配的数据</p>';
+                } else {
+                    results.forEach((result, index) => {
+                        if (result.productName || result.token) {
+                            const resultSection = document.createElement('div');
+                            resultSection.className = 'result-group';
+                            resultSection.innerHTML += `<h4>记录 ${index + 1}</h4>`;
+                            
+                            if (result.productName) {
+                                const productNameDiv = document.createElement('div');
+                                productNameDiv.className = 'result-item';
+                                productNameDiv.innerHTML = `<strong>产品名称:</strong> ${result.productName}`;
+                                resultSection.appendChild(productNameDiv);
+                            }
+                            
+                            if (result.token) {
+                                const tokenDiv = document.createElement('div');
+                                tokenDiv.className = 'result-item';
+                                tokenDiv.innerHTML = `<strong>AuthKey:</strong> <span class="token-text" onclick="copyToClipboard(this)" style="cursor: pointer; color: #007bff; text-decoration: underline;" data-token="${result.token}">${result.token}</span>`;
+                                resultSection.appendChild(tokenDiv);
+                            }
+                            
+                            successDiv.appendChild(resultSection);
+                        }
+                    });
+                }
+                
+                resultContainer.appendChild(successDiv);
+            }
+            
+            // 添加复制到剪贴板的函数
+            async function copyToClipboard(element) {
+                const token = element.getAttribute('data-token');
+                
+                // 尝试使用现代 Clipboard API（首选方法）
+                if (navigator.clipboard && window.isSecureContext) {
+                    try {
+                        await navigator.clipboard.writeText(token);
+                        showMessage('AuthKey已复制到剪贴板!');
+                        return;
+                    } catch (err) {
+                        console.error('Clipboard API 复制失败:', err);
+                    }
+                }
+                
+                // 如果 Clipboard API 不可用或失败，使用备用方法
+                // 创建一个临时的 textarea 元素
+                const textarea = document.createElement('textarea');
+                textarea.value = token;
+                
+                // 设置样式使其不可见且不干扰页面布局
+                textarea.style.cssText = `
+                    position: absolute;
+                    left: -9999px;
+                    top: -9999px;
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                `;
+                
+                // 添加到页面
+                document.body.appendChild(textarea);
+                
+                // 选中文本并复制
+                textarea.focus();
+                textarea.select();
+                
+                // 尝试复制
+                let successful = false;
+                try {
+                    successful = document.execCommand('copy');
+                } catch (err) {
+                    console.error('execCommand 复制失败:', err);
+                }
+                
+                // 清理：移除临时元素
+                document.body.removeChild(textarea);
+                
+                // 显示结果消息
+                if (successful) {
+                    showMessage('AuthKey已复制到剪贴板!');
+                } else {
+                    showMessage('复制失败，请手动复制');
+                }
+            }
+
+            function showMessage(msg) {
+                // 检查是否已有消息元素，如果有则移除
+                const existingMsg = document.querySelector('.copy-success-message');
+                if (existingMsg) {
+                    document.body.removeChild(existingMsg);
+                }
+                
+                const message = document.createElement('div');
+                message.textContent = msg;
+                message.className = 'copy-success-message';
+                message.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 10px 20px;
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6c3;
+                    border-radius: 4px;
+                    z-index: 1000;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                `;
+                
+                document.body.appendChild(message);
+                
+                // 2秒后自动移除消息
+                setTimeout(() => {
+                    if (document.body.contains(message)) {
+                        document.body.removeChild(message);
+                    }
+                }, 2000);
+            }
+            
+            function showError(message) {
+                resultContainer.innerHTML = `
+                    <div class="result error">
+                        <h3>错误</h3>
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
