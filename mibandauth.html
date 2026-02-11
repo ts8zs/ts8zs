@@ -144,6 +144,17 @@
         .hidden {
             display: none;
         }
+        
+        .copyable-text {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .copyable-text:hover {
+            background-color: #f0f8ff;
+        }
     </style>
 </head>
 <body>
@@ -429,7 +440,13 @@
                             if (result.token) {
                                 const tokenDiv = document.createElement('div');
                                 tokenDiv.className = 'result-item';
-                                tokenDiv.innerHTML = `<strong>AuthKey:</strong> <span class="token-text" onclick="copyToClipboard(this)" style="cursor: pointer; color: #007bff; text-decoration: underline;" data-token="${result.token}">${result.token}</span>`;
+                                tokenDiv.innerHTML = `<strong>AuthKey:</strong> <span class="copyable-text">${result.token}</span>`;
+                                // 添加点击复制功能
+                                tokenDiv.addEventListener('click', function(e) {
+                                    if (e.target.classList.contains('copyable-text')) {
+                                        copyToClipboard(e.target.textContent);
+                                    }
+                                });
                                 resultSection.appendChild(tokenDiv);
                             }
                             
@@ -440,61 +457,51 @@
                 
                 resultContainer.appendChild(successDiv);
             }
-            
-            // 添加复制到剪贴板的函数
-            async function copyToClipboard(element) {
-                const token = element.getAttribute('data-token');
-                
-                // 尝试使用现代 Clipboard API（首选方法）
+
+            // 添加复制到剪贴板函数
+            function copyToClipboard(text) {
+                // 首先尝试使用现代API
                 if (navigator.clipboard && window.isSecureContext) {
-                    try {
-                        await navigator.clipboard.writeText(token);
-                        showMessage('AuthKey已复制到剪贴板!');
-                        return;
-                    } catch (err) {
-                        console.error('Clipboard API 复制失败:', err);
-                    }
-                }
-                
-                // 如果 Clipboard API 不可用或失败，使用备用方法
-                // 创建一个临时的 textarea 元素
-                const textarea = document.createElement('textarea');
-                textarea.value = token;
-                
-                // 设置样式使其不可见且不干扰页面布局
-                textarea.style.cssText = `
-                    position: absolute;
-                    left: -9999px;
-                    top: -9999px;
-                    opacity: 0;
-                    width: 0;
-                    height: 0;
-                `;
-                
-                // 添加到页面
-                document.body.appendChild(textarea);
-                
-                // 选中文本并复制
-                textarea.focus();
-                textarea.select();
-                
-                // 尝试复制
-                let successful = false;
-                try {
-                    successful = document.execCommand('copy');
-                } catch (err) {
-                    console.error('execCommand 复制失败:', err);
-                }
-                
-                // 清理：移除临时元素
-                document.body.removeChild(textarea);
-                
-                // 显示结果消息
-                if (successful) {
-                    showMessage('AuthKey已复制到剪贴板!');
+                    navigator.clipboard.writeText(text).then(function() {
+                        showMessage('已复制到剪贴板!');
+                    }).catch(function(err) {
+                        console.error('复制失败:', err);
+                        fallbackCopyTextToClipboard(text);
+                    });
                 } else {
+                    // 降级方案
+                    fallbackCopyTextToClipboard(text);
+                }
+            }
+
+            // 降级复制方案
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                
+                // 避免滚动到底部
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.position = "fixed";
+                textArea.style.opacity = "0";
+                
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showMessage('已复制到剪贴板!');
+                    } else {
+                        showMessage('复制失败，请手动复制');
+                    }
+                } catch (err) {
+                    console.error('降级复制失败:', err);
                     showMessage('复制失败，请手动复制');
                 }
+
+                document.body.removeChild(textArea);
             }
 
             function showMessage(msg) {
