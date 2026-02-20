@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>耳机煲机工具</title>
+    <style>
+      body {
+        font-family: "Microsoft YaHei", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+      }
+
+      h2 {
+        color: #2980b9;
+        margin-bottom: 15px;
+      }
+
+      .frequency-controls {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .control-group {
+        text-align: center;
+      }
+
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      button:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+      }
+
+      .progress-container {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      progress {
+        width: 100%;
+        height: 20px;
+        border-radius: 10px;
+      }
+
+      .tips {
+        background-color: #e8f4fd;
+        padding: 15px;
+        border-left: 4px solid #3498db;
+        margin-top: 20px;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .active {
+        background-color: #27ae60;
+      }
+
+      .mode-btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎧 耳机煲机工具</h1>
+
+      <div class="section">
+        <h2>📝 免责声明</h2>
+        <p>本工具提供的耳机煲机功能仅供参考使用。用户在使用本工具时需自行承担一切风险：</p>
+        <ul>
+          <li>请确保您的耳机处于良好工作状态，如有损坏请勿使用本工具</li>
+          <li>建议先在低音量下试用几分钟，确认无异常后再继续</li>
+          <li>不同耳机型号对信号的响应特性不同，请根据实际情况调整使用方式</li>
+          <li>过度或不当使用可能导致耳机或耳朵性能下降甚至永久损坏</li>
+          <li>本工具不对任何因使用造成的设备损害负责</li>
+        </ul>
+        <p><strong>温馨提示：</strong>享受音乐的同时，请务必关注设备状态和听力健康。</p>
+      </div>
+    </div>
+
+      <div class="section">
+        <h2>🎛️ 煲机模式</h2>
+
+        <div class="control-group">
+          <h3>选择煲机模式:</h3>
+          <button class="mode-btn" data-mode="music">🎵 扫频模式 (推荐)</button>
+          <button class="mode-btn" data-mode="white-noise">🔊 白噪音</button>
+          <button class="mode-btn" data-mode="pink-noise">📊 粉红噪音</button>
+          <button class="mode-btn" data-mode="brown-noise">📦 棕色噪音</button>
+          <button class="mode-btn" data-mode="cleaning">🧹 低频清灰模式</button>
+        </div>
+
+        <div class="frequency-controls">
+
+          <div class="control-group">
+            <label for="duration">煲机时长 (分钟):</label>
+            <input type="number" id="duration" value="30" min="1" max="1440" />
+          </div>
+          <div class="control-group">
+            <label for="volume">音量:</label>
+            <input
+              type="range"
+              id="volume"
+              min="0"
+              max="1"
+              step="0.1"
+              value="0.5"
+            />
+            <span id="volumeValue">50%</span>
+          </div>
+        </div>
+          <div class="control-group">
+            <button id="startBtn">开始煲机</button>
+            <button id="stopBtn" disabled>停止煲机</button>
+          </div>
+        <div class="progress-container">
+          <p>煲机进度: <span id="progressText">0%</span></p>
+          <progress id="progressBar" value="0" max="100"></progress>
+          <p id="timeRemaining">剩余时间: --:--</p>
+        </div>
+
+        <div class="tips">
+          <strong>提示：</strong
+          >建议从较低音量开始，逐渐增加到正常听音水平的70%-80%。避免使用过高音量，以免损坏耳机。
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📋 煲机计划建议</h2>
+        <table style="width: 100%; border-collapse: collapse">
+          <tr style="background-color: #3498db; color: white">
+            <th style="padding: 10px; text-align: left">天数</th>
+            <th style="padding: 10px; text-align: left">建议时长</th>
+            <th style="padding: 10px; text-align: left">注意事项</th>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">第1天</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              2-4小时
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              使用轻柔音乐，音量30%-50%
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              第2-3天
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              4-6小时/天
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              可使用测试音频，音量50%-70%
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              第4-7天
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              6-8小时/天
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              正常使用，音量60%-80%
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              第8天后
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              根据需要
+            </td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd">
+              耳机已基本完成煲机，可正常使用
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>⚠️ 注意事项</h2>
+        <ul>
+          <li>不要使用过高音量进行煲机，这可能会永久损坏耳机</li>
+          <li>煲机过程中注意耳机是否有异常发热或异响</li>
+          <li>动圈耳机通常需要更长的煲机时间，而动铁耳机煲机时间相对较短</li>
+          <li>开放式耳机煲机时间一般比封闭式耳机要长</li>
+          <li>煲机效果因人而异，不要期望立竿见影的变化</li>
+          <li>
+            低频清灰模式建议使用较低音量（30%-50%），每次使用10-15分钟即可，避免长时间使用导致振膜过度振动
+          </li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>🎵 煲机说明</h2>
+        <p>
+          耳机煲机（Burn-in）是指通过长时间播放不同频率的声音信号，使耳机振膜和其他部件达到最佳工作状态的过程。新耳机的振膜通常比较紧，声音可能偏硬，通过适当的煲机可以改善音质表现。
+        </p>
+
+        <h3>煲机原理：</h3>
+        <ul>
+          <li>新耳机的振膜材料需要时间来"磨合"和松弛</li>
+          <li>煲机有助于提升低频的下潜深度和弹性</li>
+          <li>中高频会变得更加自然顺滑</li>
+          <li>声场和分离度会有所改善</li>
+        </ul>
+      </div>
+
+
+    <script>
+      // 音频上下文
+      let audioContext;
+      let oscillator = null;
+      let gainNode = null;
+      let noiseBuffer = null;
+      let isPlaying = false;
+      let timer = null;
+      let totalTime = 0;
+      let currentTime = 0;
+      let currentMode = "music";
+
+      // 获取DOM元素
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const durationInput = document.getElementById("duration");
+      const volumeSlider = document.getElementById("volume");
+      const volumeValue = document.getElementById("volumeValue");
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      const timeRemaining = document.getElementById("timeRemaining");
+      const modeButtons = document.querySelectorAll(".mode-btn");
+
+      // 初始化音量显示
+      updateVolumeDisplay();
+
+      // 音量滑块事件
+      volumeSlider.addEventListener("input", function () {
+        updateVolumeDisplay();
+        if (gainNode) {
+          gainNode.gain.setValueAtTime(this.value, audioContext.currentTime);
+        }
+      });
+
+      // 更新音量显示
+      function updateVolumeDisplay() {
+        const percent = Math.round(volumeSlider.value * 100);
+        volumeValue.textContent = `${percent}%`;
+      }
+
+      // 创建音频上下文
+      function initAudio() {
+        if (!audioContext) {
+          audioContext = new (
+            window.AudioContext || window.webkitAudioContext
+          )();
+          gainNode = audioContext.createGain();
+          gainNode.gain.value = volumeSlider.value;
+          gainNode.connect(audioContext.destination);
+
+          // 创建噪声缓冲区
+          createNoiseBuffers();
+        }
+      }
+
+      // 创建噪声缓冲区
+      function createNoiseBuffers() {
+        // 白噪音
+        const bufferSize = audioContext.sampleRate * 2; // 2秒的缓冲区
+        noiseBuffer = {
+          white: audioContext.createBuffer(
+            1,
+            bufferSize,
+            audioContext.sampleRate,
+          ),
+          pink: audioContext.createBuffer(
+            1,
+            bufferSize,
+            audioContext.sampleRate,
+          ),
+          brown: audioContext.createBuffer(
+            1,
+            bufferSize,
+            audioContext.sampleRate,
+          ),
+        };
+
+        // 填充白噪音数据
+        const whiteData = noiseBuffer.white.getChannelData(0);
+        const pinkData = noiseBuffer.pink.getChannelData(0);
+        const brownData = noiseBuffer.brown.getChannelData(0);
+
+        let lastPink = 0;
+        let lastBrown = 0;
+
+        for (let i = 0; i < bufferSize; i++) {
+          // 白噪音: -1 到 1 之间的随机值
+          whiteData[i] = Math.random() * 2 - 1;
+
+          // 粉红噪音
+          let pink = Math.random() * 2 - 1;
+          pink = (lastPink + 0.02 * pink) / 1.02;
+          lastPink = pink;
+          pinkData[i] = pink * 3.5; // 缩放以匹配音量
+
+          // 棕色噪音
+          let brown = Math.random() * 2 - 1;
+          brown = (lastBrown + 0.02 * brown) / 1.02;
+          lastBrown = brown;
+          brownData[i] = lastBrown * 3.5 - (brownData[i - 1] || 0) * 0.998;
+        }
+      }
+
+      // 播放特定模式的音频
+      function playMode(mode) {
+        if (!audioContext) {
+          initAudio();
+        }
+
+        // 停止当前播放
+        stopCurrentPlayback();
+
+        switch (mode) {
+          case "music":
+            // 模拟音乐播放 - 使用扫频正弦波
+            oscillator = audioContext.createOscillator();
+            oscillator.type = "sine";
+
+            // 从20Hz扫频到20kHz
+            const now = audioContext.currentTime;
+            oscillator.frequency.setValueAtTime(20, now);
+            oscillator.frequency.exponentialRampToValueAtTime(20000, now + 30); // 30秒内完成扫频
+
+            // 循环扫频
+            const interval = setInterval(() => {
+              const startTime = audioContext.currentTime;
+              oscillator.frequency.setValueAtTime(20, startTime);
+              oscillator.frequency.exponentialRampToValueAtTime(
+                20000,
+                startTime + 30,
+              );
+            }, 30000);
+
+            // 存储interval ID以便停止
+            oscillator.loopInterval = interval;
+            oscillator.connect(gainNode);
+            oscillator.start();
+            break;
+
+          case "white-noise":
+          case "pink-noise":
+          case "brown-noise":
+            // 播放噪声
+            const noiseType = mode.split("-")[0];
+            const source = audioContext.createBufferSource();
+            source.buffer = noiseBuffer[noiseType];
+            source.loop = true;
+            source.connect(gainNode);
+            source.start();
+
+            // 存储source以便停止
+            oscillator = source;
+            break;
+
+          case "cleaning":
+            // 低频清灰模式 - 使用1-60Hz的扫频正弦波
+            oscillator = audioContext.createOscillator();
+            oscillator.type = "sine";
+
+            // 设置较低的频率范围，专门用于清除振膜上的灰尘
+            const cleanNow = audioContext.currentTime;
+            oscillator.frequency.setValueAtTime(1, cleanNow); // 从1Hz开始
+            oscillator.frequency.exponentialRampToValueAtTime(
+              60,
+              cleanNow + 15,
+            ); // 15秒内扫频到60Hz
+
+            // 循环低频扫频
+            const cleanInterval = setInterval(() => {
+              const startTime = audioContext.currentTime;
+              oscillator.frequency.setValueAtTime(1, startTime);
+              oscillator.frequency.exponentialRampToValueAtTime(
+                60,
+                startTime + 15,
+              );
+            }, 15000);
+
+            // 存储interval ID以便停止
+            oscillator.loopInterval = cleanInterval;
+            oscillator.connect(gainNode);
+            oscillator.start();
+            break;
+        }
+      }
+
+      // 停止当前播放
+      function stopCurrentPlayback() {
+        if (oscillator) {
+          try {
+            oscillator.stop();
+
+            // 清理循环定时器
+            if (oscillator.loopInterval) {
+              clearInterval(oscillator.loopInterval);
+            }
+          } catch (e) {
+            // 已经停止的情况
+          }
+          oscillator = null;
+        }
+      }
+
+      // 开始煲机
+      startBtn.addEventListener("click", function () {
+        if (isPlaying) return;
+
+        initAudio();
+
+        const duration = parseInt(durationInput.value) * 60; // 转换为秒
+        if (duration <= 0) {
+          alert("请输入有效的煲机时长！");
+          return;
+        }
+
+        totalTime = duration;
+        currentTime = 0;
+
+        // 播放当前选定模式
+        playMode(currentMode);
+
+        // 启动计时器
+        timer = setInterval(updateTimer, 1000);
+
+        // 更新UI状态
+        isPlaying = true;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        durationInput.disabled = true;
+        modeButtons.forEach((btn) => {
+          btn.disabled = true;
+        });
+
+        updateTimer();
+      });
+
+      // 停止煲机
+      stopBtn.addEventListener("click", function () {
+        if (!isPlaying) return;
+
+        // 停止音频
+        stopCurrentPlayback();
+
+        // 停止计时器
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+
+        // 更新UI状态
+        isPlaying = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        durationInput.disabled = false;
+        modeButtons.forEach((btn) => {
+          btn.disabled = false;
+        });
+
+        // 重置进度
+        progressBar.value = 0;
+        progressText.textContent = "0%";
+        timeRemaining.textContent = "剩余时间: --:--";
+      });
+
+      // 更新计时器
+      function updateTimer() {
+        currentTime++;
+
+        // 计算进度
+        const progress = (currentTime / totalTime) * 100;
+        progressBar.value = progress;
+        progressText.textContent = `${Math.round(progress)}%`;
+
+        // 计算剩余时间
+        const remainingSeconds = totalTime - currentTime;
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = remainingSeconds % 60;
+        timeRemaining.textContent = `剩余时间: ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+        // 检查是否完成
+        if (currentTime >= totalTime) {
+          stopBtn.click();
+          alert("🎉 煲机完成！请让耳机休息一段时间后再使用。");
+        }
+      }
+
+      // 模式选择
+      modeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          if (isPlaying) {
+            alert("请先停止当前煲机，再切换模式。");
+            return;
+          }
+
+          // 更新选中状态
+          modeButtons.forEach((btn) => {
+            btn.classList.remove("active");
+          });
+          this.classList.add("active");
+
+          // 更新当前模式
+          currentMode = this.dataset.mode;
+        });
+      });
+
+      // 页面卸载时停止音频
+      window.addEventListener("beforeunload", function () {
+        if (isPlaying) {
+          stopCurrentPlayback();
+          if (timer) {
+            clearInterval(timer);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
