@@ -9,6 +9,7 @@
 
 #### 和AI聊天系列
 
+  * [天才和狗屁工作](/talent)  
   * [占卜与自我验证](/8g)  
   * [有这么高速运转的AI进入中国](/highspeed)  
   * [TerrorFlow](/terrorflow)
