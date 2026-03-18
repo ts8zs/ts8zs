@@ -1,0 +1,8 @@
+# 歌曲资源文件（体积较大）
+songs/
+
+# 其他可能需要的忽略项
+node_modules/
+*.log
+.DS_Store
+Thumbs.db

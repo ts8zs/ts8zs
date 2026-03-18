@@ -19,6 +19,7 @@
   * [人月神话的攻受关系](/m2m)
   * [音乐游戏的难度定数](/ahardmug)
   * [平等与公平](/equalnotfair)
+  * [纽科姆悖论和机会成本](/Newcomb)
 
 #### AI做的小游戏
   * [儿化音小游戏](https://www.ts8zs.com/er)
