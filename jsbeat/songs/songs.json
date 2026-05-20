@@ -166,6 +166,17 @@
       ]
     },
     {
+      "id": "shineonme",
+      "name": "Shine On Me",
+      "artist": "kors k",
+      "bpm": 170,
+      "levels": [
+        4,
+        8,
+        9
+      ]
+    },
+    {
       "id": "sigsig",
       "name": "sigsig",
       "artist": "kors k",
@@ -188,6 +199,17 @@
       ]
     },
     {
+      "id": "spacecarnival",
+      "name": "スペースカーニバル",
+      "artist": "shooting star",
+      "bpm": 160,
+      "levels": [
+        4,
+        7,
+        9
+      ]
+    },
+    {
       "id": "Sunshine Girl",
       "name": "Sunshine Girl",
       "artist": "moumoon",
@@ -206,6 +228,17 @@
       "levels": [
         5,
         8,
+        10
+      ]
+    },
+    {
+      "id": "Water Horizon",
+      "name": "Water Horizon",
+      "artist": "青龍",
+      "bpm": 191,
+      "levels": [
+        5,
+        9,
         10
       ]
     },
@@ -265,6 +298,17 @@
       ]
     },
     {
+      "id": "天国と地獄",
+      "name": "天国と地獄",
+      "artist": "Mutsuhiko Izumi",
+      "bpm": 195,
+      "levels": [
+        3,
+        8,
+        9
+      ]
+    },
+    {
       "id": "情熱大陸",
       "name": "情熱大陸",
       "artist": "葉加瀬太郎",
@@ -273,6 +317,17 @@
         2,
         7,
         9
+      ]
+    },
+    {
+      "id": "渚の小悪魔ラヴリィ～レイディオ",
+      "name": "†渚の小悪魔ラヴリィ～レイディオ†",
+      "artist": "夏色ビキニのPrim",
+      "bpm": 190,
+      "levels": [
+        0,
+        0,
+        10
       ]
     },
     {
