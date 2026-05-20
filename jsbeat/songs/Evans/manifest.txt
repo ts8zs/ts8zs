@@ -1,0 +1,7 @@
+﻿/* evans */
+
+Name=Evans
+Composer=DJ YOSHITAKA
+BPM=185
+From=「JUBEAT 初代」所收录的BENAMI原创歌曲
+Level=6,8,10

@@ -1,0 +1,7 @@
+﻿/* russiansnowydance */
+
+Name=Russian Snowy Dance
+Composer=Mutsuhiko Izumi
+BPM=170-240
+From=「JUBEAT ripples」所收录的BENAMI原创曲目
+Level=5,8,10

@@ -1,0 +1,7 @@
+﻿/* ymca */
+
+Name=Y.M.C.A.
+Composer=VILLAGE PEOPLE
+BPM=123-126
+From=美国的士高组合VILLAGE PEOPLE在1978年公布的单曲
+Level=2,5,7

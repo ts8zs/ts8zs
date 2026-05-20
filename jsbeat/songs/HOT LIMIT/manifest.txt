@@ -1,0 +1,7 @@
+﻿/* hotlimit */
+
+Name=HOT LIMIT
+Composer=HIGH and MIGHTY COLOR
+BPM=139
+From=「T.M.Revolution」代表曲目
+Level=5,7,8

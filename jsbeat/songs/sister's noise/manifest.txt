@@ -1,0 +1,7 @@
+﻿/*sister's noise*/
+
+Name=sister's noise
+Composer=动画[某科学的超电磁炮s]op
+BPM=144
+From=[iboogie]自制曲目
+Level=0,0,8

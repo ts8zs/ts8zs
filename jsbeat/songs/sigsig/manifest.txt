@@ -1,0 +1,7 @@
+﻿/* sigsig */
+
+Name=sigsig
+Composer=kors k
+BPM=179
+From=[jubeat官方原创曲目
+Level=6,8,9

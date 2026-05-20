@@ -1,0 +1,7 @@
+﻿/* sandstorm */
+
+Name=Sandstorm
+Composer=Darude
+BPM=136
+From=「JUBEAT knit」所收录的版权曲目
+Level=2,6,8

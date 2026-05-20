@@ -1,0 +1,7 @@
+﻿/* Flip Flap */
+
+Name=Flip Flap
+Composer=kors k
+BPM=175
+From=「JUBEAT saucer」所追加的原创曲目
+Level=4,7,9

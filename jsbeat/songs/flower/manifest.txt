@@ -1,0 +1,7 @@
+﻿/* flower */
+
+Name=FLOWER
+Composer=DJ YOSHITAKA
+BPM=173
+From=「JUBEAT knit APPEND」所追加的BENAMI原创曲目
+Level=6,9,10

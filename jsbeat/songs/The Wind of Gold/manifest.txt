@@ -1,0 +1,7 @@
+﻿/* thewindofgold */
+
+Name=The Wind of Gold
+Composer=kors k
+BPM=170
+From=「JUBEAT copious APPEND」所追加的BENAMI原创曲目
+Level=5,8,10

@@ -1,0 +1,7 @@
+﻿/* sumidagawa */
+
+Name=隅田川夏恋歌
+Composer=Seiya murai feat. ALT
+BPM=180
+From=「JUBEAT ripples」所收录的BENAMI原创曲目
+Level=5,7,9

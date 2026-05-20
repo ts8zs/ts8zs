@@ -1,0 +1,7 @@
+﻿/* natsumatsuri */
+
+Name=夏祭り
+Composer=ジッタリンジン
+BPM=142
+From=JITTERIN'JINN 的第4首单曲
+Level=2,6,8

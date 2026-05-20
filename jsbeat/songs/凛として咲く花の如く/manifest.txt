@@ -1,0 +1,7 @@
+﻿/* rintohana */
+
+Name=凛として咲く花の如く
+Composer=紅色リトマス
+BPM=163
+From=「JUBEAT 初代」中收录的BENAMI原创曲目
+Level=4,7,9

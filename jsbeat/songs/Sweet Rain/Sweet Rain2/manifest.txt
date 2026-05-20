@@ -1,0 +1,7 @@
+﻿/* Sweet Rain */
+
+Name=Sweet Rain
+Composer=Jazztronik
+BPM=127
+From=[jubeat plus]Jazztronik pack配信曲目
+Level=3,5,7

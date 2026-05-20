@@ -1,0 +1,7 @@
+﻿/* bass2bass */
+
+Name=bass 2 bass
+Composer=Ryu☆
+BPM=140
+From=「JUBEAT 初代」所收录的BENAMI原创歌曲
+Level=5,6,8

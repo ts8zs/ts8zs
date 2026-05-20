@@ -1,0 +1,7 @@
+﻿/* shirokotori */
+
+Name=白鳥の湖
+Composer=Swan Lake Orchestra
+BPM=180
+From=由著名古典乐曲「天鹅湖」改编
+Level=4,7,9

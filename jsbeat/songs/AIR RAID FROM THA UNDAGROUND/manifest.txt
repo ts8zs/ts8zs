@@ -1,0 +1,7 @@
+﻿/* airraidfromthaundaground */
+
+Name=AIR RAID FROM THA UNDAGROUND
+Composer=GUHROOVY
+BPM=180
+From=「JUBEAT ripples APPEND」所追加的BENAMI原创曲目
+Level=5,9,10

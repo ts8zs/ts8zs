@@ -1,0 +1,7 @@
+﻿/* truelove */
+
+Name=TRUE LOVE
+Composer=jun feat. Schanita
+BPM=188
+From=「JUBEAT」所追加的BENAMI原创曲目
+Level=3,7,9

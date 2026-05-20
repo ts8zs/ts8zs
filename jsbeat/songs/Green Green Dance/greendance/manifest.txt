@@ -1,0 +1,7 @@
+﻿/* greendance */
+
+Name=Green Green Dance
+Composer=Mutsuhiko Izumi
+BPM=165
+From=「JUBEAT knit」所收录的BENAMI原创曲目
+Level=4,8,9

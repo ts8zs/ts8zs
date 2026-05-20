@@ -1,0 +1,7 @@
+﻿/* onlymyrailgun */
+
+Name=only my railgun
+Composer=fripSide
+BPM=143
+From=TV动画「とある科学の超電磁砲」OP
+Level=3,6,8

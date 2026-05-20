@@ -1,0 +1,7 @@
+﻿/* imymemine */
+
+Name=I my me mine
+Composer=POLYSICS
+BPM=167
+From=POLYSICS于2006年公布的EP歌曲
+Level=3,6,8

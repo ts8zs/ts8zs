@@ -1,0 +1,7 @@
+﻿/* 千本桜 */
+
+Name=千本桜
+Composer=黒うさP
+BPM=154
+From=[jubeat saucer]第一期就被毁灭的版权曲目
+Level=3,7,9

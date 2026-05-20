@@ -1,0 +1,7 @@
+﻿/* 情熱大陸 */
+
+Name=情熱大陸
+Composer=葉加瀬太郎
+BPM=128
+From=TBS「情熱大陸」片头曲
+Level=2,7,9

@@ -1,0 +1,7 @@
+﻿/* ロストワンの号哭 */
+
+Name=ロストワンの号哭
+Composer=Neru
+BPM=161
+From=【EXIT TUNES Pack vol.3】收录乐曲
+Level=4,8,10

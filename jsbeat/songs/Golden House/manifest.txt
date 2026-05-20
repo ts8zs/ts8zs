@@ -1,0 +1,7 @@
+﻿/* Golden House */
+
+Name=Golden House(黄金屋)
+Composer=BMA群星
+BPM=130
+From=「JUBEAT ripples」所收录的中文版权曲目
+Level=4,6,8

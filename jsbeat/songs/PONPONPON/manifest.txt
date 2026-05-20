@@ -1,0 +1,7 @@
+﻿/* PONPONPON */
+
+Name=PONPONPON
+Composer=きゃりーぱみゅぱみゅ 
+BPM=128
+From=[jubeat copious APPEND ]版权曲目
+Level=,5,7

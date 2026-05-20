@@ -1,0 +1,7 @@
+﻿/* sunshinegirl */
+
+Name=Sunshine Girl
+Composer=moumoon
+BPM=103
+From=资生堂「ANESSA」（2010年版）CM歌曲
+Level=1,5,8

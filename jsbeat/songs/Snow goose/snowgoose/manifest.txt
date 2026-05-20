@@ -1,0 +1,7 @@
+﻿/* snowgoose */
+
+Name=Snow Goose
+Composer=Mutsuhiko Izumi
+BPM=200
+From=「JUBEAT」所追加的BENAMI原创曲目
+Level=5,7,8
