@@ -1,0 +1,7 @@
+﻿/* 天国と地獄  */
+
+Name=天国と地獄 
+Composer=Mutsuhiko Izumi 
+BPM=195
+From=[jubeat]原创曲目
+Level=3,8,9

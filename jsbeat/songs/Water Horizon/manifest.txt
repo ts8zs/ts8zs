@@ -1,0 +1,6 @@
+﻿/* Water Horizon */
+
+Name=Water Horizon
+Composer=青龍
+BPM=191
+Level=5,9,10

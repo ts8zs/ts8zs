@@ -1,0 +1,7 @@
+﻿/* spacecarnival */
+
+Name=スペースカーニバル 
+Composer=shooting star
+BPM=160
+From=「JUBEAT ripples APPEND」所追加的BENAMI原创曲目
+Level=4,7,9

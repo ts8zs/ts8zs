@@ -1,0 +1,7 @@
+﻿/* shineonme */
+
+Name=Shine On Me
+Composer=kors k
+BPM=170
+From=「JUBEAT knit」所收录的BENAMI原创曲目
+Level=4,8,9

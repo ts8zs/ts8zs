@@ -1,0 +1,7 @@
+﻿/* †渚の小悪魔ラヴリィ～レイディオ† */
+
+Name=†渚の小悪魔ラヴリィ～レイディオ†
+Composer=夏色ビキニのPrim
+BPM=190
+From=[jubeat saucer]第一期公布原创曲目
+Level=0,0,10
