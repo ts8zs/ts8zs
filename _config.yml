@@ -27,7 +27,7 @@ exclude:
 # Collections: blog posts grouped by series. Files keep their own
 # permalink so URLs stay clean (e.g. /talent/), file names don't need dates.
 collections:
-  ai-chat:
+  aichat:
     output: true
   ugc:
     output: true
@@ -41,7 +41,7 @@ defaults:
       layout: "default"
   - scope:
       path: ""        # all collection docs
-      type: "ai-chat"
+      type: "aichat"
     values:
       layout: "post"
   - scope:
