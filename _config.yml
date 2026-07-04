@@ -24,28 +24,11 @@ exclude:
   - vendor
   - .vscode
 
-# Collections: blog posts grouped by series. Files keep their own
-# permalink so URLs stay clean (e.g. /talent/), file names don't need dates.
-collections:
-  aichat:
-    output: true
-  ugc:
-    output: true
-
-# Default layout for pages and collection docs.
+# Default layout for the markdown blog posts moved to root.
+# Individual files set their own permalink so URLs stay clean (e.g. /talent/).
 defaults:
   - scope:
       path: ""        # all pages
       type: pages
     values:
       layout: "default"
-  - scope:
-      path: ""        # all collection docs
-      type: "aichat"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "ugc"
-    values:
-      layout: "post"

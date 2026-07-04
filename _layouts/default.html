@@ -221,16 +221,25 @@
       <nav class="sidebar-nav">
         <h3>和 AI 聊天系列</h3>
         <ul>
-          {% for post in site.aichat %}
-          <li><a href="{{ post.permalink }}" {% if page.url == post.permalink %}class="active"{% endif %}>{{ post.title }}</a></li>
-          {% endfor %}
+          <li><a href="/talent/" {% if page.url == '/talent/' %}class="active"{% endif %}>天才和狗屁工作</a></li>
+          <li><a href="/8g/" {% if page.url == '/8g/' %}class="active"{% endif %}>占卜与自我验证</a></li>
+          <li><a href="/highspeed/" {% if page.url == '/highspeed/' %}class="active"{% endif %}>有这么高速运转的 AI 进入中国</a></li>
+          <li><a href="/terrorflow/" {% if page.url == '/terrorflow/' %}class="active"{% endif %}>TerrorFlow</a></li>
+          <li><a href="/olympics/" {% if page.url == '/olympics/' %}class="active"{% endif %}>如何评价奥运会开幕式</a></li>
+          <li><a href="/galani/" {% if page.url == '/galani/' %}class="active"{% endif %}>gal 改动画为什么多暴死</a></li>
+          <li><a href="/talkgamewithdeepseek/" {% if page.url == '/talkgamewithdeepseek/' %}class="active"{% endif %}>做游戏就是竹篮打水</a></li>
+          <li><a href="/m2m/" {% if page.url == '/m2m/' %}class="active"{% endif %}>人月神话的攻受关系</a></li>
+          <li><a href="/ahardmug/" {% if page.url == '/ahardmug/' %}class="active"{% endif %}>音乐游戏的难度定数</a></li>
+          <li><a href="/equalnotfair/" {% if page.url == '/equalnotfair/' %}class="active"{% endif %}>平等与公平</a></li>
+          <li><a href="/Newcomb/" {% if page.url == '/Newcomb/' %}class="active"{% endif %}>纽科姆悖论和机会成本</a></li>
+          <li><a href="/kejie/" {% if page.url == '/kejie/' %}class="active"{% endif %}>人无完人</a></li>
         </ul>
 
         <h3>UGC 相关</h3>
         <ul>
-          {% for post in site.ugc %}
-          <li><a href="{{ post.permalink }}" {% if page.url == post.permalink %}class="active"{% endif %}>{{ post.title }}</a></li>
-          {% endfor %}
+          <li><a href="/GBG/" {% if page.url == '/GBG/' %}class="active"{% endif %}>GBG 使用体验</a></li>
+          <li><a href="/hypehype/" {% if page.url == '/hypehype/' %}class="active"{% endif %}>HypeHype 使用体验</a></li>
+          <li><a href="/roblox/" {% if page.url == '/roblox/' %}class="active"{% endif %}>[译]所以你想与 Roblox 竞争吗</a></li>
         </ul>
 
 
