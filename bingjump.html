@@ -38,5 +38,15 @@
             document.body.innerHTML = '请输入搜索参数（例如：?q=关键词）';
         }
     </script>
+
+<style>
+#home-corner-btn{position:fixed;bottom:0;left:0;width:72px;height:72px;z-index:99999;
+  background:#2e7d32;clip-path:polygon(0 0,0 100%,100% 100%);
+  display:flex;align-items:flex-end;justify-content:flex-start;padding:6px 0 6px 8px;
+  box-sizing:border-box;text-decoration:none;}
+#home-corner-btn svg{width:28px;height:28px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));}
+:fullscreen #home-corner-btn,:-webkit-full-screen #home-corner-btn{display:none!important;}
+</style>
+<a id="home-corner-btn" href="/" title="//go home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 10.5v9.5a2 2 0 0 0 2 2h5v-7h6v7h5a2 2 0 0 0 2-2v-9.5L12 2z"/></svg></a>
 </body>
 </html>
