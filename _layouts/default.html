@@ -218,6 +218,8 @@
     <aside class="sidebar">
       <div class="sidebar-brand"><a href="/">{{ site.title }}</a></div>
       <nav class="sidebar-nav">
+
+        <a href="/" {% if page.url == '/' %}class="active"{% endif %}>提升8智商</a>
         <h3>UGC 相关</h3>
         <ul>
           <li><a href="/GBG/" {% if page.url == '/GBG/' %}class="active"{% endif %}>GBG 使用体验</a></li>
@@ -241,8 +243,9 @@
           <li><a href="/kejie/" {% if page.url == '/kejie/' %}class="active"{% endif %}>人无完人</a></li>
         </ul>
 
-        <h3>AI 做的小游戏</h3>
-        <ul>
+        <h3>AI 做的小东西</h3>
+        <ul>          
+          <li><a href="/game.html" {% if page.url == '/game.html' %}class="active"{% endif %}>DVD小游戏</a></li>
           <li><a href="/er.html" {% if page.url == '/er.html' %}class="active"{% endif %}>儿化音小游戏</a></li>
           <li><a href="/de.html" {% if page.url == '/de.html' %}class="active"{% endif %}>的地得小游戏</a></li>
           <li><a href="/shuzhi.html" {% if page.url == '/shuzhi.html' %}class="active"{% endif %}>数织</a></li>
@@ -253,12 +256,7 @@
           <li><a href="/RTLC.html" {% if page.url == '/RTLC.html' %}class="active"{% endif %}>节奏天国奇迹之星歌词对比</a></li>
         </ul>
 
-        <h3>其他</h3>
-        <ul>
-          <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>首页</a></li>
-          <li><a href="/game.html" {% if page.url == '/game.html' %}class="active"{% endif %}>首页游戏</a></li>
-          <li><a href="https://greasyfork.org/zh-CN/users/207890-ts8zs">油猴脚本</a></li>
-        </ul>
+
       </nav>
     </aside>
 
