@@ -17,7 +17,10 @@
       --link-hover: #2c8c5e;
       --border: #eaecef;
       --code-bg: #f6f8fa;
-      --max-width: 820px;
+      --sidebar-bg: #fafbfc;
+      --active-bg: rgba(66, 185, 131, 0.12);
+      --sidebar-width: 250px;
+      --main-max: 820px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -29,6 +32,8 @@
         --link-hover: #7fe0b0;
         --border: #30363d;
         --code-bg: #2d333b;
+        --sidebar-bg: #161718;
+        --active-bg: rgba(88, 211, 154, 0.15);
       }
     }
 
@@ -45,44 +50,88 @@
       font-size: 16px;
     }
 
-    a {
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    /* ====== Layout: sidebar + main ====== */
+    .layout {
+      display: flex;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      flex: 0 0 var(--sidebar-width);
+      width: var(--sidebar-width);
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 20px 16px 60px;
+      font-size: 0.93em;
+    }
+
+    .sidebar-brand {
+      font-weight: 700;
+      font-size: 1.15em;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-brand a { color: var(--fg); }
+
+    .sidebar-nav h3 {
+      margin: 16px 0 6px;
+      font-size: 0.8em;
+      color: var(--muted);
+      text-transform: none;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .sidebar-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-nav li { margin: 0; }
+    .sidebar-nav a {
+      display: block;
+      padding: 5px 10px;
+      border-radius: 4px;
+      color: var(--fg);
+      line-height: 1.45;
+    }
+    .sidebar-nav a:hover {
+      background: var(--active-bg);
       color: var(--link);
       text-decoration: none;
     }
-    a:hover { color: var(--link-hover); text-decoration: underline; }
-
-    .wrapper {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 24px 20px 80px;
+    .sidebar-nav a.active {
+      background: var(--active-bg);
+      color: var(--link);
+      font-weight: 600;
     }
 
-    header.site {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      max-width: var(--max-width);
+    .main {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 32px 40px 80px;
+    }
+    .main-inner {
+      max-width: var(--main-max);
       margin: 0 auto;
     }
-    header.site .brand {
-      font-weight: 700;
-      font-size: 18px;
-    }
-    header.site .brand a { color: var(--fg); }
-    header.site nav a {
-      margin-left: 14px;
-      color: var(--muted);
-    }
 
-    main h1 { font-size: 1.9em; margin-top: 0; }
-    main h2 { font-size: 1.4em; margin-top: 1.6em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
-    main h3 { font-size: 1.15em; margin-top: 1.4em; }
+    /* ====== Typography in main ====== */
+    .main h1 { font-size: 1.9em; margin-top: 0; }
+    .main h2 { font-size: 1.4em; margin-top: 1.6em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+    .main h3 { font-size: 1.15em; margin-top: 1.4em; }
+    .main img { max-width: 100%; }
 
-    main img { max-width: 100%; }
-
-    main blockquote {
+    .main blockquote {
       border-left: 4px solid var(--link);
       margin: 1em 0;
       padding: 0.4em 1em;
@@ -91,33 +140,31 @@
       border-radius: 0 4px 4px 0;
     }
 
-    main code {
+    .main code {
       background: var(--code-bg);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 0.9em;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
-    main pre {
+    .main pre {
       background: var(--code-bg);
       padding: 12px 14px;
       border-radius: 6px;
       overflow-x: auto;
       line-height: 1.45;
     }
-    main pre code { background: transparent; padding: 0; }
+    .main pre code { background: transparent; padding: 0; }
 
-    main table {
+    .main table {
       border-collapse: collapse;
       margin: 1em 0;
       width: 100%;
     }
-    main th, main td {
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-    }
-    main th { background: var(--code-bg); }
+    .main th, .main td { border: 1px solid var(--border); padding: 6px 12px; }
+    .main th { background: var(--code-bg); }
 
+    /* ====== Footer ====== */
     footer.site {
       position: fixed;
       bottom: 0;
@@ -125,15 +172,15 @@
       padding: 10px;
       font-size: 13px;
       color: var(--muted);
+      background: var(--bg);
     }
     footer.site a { color: var(--muted); }
 
-    /* Homepage-specific */
-    .home-hero {
-      padding: 28px 0 18px;
-    }
+    /* ====== Homepage blocks ====== */
+    .home-hero { padding: 8px 0 18px; }
     .home-hero h1 { margin: 0 0 8px; font-size: 2em; }
     .home-hero .tagline { color: var(--muted); margin: 4px 0; }
+
     .home-contact {
       margin: 18px 0;
       padding: 14px 16px;
@@ -142,51 +189,85 @@
       font-size: 0.95em;
     }
     .home-contact p { margin: 4px 0; }
-    .home-game {
-      margin: 18px 0 28px;
-    }
-    .home-game a {
-      display: inline-block;
-      padding: 8px 16px;
-      border: 1px solid var(--link);
-      border-radius: 6px;
-      color: var(--link);
-    }
-    .home-game a:hover { background: var(--link); color: var(--bg); text-decoration: none; }
 
-    .post-list { margin: 22px 0; }
-    .post-list h2 {
-      font-size: 1.15em;
-      color: var(--muted);
-      border: none;
-      margin: 22px 0 8px;
-      padding: 0;
-    }
-    .post-list ul { list-style: none; padding-left: 0; margin: 0; }
-    .post-list li { padding: 4px 0; }
-
-    .post-header {
-      margin-bottom: 18px;
-    }
+    /* ====== Post page ====== */
+    .post-header { margin-bottom: 18px; }
     .post-header .back { font-size: 0.85em; color: var(--muted); }
     .post-header h1 { margin: 6px 0 0; }
 
-    .hidden-comment { display: none; }
+    /* ====== Mobile: sidebar collapses to top ====== */
+    @media (max-width: 820px) {
+      .layout { flex-direction: column; }
+      .sidebar {
+        position: static;
+        width: 100%;
+        flex: 0 0 auto;
+        height: auto;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 14px 16px;
+      }
+      .main { padding: 24px 18px 80px; }
+    }
   </style>
 </head>
 
 <body>
-  <header class="site">
-    <div class="brand"><a href="/">{{ site.title }}</a></div>
-    <nav>
-      <a href="/">首页</a>
-      <a href="/game.html">游戏</a>
-    </nav>
-  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><a href="/">{{ site.title }}</a></div>
+      <nav class="sidebar-nav">
+        <h3>UGC 相关</h3>
+        <ul>
+          <li><a href="/GBG/" {% if page.url == '/GBG/' %}class="active"{% endif %}>GBG 使用体验</a></li>
+          <li><a href="/hypehype/" {% if page.url == '/hypehype/' %}class="active"{% endif %}>HypeHype 使用体验</a></li>
+          <li><a href="/roblox/" {% if page.url == '/roblox/' %}class="active"{% endif %}>[译]所以你想与 Roblox 竞争吗</a></li>
+        </ul>
 
-  <main class="wrapper">
-    {{ content }}
-  </main>
+        <h3>和 AI 聊天系列</h3>
+        <ul>
+          <li><a href="/talent/" {% if page.url == '/talent/' %}class="active"{% endif %}>天才和狗屁工作</a></li>
+          <li><a href="/8g/" {% if page.url == '/8g/' %}class="active"{% endif %}>占卜与自我验证</a></li>
+          <li><a href="/highspeed/" {% if page.url == '/highspeed/' %}class="active"{% endif %}>有这么高速运转的 AI 进入中国</a></li>
+          <li><a href="/terrorflow/" {% if page.url == '/terrorflow/' %}class="active"{% endif %}>TerrorFlow</a></li>
+          <li><a href="/olympics/" {% if page.url == '/olympics/' %}class="active"{% endif %}>如何评价奥运会开幕式</a></li>
+          <li><a href="/galani/" {% if page.url == '/galani/' %}class="active"{% endif %}>gal 改动画为什么多暴死</a></li>
+          <li><a href="/talkgamewithdeepseek/" {% if page.url == '/talkgamewithdeepseek/' %}class="active"{% endif %}>做游戏就是竹篮打水</a></li>
+          <li><a href="/m2m/" {% if page.url == '/m2m/' %}class="active"{% endif %}>人月神话的攻受关系</a></li>
+          <li><a href="/ahardmug/" {% if page.url == '/ahardmug/' %}class="active"{% endif %}>音乐游戏的难度定数</a></li>
+          <li><a href="/equalnotfair/" {% if page.url == '/equalnotfair/' %}class="active"{% endif %}>平等与公平</a></li>
+          <li><a href="/Newcomb/" {% if page.url == '/Newcomb/' %}class="active"{% endif %}>纽科姆悖论和机会成本</a></li>
+          <li><a href="/kejie/" {% if page.url == '/kejie/' %}class="active"{% endif %}>人无完人</a></li>
+        </ul>
+
+        <h3>AI 做的小游戏</h3>
+        <ul>
+          <li><a href="/er.html" {% if page.url == '/er.html' %}class="active"{% endif %}>儿化音小游戏</a></li>
+          <li><a href="/de.html" {% if page.url == '/de.html' %}class="active"{% endif %}>的地得小游戏</a></li>
+          <li><a href="/shuzhi.html" {% if page.url == '/shuzhi.html' %}class="active"{% endif %}>数织</a></li>
+          <li><a href="/anywordle.html" {% if page.url == '/anywordle.html' %}class="active"{% endif %}>不限字母数量的 WORDLE</a></li>
+          <li><a href="/114514/" {% if page.url == '/114514/' %}class="active"{% endif %}>114 最有文化的一集</a></li>
+          <li><a href="/d4w/" {% if page.url == '/d4w/' %}class="active"{% endif %}>把所有舞蹈视频都变成跳舞游戏</a></li>
+          <li><a href="/jsbeat/" {% if page.url == '/jsbeat/' %}class="active"{% endif %}>Jubeat 模拟器</a></li>
+          <li><a href="/RTLC.html" {% if page.url == '/RTLC.html' %}class="active"{% endif %}>节奏天国奇迹之星歌词对比</a></li>
+        </ul>
+
+        <h3>其他</h3>
+        <ul>
+          <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>首页</a></li>
+          <li><a href="/game.html" {% if page.url == '/game.html' %}class="active"{% endif %}>首页游戏</a></li>
+          <li><a href="https://greasyfork.org/zh-CN/users/207890-ts8zs">油猴脚本</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="main-inner">
+        {{ content }}
+      </div>
+    </main>
+  </div>
 
   <footer class="site">
     <a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
