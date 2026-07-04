@@ -1,46 +1,69 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3; url=/index.html"> <!-- 3 秒后跳转 -->
-    <title>提升?智商</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 5%;
-        }
-        h1 {
-            color: #ff0000;
-        }
-        p {
-            margin-top: 20px;
-        }
-    </style>
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "qk8jzgjvf7");
-    </script>
-</head>
-<body>
-    <h1>抱歉，您访问的页面不存在。</h1>
-    <p>将在<span id="countdown">3</span>秒后返回<a href="/index.html">首页</a>.</p>
+---
+layout: default
+permalink: /404.html
+---
 
-    <script>
-        var countdownElement = document.getElementById('countdown');
-        var countDownTime = parseInt(countdownElement.innerText);
+<style>
+  .notfound {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .notfound h1 {
+    font-size: 2.4em;
+    margin-bottom: 12px;
+  }
+  .notfound p {
+    color: var(--muted);
+    margin: 8px 0;
+  }
+  .notfound .countdown {
+    color: var(--link);
+    font-weight: 600;
+  }
+  .notfound a {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--fg);
+  }
+  .notfound a:hover {
+    background: var(--active-bg);
+    text-decoration: none;
+  }
+</style>
 
-        setInterval(function () {
-            if (countDownTime > 0) {
-                countDownTime--;
-                countdownElement.textContent = countDownTime.toString();
-            } else {
-                window.location.href = '/index.html';
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+<div class="notfound">
+  <h1>404</h1>
+  <p>抱歉，您访问的页面不存在。</p>
+  <p>将在 <span class="countdown" id="countdown">3</span> 秒后返回上一页</p>
+  <a href="/" id="home-link">返回首页</a>
+</div>
+
+<script>
+  (function () {
+    var hasPrev = (window.history.length > 1 && document.referrer !== '');
+    var homeLink = document.getElementById('home-link');
+    if (!hasPrev) {
+      document.querySelector('.notfound p:last-of-type').innerHTML =
+        '将在 <span class="countdown" id="countdown">3</span> 秒后返回<a href="/">首页</a>';
+    }
+
+    var countdownEl = document.getElementById('countdown');
+    var t = parseInt(countdownEl.innerText, 10);
+    var timer = setInterval(function () {
+      t--;
+      if (t > 0) {
+        countdownEl.textContent = t;
+      } else {
+        clearInterval(timer);
+        if (hasPrev) {
+          window.history.back();
+        } else {
+          window.location.href = '/';
+        }
+      }
+    }, 1000);
+  })();
+</script>
