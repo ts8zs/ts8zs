@@ -131,6 +131,33 @@
     .main h3 { font-size: 1.15em; margin-top: 1.4em; }
     .main img { max-width: 100%; }
 
+    /* Anchor link for headings (click to copy) */
+    .main h2, .main h3, .main h4, .main h5, .main h6 { position: relative; }
+    .main h2 > .anchor-link,
+    .main h3 > .anchor-link,
+    .main h4 > .anchor-link,
+    .main h5 > .anchor-link,
+    .main h6 > .anchor-link {
+      position: absolute;
+      left: -1.2em;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      opacity: 0;
+      font-weight: 400;
+      text-decoration: none;
+      padding: 0 0.2em;
+      user-select: none;
+    }
+    .main h2:hover > .anchor-link,
+    .main h3:hover > .anchor-link,
+    .main h4:hover > .anchor-link,
+    .main h5:hover > .anchor-link,
+    .main h6:hover > .anchor-link { opacity: 1; }
+    .main .anchor-link:hover { color: var(--link); text-decoration: none; }
+    .main .anchor-link.copied { color: var(--link); opacity: 1; }
+    .main .anchor-link.copied::after { content: " ✓"; }
+
     .main blockquote {
       border-left: 4px solid var(--link);
       margin: 1em 0;
@@ -267,6 +294,47 @@
       t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
       y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "qk8jzgjvf7");
+  </script>
+
+  <script>
+    // 为 .main 中的 h1~h6 注入可复制锚点链接
+    (function () {
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); resolve(); }
+          catch (e) { reject(e); }
+          finally { document.body.removeChild(ta); }
+        });
+      }
+
+      var headings = document.querySelectorAll('.main h1 .main h2, .main h3, .main h4, .main h5, .main h6');
+      headings.forEach(function (h) {
+        if (!h.id) return;
+        var a = document.createElement('a');
+        a.className = 'anchor-link';
+        a.href = '#' + h.id;
+        a.textContent = '#';
+        a.title = '复制锚点链接';
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var url = location.origin + location.pathname + '#' + h.id;
+          copyText(url).then(function () {
+            a.classList.add('copied');
+            setTimeout(function () { a.classList.remove('copied'); }, 1500);
+          });
+        });
+        h.appendChild(a);
+      });
+    })();
   </script>
 </body>
 
