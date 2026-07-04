@@ -29,3 +29,4 @@
   * [114最有文化的一集](https://www.ts8zs.com/114514)
   * [把所有舞蹈视频都变成跳舞游戏](https://www.ts8zs.com/d4w)
   * [Jubeat模拟器](https://www.ts8zs.com/jsbeat)
+  * [节奏天国奇迹之星歌词对比](https://www.ts8zs.com/RTLC)
