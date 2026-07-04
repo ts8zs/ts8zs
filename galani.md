@@ -1,3 +1,9 @@
+---
+layout: post
+title: "gal改动画为什么多暴死"
+permalink: "/galani/"
+---
+
 # gal改动画为什么多暴死
 
 gal改难做和gal的剧情节奏和叙事结构也有关系  

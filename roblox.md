@@ -1,3 +1,9 @@
+---
+layout: post
+title: "[译]所以你想与 Roblox 竞争吗"
+permalink: "/roblox/"
+---
+
 # 所以你想与 Roblox 竞争吗
 ## 转译自 https://www.fortressofdoors.com/so-you-want-to-compete-with-roblox/
 

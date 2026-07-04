@@ -1,1 +1,7 @@
 .vscode/
+# Jekyll build artifacts (only relevant if running Jekyll locally;
+# GitHub Pages builds on the server so these are not committed)
+_site/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock

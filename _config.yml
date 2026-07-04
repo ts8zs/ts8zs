@@ -1,0 +1,37 @@
+title: 提升8智商
+description: Ts8zs - 提升8智商的代码存放处
+url: "https://www.ts8zs.com"
+lang: zh-CN
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+
+# These files/folders are NOT processed by Jekyll but still copied to _site as-is.
+# We list nothing here that would break the static pages; instead we rely on the
+# fact that HTML files without front matter pass through unchanged by Liquid.
+exclude:
+  - README.md
+  - CNAME
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .vscode
+  - hitsounds-08zs.zip
+  - allwords.txt
+  - commonwords.txt
+
+# Default layout for the markdown blog posts moved to root.
+# Individual files set their own permalink so URLs stay clean (e.g. /talent/).
+defaults:
+  - scope:
+      path: ""        # all pages
+      type: pages
+    values:
+      layout: "default"

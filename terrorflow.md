@@ -1,3 +1,9 @@
+---
+layout: post
+title: "TerrorFlow"
+permalink: "/terrorflow/"
+---
+
 > 突然想玩TensorFlow的梗 就这样  
 > 恐怖游戏的核心机制是什么
 

@@ -1,3 +1,9 @@
+---
+layout: post
+title: "HypeHype 使用体验"
+permalink: "/hypehype/"
+---
+
 # GBG，但更难 —— HypeHype(EA)
 大体是GBG的威力加强版 关于节点编程的优劣势可参考GBG一文  
 

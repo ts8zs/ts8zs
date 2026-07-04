@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="icon" href="/favicon.svg">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #2c3e50;
+      --muted: #8492a6;
+      --link: #42b983;
+      --link-hover: #2c8c5e;
+      --border: #eaecef;
+      --code-bg: #f6f8fa;
+      --max-width: 820px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1d1f21;
+        --fg: #c9d1d9;
+        --muted: #8b949e;
+        --link: #58d39a;
+        --link-hover: #7fe0b0;
+        --border: #30363d;
+        --code-bg: #2d333b;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    header.site {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    header.site .brand {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    header.site .brand a { color: var(--fg); }
+    header.site nav a {
+      margin-left: 14px;
+      color: var(--muted);
+    }
+
+    main h1 { font-size: 1.9em; margin-top: 0; }
+    main h2 { font-size: 1.4em; margin-top: 1.6em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+    main h3 { font-size: 1.15em; margin-top: 1.4em; }
+
+    main img { max-width: 100%; }
+
+    main blockquote {
+      border-left: 4px solid var(--link);
+      margin: 1em 0;
+      padding: 0.4em 1em;
+      color: var(--muted);
+      background: var(--code-bg);
+      border-radius: 0 4px 4px 0;
+    }
+
+    main code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+    main pre {
+      background: var(--code-bg);
+      padding: 12px 14px;
+      border-radius: 6px;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+    main pre code { background: transparent; padding: 0; }
+
+    main table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      width: 100%;
+    }
+    main th, main td {
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+    }
+    main th { background: var(--code-bg); }
+
+    footer.site {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer.site a { color: var(--muted); }
+
+    /* Homepage-specific */
+    .home-hero {
+      padding: 28px 0 18px;
+    }
+    .home-hero h1 { margin: 0 0 8px; font-size: 2em; }
+    .home-hero .tagline { color: var(--muted); margin: 4px 0; }
+    .home-contact {
+      margin: 18px 0;
+      padding: 14px 16px;
+      background: var(--code-bg);
+      border-radius: 8px;
+      font-size: 0.95em;
+    }
+    .home-contact p { margin: 4px 0; }
+    .home-game {
+      margin: 18px 0 28px;
+    }
+    .home-game a {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid var(--link);
+      border-radius: 6px;
+      color: var(--link);
+    }
+    .home-game a:hover { background: var(--link); color: var(--bg); text-decoration: none; }
+
+    .post-list { margin: 22px 0; }
+    .post-list h2 {
+      font-size: 1.15em;
+      color: var(--muted);
+      border: none;
+      margin: 22px 0 8px;
+      padding: 0;
+    }
+    .post-list ul { list-style: none; padding-left: 0; margin: 0; }
+    .post-list li { padding: 4px 0; }
+
+    .post-header {
+      margin-bottom: 18px;
+    }
+    .post-header .back { font-size: 0.85em; color: var(--muted); }
+    .post-header h1 { margin: 6px 0 0; }
+
+    .hidden-comment { display: none; }
+  </style>
+</head>
+
+<body>
+  <header class="site">
+    <div class="brand"><a href="/">{{ site.title }}</a></div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/game.html">游戏</a>
+    </nav>
+  </header>
+
+  <main class="wrapper">
+    {{ content }}
+  </main>
+
+  <footer class="site">
+    <a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
+  </footer>
+
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "qk8jzgjvf7");
+  </script>
+</body>
+
+</html>

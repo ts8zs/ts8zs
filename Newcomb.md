@@ -1,3 +1,9 @@
+---
+layout: post
+title: "纽科姆悖论和机会成本"
+permalink: "/Newcomb/"
+---
+
 # 两个盒子 两样人生
 
 > 纽科姆悖论是什么

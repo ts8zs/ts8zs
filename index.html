@@ -1,162 +1,67 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+---
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ts8zs - 提升8智商的代码存放处</title>
-    <script src="pixi.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: black;
-        }
+<div class="home-hero">
+  <h1>你好呀</h1>
+  <p class="tagline">没见过把 Jekyll 当博客用的吧()</p>
+  <p class="tagline">音游和逻辑解谜游戏爱好者</p>
+</div>
 
-        a {
-            color: #fff;
-            text-decoration: none;
-            user-select: none;
-        }
-    </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.svg">
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "qk8jzgjvf7");
-    </script>
-</head>
+<div class="home-contact">
+  <p>Email: 这个域名@这个域名</p>
+  <p>QQ: 这个域名@qq.com</p>
+  <p>WX: IQPLUS8</p>
+  <p>osu!: <a href="https://osu.ppy.sh/users/838176">Ts8zs</a></p>
+  <p>Steam: <a href="https://steamcommunity.com/id/ts8zs/">Ts8zs</a></p>
+  <p>油猴脚本: <a href="https://greasyfork.org/zh-CN/users/207890-ts8zs">Greasy Fork</a></p>
+</div>
 
-<body>
-    <div style="position: fixed;bottom: 0;user-select: none;padding: 10px;">
-        <a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
-    </div>
-    <div style="position: fixed;bottom: 0;left: 50%;transform: translateX(-50%);user-select: none;">
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=52
-            src="//music.163.com/outchain/player?type=0&id=9495100&auto=0&height=32"></iframe>
-    </div>
-    <div style="position: fixed;bottom: 0;right:0;user-select: none;padding: 10px;"><a href="/homie">进入主页</a></div>
-</body>
-<script>
-    console.log(atob('ICBfX19fXyAgICAgX19fXyAgICAgICBfX18gICAgICAgX19fX18gICAgX19fXyAgICAgICAgICAgIF9fX18gICAgIFUgIF9fXyB1ICAgX18gIF9fICAgDQogfF8gIiBffCAgIC8gX18ifCB1ICBVKCAiICkgdSAgIHwiXyAgL3UgIC8gX18ifCB1ICAgICAgVSAvIl9fX3wgICAgIFwvIl8gXC8gVXwnIFwvICd8dSANCiAgIHwgfCAgICA8XF9fXyBcLyAgIFwvICAgXC8gICAgVSAvIC8vICA8XF9fXyBcLyAgICAgICBcfCB8IHUgICAgICAgfCB8IHwgfCBcfCB8XC98IHwvIA0KICAvfCB8XCAgICB1X19fKSB8ICAgfCAoICkgfCAgICBcLyAvXyAgICB1X19fKSB8ICAgICAgICB8IHwvX18gIC4tLF98IHxffCB8ICB8IHwgIHwgfCAgDQogdSB8X3xVICAgIHxfX19fLz4+ICAgXF9fXy8+PiAgIC9fX19ffCAgIHxfX19fLz4+ICAgXyAgICBcX19fX3wgIFxfKS1cX19fLyAgIHxffCAgfF98ICANCiBfLy8gXFxfICAgICkoICAoX18pICAgKSggKF9fKSAgXy8vPDwsLSAgICkoICAoX18pICgiKSAgXy8vIFxcICAgICAgICBcXCAgICA8PCwtLCwtLiAgIA0KKF9fKSAoX18pICAoX18pICAgICAgIChfXykgICAgIChfXykgKF8vICAoX18pICAgICAgICIgIChfXykoX18pICAgICAgKF9fKSAgICAoLi8gIFwuKSAg'));
-    //copilot with github copilot
-    let app = new PIXI.Application({
-        width: window.innerWidth,
-        height: window.innerHeight,
-    });
-    document.body.appendChild(app.view);
+<div class="home-game">
+  <a href="/game.html">进入首页游戏</a>
+</div>
 
-    let lost = '提升';
-    let style = new PIXI.TextStyle({});
-    let target = new PIXI.Text(`${lost}\n8\n智商`, style);
-    target.anchor.set(0.5);
-    app.stage.addChild(target);
+<div class="post-list">
+  <h2>UGC 相关</h2>
+  <ul>
+    <li><a href="/GBG/">GBG 使用体验</a></li>
+    <li><a href="/hypehype/">HypeHype 使用体验</a></li>
+    <li><a href="/roblox/">[译]所以你想与 Roblox 竞争吗</a></li>
+  </ul>
 
-    let vx = 1;
-    let vy = 1;
-    let hue = 0;
-    let score = 8;
-    let die = 0;
+  <h2>和 AI 聊天系列</h2>
+  <ul>
+    <li><a href="/talent/">天才和狗屁工作</a></li>
+    <li><a href="/8g/">占卜与自我验证</a></li>
+    <li><a href="/highspeed/">有这么高速运转的 AI 进入中国</a></li>
+    <li><a href="/terrorflow/">TerrorFlow</a></li>
+    <li><a href="/olympics/">如何评价奥运会开幕式</a></li>
+    <li><a href="/galani/">gal 改动画为什么多暴死</a></li>
+    <li><a href="/talkgamewithdeepseek/">做游戏就是竹篮打水</a></li>
+    <li><a href="/m2m/">人月神话的攻受关系</a></li>
+    <li><a href="/ahardmug/">音乐游戏的难度定数</a></li>
+    <li><a href="/equalnotfair/">平等与公平</a></li>
+    <li><a href="/Newcomb/">纽科姆悖论和机会成本</a></li>
+    <li><a href="/kejie/">人无完人</a></li>
+  </ul>
 
-    //用矩形填充背景
-    let background = new PIXI.Graphics();
+  <h2>AI 做的小游戏</h2>
+  <ul>
+    <li><a href="/er.html">儿化音小游戏</a></li>
+    <li><a href="/de.html">的地得小游戏</a></li>
+    <li><a href="/shuzhi.html">数织</a></li>
+    <li><a href="/anywordle.html">不限字母数量的 WORDLE</a></li>
+    <li><a href="/114514/">114 最有文化的一集</a></li>
+    <li><a href="/d4w/">把所有舞蹈视频都变成跳舞游戏</a></li>
+    <li><a href="/jsbeat/">Jubeat 模拟器</a></li>
+    <li><a href="/RTLC.html">节奏天国奇迹之星歌词对比</a></li>
+  </ul>
+</div>
 
-    background.beginFill(0x000000);
-    background.drawRect(0, 0, app.screen.width, app.screen.height);
-    background.endFill();
-    app.stage.addChildAt(background, 0);
-
-    app.ticker.add(() => {
-        target.x += vx;
-        target.y += vy;
-        //文字边缘碰到画布边缘时反弹
-        if (target.x > app.screen.width - target.width / 2) {
-            vx = -vx;
-            target.x = app.screen.width - target.width / 2;
-        } else if (target.x < target.width / 2) {
-            vx = -vx;
-            target.x = target.width / 2;
-        }
-        if (target.y > app.screen.height - target.height / 2) {
-            vy = -vy;
-            target.y = app.screen.height - target.height / 2;
-        } else if (target.y < target.height / 2) {
-            vy = -vy;
-            target.y = target.height / 2;
-        }
-        hue += 1;
-        //hue超出范围时重置
-        if (hue > 360) {
-            hue = 0;
-        }
-        target.style = new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 36,
-            fill: `hsl(${hue}, 100%, 50%)`,
-            wordWrap: true,
-            wordWrapWidth: 440,
-            align: "center",
-        });
-
-    });
-    let highscore = 8;
-    target.interactive = true;
-    target.on('pointerdown', () => {
-        score += 1;
-        target.text = `${lost}\n${score}\n智商`;
-        if (score > highscore) {
-            highscore = score;
-            document.title = `Ts${highscore}zs - 提升${highscore}智商`;
-        }
-
-        vx = Math.random() > 0.5 ? Math.abs(vx) : -Math.abs(vx);
-        vy = Math.random() > 0.5 ? Math.abs(vy) : -Math.abs(vy);
-        vx *= 1.01;
-        vy *= 1.01;
-    });
-
-    //点击到屏幕空白位置时分数归8速度还原 点击文字位置时则不会
-    app.stage.interactive = true;
-    app.stage.on('pointerdown', (e) => {
-        if (e.target == app.stage && die < 10) {
-            score = 8;
-            vx = 1;
-            vy = 1;
-            //还原背景颜色为黑色
-            background.beginFill(0x000000);
-            background.drawRect(0, 0, app.screen.width, app.screen.height);
-            background.endFill();
-            die += 1;
-            if (die == 10) {
-                lost = '降低'
-            }
-            target.text = `${lost}\n${score}\n智商`;
-        }
-    });
-
-
-    //当窗口大小改变时重新设置画布大小
-    window.onresize = () => {
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        target.x = app.screen.width / 2;
-        target.y = app.screen.height / 2;
-        //重新修改背景大小
-        background.drawRect(0, 0, app.screen.width, app.screen.height);
-        background.endFill();
-    };
-    //每秒score减1 最低减到8
-    // setInterval(() => {
-    //     if (score > 8) {
-    //         score -= 1;
-    //     }
-    //     if (score < 8) {
-    //         score += 1;
-    //     }
-    //     target.text = `提升\n${score}\n智商`;
-    // }, 1000);
-</script>
-
-</html>
+<!-- 恭喜你发现了首页游戏的秘辛!
+尝试了AI编程实现呢 我只写了注释部分
+采用类似DVD的撞墙和幻彩设计
+仿照osu!的追打玩法
+学的太空侵略者随着分数逐渐提升速度的动态难度
+最高分记在title里 最终成绩会跑到浏览器历史记录(
+失败太多次会降低难度呢 虽然提高智商会变成降低智商就是了 -->
