@@ -221,14 +221,14 @@
       <nav class="sidebar-nav">
         <h3>和 AI 聊天系列</h3>
         <ul>
-          {% for post in site.ai-chat %}
+          {% for post in site['ai-chat'] %}
           <li><a href="{{ post.permalink }}" {% if page.url == post.permalink %}class="active"{% endif %}>{{ post.title }}</a></li>
           {% endfor %}
         </ul>
 
         <h3>UGC 相关</h3>
         <ul>
-          {% for post in site.ugc %}
+          {% for post in site['ugc'] %}
           <li><a href="{{ post.permalink }}" {% if page.url == post.permalink %}class="active"{% endif %}>{{ post.title }}</a></li>
           {% endfor %}
         </ul>
