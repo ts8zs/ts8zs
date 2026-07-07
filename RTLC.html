@@ -90,11 +90,14 @@ body {
 }
 #sidebar-toggle.collapsed {
   left: 0;
-  transform: translateY(-50%) rotate(180deg);
 }
 #sidebar-toggle::before {
   content: '‹';
   font-size: 20px;
+  transition: transform 0.3s ease;
+}
+#sidebar-toggle.collapsed::before {
+  transform: rotate(180deg);
 }
 
 #sidebar h1 {
@@ -385,7 +388,12 @@ rt {
 
 /* Mobile */
 @media (max-width: 900px) {
-  #sidebar { display: none; }
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.open { transform: translateX(0); box-shadow: 2px 0 20px rgba(0,0,0,0.5); }
+  #sidebar-toggle { left: 0; transform: translateY(-50%); border-radius: 0 6px 6px 0; border-left: 1px solid var(--border); border-right: none; }
+  #sidebar-toggle.open { left: 280px; border-radius: 6px 0 0 6px; border-left: none; border-right: 1px solid var(--border); }
+  #sidebar-toggle::before { transform: rotate(180deg); }
+  #sidebar-toggle.open::before { transform: rotate(0deg); }
   #main { margin-left: 0; max-width: 100vw; padding: 16px; }
   .lyric-table { font-size: 13px; }
   .lyric-table td, .lyric-table th { padding: 8px; }
@@ -3430,11 +3438,35 @@ document.querySelectorAll('.lang-filters label').forEach(label => {
 const sidebar = document.getElementById('sidebar');
 const sidebarToggle = document.getElementById('sidebar-toggle');
 const main = document.getElementById('main');
+
 sidebarToggle.addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
-  sidebarToggle.classList.toggle('collapsed');
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('open');
+    sidebarToggle.classList.toggle('open');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    sidebarToggle.classList.toggle('collapsed');
+  }
   main.classList.toggle('full-width');
 });
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    sidebar.classList.remove('open', 'collapsed');
+    sidebarToggle.classList.remove('open', 'collapsed');
+    main.classList.remove('full-width');
+  } else {
+    sidebar.classList.remove('collapsed');
+    sidebarToggle.classList.remove('collapsed');
+    if (!sidebar.classList.contains('open')) {
+      main.classList.add('full-width');
+    }
+  }
+});
+
+if (window.innerWidth <= 900) {
+  main.classList.add('full-width');
+}
 
 // Active nav highlight on scroll
 const sections = document.querySelectorAll('.song-section');
