@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诗词雨</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #111111;
+    --head: #000000;
+    --card-bg: rgba(255,255,255,0.96);
+    --card-border: #2a2a2a;
+    --muted: #666;
+    --shadow: rgba(0,0,0,0.25);
+    --hint: rgba(0,0,0,0.45);
+    --font: "STKaiti","KaiTi","楷体",serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --fg: #eeeeee;
+      --head: #ffffff;
+      --card-bg: rgba(12,12,12,0.96);
+      --card-border: #d9d9d9;
+      --muted: #999;
+      --shadow: rgba(0,0,0,0.6);
+      --hint: rgba(255,255,255,0.5);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: var(--font);
+    color: var(--fg);
+    transition: background 0.4s ease;
+  }
+
+  #rain {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+  }
+
+  #hint {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--hint);
+    pointer-events: none;
+    user-select: none;
+    font-family: var(--font);
+    animation: breathe 3s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+
+  #title-tag {
+    position: fixed;
+    top: 24px;
+    left: 28px;
+    writing-mode: vertical-rl;
+    font-size: 22px;
+    letter-spacing: 8px;
+    color: var(--hint);
+    pointer-events: none;
+    user-select: none;
+    font-family: var(--font);
+  }
+
+  #topright {
+    position: fixed;
+    top: 20px;
+    right: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--hint);
+    pointer-events: none;
+    user-select: none;
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: 0.85;
+    z-index: 5;
+  }
+  #gearBtn {
+    pointer-events: auto;
+    width: 26px; height: 26px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--muted);
+    border-radius: 50%;
+    font-size: 13px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.2s;
+  }
+  #gearBtn:hover { color: var(--head); }
+  #gearBtn.open { transform: rotate(60deg); color: var(--head); }
+
+  #settings {
+    position: fixed;
+    top: 54px;
+    right: 22px;
+    width: 248px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 10px 30px var(--shadow);
+    z-index: 6;
+    font-size: 13px;
+    color: var(--fg);
+    font-family: var(--font);
+    animation: fadeIn 0.2s ease;
+  }
+  #settings::-webkit-scrollbar { width: 5px; }
+  #settings::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+  #settings.hidden { display: none; }
+  .set-section { margin-bottom: 16px; }
+  .set-section:last-child { margin-bottom: 0; }
+  .set-label { color: var(--head); margin-bottom: 8px; letter-spacing: 2px; }
+  #speedVal { color: var(--muted); font-size: 12px; }
+  #speedSlider { width: 100%; accent-color: var(--head); cursor: pointer; }
+  #fontSelect {
+    width: 100%;
+    padding: 6px 8px;
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-family: var(--font);
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+  }
+  #fontSelect:focus { border-color: var(--head); }
+  .set-hint { color: var(--muted); font-size: 11px; margin-top: 5px; }
+  #libList { display: flex; flex-direction: column; gap: 7px; }
+  .lib-item {
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer; user-select: none;
+  }
+  .lib-item input { accent-color: var(--head); margin: 0; cursor: pointer; }
+  .lib-name { flex: 1; }
+  .lib-count { color: var(--muted); font-size: 11px; }
+
+  /* Modal */
+  #modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 10;
+    animation: fadeIn 0.25s ease;
+  }
+  #modal.show { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .card {
+    width: min(560px, 92vw);
+    max-height: 86vh;
+    overflow: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 42px 46px 36px;
+    box-shadow: 0 16px 50px var(--shadow);
+    position: relative;
+    animation: rise 0.3s cubic-bezier(.2,.8,.3,1);
+  }
+  @keyframes rise {
+    from { transform: translateY(16px) scale(0.98); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    width: 22px; height: 22px;
+    border: 2px solid var(--card-border);
+  }
+  .card::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .card::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+  .poem-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 4px;
+    color: var(--head);
+    margin-bottom: 10px;
+  }
+  .poem-author {
+    text-align: center;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    margin-bottom: 26px;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--card-border);
+    margin: 0 auto 26px;
+    opacity: 0.5;
+  }
+  .poem-text {
+    text-align: center;
+    font-size: 21px;
+    line-height: 2.4;
+    letter-spacing: 3px;
+    color: var(--fg);
+    white-space: pre-line;
+  }
+  .poem-text p { margin: 0; }
+
+  .close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 22px;
+    cursor: pointer;
+    font-family: serif;
+    line-height: 1;
+  }
+  .close-btn:hover { color: var(--head); }
+
+  .card::-webkit-scrollbar { width: 6px; }
+  .card::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+</style>
+</head>
+<body>
+  <canvas id="rain"></canvas>
+  <div id="title-tag">诗　词　雨</div>
+  <div id="topright">
+    <span id="status">0 阅</span>
+    <button id="gearBtn" title="设置" aria-label="设置">⚙</button>
+  </div>
+  <div id="settings" class="hidden">
+    <div class="set-section">
+      <div class="set-label">字间隔 <span id="speedVal">100ms</span></div>
+      <input type="range" id="speedSlider" min="80" max="600" step="10" value="100">
+      <div class="set-hint">数值越小越快</div>
+    </div>
+    <div class="set-section">
+      <div class="set-label">字体</div>
+      <select id="fontSelect"></select>
+    </div>
+    <div class="set-section">
+      <div class="set-label">诗词库</div>
+      <div id="libList"></div>
+    </div>
+  </div>
+  <div id="hint">轻点字雨　以阅全篇</div>
+
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="card">
+      <button class="close-btn" id="closeBtn" aria-label="关闭">×</button>
+      <div class="poem-title" id="mTitle"></div>
+      <div class="poem-author" id="mAuthor"></div>
+      <div class="divider"></div>
+      <div class="poem-text" id="mText"></div>
+    </div>
+  </div>
+
+<script>
+"use strict";
+
+/* ---------- 内嵌精选名篇（优先显示，立即可用） ---------- */
+const POEMS = [
+  { title: "静夜思", author: "李白", dynasty: "唐", text: "床前明月光\n疑是地上霜\n举头望明月\n低头思故乡" },
+  { title: "春晓", author: "孟浩然", dynasty: "唐", text: "春眠不觉晓\n处处闻啼鸟\n夜来风雨声\n花落知多少" },
+  { title: "登鹳雀楼", author: "王之涣", dynasty: "唐", text: "白日依山尽\n黄河入海流\n欲穷千里目\n更上一层楼" },
+  { title: "江雪", author: "柳宗元", dynasty: "唐", text: "千山鸟飞绝\n万径人踪灭\n孤舟蓑笠翁\n独钓寒江雪" },
+  { title: "相思", author: "王维", dynasty: "唐", text: "红豆生南国\n春来发几枝\n愿君多采撷\n此物最相思" },
+  { title: "鹿柴", author: "王维", dynasty: "唐", text: "空山不见人\n但闻人语响\n返景入深林\n复照青苔上" },
+  { title: "竹里馆", author: "王维", dynasty: "唐", text: "独坐幽篁里\n弹琴复长啸\n深林人不知\n明月来相照" },
+  { title: "鸟鸣涧", author: "王维", dynasty: "唐", text: "人闲桂花落\n夜静春山空\n月出惊山鸟\n时鸣春涧中" },
+  { title: "杂诗", author: "王维", dynasty: "唐", text: "君自故乡来\n应知故乡事\n来日绮窗前\n寒梅著花未" },
+  { title: "望庐山瀑布", author: "李白", dynasty: "唐", text: "日照香炉生紫烟\n遥看瀑布挂前川\n飞流直下三千尺\n疑是银河落九天" },
+  { title: "早发白帝城", author: "李白", dynasty: "唐", text: "朝辞白帝彩云间\n千里江陵一日还\n两岸猿声啼不住\n轻舟已过万重山" },
+  { title: "黄鹤楼送孟浩然之广陵", author: "李白", dynasty: "唐", text: "故人西辞黄鹤楼\n烟花三月下扬州\n孤帆远影碧空尽\n唯见长江天际流" },
+  { title: "绝句", author: "杜甫", dynasty: "唐", text: "两个黄鹂鸣翠柳\n一行白鹭上青天\n窗含西岭千秋雪\n门泊东吴万里船" },
+  { title: "春夜喜雨", author: "杜甫", dynasty: "唐", text: "好雨知时节\n当春乃发生\n随风潜入夜\n润物细无声\n野径云俱黑\n江船火独明\n晓看红湿处\n花重锦官城" },
+  { title: "赋得古原草送别", author: "白居易", dynasty: "唐", text: "离离原上草\n一岁一枯荣\n野火烧不尽\n春风吹又生\n远芳侵古道\n晴翠接荒城\n又送王孙去\n萋萋满别情" },
+  { title: "悯农", author: "李绅", dynasty: "唐", text: "锄禾日当午\n汗滴禾下土\n谁知盘中餐\n粒粒皆辛苦" },
+  { title: "寻隐者不遇", author: "贾岛", dynasty: "唐", text: "松下问童子\n言师采药去\n只在此山中\n云深不知处" },
+  { title: "逢雪宿芙蓉山主人", author: "刘长卿", dynasty: "唐", text: "日暮苍山远\n天寒白屋贫\n柴门闻犬吠\n风雪夜归人" },
+  { title: "枫桥夜泊", author: "张继", dynasty: "唐", text: "月落乌啼霜满天\n江枫渔火对愁眠\n姑苏城外寒山寺\n夜半钟声到客船" },
+  { title: "出塞", author: "王昌龄", dynasty: "唐", text: "秦时明月汉时关\n万里长征人未还\n但使龙城飞将在\n不教胡马度阴山" },
+  { title: "凉州词", author: "王翰", dynasty: "唐", text: "葡萄美酒夜光杯\n欲饮琵琶马上催\n醉卧沙场君莫笑\n古来征战几人回" },
+
+  { title: "水调歌头", author: "苏轼", dynasty: "宋", text: "明月几时有\n把酒问青天\n不知天上宫阙\n今夕是何年\n我欲乘风归去\n又恐琼楼玉宇\n高处不胜寒\n起舞弄清影\n何似在人间\n转朱阁\n低绮户\n照无眠\n不应有恨\n何事长向别时圆\n人有悲欢离合\n月有阴晴圆缺\n此事古难全\n但愿人长久\n千里共婵娟" },
+  { title: "念奴娇·赤壁怀古", author: "苏轼", dynasty: "宋", text: "大江东去\n浪淘尽\n千古风流人物\n故垒西边\n人道是\n三国周郎赤壁\n乱石穿空\n惊涛拍岸\n卷起千堆雪\n江山如画\n一时多少豪杰\n遥想公瑾当年\n小乔初嫁了\n雄姿英发\n羽扇纶巾\n谈笑间\n樯橹灰飞烟灭\n故国神游\n多情应笑我\n早生华发\n人生如梦\n一尊还酹江月" },
+  { title: "江城子·乙卯正月二十日夜记梦", author: "苏轼", dynasty: "宋", text: "十年生死两茫茫\n不思量\n自难忘\n千里孤坟\n无处话凄凉\n纵使相逢应不识\n尘满面\n鬓如霜\n夜来幽梦忽还乡\n小轩窗\n正梳妆\n相顾无言\n惟有泪千行\n料得年年肠断处\n明月夜\n短松冈" },
+  { title: "江城子·密州出猎", author: "苏轼", dynasty: "宋", text: "老夫聊发少年狂\n左牵黄\n右擎苍\n锦帽貂裘\n千骑卷平冈\n为报倾城随太守\n亲射虎\n看孙郎\n酒酣胸胆尚开张\n鬓微霜\n又何妨\n持节云中\n何日遣冯唐\n会挽雕弓如满月\n西北望\n射天狼" },
+  { title: "蝶恋花·春景", author: "苏轼", dynasty: "宋", text: "花褪残红青杏小\n燕子飞时\n绿水人家绕\n枝上柳绵吹又少\n天涯何处无芳草\n墙里秋千墙外道\n墙外行人\n墙里佳人笑\n笑渐不闻声渐悄\n多情却被无情恼" },
+  { title: "声声慢", author: "李清照", dynasty: "宋", text: "寻寻觅觅\n冷冷清清\n凄凄惨惨戚戚\n乍暖还寒时候\n最难将息\n三杯两盏淡酒\n怎敌他\n晚来风急\n雁过也\n正伤心\n却是旧时相识\n满地黄花堆积\n憔悴损\n如今有谁堪摘\n守着窗儿\n独自怎生得黑\n梧桐更兼细雨\n到黄昏\n点点滴滴\n这次第\n怎一个愁字了得" },
+  { title: "一剪梅", author: "李清照", dynasty: "宋", text: "红藕香残玉簟秋\n轻解罗裳\n独上兰舟\n云中谁寄锦书来\n雁字回时\n月满西楼\n花自飘零水自流\n一种相思\n两处闲愁\n此情无计可消除\n才下眉头\n却上心头" },
+  { title: "如梦令", author: "李清照", dynasty: "宋", text: "昨夜雨疏风骤\n浓睡不消残酒\n试问卷帘人\n却道海棠依旧\n知否\n知否\n应是绿肥红瘦" },
+  { title: "醉花阴", author: "李清照", dynasty: "宋", text: "薄雾浓云愁永昼\n瑞脑销金兽\n佳节又重阳\n玉枕纱厨\n半夜凉初透\n东篱把酒黄昏后\n有暗香盈袖\n莫道不消魂\n帘卷西风\n人比黄花瘦" },
+  { title: "永遇乐·京口北固亭怀古", author: "辛弃疾", dynasty: "宋", text: "千古江山\n英雄无觅\n孙仲谋处\n舞榭歌台\n风流总被\n雨打风吹去\n斜阳草树\n寻常巷陌\n人道寄奴曾住\n想当年\n金戈铁马\n气吞万里如虎\n元嘉草草\n封狼居胥\n赢得仓皇北顾\n四十三年\n望中犹记\n烽火扬州路\n可堪回首\n佛狸祠下\n一片神鸦社鼓\n凭谁问\n廉颇老矣\n尚能饭否" },
+  { title: "青玉案·元夕", author: "辛弃疾", dynasty: "宋", text: "东风夜放花千树\n更吹落\n星如雨\n宝马雕车香满路\n凤箫声动\n玉壶光转\n一夜鱼龙舞\n蛾儿雪柳黄金缕\n笑语盈盈暗香去\n众里寻他千百度\n蓦然回首\n那人却在\n灯火阑珊处" },
+  { title: "西江月·夜行黄沙道中", author: "辛弃疾", dynasty: "宋", text: "明月别枝惊鹊\n清风半夜鸣蝉\n稻花香里说丰年\n听取蛙声一片\n七八个星天外\n两三点雨山前\n旧时茅店社林边\n路转溪桥忽见" },
+  { title: "破阵子·为陈同甫赋壮词以寄之", author: "辛弃疾", dynasty: "宋", text: "醉里挑灯看剑\n梦回吹角连营\n八百里分麾下炙\n五十弦翻塞外声\n沙场秋点兵\n马作的卢飞快\n弓如霹雳弦惊\n了却君王天下事\n赢得生前身后名\n可怜白发生" },
+  { title: "满江红", author: "岳飞", dynasty: "宋", text: "怒发冲冠\n凭栏处\n潇潇雨歇\n抬望眼\n仰天长啸\n壮怀激烈\n三十功名尘与土\n八千里路云和月\n莫等闲\n白了少年头\n空悲切\n靖康耻\n犹未雪\n臣子恨\n何时灭\n驾长车\n踏破贺兰山缺\n壮志饥餐胡虏肉\n笑谈渴饮匈奴血\n待从头\n收拾旧山河\n朝天阙" },
+  { title: "虞美人", author: "李煜", dynasty: "五代", text: "春花秋月何时了\n往事知多少\n小楼昨夜又东风\n故国不堪回首月明中\n雕栏玉砌应犹在\n只是朱颜改\n问君能有几多愁\n恰似一江春水向东流" },
+  { title: "浪淘沙", author: "李煜", dynasty: "五代", text: "帘外雨潺潺\n春意阑珊\n罗衾不耐五更寒\n梦里不知身是客\n一晌贪欢\n独自莫凭栏\n无限江山\n别时容易见时难\n流水落花春去也\n天上人间" },
+  { title: "相见欢", author: "李煜", dynasty: "五代", text: "无言独上西楼\n月如钩\n寂寞梧桐深院锁清秋\n剪不断\n理还乱\n是离愁\n别是一般滋味在心头" },
+  { title: "雨霖铃", author: "柳永", dynasty: "宋", text: "寒蝉凄切\n对长亭晚\n骤雨初歇\n都门帐饮无绪\n留恋处\n兰舟催发\n执手相看泪眼\n竟无语凝噎\n念去去\n千里烟波\n暮霭沉沉楚天阔\n多情自古伤离别\n更那堪\n冷落清秋节\n今宵酒醒何处\n杨柳岸\n晓风残月\n此去经年\n应是良辰好景虚设\n便纵有千种风情\n更与何人说" }
+];
+
+/* 内嵌诗标记 lib */
+POEMS.forEach(p => p.lib = "builtin");
+const ALL_POEMS = POEMS;
+
+/* ---------- 配置 ---------- */
+const CHAR_SIZE = 26;
+const COL_GAP = 6;
+const TRAIL_LEN = 16;
+let speedMs = 100;            // 字间隔基准（ms），可在设置中调节
+const PUNCT = /[，。、！？：；""''「」（）()．·\s]/g;
+
+/* 字体选项（stack 为 CSS font-family 值，同时供 canvas 与 UI 使用） */
+const FONTS = [
+  { id: "kaiti",   name: "楷体",   stack: '"STKaiti","KaiTi","楷体",serif' },
+  { id: "song",    name: "宋体",   stack: '"STSong","SimSun","宋体","STSongti-SC",serif' },
+  { id: "fangsong",name: "仿宋",   stack: '"STFangsong","FangSong","仿宋","STSongti-SC",serif' },
+  { id: "lishu",   name: "隶书",   stack: '"STLiti","LiSu","隶书","STLibian",serif' },
+  { id: "xingkai", name: "行楷",   stack: '"STXingkai","华文行楷","Xingkai SC","STKaiti",cursive' },
+  { id: "wei",     name: "魏碑",   stack: '"STXinwei","华文新魏","STKaiti",serif' },
+  { id: "hei",     name: "黑体",   stack: '"SimHei","黑体","Microsoft YaHei","PingFang SC",sans-serif' }
+];
+let fontFamily = FONTS[0].stack;
+
+/* 诗词库开关（可在设置面板勾选；全量集默认关闭，按需开启） */
+const LIBS = [
+  { id: "builtin",       name: "内嵌精选",   on: true  },
+  { id: "tang",          name: "唐诗精选",   on: true  },
+  { id: "ci",            name: "宋词精选",   on: true  },
+  { id: "yuan",          name: "元曲",       on: false },
+  { id: "shijing",       name: "诗经",       on: true  },
+  { id: "chuci",         name: "楚辞",       on: true  },
+  { id: "caocao",        name: "曹操诗集",   on: false  },
+  { id: "shuimotangshi", name: "水墨唐诗",   on: false  },
+  { id: "nantang",       name: "南唐词",     on: false  },
+  { id: "huajianji",     name: "花间集",     on: false  },
+  { id: "nalan",         name: "纳兰性德",   on: false  },
+  { id: "youmeng",       name: "幽梦影",     on: false  },
+  { id: "tangAll",       name: "全唐诗",     on: false },
+  { id: "ciAll",         name: "全宋词",     on: false },
+  { id: "songpoet",      name: "全宋诗",     on: false },
+  { id: "yuding",        name: "御定全唐詩", on: false }
+];
+
+/* ---------- 主题 ---------- */
+function getThemeColors() {
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return {
+    bg: dark ? "#000000" : "#ffffff",
+    fg: dark ? "238,238,238" : "17,17,17",
+    head: dark ? "255,255,255" : "0,0,0"
+  };
+}
+let theme = getThemeColors();
+const mq = window.matchMedia("(prefers-color-scheme: dark)");
+mq.addEventListener("change", () => {
+  theme = getThemeColors();
+  document.body.style.background = theme.bg;
+});
+
+/* ---------- 选诗（按已启用库过滤） ---------- */
+let activePoems = [];
+function rebuildPool() {
+  const enabled = new Set(LIBS.filter(l => l.on).map(l => l.id));
+  activePoems = ALL_POEMS.filter(p => enabled.has(p.lib));
+  // 若全部关闭，回退到内嵌精选，避免空池
+  if (activePoems.length === 0) {
+    activePoems = ALL_POEMS.filter(p => p.lib === "builtin");
+  }
+  // 立即替换正在显示的、已禁用库的诗，让取消勾选即时生效
+  for (const col of cols) {
+    if (col.poem && !enabled.has(col.poem.lib)) col.reset();
+  }
+  if (typeof updateStatus === "function") updateStatus();
+}
+function pickPoem() {
+  return activePoems[Math.floor(Math.random() * activePoems.length)] || ALL_POEMS[0];
+}
+
+/* rainText 去标点去空白，便于字雨流式打印 */
+function toRainText(text) {
+  return (text || "").replace(PUNCT, "");
+}
+
+/* ---------- Canvas ---------- */
+const canvas = document.getElementById("rain");
+const ctx = canvas.getContext("2d");
+let W = 0, H = 0, dpr = 1;
+let cols = [];
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  buildColumns();
+}
+
+class Column {
+  constructor(x) {
+    this.x = x;
+    this.reset(true);
+  }
+  reset(initial = false) {
+    this.poem = pickPoem();
+    this.text = toRainText(this.poem.text);
+    this.idx = 0;
+    this.variation = 0.9 + Math.random() * 0.2;        // 列内 ±10% 抖动
+    this.typeInterval = speedMs * this.variation;      // 字间隔（ms）
+    this.spacing = CHAR_SIZE * (0.9 + Math.random() * 0.35);
+    this.speed = this.spacing / this.typeInterval;     // px / ms
+    this.chars = [];
+    const now = performance.now();
+    if (initial) {
+      // 起始位置在屏幕内随机（含中间），并向上预填整条可见拖尾，
+      // 首屏即满屏字、模拟已运行一段时间，无需从屏外落入
+      this.headY = Math.random() * H;
+      const maxFill = Math.min(TRAIL_LEN, Math.floor(this.headY / this.spacing) + 1);
+      for (let i = 0; i < maxFill && this.idx < this.text.length; i++) {
+        // i=0 最旧居上（最早 born），i=maxFill-1 最新在 head 处；born 错开以自然淡出
+        this.chars.push({
+          ch: this.text[this.idx],
+          y: this.headY - (maxFill - 1 - i) * this.spacing,
+          born: now - (maxFill - 1 - i) * this.typeInterval
+        });
+        this.idx++;
+      }
+      this.lastTypeTime = now;
+    } else {
+      // 回收后从顶部上方落入，维持雨流
+      this.headY = -Math.random() * 80 - CHAR_SIZE;
+      this.lastTypeTime = now;
+    }
+  }
+  update(now, dt) {
+    // 字头下移（字本身不平移，原地出现并按时间淡出）
+    this.headY += this.speed * dt;
+    // 标签页切走后回来会积压大量待打字时间，跳过补打以避免同位置叠字/残影
+    if (now - this.lastTypeTime > this.typeInterval * (TRAIL_LEN + 2)) {
+      this.lastTypeTime = now;
+    }
+    // 时间触发打字（仅当字头仍在屏幕内时才打，避免在屏外空打）
+    while (
+      this.idx < this.text.length &&
+      this.headY < H + CHAR_SIZE &&
+      (now - this.lastTypeTime) >= this.typeInterval
+    ) {
+      const ch = this.text[this.idx];
+      if (ch) this.chars.push({ ch, y: this.headY, born: now });
+      this.idx++;
+      this.lastTypeTime += this.typeInterval;
+    }
+    // 按时间淘汰过期字（最旧端在数组前部），字因此原地淡出消失，无需平移
+    const TTL = this.typeInterval * TRAIL_LEN;
+    while (this.chars.length && (now - this.chars[0].born) > TTL) {
+      this.chars.shift();
+    }
+    // 回收：字全部消失（诗打完或字头已过屏底）
+    if (this.chars.length === 0) {
+      const poemDone = this.idx >= this.text.length;
+      if (poemDone || this.headY > H + 100) this.reset();
+    }
+  }
+  draw(now) {
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const n = this.chars.length;
+    const TTL = this.typeInterval * TRAIL_LEN;
+    for (let i = 0; i < n; i++) {
+      const c = this.chars[i];
+      if (c.y < -CHAR_SIZE || c.y > H + CHAR_SIZE) continue;
+      const isHead = i === n - 1;        // 末尾为最新字头
+      // 所有字（含字头）按年龄渐隐；字头刚出生时 age≈0 自然最亮，老去时平滑淡出
+      const op = Math.max(0, 1 - (now - c.born) / TTL);
+      const rgb = isHead ? theme.head : theme.fg;
+      ctx.fillStyle = `rgba(${rgb}, ${op})`;
+      ctx.fillText(c.ch, this.x, c.y);
+    }
+  }
+}
+
+function buildColumns() {
+  const step = CHAR_SIZE + COL_GAP;
+  const count = Math.max(1, Math.floor(W / step));
+  const offset = (W - count * step) / 2 + step / 2;
+  cols = [];
+  for (let i = 0; i < count; i++) {
+    cols.push(new Column(offset + i * step));
+  }
+}
+
+/* ---------- 渲染循环（基于时间戳） ---------- */
+let lastT = performance.now();
+function frame(t) {
+  const dt = Math.min(60, t - lastT); // 限制单帧步长，防卡顿后跳跃
+  lastT = t;
+  ctx.fillStyle = theme.bg;
+  ctx.fillRect(0, 0, W, H);
+  ctx.font = `${CHAR_SIZE}px ${fontFamily}`;
+  for (const col of cols) {
+    // 单列出错不致中断整条 rAF 链导致全屏冻结
+    try { col.update(t, dt); col.draw(t); } catch (e) { /* 跳过本列本帧 */ }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- 标签页切回时重置时间基准，避免补打叠字/残影 ---------- */
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    const now = performance.now();
+    lastT = now;
+    for (const col of cols) col.lastTypeTime = now;
+  }
+});
+
+/* ---------- 点击交互 ---------- */
+canvas.addEventListener("click", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  let best = null, bestDist = Infinity;
+  for (const col of cols) {
+    if (col.chars.length === 0) continue;
+    const dx = Math.abs(col.x - x);
+    if (dx > CHAR_SIZE) continue;
+    const top = col.chars[0].y;
+    const bot = col.chars[col.chars.length - 1].y;
+    if (y < top - CHAR_SIZE || y > bot + CHAR_SIZE) continue;
+    if (dx < bestDist) { bestDist = dx; best = col; }
+  }
+  if (best) showModal(best.poem);
+});
+
+/* ---------- 弹窗 ---------- */
+const modal = document.getElementById("modal");
+const mTitle = document.getElementById("mTitle");
+const mAuthor = document.getElementById("mAuthor");
+const mText = document.getElementById("mText");
+
+function showModal(p) {
+  mTitle.textContent = p.title || "佚名";
+  mAuthor.textContent = `${p.dynasty ? p.dynasty + " · " : ""}${p.author || "佚名"}`;
+  mText.innerHTML = (p.text || "").split("\n").map(l => `<p>${l}</p>`).join("");
+  modal.classList.add("show");
+}
+function hideModal() { modal.classList.remove("show"); }
+document.getElementById("closeBtn").addEventListener("click", hideModal);
+modal.addEventListener("click", (e) => { if (e.target === modal) hideModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") hideModal(); });
+
+/* ---------- 状态显示 ---------- */
+const statusEl = document.getElementById("status");
+let activeLoads = 0; // 正在加载的库数量
+function updateStatus() {
+  const suffix = activeLoads > 0 ? " · 载入中" : "";
+  statusEl.textContent = `${activePoems.length} 阅${suffix}`;
+}
+
+/* ---------- 各库对应的源文件 ---------- */
+const range = (s, e, st) => { const a = []; for (let i = s; i <= e; i += st) a.push(i); return a; };
+const pad3 = n => String(n).padStart(3, "0");
+const LIB_FILES = {
+  // 精选 / 单集（较轻）
+  tang:          ["全唐诗/唐诗三百首.json", "全唐诗/唐诗补录.json"],
+  ci:            ["宋词/宋词三百首.json", "宋词/ci.song.2019y.json"],
+  yuan:          ["元曲/yuanqu.json"],
+  youmeng:       ["幽梦影/youmengying.json"],
+  shijing:       ["诗经/shijing.json"],
+  chuci:         ["楚辞/chuci.json"],
+  caocao:        ["曹操诗集/caocao.json"],
+  shuimotangshi: ["水墨唐诗/shuimotangshi.json"],
+  nantang:       ["五代诗词/nantang/poetrys.json"],
+  huajianji:     [...range(1, 9, 1).map(n => `五代诗词/huajianji/huajianji-${n}-juan.json`), "五代诗词/huajianji/huajianji-x-juan.json"],
+  nalan:         ["纳兰性德/纳兰性德诗集.json"],
+  // 全量集（较重，默认关闭）
+  tangAll:  range(0, 9000, 1000).map(n => `全唐诗/poet.tang.${n}.json`),
+  ciAll:    range(0, 21000, 1000).map(n => `宋词/ci.song.${n}.json`),
+  songpoet: range(0, 23000, 1000).map(n => `全唐诗/poet.song.${n}.json`),
+  yuding:   range(1, 900, 1).map(n => `御定全唐詩/json/${pad3(n)}.json`)
+};
+const LIB_DYNASTY = {
+  tang:"唐", ci:"宋", yuan:"元", youmeng:"清",
+  shijing:"周", chuci:"楚", caocao:"汉", shuimotangshi:"唐",
+  nantang:"五代", huajianji:"五代", nalan:"清",
+  tangAll:"唐", ciAll:"宋", songpoet:"宋", yuding:"唐"
+};
+
+// 统一解析：兼容 paragraphs / para / content(数组) / content(字符串，幽梦影)
+function mapItem(it, dynasty, lib) {
+  if (!it) return null;
+  let text = "";
+  let arr = null;
+  if (Array.isArray(it.paragraphs)) arr = it.paragraphs;
+  else if (Array.isArray(it.para)) arr = it.para;
+  else if (Array.isArray(it.content)) arr = it.content;
+  else if (typeof it.content === "string" && it.content.trim()) text = it.content;
+  if (arr && arr.length) text = arr.join("\n");
+  if (!text || text.replace(PUNCT, "").length < 4) return null;
+  const title = it.title || it.rhythmic || (lib === "youmeng" ? "幽梦影" : "");
+  const author = it.author || "佚名";
+  return { title: title || "无题", author, dynasty, text, lib };
+}
+
+/* ---------- 按库懒加载（仅在勾选时拉取，已加载的不再重复拉） ---------- */
+const loadedLibs = new Set(["builtin"]);
+async function loadLib(libId) {
+  if (libId === "builtin" || loadedLibs.has(libId)) return;
+  loadedLibs.add(libId); // 立即标记，避免重复触发
+  const files = LIB_FILES[libId] || [];
+  const dynasty = LIB_DYNASTY[libId];
+  activeLoads++;
+  updateStatus();
+  const CONCURRENCY = 6;
+  let cursor = 0;
+  async function worker() {
+    while (cursor < files.length) {
+      const url = files[cursor++];
+      try {
+        const r = await fetch(url, { cache: "force-cache" });
+        if (r.ok) {
+          const arr = await r.json();
+          if (Array.isArray(arr)) {
+            const mapped = arr.map(it => mapItem(it, dynasty, libId)).filter(Boolean);
+            if (mapped.length) {
+              ALL_POEMS.push(...mapped);
+              rebuildPool();
+              updateLibCounts();
+            }
+          }
+        }
+      } catch (e) {
+        // file:// 协议下 fetch 会被 CORS 拦截，静默忽略
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
+  activeLoads--;
+  updateStatus();
+}
+
+// 启动时加载所有已启用的非内嵌库
+function loadEnabledLibs() {
+  for (const lib of LIBS) {
+    if (lib.on && lib.id !== "builtin") loadLib(lib.id);
+  }
+}
+
+/* ---------- 设置面板：库列表 ---------- */
+function buildLibList() {
+  const el = document.getElementById("libList");
+  el.innerHTML = "";
+  for (const lib of LIBS) {
+    const wrap = document.createElement("label");
+    wrap.className = "lib-item";
+    wrap.dataset.id = lib.id;
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = lib.on;
+    cb.addEventListener("change", () => {
+      lib.on = cb.checked;
+      // 勾选未加载的库 → 拉取；已加载或取消勾选 → 仅重建池
+      if (lib.on && lib.id !== "builtin" && !loadedLibs.has(lib.id)) {
+        loadLib(lib.id);
+      } else {
+        rebuildPool();
+      }
+      saveSettings();
+    });
+    const name = document.createElement("span");
+    name.className = "lib-name"; name.textContent = lib.name;
+    const cnt = document.createElement("span");
+    cnt.className = "lib-count";
+    wrap.appendChild(cb); wrap.appendChild(name); wrap.appendChild(cnt);
+    el.appendChild(wrap);
+  }
+  updateLibCounts();
+}
+function updateLibCounts() {
+  const el = document.getElementById("libList");
+  if (!el) return;
+  for (const child of el.children) {
+    const id = child.dataset.id;
+    const count = ALL_POEMS.filter(p => p.lib === id).length;
+    child.querySelector(".lib-count").textContent = count;
+  }
+}
+
+/* ---------- 设置面板：交互 ---------- */
+const gearBtn = document.getElementById("gearBtn");
+const settingsEl = document.getElementById("settings");
+gearBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const willOpen = settingsEl.classList.contains("hidden");
+  settingsEl.classList.toggle("hidden", !willOpen);
+  gearBtn.classList.toggle("open", willOpen);
+});
+document.addEventListener("click", (e) => {
+  if (settingsEl.classList.contains("hidden")) return;
+  if (!settingsEl.contains(e.target) && e.target !== gearBtn) {
+    settingsEl.classList.add("hidden");
+    gearBtn.classList.remove("open");
+  }
+});
+
+/* ---------- 速度调节 ---------- */
+const speedSlider = document.getElementById("speedSlider");
+const speedVal = document.getElementById("speedVal");
+speedSlider.addEventListener("input", () => {
+  speedVal.textContent = speedSlider.value + "ms";
+});
+speedSlider.addEventListener("change", () => {
+  applySpeed(Number(speedSlider.value));
+});
+function applySpeed(ms) {
+  speedMs = ms;
+  const now = performance.now();
+  for (const c of cols) {
+    c.typeInterval = speedMs * c.variation;
+    c.speed = c.spacing / c.typeInterval;
+    c.lastTypeTime = now; // 避免变速后补打叠字
+  }
+  saveSettings();
+}
+
+/* ---------- 字体调节 ---------- */
+const fontSelect = document.getElementById("fontSelect");
+function buildFontList() {
+  fontSelect.innerHTML = "";
+  for (const f of FONTS) {
+    const opt = document.createElement("option");
+    opt.value = f.id;
+    opt.textContent = f.name;
+    opt.style.fontFamily = f.stack.replace(/"/g, "");
+    if (f.id === FONTS[0].id) opt.selected = true;
+    fontSelect.appendChild(opt);
+  }
+}
+fontSelect.addEventListener("change", () => {
+  const f = FONTS.find(x => x.id === fontSelect.value) || FONTS[0];
+  fontFamily = f.stack;
+  document.documentElement.style.setProperty("--font", f.stack);
+  saveSettings();
+});
+buildFontList();
+
+/* ---------- 设置持久化（localStorage） ---------- */
+const STORAGE_KEY = "shiciRain.settings";
+function saveSettings() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      speed: speedMs,
+      font: fontSelect.value,
+      libs: LIBS.map(l => ({ id: l.id, on: l.on }))
+    }));
+  } catch (e) {}
+}
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (typeof data.speed === "number" && data.speed >= 80 && data.speed <= 600) {
+      speedMs = data.speed;
+      speedSlider.value = data.speed;
+      speedVal.textContent = data.speed + "ms";
+    }
+    if (data.font) {
+      const f = FONTS.find(x => x.id === data.font);
+      if (f) {
+        fontFamily = f.stack;
+        document.documentElement.style.setProperty("--font", f.stack);
+        fontSelect.value = f.id;
+      }
+    }
+    if (Array.isArray(data.libs)) {
+      for (const s of data.libs) {
+        const l = LIBS.find(x => x.id === s.id);
+        if (l) l.on = !!s.on;
+      }
+    }
+  } catch (e) {}
+}
+
+/* ---------- 启动 ---------- */
+window.addEventListener("resize", resize);
+loadSettings();   // 先恢复本地设置（速度/字体/库勾选），再据此构建列表与池
+buildLibList();
+rebuildPool();      // 初始化可用池（内嵌精选）
+resize();
+loadEnabledLibs();  // 后台拉取已启用的非内嵌库（不阻塞渲染）
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
