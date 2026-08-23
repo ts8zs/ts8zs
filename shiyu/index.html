@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>诗词雨</title>
+<title>诗雨</title>
+
 <style>
   :root {
     --bg: #ffffff;
@@ -255,12 +256,18 @@
   .card::-webkit-scrollbar { width: 6px; }
   .card::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
 </style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "qk8jzgjvf7");
+</script>
 </head>
 <body>
   <canvas id="rain"></canvas>
-  <div id="title-tag">诗　词　雨</div>
   <div id="topright">
-    <span id="status">0 阅</span>
+    <span id="statusText">已载 0 篇</span>
     <button id="gearBtn" title="设置" aria-label="设置">⚙</button>
   </div>
   <div id="settings" class="hidden">
@@ -591,12 +598,7 @@ modal.addEventListener("click", (e) => { if (e.target === modal) hideModal(); })
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") hideModal(); });
 
 /* ---------- 状态显示 ---------- */
-const statusEl = document.getElementById("status");
-let activeLoads = 0; // 正在加载的库数量
-function updateStatus() {
-  const suffix = activeLoads > 0 ? " · 载入中" : "";
-  statusEl.textContent = `${activePoems.length} 阅${suffix}`;
-}
+
 
 /* ---------- 各库对应的源文件 ---------- */
 const range = (s, e, st) => { const a = []; for (let i = s; i <= e; i += st) a.push(i); return a; };
@@ -645,6 +647,27 @@ function mapItem(it, dynasty, lib) {
 
 /* ---------- 按库懒加载（仅在勾选时拉取，已加载的不再重复拉） ---------- */
 const loadedLibs = new Set(["builtin"]);
+let activeLoads = 0;                  // 正在加载的库数量
+const statusText = document.getElementById("statusText");
+function updateStatus() {
+  const n = activePoems.length;
+  statusText.textContent = activeLoads > 0 ? `已载 ${n} 篇 · 载入中` : `已载 ${n} 篇`;
+}
+// 节流重建：加载期间避免每个文件都跑一遍 O(N) 的 filter，改为最多 600ms 一次
+let rebuildTimer = null;
+function scheduleRebuild() {
+  if (rebuildTimer) return;
+  rebuildTimer = setTimeout(() => {
+    rebuildTimer = null;
+    rebuildPool();
+    updateLibCounts();
+  }, 600);
+}
+function flushRebuild() {
+  if (rebuildTimer) { clearTimeout(rebuildTimer); rebuildTimer = null; }
+  rebuildPool();
+  updateLibCounts();
+}
 async function loadLib(libId) {
   if (libId === "builtin" || loadedLibs.has(libId)) return;
   loadedLibs.add(libId); // 立即标记，避免重复触发
@@ -652,6 +675,7 @@ async function loadLib(libId) {
   const dynasty = LIB_DYNASTY[libId];
   activeLoads++;
   updateStatus();
+
   const CONCURRENCY = 6;
   let cursor = 0;
   async function worker() {
@@ -665,8 +689,7 @@ async function loadLib(libId) {
             const mapped = arr.map(it => mapItem(it, dynasty, libId)).filter(Boolean);
             if (mapped.length) {
               ALL_POEMS.push(...mapped);
-              rebuildPool();
-              updateLibCounts();
+              scheduleRebuild(); // 节流重建池，避免重型库加载时卡顿
             }
           }
         }
@@ -677,6 +700,7 @@ async function loadLib(libId) {
   }
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
   activeLoads--;
+  flushRebuild(); // 收尾：立即刷新一次
   updateStatus();
 }
 
@@ -720,10 +744,14 @@ function buildLibList() {
 function updateLibCounts() {
   const el = document.getElementById("libList");
   if (!el) return;
+  // 单遍统计各库数量，避免 16 × O(N) 的重复扫描
+  const counts = Object.create(null);
+  for (const p of ALL_POEMS) counts[p.lib] = (counts[p.lib] || 0) + 1;
   for (const child of el.children) {
     const id = child.dataset.id;
-    const count = ALL_POEMS.filter(p => p.lib === id).length;
-    child.querySelector(".lib-count").textContent = count;
+    const cnt = child.querySelector(".lib-count");
+    // 未加载过的库显示“未加载”，加载完才显示数量
+    cnt.textContent = loadedLibs.has(id) ? (counts[id] || 0) : "未加载";
   }
 }
 
