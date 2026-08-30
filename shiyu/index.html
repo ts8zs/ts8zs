@@ -139,8 +139,8 @@
   .set-section { margin-bottom: 16px; }
   .set-section:last-child { margin-bottom: 0; }
   .set-label { color: var(--head); margin-bottom: 8px; letter-spacing: 2px; }
-  #speedVal { color: var(--muted); font-size: 12px; }
-  #speedSlider { width: 100%; accent-color: var(--head); cursor: pointer; }
+  #speedVal, #sizeVal { color: var(--muted); font-size: 12px; }
+  #speedSlider, #sizeSlider { width: 100%; accent-color: var(--head); cursor: pointer; }
   #fontSelect {
     width: 100%;
     padding: 6px 8px;
@@ -180,8 +180,9 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .card {
-    width: min(560px, 92vw);
+    writing-mode: vertical-rl;
     max-height: 86vh;
+    max-width: 92vw;
     overflow: auto;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -202,45 +203,45 @@
     width: 22px; height: 22px;
     border: 2px solid var(--card-border);
   }
-  .card::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
-  .card::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+  .card::before { bottom: 8px; left: 8px; border-top: none; border-right: none; }
+  .card::after { top: 8px; right: 8px; border-bottom: none; border-left: none; }
 
   .poem-title {
-    text-align: center;
     font-size: 30px;
     font-weight: normal;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     color: var(--head);
-    margin-bottom: 10px;
+    margin-block-end: 20px;
   }
   .poem-author {
-    text-align: center;
     font-size: 15px;
     color: var(--muted);
-    letter-spacing: 3px;
-    margin-bottom: 26px;
+    letter-spacing: 4px;
+    margin-block-end: 26px;
   }
   .divider {
-    width: 60px;
-    height: 1px;
+    width: 1px;
+    height: 50px;
     background: var(--card-border);
-    margin: 0 auto 26px;
+    margin-block-end: 26px;
     opacity: 0.5;
   }
   .poem-text {
-    text-align: center;
     font-size: 21px;
-    line-height: 2.4;
-    letter-spacing: 3px;
+    line-height: 1.8;
+    letter-spacing: 4px;
     color: var(--fg);
     white-space: pre-line;
   }
-  .poem-text p { margin: 0; }
+  .poem-text p {
+    margin: 0;
+    margin-block-end: 20px;
+  }
 
   .close-btn {
     position: absolute;
     top: 14px;
-    right: 16px;
+    left: 16px;
     width: 30px;
     height: 30px;
     border: none;
@@ -250,10 +251,11 @@
     cursor: pointer;
     font-family: serif;
     line-height: 1;
+    z-index: 2;
   }
   .close-btn:hover { color: var(--head); }
 
-  .card::-webkit-scrollbar { width: 6px; }
+  .card::-webkit-scrollbar { width: 6px; height: 6px; }
   .card::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
 </style>
 <script type="text/javascript">
@@ -263,6 +265,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "qk8jzgjvf7");
 </script>
+<script src="pixi.min.js"></script>
 </head>
 <body>
   <canvas id="rain"></canvas>
@@ -279,6 +282,11 @@
     <div class="set-section">
       <div class="set-label">字体</div>
       <select id="fontSelect"></select>
+    </div>
+    <div class="set-section">
+      <div class="set-label">字号 <span id="sizeVal">26px</span></div>
+      <input type="range" id="sizeSlider" min="14" max="48" step="1" value="26">
+      <div class="set-hint">字雨字符大小</div>
     </div>
     <div class="set-section">
       <div class="set-label">诗词库</div>
@@ -349,7 +357,7 @@ POEMS.forEach(p => p.lib = "builtin");
 const ALL_POEMS = POEMS;
 
 /* ---------- 配置 ---------- */
-const CHAR_SIZE = 26;
+let charSize = 26;
 const COL_GAP = 6;
 const TRAIL_LEN = 16;
 let speedMs = 100;            // 字间隔基准（ms），可在设置中调节
@@ -427,109 +435,134 @@ function toRainText(text) {
   return (text || "").replace(PUNCT, "");
 }
 
-/* ---------- Canvas ---------- */
-const canvas = document.getElementById("rain");
-const ctx = canvas.getContext("2d");
-let W = 0, H = 0, dpr = 1;
+/* ---------- PixiJS 渲染 ---------- */
+let app, rainContainer;
+let W = 0, H = 0;
 let cols = [];
 
+const sharedStyle = new PIXI.TextStyle({
+  fontFamily,
+  fontSize: charSize,
+  fill: 0xffffff,
+  align: "center"
+});
+
+/* 字符精灵池：复用 Text，避免反复创建/销毁 */
+const textPool = [];
+function acquireText(ch, x, y) {
+  let t = textPool.pop();
+  if (!t) {
+    t = new PIXI.Text({ text: ch, style: sharedStyle });
+    t.anchor.set(0.5);
+    rainContainer.addChild(t);
+  } else {
+    t.text = ch;
+    t.visible = true;
+  }
+  t.x = x; t.y = y;
+  return t;
+}
+function releaseText(t) {
+  t.visible = false;
+  textPool.push(t);
+}
+
+/* "r,g,b" → tint */
+function tintOf(rgb) {
+  const [r, g, b] = rgb.split(",").map(Number);
+  return (r << 16) | (g << 8) | b;
+}
+
 function resize() {
-  dpr = Math.min(window.devicePixelRatio || 1, 2);
   W = window.innerWidth;
   H = window.innerHeight;
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width = W + "px";
-  canvas.style.height = H + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  if (app) app.renderer.resize(W, H);
   buildColumns();
 }
 
 class Column {
   constructor(x) {
     this.x = x;
-    this.reset(true);
+    this.reset();
   }
-  reset(initial = false) {
+  reset() {
     this.poem = pickPoem();
     this.text = toRainText(this.poem.text);
     this.idx = 0;
-    this.variation = 0.9 + Math.random() * 0.2;        // 列内 ±10% 抖动
+    this.variation = 0.7 + Math.random() * 0.6;        // 每篇随机速度（70%–130%）
     this.typeInterval = speedMs * this.variation;      // 字间隔（ms）
-    this.spacing = CHAR_SIZE * (0.9 + Math.random() * 0.35);
+    this.spacing = charSize * (0.9 + Math.random() * 0.35);
     this.speed = this.spacing / this.typeInterval;     // px / ms
+    // 释放旧字精灵
+    for (const c of this.chars || []) releaseText(c.sprite);
     this.chars = [];
-    const now = performance.now();
-    if (initial) {
-      // 起始位置在屏幕内随机（含中间），并向上预填整条可见拖尾，
-      // 首屏即满屏字、模拟已运行一段时间，无需从屏外落入
-      this.headY = Math.random() * H;
-      const maxFill = Math.min(TRAIL_LEN, Math.floor(this.headY / this.spacing) + 1);
-      for (let i = 0; i < maxFill && this.idx < this.text.length; i++) {
-        // i=0 最旧居上（最早 born），i=maxFill-1 最新在 head 处；born 错开以自然淡出
-        this.chars.push({
-          ch: this.text[this.idx],
-          y: this.headY - (maxFill - 1 - i) * this.spacing,
-          born: now - (maxFill - 1 - i) * this.typeInterval
-        });
-        this.idx++;
-      }
-      this.lastTypeTime = now;
-    } else {
-      // 回收后从顶部上方落入，维持雨流
-      this.headY = -Math.random() * 80 - CHAR_SIZE;
-      this.lastTypeTime = now;
-    }
+    // 始终从屏幕顶端开始向下书写
+    this.headY = 0;
+    this.lastTypeTime = performance.now();
   }
   update(now, dt) {
     // 字头下移（字本身不平移，原地出现并按时间淡出）
     this.headY += this.speed * dt;
+    // 超出屏幕下端后回绕至顶端继续书写，确保全诗逐字写完
+    if (H > 0) {
+      while (this.headY >= H) this.headY -= H;
+    }
     // 标签页切走后回来会积压大量待打字时间，跳过补打以避免同位置叠字/残影
     if (now - this.lastTypeTime > this.typeInterval * (TRAIL_LEN + 2)) {
       this.lastTypeTime = now;
     }
-    // 时间触发打字（仅当字头仍在屏幕内时才打，避免在屏外空打）
+    // 时间触发打字（不再因触底截断；回绕保证全诗完整显示）
     while (
       this.idx < this.text.length &&
-      this.headY < H + CHAR_SIZE &&
       (now - this.lastTypeTime) >= this.typeInterval
     ) {
       const ch = this.text[this.idx];
-      if (ch) this.chars.push({ ch, y: this.headY, born: now });
+      if (ch) {
+        const sprite = acquireText(ch, this.x, this.headY);
+        this.chars.push({ ch, y: this.headY, born: now, sprite });
+      }
       this.idx++;
       this.lastTypeTime += this.typeInterval;
     }
     // 按时间淘汰过期字（最旧端在数组前部），字因此原地淡出消失，无需平移
     const TTL = this.typeInterval * TRAIL_LEN;
     while (this.chars.length && (now - this.chars[0].born) > TTL) {
-      this.chars.shift();
+      releaseText(this.chars.shift().sprite);
     }
-    // 回收：字全部消失（诗打完或字头已过屏底）
-    if (this.chars.length === 0) {
-      const poemDone = this.idx >= this.text.length;
-      if (poemDone || this.headY > H + 100) this.reset();
+    // 全诗写完且拖尾淡尽后，换下一篇
+    if (this.chars.length === 0 && this.idx >= this.text.length) {
+      this.reset();
     }
   }
   draw(now) {
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
     const n = this.chars.length;
     const TTL = this.typeInterval * TRAIL_LEN;
+    const headTint = tintOf(theme.head);
+    const fgTint = tintOf(theme.fg);
     for (let i = 0; i < n; i++) {
       const c = this.chars[i];
-      if (c.y < -CHAR_SIZE || c.y > H + CHAR_SIZE) continue;
+      if (c.y < -charSize || c.y > H + charSize) {
+        c.sprite.visible = false;
+        continue;
+      }
+      c.sprite.visible = true;
+      c.sprite.x = this.x;
+      c.sprite.y = c.y;
       const isHead = i === n - 1;        // 末尾为最新字头
       // 所有字（含字头）按年龄渐隐；字头刚出生时 age≈0 自然最亮，老去时平滑淡出
-      const op = Math.max(0, 1 - (now - c.born) / TTL);
-      const rgb = isHead ? theme.head : theme.fg;
-      ctx.fillStyle = `rgba(${rgb}, ${op})`;
-      ctx.fillText(c.ch, this.x, c.y);
+      c.sprite.tint = isHead ? headTint : fgTint;
+      c.sprite.alpha = Math.max(0, 1 - (now - c.born) / TTL);
     }
   }
 }
 
 function buildColumns() {
-  const step = CHAR_SIZE + COL_GAP;
+  // 释放旧列残存精灵
+  for (const col of cols) {
+    for (const c of col.chars || []) releaseText(c.sprite);
+    col.chars = [];
+  }
+  const step = charSize + COL_GAP;
   const count = Math.max(1, Math.floor(W / step));
   const offset = (W - count * step) / 2 + step / 2;
   cols = [];
@@ -538,47 +571,55 @@ function buildColumns() {
   }
 }
 
-/* ---------- 渲染循环（基于时间戳） ---------- */
-let lastT = performance.now();
-function frame(t) {
-  const dt = Math.min(60, t - lastT); // 限制单帧步长，防卡顿后跳跃
-  lastT = t;
-  ctx.fillStyle = theme.bg;
-  ctx.fillRect(0, 0, W, H);
-  ctx.font = `${CHAR_SIZE}px ${fontFamily}`;
-  for (const col of cols) {
-    // 单列出错不致中断整条 rAF 链导致全屏冻结
-    try { col.update(t, dt); col.draw(t); } catch (e) { /* 跳过本列本帧 */ }
-  }
-  requestAnimationFrame(frame);
-}
-
 /* ---------- 标签页切回时重置时间基准，避免补打叠字/残影 ---------- */
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     const now = performance.now();
-    lastT = now;
     for (const col of cols) col.lastTypeTime = now;
   }
 });
 
-/* ---------- 点击交互 ---------- */
-canvas.addEventListener("click", (e) => {
-  const rect = canvas.getBoundingClientRect();
+/* ---------- 点击交互：取最近一列 ---------- */
+function onCanvasClick(e) {
+  const rect = app.canvas.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   let best = null, bestDist = Infinity;
   for (const col of cols) {
     if (col.chars.length === 0) continue;
     const dx = Math.abs(col.x - x);
-    if (dx > CHAR_SIZE) continue;
+    if (dx > charSize) continue;
     const top = col.chars[0].y;
     const bot = col.chars[col.chars.length - 1].y;
-    if (y < top - CHAR_SIZE || y > bot + CHAR_SIZE) continue;
+    if (y < top - charSize || y > bot + charSize) continue;
     if (dx < bestDist) { bestDist = dx; best = col; }
   }
   if (best) showModal(best.poem);
-});
+}
+
+/* ---------- 初始化渲染器与主循环 ---------- */
+async function initRenderer() {
+  app = new PIXI.Application();
+  await app.init({
+    canvas: document.getElementById("rain"),
+    backgroundAlpha: 0,
+    antialias: true,
+    autoDensity: true,
+    resolution: Math.min(window.devicePixelRatio || 1, 2)
+  });
+  rainContainer = new PIXI.Container();
+  app.stage.addChild(rainContainer);
+  app.canvas.addEventListener("click", onCanvasClick);
+  resize();
+  app.ticker.add((ticker) => {
+    const now = performance.now();
+    const dt = Math.min(60, ticker.deltaMS); // 限制单帧步长，防卡顿后跳跃
+    for (const col of cols) {
+      // 单列出错不致中断整条主循环导致全屏冻结
+      try { col.update(now, dt); col.draw(now); } catch (e) { /* 跳过本列本帧 */ }
+    }
+  });
+}
 
 /* ---------- 弹窗 ---------- */
 const modal = document.getElementById("modal");
@@ -808,10 +849,29 @@ function buildFontList() {
 fontSelect.addEventListener("change", () => {
   const f = FONTS.find(x => x.id === fontSelect.value) || FONTS[0];
   fontFamily = f.stack;
+  sharedStyle.fontFamily = f.stack;   // 同步字雨精灵字体
   document.documentElement.style.setProperty("--font", f.stack);
   saveSettings();
 });
 buildFontList();
+
+/* ---------- 字号调节 ---------- */
+const sizeSlider = document.getElementById("sizeSlider");
+const sizeVal = document.getElementById("sizeVal");
+sizeSlider.addEventListener("input", () => {
+  sizeVal.textContent = sizeSlider.value + "px";
+});
+sizeSlider.addEventListener("change", () => {
+  applyFontSize(Number(sizeSlider.value));
+});
+function applyFontSize(sz) {
+  charSize = sz;
+  sharedStyle.fontSize = sz;          // 共享样式即时生效（含池中精灵）
+  const now = performance.now();
+  buildColumns();                     // 按新字号重建列间距
+  for (const col of cols) col.lastTypeTime = now;
+  saveSettings();
+}
 
 /* ---------- 设置持久化（localStorage） ---------- */
 const STORAGE_KEY = "shiciRain.settings";
@@ -820,6 +880,7 @@ function saveSettings() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       speed: speedMs,
       font: fontSelect.value,
+      size: charSize,
       libs: LIBS.map(l => ({ id: l.id, on: l.on }))
     }));
   } catch (e) {}
@@ -838,9 +899,16 @@ function loadSettings() {
       const f = FONTS.find(x => x.id === data.font);
       if (f) {
         fontFamily = f.stack;
+        sharedStyle.fontFamily = f.stack;
         document.documentElement.style.setProperty("--font", f.stack);
         fontSelect.value = f.id;
       }
+    }
+    if (typeof data.size === "number" && data.size >= 14 && data.size <= 48) {
+      charSize = data.size;
+      sharedStyle.fontSize = data.size;
+      sizeSlider.value = data.size;
+      sizeVal.textContent = data.size + "px";
     }
     if (Array.isArray(data.libs)) {
       for (const s of data.libs) {
@@ -853,12 +921,11 @@ function loadSettings() {
 
 /* ---------- 启动 ---------- */
 window.addEventListener("resize", resize);
-loadSettings();   // 先恢复本地设置（速度/字体/库勾选），再据此构建列表与池
+loadSettings();   // 先恢复本地设置（速度/字体/字号/库勾选），再据此构建列表与池
 buildLibList();
 rebuildPool();      // 初始化可用池（内嵌精选）
-resize();
+initRenderer();     // 异步初始化 PixiJS 渲染器并启动主循环（内部调用 resize）
 loadEnabledLibs();  // 后台拉取已启用的非内嵌库（不阻塞渲染）
-requestAnimationFrame(frame);
 </script>
 </body>
 </html>
