@@ -1233,6 +1233,11 @@
 
   window.addEventListener('resize', layout);
 
+  // 丢失焦点（切到别的窗口/标签页、点击外链等）时自动暂停
+  const autoPause = () => { if (G.state === 'playing') togglePause(); };
+  window.addEventListener('blur', autoPause);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) autoPause(); });
+
   /* ============ 启动 ============ */
   lang = detectLang();
   applyI18n();
