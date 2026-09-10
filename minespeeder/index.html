@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>街机扫雷 · MINESPEEDER</title>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qk8jzgjvf7");
+    </script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0f1a;
+    --line: rgba(255,255,255,.08);
+    --txt: #e6ecf7;
+    --dim: #8b9ab5;
+    --acc: #38bdf8;
+    --ok: #3ddc84;
+    --bad: #ff5470;
+    --warn: #fbbf24;
+  }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(1200px 700px at 50% -10%, #1a2440 0%, var(--bg) 60%);
+    color: var(--txt);
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    overflow: hidden;
+  }
+  #app { height: 100%; display: flex; flex-direction: column; }
+
+  header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 16px; flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    background: rgba(10,14,24,.6);
+  }
+  .hud { display: flex; gap: 8px; flex-wrap: wrap; width: 100%; }
+  .hud .chip { flex: 1 1 auto; min-width: 60px; text-align: center; }
+  .chip {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--line);
+    border-radius: 8px; padding: 5px 10px; min-width: 70px;
+  }
+  .chip b { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .chip i { font-style: normal; font-size: 10px; color: var(--dim); letter-spacing: 1px; }
+  .chip.combo b { color: var(--acc); }
+  .chip.lives b { color: var(--bad); letter-spacing: 2px; }
+
+  .toolbar {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 8px 16px; border-bottom: 1px solid var(--line);
+    background: rgba(255,255,255,.02);
+  }
+  .field { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); }
+  select, input[type=number] {
+    background: #0f1728; color: var(--txt); border: 1px solid var(--line);
+    border-radius: 7px; padding: 5px 7px; font-size: 13px; outline: none;
+  }
+  input[type=number] { width: 62px; }
+  input[type=range] { width: 90px; accent-color: var(--acc); }
+  button {
+    background: linear-gradient(180deg, #2b3a5c, #1d2740);
+    color: var(--txt); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--acc); }
+  button.primary { background: linear-gradient(180deg, #38bdf8, #0ea5e9); color: #04121f; font-weight: 700; border: none; }
+  button.danger { background: linear-gradient(180deg, #ff5470, #c62b46); color: #fff; border: none; }
+  .spacer { margin-left: auto; }
+  .toolbar .brand { font-weight: 800; letter-spacing: 2px; color: var(--acc); font-size: 14px; }
+  .tbinfo {
+    font-size: 11.5px; color: var(--dim); letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  #stage {
+    flex: 1; min-height: 0; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px; overflow: hidden;
+  }
+  canvas {
+    display: block; border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px var(--line) inset;
+    touch-action: none; cursor: pointer;
+  }
+
+  #warnBar {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    top: 14px; padding: 5px 12px; border-radius: 999px;
+    background: rgba(255,84,112,.16); border: 1px solid rgba(255,84,112,.5);
+    color: #ffb3c1; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    opacity: 0; transition: opacity .15s; pointer-events: none;
+  }
+  #warnBar.on { opacity: 1; animation: blink .7s infinite; }
+  @keyframes blink { 50% { opacity: .35; } }
+
+  .overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(6,9,17,.72); backdrop-filter: blur(3px); z-index: 5;
+    pointer-events: none;                 /* 让雷区可直接点击开始 */
+  }
+  .overlay.hidden { display: none; }
+  .overlay .panel {
+    pointer-events: auto;
+    width: min(460px, 92%); background: linear-gradient(180deg, #16203a, #101728);
+    border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6); text-align: center;
+  }
+  .panel h1 { font-size: 26px; letter-spacing: 3px; }
+  .panel h2 { font-size: 22px; margin-bottom: 6px; }
+  .panel .sub { color: var(--dim); font-size: 12.5px; margin: 8px 0 14px; line-height: 1.7; }
+  .rules { text-align: left; font-size: 12px; color: var(--dim); line-height: 1.9; margin-bottom: 14px; }
+  .rules b { color: var(--txt); }
+  .tap { font-size: 12px; color: var(--acc); font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 50% { opacity: .45; } }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 16px; }
+  .stat { background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 9px; padding: 8px; }
+  .stat b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .stat i { font-style: normal; font-size: 10.5px; color: var(--dim); }
+  .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .credit { margin-top: 12px; font-size: 11px; color: var(--dim); letter-spacing: .5px; }
+  .credit a { color: var(--acc); text-decoration: none; }
+  .credit a:hover { text-decoration: underline; }
+  .newrec { color: var(--warn); font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
+
+  /* 暂停条：与顶部游戏状态（HUD）处于同一行 */
+  .overlay.paused { align-items: flex-start; }
+  .overlay.paused .panel {
+    width: 100%; border-radius: 0 0 16px 16px; text-align: left;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 16px;
+  }
+  .overlay.paused .ptitle { font-size: 16px; font-weight: 700; letter-spacing: 2px; }
+  .overlay.paused .pstat { color: var(--dim); font-size: 12.5px; }
+  .overlay.paused .pbtns { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .overlay.paused .phint {
+    flex-basis: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px;
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
+    font-size: 11.5px; color: var(--dim);
+  }
+  .overlay.paused .phint .ptip { grid-column: 1 / -1; line-height: 1.6; }
+  .overlay.paused .phint kbd {
+    background: #1b2440; border: 1px solid var(--line); border-radius: 4px;
+    padding: 1px 5px; font-size: 10.5px; color: var(--txt);
+  }
+
+  /* 首页设定区 */
+  .setup { text-align: left; margin: 0 0 14px; }
+  .srow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .slabel { font-size: 12px; color: var(--dim); width: 48px; flex: none; letter-spacing: 1px; }
+  .seg { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+  .seg button { flex: 1; min-width: 78px; padding: 7px 6px; font-size: 12.5px; }
+  .seg button.on {
+    background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+    color: #04121f; font-weight: 700; border: none;
+  }
+  .cfields { display: flex; align-items: center; gap: 12px; flex: 1; flex-wrap: wrap; font-size: 12px; color: var(--dim); }
+  .cfields label { display: flex; align-items: center; gap: 5px; }
+  .cfields input[type=number] { width: 58px; }
+  .cfields input[type=range] { width: 100px; }
+  .hint { font-size: 11px; color: var(--dim); opacity: .85; margin: -2px 0 10px 58px; }
+  .hint b.bestval { color: var(--warn); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+
+
+  /* ============ 移动端 ============ */
+  @media (max-width: 700px) {
+    header { gap: 8px; padding: 8px 10px; }
+    .logo { font-size: 15px; letter-spacing: 1px; }
+    .logo span { font-size: 9px; letter-spacing: 2px; }
+    .hud { gap: 5px; }
+    .chip { min-width: 52px; padding: 4px 7px; border-radius: 7px; }
+    .chip b { font-size: 13px; }
+    .chip i { font-size: 9px; letter-spacing: 0; }
+    .toolbar { gap: 7px; padding: 7px 10px; }
+    .toolbar button { padding: 7px 10px; font-size: 12px; }
+
+    .overlay { align-items: flex-start; padding: 12px 10px; }
+    .overlay .panel {
+      width: 100%; padding: 16px; border-radius: 12px;
+      max-height: calc(100vh - 24px); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    }
+    .panel h1 { font-size: 20px; letter-spacing: 2px; }
+    .panel h2 { font-size: 19px; }
+    .panel .sub { font-size: 12px; margin: 6px 0 12px; }
+    .rules { font-size: 11.5px; line-height: 1.7; margin-bottom: 12px; }
+    .slabel { width: 42px; }
+    .seg button { min-width: 0; padding: 8px 4px; font-size: 12px; }
+    .cfields { gap: 10px; }
+    .hint { margin-left: 52px; }
+    .stats { gap: 6px; }
+    .stat b { font-size: 16px; }
+  }
+  @media (max-width: 400px) {
+    .chip { min-width: 44px; padding: 3px 5px; }
+    .chip b { font-size: 12px; }
+    .chip i { font-size: 8.5px; }
+    .hud { gap: 4px; }
+  }
+  /* 横屏矮屏：压缩纵向占位 */
+  @media (max-height: 480px) {
+    header { padding: 5px 10px; }
+    .toolbar { padding: 5px 10px; }
+    .chip { padding: 3px 7px; }
+    .chip b { font-size: 12.5px; }
+
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="toolbar">
+    <span class="brand" id="tbBrand" data-i18n="gameName">MINESPEEDER</span>
+    <div class="spacer"></div>
+    <span class="tbinfo" id="tbInfo">竖屏·普通</span>
+    <button id="btnPause" data-i18n="pause">暂停</button>
+  </div>
+
+  <div id="stage">
+    <canvas id="board"></canvas>
+    <div id="warnBar">⚠</div>
+    <div id="overlay" class="overlay"></div>
+  </div>
+
+  <header>
+    <div class="hud">
+      <div class="chip"><b id="hScore">0</b><i data-i18n="score">分数</i></div>
+      <div class="chip combo"><b id="hCombo">×1</b><i data-i18n="combo">连击</i></div>
+      <div class="chip"><b id="hSpeed">1.0x</b><i data-i18n="speed">速度</i></div>
+      <div class="chip"><b id="hTime">00:00</b><i data-i18n="time">时长</i></div>
+      <div class="chip"><b id="hCleared">0</b><i data-i18n="cleared">已排雷</i></div>
+      <div class="chip lives"><b id="hLives">♥♥♥</b><i data-i18n="lives">生命</i></div>
+      <div class="chip"><b id="hBest">0</b><i data-i18n="best">最高分</i></div>
+    </div>
+  </header>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============ 多语言 ============ */
+  const T = {
+    zh: {
+      htmlLang: 'zh-CN',
+      docTitle: '街机扫雷 · MINESPEEDER',
+      title: '街机扫雷', subTitle: 'MINESPEEDER', gameName: '街机扫雷',
+      score: '分数', combo: '连击', speed: '速度', time: '时长', cleared: '已排雷', lives: '生命', best: '最高分',
+      width: '宽', height: '高', difficulty: '难度', density: '雷密度', speedPreset: '速度档',
+      mode: '模式', portrait: '竖屏', landscape: '横屏', custom: '自定义',
+      language: '语言', zh: '中文', en: 'English',
+      customHint: '宽、高、雷密度与速度自定；点速度档可一键预填速度参数',
+      bestLabel: '本模式最高分', noBest: '自定义模式不计入最高分',
+      speedCfg: '速度',
+      spT0: '起始速度', spTmin: '最快速度', spTau: '加速时间',
+      tipT0: '开局滚完一屏的秒数，越大越慢',
+      tipTmin: '最快时滚完一屏的秒数，速度上限',
+      tipTau: '加速快慢的时间常数，越大加速越平缓',
+      tapStart: '点击任意格子开始滚动',
+      easy: '简单', normal: '普通', hard: '困难',
+      start: '开始游戏', pause: '暂停', resume: '继续', restart: '重新开始', toTitle: '返回标题', sfxOn: '音效：开', sfxOff: '音效：关', langBtn: 'English',
+      footReveal: '<kbd>左键</kbd> 翻开格子 / 点数字连锁',
+      footFlag: '<kbd>右键</kbd> 插旗标记地雷',
+      footTouch: '<kbd>长按</kbd> 触屏插旗',
+      footSpace: '<kbd>空格</kbd> 开始/暂停',
+      footRestart: '<kbd>R</kbd> 重开',
+      footTip: '新出现的 0 会自动展开；未插旗的雷滚出底部或左键点中雷 = 扣 1 条命，3 条命用完即结束',
+      menuTitle: '街 机 扫 雷',
+      menuSub: '雷区从上方持续向下滚动并逐渐加速<br>在每一颗雷滚出底部之前把它标记出来',
+      rule1: '<b>左键</b>：翻开空白格（自动连锁展开）；点击已翻开的数字 n——旗数已够 n 则点开其余格子，未标记的格子正好剩 n 个则自动插旗',
+      rule2: '<b>右键</b>：插旗标记地雷（触屏长按）',
+      rule3: '<b>扣命</b>：左键点中地雷、或未插旗的地雷滚出底部，各扣 1 条命；踩雷会触发清屏，标出场上所有雷并翻开其余格子',
+      rule4: '<b>得分</b>：成功标记的雷滚出底部 +50 起，连续排雷有连击加成；误标 -30',
+      tapHint: '点击雷区任意位置即可开始',
+      startBtn: '开始游戏', credit: 'Made by <a href="https://ts8zs.com" target="_blank" rel="noopener noreferrer">Ts8zs</a> with CodeBuddy',
+      pausedTitle: '已暂停', pausedSub: '当前分数 {score} · 已排雷 {cleared}',
+      overClick: '踩到雷了！', overMiss: '有雷漏出了底部！', overLives: '生命耗尽！',
+      whyClick: '左键只能用于翻开安全格，地雷请右键插旗',
+      whyMiss: '必须在地雷滚出屏幕底部前完成标记',
+      whyLives: '三条生命已全部用完',
+      newRec: '★ 新纪录 ★',
+      statScore: '本局得分', statBest: '最高分', statCleared: '成功排雷',
+      statCombo: '最高连击', statOpen: '翻开格子', statTime: '存活时长', statLives: '剩余生命',
+      againBtn: '再来一局（R）', resumeBtn: '继续', restartBtn: '重新开始',
+      warn: n => '⚠ 底部有 ' + n + ' 颗雷未标记',
+      warnEn: n => '⚠ ' + n + ' unflagged mine(s) near bottom'
+    },
+    en: {
+      htmlLang: 'en',
+      docTitle: 'MINESPEEDER',
+      title: 'MINESPEEDER', subTitle: 'MINESPEEDER', gameName: 'MINESPEEDER',
+      score: 'SCORE', combo: 'COMBO', speed: 'SPEED', time: 'TIME', cleared: 'CLEARED', lives: 'LIVES', best: 'BEST',
+      width: 'W', height: 'H', difficulty: 'LEVEL', density: 'DENSITY', speedPreset: 'SPEED',
+      mode: 'MODE', portrait: 'PORTRAIT', landscape: 'LANDSCAPE', custom: 'CUSTOM',
+      language: 'LANG', zh: '中文', en: 'EN',
+      customHint: 'Set width, height, density and speed; tap a level to pre-fill the speed',
+      bestLabel: 'Mode best', noBest: 'Custom mode is not ranked',
+      speedCfg: 'SPEED',
+      spT0: 'START SPD', spTmin: 'MAX SPD', spTau: 'RAMP TIME',
+      tipT0: 'Seconds per screen at the start; larger = slower',
+      tipTmin: 'Seconds per screen at max speed; the speed cap',
+      tipTau: 'Time constant of acceleration; larger = gentler ramp',
+      tapStart: 'Tap any cell to start',
+      easy: 'EASY', normal: 'NORMAL', hard: 'HARD',
+      start: 'START', pause: 'PAUSE', resume: 'RESUME', restart: 'NEW GAME', toTitle: 'TITLE', sfxOn: 'SFX: ON', sfxOff: 'SFX: OFF', langBtn: '中文',
+      footReveal: '<kbd>Left</kbd> open cell / chord a number',
+      footFlag: '<kbd>Right</kbd> flag a mine',
+      footTouch: '<kbd>Long press</kbd> flag on touch',
+      footSpace: '<kbd>Space</kbd> start / pause',
+      footRestart: '<kbd>R</kbd> restart',
+      footTip: 'New zeros open automatically; an unflagged mine leaving the bottom or clicking a mine costs 1 of 3 lives',
+      menuTitle: 'MINESPEEDER',
+      menuSub: 'The minefield scrolls down faster and faster<br>Flag every mine before it leaves the bottom',
+      rule1: '<b>Left click</b>: open a cell (cascades); click a revealed number n — chord the rest once n flags are placed, or auto-flag when exactly n neighbours are unflagged',
+      rule2: '<b>Right click</b>: flag a mine (long press on touch)',
+      rule3: '<b>Lives</b>: clicking a mine, or letting an unflagged mine leave the bottom, costs 1 life (3 total); stepping on a mine triggers a wipe that marks every mine and opens the rest',
+      rule4: '<b>Score</b>: +50 base per flagged mine that exits safely, combo bonus; wrong flag -30',
+      tapHint: 'Click anywhere on the field to start',
+      startBtn: 'START GAME', credit: 'Made by <a href="https://ts8zs.com" target="_blank" rel="noopener noreferrer">Ts8zs</a> with CodeBuddy',
+      pausedTitle: 'PAUSED', pausedSub: 'Score {score} · Mines cleared {cleared}',
+      overClick: 'You clicked a mine!', overMiss: 'A mine slipped past the bottom!', overLives: 'Out of lives!',
+      whyClick: 'Left click is only for safe cells — flag mines with right click',
+      whyMiss: 'Every mine must be flagged before it scrolls off the bottom',
+      whyLives: 'All three lives are gone',
+      newRec: '★ NEW RECORD ★',
+      statScore: 'SCORE', statBest: 'BEST', statCleared: 'MINES CLEARED',
+      statCombo: 'MAX COMBO', statOpen: 'CELLS OPENED', statTime: 'SURVIVED', statLives: 'LIVES LEFT',
+      againBtn: 'PLAY AGAIN (R)', resumeBtn: 'RESUME', restartBtn: 'RESTART',
+      warn: n => '⚠ ' + n + ' unflagged mine(s) near bottom',
+      warnEn: n => '⚠ ' + n + ' unflagged mine(s) near bottom'
+    }
+  };
+  let L = T.zh, lang = 'zh';
+  const t = k => L[k];
+
+  /* ============ 常量 / 状态 ============ */
+  const cv = document.getElementById('board');
+  const ctx = cv.getContext('2d');
+  const stage = document.getElementById('stage');
+  const overlay = document.getElementById('overlay');
+  const warnBar = document.getElementById('warnBar');
+
+  const KEY_BEST = 'rolling_ms_best_v2';     // 按「模式 + 难度」分别记录
+  const KEY_LANG = 'rolling_ms_lang_v1';
+  const NUM_COLORS = ['#4aa3ff', '#3ddc84', '#ff7b7b', '#c084fc', '#fbbf24', '#22d3ee', '#f1f5f9', '#94a3b8'];
+  const MAX_LIVES = 3;
+
+  // 最高分：自定义模式不参与记录，其余每种「模式 + 难度」各一份
+  function loadBests() {
+    try {
+      const v = JSON.parse(localStorage.getItem(KEY_BEST) || '{}');
+      return (v && typeof v === 'object') ? v : {};
+    } catch (e) { return {}; }
+  }
+  let bests = loadBests();
+  const bestKey = () => G.mode === 'custom' ? null : G.mode + '_' + G.diff;
+  const bestOf = k => (k && bests[k]) || 0;
+
+  // 雷密度：简单 10% / 普通 15% / 困难 20%
+  const DIFF = {
+    easy:   { p: 0.10, T0: 60, Tmin: 20, tau: 600 },
+    normal: { p: 0.15, T0: 50, Tmin: 15, tau: 300 },
+    hard:   { p: 0.20, T0: 40, Tmin: 10,  tau: 300 }
+  };
+  // 预设尺寸：竖屏 10 列 × 20 行，横屏 20 列 × 20 行
+  const PRESET = {
+    portrait:  { cols: 10, rows: 20 },
+    landscape: { cols: 20, rows: 20 }
+  };
+  // 速度参数：自定义模式用玩家填的，其余按难度档位
+  function speedCfg() {
+    return G.mode === 'custom'
+      ? { T0: G.customT0, Tmin: G.customTmin, tau: G.customTau }
+      : DIFF[G.diff];
+  }
+
+  const G = {
+    cols: 20, rows: 20, diff: 'normal', p: 0.15,
+    mode: 'landscape', customCols: 20, customRows: 20, customP: 15,
+    customT0: 50, customTmin: 12, customTau: 200,
+    cell: 24, dpr: 1,
+    scrollRows: 0, time: 0, speedRows: 0,
+    wipe: null, awaitFirst: false, autoOpenOn: true,
+    rowMap: new Map(), maxGen: 0, autoNext: 1,
+    state: 'menu',                 // menu | playing | paused | over
+    score: 0, combo: 0, comboMax: 0, lastClearT: -99,
+    revealed: 0, cleared: 0, wrongFlags: 0, danger: 0,
+    lives: MAX_LIVES,
+    best: 0,
+    particles: [], popups: [], shake: 0,
+    hover: null, deadCell: null, revealAll: false,
+    sound: true, flash: 0, overReason: 'lives', newRecord: false
+  };
+
+  const clamp = (v, a, b) => v < a ? a : (v > b ? b : v);
+  const fmtTime = x => {
+    const m = Math.floor(x / 60), s = Math.floor(x % 60);
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  };
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  /* ============ 音效 ============ */
+  let actx = null;
+  function sfx(type) {
+    if (!G.sound) return;
+    try {
+      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+    } catch (e) { return; }
+    const tt = actx.currentTime;
+    if (type === 'boom') {
+      const len = Math.floor(actx.sampleRate * 0.45);
+      const buf = actx.createBuffer(1, len, actx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2);
+      const src = actx.createBufferSource(); src.buffer = buf;
+      const g = actx.createGain(); g.gain.value = 0.3;
+      const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+      src.connect(lp); lp.connect(g); g.connect(actx.destination); src.start();
+      return;
+    }
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.connect(g); g.connect(actx.destination);
+    const cfg = {
+      reveal: ['triangle', 480, 700, 0.05, 0.09],
+      flag:   ['square',   900, 900, 0.04, 0.06],
+      clear:  ['sine',     620, 1240, 0.07, 0.20],
+      deny:   ['sawtooth', 200, 140, 0.035, 0.09],
+      wrong:  ['sawtooth', 320, 120, 0.05, 0.22]
+    }[type];
+    if (!cfg) return;
+    o.type = cfg[0];
+    o.frequency.setValueAtTime(cfg[1], tt);
+    o.frequency.exponentialRampToValueAtTime(Math.max(40, cfg[2]), tt + cfg[4]);
+    g.gain.setValueAtTime(cfg[3], tt);
+    g.gain.exponentialRampToValueAtTime(0.0008, tt + cfg[4] + 0.02);
+    o.start(tt); o.stop(tt + cfg[4] + 0.05);
+  }
+
+  /* ============ 棋盘 ============ */
+  // state: 0 隐藏 / 1 已翻开 / 2 已插旗 / 3 已引爆
+  function makeRow(r, safe) {
+    const mines = new Uint8Array(G.cols);
+    if (!safe) for (let c = 0; c < G.cols; c++) mines[c] = Math.random() < G.p ? 1 : 0;
+    return { r: r, mines: mines, state: new Uint8Array(G.cols) };
+  }
+  function ensureRows() {
+    const need = Math.floor(G.scrollRows) + 2;
+    for (let r = G.maxGen + 1; r <= need; r++) G.rowMap.set(r, makeRow(r, false));
+    if (need > G.maxGen) G.maxGen = need;
+    // 新生成的行：只要上下邻居都已生成，就把 0 格连片自动展开。
+    // autoNext 是单调递增指针，顶行邻居没生成时先跳过、下一批补齐，不会漏行。
+    while (G.autoNext <= G.maxGen - 1) {
+      const row = G.rowMap.get(G.autoNext);
+      if (row) autoOpenRow(row);
+      G.autoNext++;
+    }
+    const cutoff = Math.floor(G.scrollRows) - G.rows - 1;
+    for (const r of Array.from(G.rowMap.keys())) if (r < cutoff) G.rowMap.delete(r);
+  }
+  // 自动展开只蔓延「与已翻开的 0 格连通」的部分：从相邻的开着的 0 格扩散过去
+  function autoOpenRow(row) {
+    if (!G.autoOpenOn) return;              // 开局第一下之前不预先翻开 0 格
+    for (let c = 0; c < G.cols; c++) {
+      if (row.state[c] !== 0 || row.mines[c]) continue;
+      if (touchesOpenZero(row.r, c)) revealFlood(row.r, c, false);
+    }
+  }
+  function touchesOpenZero(r, c) {
+    let hit = false;
+    eachNeighbor(r, c, (nr, nr0, nc) => {
+      if (!hit && nr.state[nc] === 1 && countNear(nr0, nc) === 0) hit = true;
+    });
+    return hit;
+  }
+  function countNear(r, c) {
+    let n = 0;
+    for (let dr = -1; dr <= 1; dr++) {
+      const row = G.rowMap.get(r + dr);
+      if (!row) continue;
+      for (let dc = -1; dc <= 1; dc++) {
+        if (!dr && !dc) continue;
+        const cc = c + dc;
+        if (cc < 0 || cc >= G.cols) continue;
+        n += row.mines[cc];
+      }
+    }
+    return n;
+  }
+  function eachNeighbor(r, c, fn) {
+    for (let dr = -1; dr <= 1; dr++) {
+      const row = G.rowMap.get(r + dr);
+      if (!row) continue;
+      for (let dc = -1; dc <= 1; dc++) {
+        if (!dr && !dc) continue;
+        const cc = c + dc;
+        if (cc < 0 || cc >= G.cols) continue;
+        fn(row, r + dr, cc);
+      }
+    }
+  }
+
+  /* ============ 特效 ============ */
+  function burst(x, y, color, n, power) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, sp = (0.3 + Math.random()) * power;
+      G.particles.push({
+        x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - power * 0.3,
+        life: 0.5 + Math.random() * 0.5, max: 1, r: 1.2 + Math.random() * 2.6, color: color
+      });
+    }
+  }
+  function popup(x, y, text, color) {
+    G.popups.push({ x: x, y: y, text: text, color: color, life: 0.9, max: 0.9 });
+  }
+
+  /* ============ 布局 ============ */
+  function layout() {
+    const availW = stage.clientWidth - 24, availH = stage.clientHeight - 24;
+    G.cell = clamp(Math.floor(Math.min(availW / G.cols, availH / G.rows)), 10, 46);
+    G.dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = G.cell * G.cols, h = G.cell * G.rows;
+    cv.style.width = w + 'px'; cv.style.height = h + 'px';
+    cv.width = Math.round(w * G.dpr); cv.height = Math.round(h * G.dpr);
+    ctx.setTransform(G.dpr, 0, 0, G.dpr, 0, 0);
+  }
+
+  /* ============ 流程 ============ */
+  function reset() {
+    G.rowMap = new Map(); G.maxGen = 0; G.autoNext = 1; G.scrollRows = 0;
+    G.time = 0; G.speedRows = 0; G.score = 0; G.combo = 0; G.comboMax = 0;
+    G.lastClearT = -99; G.revealed = 0; G.cleared = 0; G.wrongFlags = 0;
+    G.particles = []; G.popups = []; G.shake = 0; G.flash = 0;
+    G.danger = 0; G.deadCell = null; G.revealAll = false; G.lives = MAX_LIVES;
+    G.wipe = null; G.awaitFirst = false;
+    // 开局屏幕内的行不含雷，保证第一颗雷有完整滚动距离
+    for (let r = -G.rows + 1; r <= 0; r++) G.rowMap.set(r, makeRow(r, true));
+    for (let r = -G.rows + 2; r <= 0; r++) autoOpenRow(G.rowMap.get(r));
+    ensureRows();
+    layout();
+    syncHud(true);
+  }
+  // 回到菜单：铺出完整网格但不开始滚动，等玩家点开始
+  function gotoMenu() {
+    G.autoOpenOn = false;
+    reset();
+    for (const row of G.rowMap.values()) row.state.fill(0);
+    G.state = 'menu';
+    showOverlay('menu');
+  }
+  function startGame() {
+    G.autoOpenOn = false;           // 开局保持整屏未翻开，等玩家点第一下
+    reset();
+    G.state = 'playing';
+    G.awaitFirst = true;            // 等玩家翻开第一个格子才开始滚动、计时
+    showOverlay('none');
+    document.getElementById('btnPause').textContent = t('pause');
+  }
+  function togglePause() {
+    if (G.state === 'playing') {
+      G.state = 'paused'; showOverlay('paused');
+      document.getElementById('btnPause').textContent = t('resume');
+    } else if (G.state === 'paused') {
+      G.state = 'playing'; showOverlay('none');
+      document.getElementById('btnPause').textContent = t('pause');
+    } else if (G.state === 'menu') startGame();
+  }
+  function loseLife() {
+    G.lives--;
+    G.combo = 0;
+    G.shake = 1; G.flash = 1;
+    sfx('boom');
+    if (G.lives <= 0) gameOver();
+  }
+  function gameOver() {
+    G.state = 'over';
+    G.revealAll = true;
+    G.newRecord = false;
+    const k = bestKey();
+    if (k && G.score > bestOf(k)) {
+      bests[k] = G.score;
+      G.newRecord = true;
+      try { localStorage.setItem(KEY_BEST, JSON.stringify(bests)); } catch (e) {}
+    }
+    G.best = bestOf(k);
+    showOverlay('over');
+  }
+
+  /* ============ 操作 ============ */
+  function cellAt(px, py) {
+    const c = Math.floor(px / G.cell);
+    if (c < 0 || c >= G.cols) return null;
+    const r = Math.ceil((G.scrollRows * G.cell - py) / G.cell);
+    const row = G.rowMap.get(r);
+    if (!row) return null;
+    return { row: row, r: r, c: c };
+  }
+  function revealFlood(r0, c0, manual) {
+    const stack = [[r0, c0]];
+    let opened = 0;
+    while (stack.length) {
+      const p = stack.pop(), r = p[0], c = p[1];
+      const row = G.rowMap.get(r);
+      if (!row) continue;
+      if (row.state[c] !== 0) continue;
+      row.state[c] = 1;
+      opened++;
+      if (countNear(r, c) === 0) {
+        eachNeighbor(r, c, (nr, nr0, nc) => { if (nr0 <= G.maxGen) stack.push([nr0, nc]); });
+      }
+    }
+    if (opened > 0) {
+      G.revealed += opened;
+      if (manual) { G.score += opened; sfx('reveal'); }
+    }
+    return opened;
+  }
+  function chord(r, c) {
+    const n = countNear(r, c);
+    if (n === 0) return;
+    let flags = 0; const hidden = [];
+    eachNeighbor(r, c, (row, rr, cc) => {
+      if (row.state[cc] === 2) flags++;
+      else if (row.state[cc] === 0) hidden.push([rr, cc]);
+    });
+    if (hidden.length > 0 && flags === n) {                // 旗数够了 → 其余都不是雷，点开
+      for (const h of hidden) {
+        const row = G.rowMap.get(h[0]);
+        if (!row) continue;
+        if (row.mines[h[1]]) { detonate(h[0], h[1]); return; }
+        revealFlood(h[0], h[1], true);
+      }
+      return;
+    }
+    // 剩余隐藏格数 == 还没标出的雷数 → 这些格子必然都是雷，全部插旗
+    if (hidden.length > 0 && hidden.length === n - flags) {
+      for (const h of hidden) { const row = G.rowMap.get(h[0]); if (row) row.state[h[1]] = 2; }
+      sfx('flag');
+      return;
+    }
+    sfx('deny');
+  }
+  function toggleFlag(r, c) {
+    const row = G.rowMap.get(r);
+    if (!row || row.state[c] === 1 || row.state[c] === 3) return;
+    row.state[c] = row.state[c] === 2 ? 0 : 2;
+    sfx('flag');
+  }
+  // 引爆一颗雷：扣 1 条命，标记 state=3 避免重复触发
+  function detonate(r, c) {
+    const row = G.rowMap.get(r);
+    if (row) row.state[c] = 3;
+    const x = c * G.cell + G.cell / 2;
+    const y = clamp((G.scrollRows - r) * G.cell + G.cell / 2, 6, G.rows * G.cell - 6);
+    G.deadCell = { r: r, c: c };
+    burst(x, y, '#ff5470', 44, 4.0);
+    popup(x, y, '-1 ♥', '#ff5470');
+    loseLife();
+    if (G.state === 'playing') startWipe();     // 还有命：触发清屏
+  }
+
+  /* ============ 触雷清屏 ============ */
+  // 自下而上把屏幕内每一行"正确标记"：雷插旗、非雷翻开显示数字，随后整屏清除
+  function startWipe() {
+    // 收下整张地图（含刚滚出还没结算的行），避免清屏后同一颗漏雷被二次扣命
+    const rows = Array.from(G.rowMap.values()).sort((a, b) => a.r - b.r);
+    if (!rows.length) { G.wipe = null; return; }
+    G.state = 'wiping';
+    G.wipe = { t: 0, dur: Math.min(1.0, 0.25 + rows.length * 0.04), rows: rows, done: 0 };
+  }
+  function wipeRow(row) {
+    const y = (G.scrollRows - row.r) * G.cell;
+    for (let c = 0; c < G.cols; c++) {
+      if (row.mines[c]) row.state[c] = 2;               // 雷 → 正确标记
+      else if (row.state[c] !== 3) row.state[c] = 1;    // 非雷 → 翻开显示数字
+    }
+    burst(G.cols * G.cell * 0.5, y + G.cell * 0.5, '#38bdf8', 7, 1.8);
+  }
+  function finishWipe() {
+    G.wipe = null;
+    G.deadCell = null;
+    G.danger = 0;
+    G.flash = Math.max(G.flash, 0.7);
+    G.state = 'playing';        // 雷区不动：已标出的雷与翻开的数字随滚动正常出界
+    sfx('clear');
+  }
+  // 第一次有效点击：开始滚动，并把开局这一屏欠下的 0 格补齐
+  function beginRun() {
+    if (!G.awaitFirst) return false;
+    G.awaitFirst = false;
+    G.autoOpenOn = true;
+    return true;
+  }
+  function openPendingZeros() {
+    const rows = Array.from(G.rowMap.values()).sort((a, b) => a.r - b.r);
+    for (const row of rows) autoOpenRow(row);
+  }
+  function leftClick(cell) {
+    const row = cell.row, r = cell.r, c = cell.c;
+    if (row.state[c] === 2 || row.state[c] === 3) return;
+    const first = beginRun();
+    if (row.state[c] === 1) chord(r, c);
+    else if (row.mines[c]) detonate(r, c);
+    else revealFlood(r, c, true);
+    if (first && G.state === 'playing') openPendingZeros();
+  }
+
+  /* ============ 出界结算 ============ */
+  function processExit(row) {
+    let miss = -1;
+    for (let c = 0; c < G.cols; c++) {
+      if (row.mines[c]) {
+        if (row.state[c] === 2) {
+          if (G.time - G.lastClearT <= 6) G.combo++; else G.combo = 1;
+          G.lastClearT = G.time;
+          G.comboMax = Math.max(G.comboMax, G.combo);
+          const pts = 50 + 10 * Math.min(G.combo - 1, 15);
+          G.score += pts; G.cleared++;
+          popup((c + 0.5) * G.cell, G.rows * G.cell - 26, '+' + pts, '#3ddc84');
+          burst((c + 0.5) * G.cell, G.rows * G.cell - 6, '#3ddc84', 10, 2.2);
+          sfx('clear');
+        } else if (row.state[c] !== 3 && miss < 0) miss = c;   // 已引爆过的不再扣命
+      } else if (row.state[c] === 2) {
+        G.score = Math.max(0, G.score - 30);
+        G.combo = 0; G.wrongFlags++;
+        popup((c + 0.5) * G.cell, G.rows * G.cell - 26, '-30', '#fbbf24');
+        sfx('wrong');
+      }
+    }
+    if (miss >= 0) {
+      G.deadCell = { r: row.r, c: miss };
+      G.overReason = 'miss';
+      burst((miss + 0.5) * G.cell, G.rows * G.cell - 6, '#ff5470', 40, 3.6);
+      loseLife();
+      if (G.state === 'playing') startWipe();   // 与点雷一致：漏雷同样触发清屏
+    }
+  }
+
+  /* ============ 主循环 ============ */
+  let last = 0;
+  function frame(ts) {
+    const dt = last ? Math.min(0.05, (ts - last) / 1000) : 0;
+    last = ts;
+    update(dt);
+    draw();
+    requestAnimationFrame(frame);
+  }
+  function update(dt) {
+    if (G.state === 'playing' && !G.awaitFirst) {
+      G.time += dt;
+      const d = speedCfg();
+      const T = Math.max(d.Tmin, d.T0 * Math.exp(-G.time / d.tau));
+      G.speedRows = G.rows / T;
+      G.scrollRows += G.speedRows * dt;
+      ensureRows();
+      const exiting = [];
+      for (const row of G.rowMap.values()) if (G.scrollRows - row.r >= G.rows) exiting.push(row);
+      exiting.sort((a, b) => a.r - b.r);
+      for (const row of exiting) {
+        processExit(row);
+        G.rowMap.delete(row.r);
+        if (G.state !== 'playing') break;
+      }
+    } else if (G.state === 'wiping') {
+      const w = G.wipe;
+      w.t += dt;
+      const should = Math.floor(Math.min(1, w.t / w.dur) * w.rows.length);
+      while (w.done < should) wipeRow(w.rows[w.done++]);
+      if (w.done >= w.rows.length) finishWipe();
+    }
+    for (let i = G.particles.length - 1; i >= 0; i--) {
+      const p = G.particles[i];
+      p.life -= dt;
+      if (p.life <= 0) { G.particles.splice(i, 1); continue; }
+      p.x += p.vx; p.y += p.vy; p.vy += 0.18; p.vx *= 0.99;
+    }
+    for (let i = G.popups.length - 1; i >= 0; i--) {
+      const p = G.popups[i];
+      p.life -= dt; p.y -= 26 * dt;
+      if (p.life <= 0) G.popups.splice(i, 1);
+    }
+    if (G.shake > 0) G.shake = Math.max(0, G.shake - dt * 2.2);
+    if (G.flash > 0) G.flash = Math.max(0, G.flash - dt * 3);
+
+    let danger = 0;
+    const H = G.rows * G.cell;
+    for (const row of G.rowMap.values()) {
+      const y = (G.scrollRows - row.r) * G.cell;
+      if (y > H - 2 * G.cell && y <= H) {
+        for (let c = 0; c < G.cols; c++) if (row.mines[c] && row.state[c] !== 2 && row.state[c] !== 3) danger++;
+      }
+    }
+    G.danger = danger;
+    syncHud(false);
+  }
+
+  /* ============ 绘制 ============ */
+  function drawBomb(x, y, s, hot) {
+    const cx = x + s / 2, cy = y + s / 2, r = s * 0.27;
+    ctx.save();
+    ctx.fillStyle = hot ? '#ff5470' : '#0d1220';
+    ctx.strokeStyle = ctx.fillStyle;
+    ctx.lineWidth = Math.max(1, s * 0.06);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * r * 0.85, cy + Math.sin(a) * r * 0.85);
+      ctx.lineTo(cx + Math.cos(a) * r * 1.5, cy + Math.sin(a) * r * 1.5);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.moveTo(cx + r * 0.55, cy - r * 0.6);
+    ctx.quadraticCurveTo(cx + r * 1.5, cy - r * 1.7, cx + r * 1.1, cy - r * 2.1);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.55)';
+    ctx.beginPath(); ctx.arc(cx - r * 0.34, cy - r * 0.34, r * 0.2, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  function drawFlag(x, y, s) {
+    const cx = x + s / 2, cy = y + s / 2;
+    ctx.save();
+    ctx.strokeStyle = '#dbe4f5'; ctx.lineWidth = Math.max(1.2, s * 0.07);
+    ctx.beginPath(); ctx.moveTo(cx - s * 0.1, cy - s * 0.34); ctx.lineTo(cx - s * 0.1, cy + s * 0.34); ctx.stroke();
+    ctx.fillStyle = '#ff4d6d';
+    ctx.beginPath();
+    ctx.moveTo(cx - s * 0.08, cy - s * 0.32);
+    ctx.lineTo(cx + s * 0.32, cy - s * 0.1);
+    ctx.lineTo(cx - s * 0.08, cy + s * 0.08);
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  function drawCell(row, y, c) {
+    const s = G.cell, x = c * s, st = row.state[c], isMine = row.mines[c] === 1;
+    const dead = G.deadCell && G.deadCell.r === row.r && G.deadCell.c === c;
+
+    if (st === 1) {
+      ctx.fillStyle = '#131a2b';
+      ctx.fillRect(x, y, s, s);
+      ctx.strokeStyle = 'rgba(255,255,255,.05)';
+      ctx.strokeRect(x + .5, y + .5, s - 1, s - 1);
+      const n = countNear(row.r, c);
+      if (n > 0) {
+        ctx.fillStyle = NUM_COLORS[Math.min(n, 8) - 1];
+        ctx.font = '700 ' + Math.round(s * 0.56) + 'px "Segoe UI", system-ui, sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(String(n), x + s / 2, y + s / 2 + 1);
+      }
+      return;
+    }
+
+    const g = ctx.createLinearGradient(x, y, x, y + s);
+    g.addColorStop(0, '#4a5573'); g.addColorStop(1, '#2c3450');
+    ctx.fillStyle = g;
+    roundRect(x + 1, y + 1, s - 2, s - 2, Math.max(2, s * 0.12)); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.10)'; ctx.stroke();
+
+    if (st === 3) {                                  // 已引爆
+      drawBomb(x, y, s, true);
+      ctx.strokeStyle = '#ff5470'; ctx.lineWidth = Math.max(1.5, s * 0.09);
+      ctx.beginPath();
+      ctx.moveTo(x + s * .28, y + s * .28); ctx.lineTo(x + s * .72, y + s * .72);
+      ctx.moveTo(x + s * .72, y + s * .28); ctx.lineTo(x + s * .28, y + s * .72);
+      ctx.stroke();
+      return;
+    }
+    if (st === 2) {
+      if (G.revealAll && !isMine) {
+        ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = Math.max(1.5, s * 0.09);
+        ctx.beginPath();
+        ctx.moveTo(x + s * .3, y + s * .3); ctx.lineTo(x + s * .7, y + s * .7);
+        ctx.moveTo(x + s * .7, y + s * .3); ctx.lineTo(x + s * .3, y + s * .7);
+        ctx.stroke();
+      }
+      drawFlag(x, y, s);
+    } else if (isMine && G.revealAll) {
+      drawBomb(x, y, s, dead);
+    }
+
+    if (G.hover && G.hover.r === row.r && G.hover.c === c && G.state === 'playing') {
+      ctx.strokeStyle = 'rgba(56,189,248,.85)'; ctx.lineWidth = 2;
+      roundRect(x + 1.5, y + 1.5, s - 3, s - 3, Math.max(2, s * 0.12)); ctx.stroke();
+    }
+  }
+  function draw() {
+    const w = G.cols * G.cell, h = G.rows * G.cell;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#0a0e19'; ctx.fillRect(0, 0, w, h);
+    ctx.save();
+    if (G.shake > 0) {
+      const k = G.shake * 6;
+      ctx.translate((Math.random() - .5) * k, (Math.random() - .5) * k);
+    }
+    const topR = Math.floor(G.scrollRows);
+    for (let r = topR + 1; r >= topR - G.rows; r--) {
+      const row = G.rowMap.get(r);
+      if (!row) continue;
+      const y = (G.scrollRows - r) * G.cell;
+      if (y > h || y < -G.cell) continue;
+      for (let c = 0; c < G.cols; c++) drawCell(row, y, c);
+    }
+    if (G.state === 'wiping' && G.wipe) {
+      const pr = Math.min(1, G.wipe.t / G.wipe.dur);
+      const sy = h * (1 - pr);
+      const sg = ctx.createLinearGradient(0, sy - G.cell, 0, sy + G.cell);
+      sg.addColorStop(0, 'rgba(56,189,248,0)');
+      sg.addColorStop(0.5, 'rgba(56,189,248,.5)');
+      sg.addColorStop(1, 'rgba(56,189,248,0)');
+      ctx.fillStyle = sg; ctx.fillRect(0, sy - G.cell, w, G.cell * 2);
+    }
+    if (G.danger > 0 && G.state === 'playing') {
+      const a = 0.25 + 0.2 * Math.sin(performance.now() / 110);
+      const gg = ctx.createLinearGradient(0, h - G.cell * 2, 0, h);
+      gg.addColorStop(0, 'rgba(255,84,112,0)');
+      gg.addColorStop(1, 'rgba(255,84,112,' + a.toFixed(3) + ')');
+      ctx.fillStyle = gg; ctx.fillRect(0, h - G.cell * 2, w, G.cell * 2);
+    }
+    if (G.flash > 0) {
+      ctx.fillStyle = 'rgba(255,84,112,' + (G.flash * 0.35).toFixed(3) + ')';
+      ctx.fillRect(0, 0, w, h);
+    }
+    for (const p of G.particles) {
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.life / p.max));
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const p of G.popups) {
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.life / p.max));
+      ctx.fillStyle = p.color;
+      ctx.font = '800 ' + Math.round(G.cell * 0.5) + 'px "Segoe UI", system-ui, sans-serif';
+      ctx.fillText(p.text, p.x, p.y);
+    }
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+
+  /* ============ HUD / 覆盖层 ============ */
+  let hudT = 0;
+  function syncHud(force) {
+    const now = performance.now();
+    if (!force && now - hudT < 90) return;
+    hudT = now;
+    const d = speedCfg();
+    const T = Math.max(d.Tmin, d.T0 * Math.exp(-G.time / d.tau));
+    document.getElementById('hScore').textContent = G.score;
+    document.getElementById('hCombo').textContent = '×' + Math.max(1, G.combo);
+    document.getElementById('hSpeed').textContent = (d.T0 / T).toFixed(1) + 'x';
+    document.getElementById('hTime').textContent = fmtTime(G.time);
+    document.getElementById('hCleared').textContent = G.cleared;
+    document.getElementById('hBest').textContent = bestKey() ? Math.max(G.best, G.score) : '—';
+    document.getElementById('hLives').textContent =
+      '♥'.repeat(Math.max(0, G.lives)) + '♡'.repeat(Math.max(0, MAX_LIVES - G.lives));
+    if (G.awaitFirst && G.state === 'playing') {
+      warnBar.classList.add('on');
+      warnBar.textContent = t('tapStart');
+    } else if (G.danger > 0 && G.state === 'playing') {
+      warnBar.classList.add('on');
+      warnBar.textContent = t('warn')(G.danger);
+    } else warnBar.classList.remove('on');
+  }
+  /* ============ 首页设定 ============ */
+  function setupHtml() {
+    const on = cond => cond ? ' class="on"' : '';
+    const modeBtn = (m, label) => '<button data-mode="' + m + '"' + on(G.mode === m) + '>' + label + '</button>';
+    const diffBtn = d => '<button data-diff="' + d + '"' + on(G.diff === d) + '>' + t(d) +
+      (G.mode === 'custom' ? ' T0:' + DIFF[d].T0 : ' ' + Math.round(DIFF[d].p * 100) + '%') + '</button>';
+    const pr = PRESET.portrait, la = PRESET.landscape;
+    return '<div class="setup">' +
+      '<div class="srow"><span class="slabel">' + t('mode') + '</span><div class="seg" id="segMode">' +
+        modeBtn('portrait', t('portrait') + ' ' + pr.cols + '×' + pr.rows) +
+        modeBtn('landscape', t('landscape') + ' ' + la.cols + '×' + la.rows) +
+        modeBtn('custom', t('custom')) +
+      '</div></div>' +
+      '<div class="srow"><span class="slabel">' + (G.mode === 'custom' ? t('speedPreset') : t('difficulty')) + '</span><div class="seg" id="segDiff">' +
+        diffBtn('easy') + diffBtn('normal') + diffBtn('hard') +
+      '</div></div>' +
+      '<div class="srow" id="rowCustom"' + (G.mode === 'custom' ? '' : ' style="display:none"') + '>' +
+        '<span class="slabel">' + t('custom') + '</span><div class="cfields">' +
+        '<label>' + t('width') + ' <input type="number" id="ovCols" min="5" max="40" value="' + G.customCols + '"></label>' +
+        '<label>' + t('height') + ' <input type="number" id="ovRows" min="6" max="40" value="' + G.customRows + '"></label>' +
+        '<label>' + t('density') + ' <input type="range" id="ovDensity" min="4" max="40" step="1" value="' + G.customP + '">' +
+        '<span id="ovDensLb">' + G.customP + '%</span></label>' +
+        '</div></div>' +
+      '<div class="srow" id="rowSpeed"' + (G.mode === 'custom' ? '' : ' style="display:none"') + '>' +
+        '<span class="slabel">' + t('speedCfg') + '</span><div class="cfields">' +
+        '<label title="' + t('tipT0') + '">' + t('spT0') + ' <input type="number" id="ovT0" min="10" max="200" value="' + G.customT0 + '"></label>' +
+        '<label title="' + t('tipTmin') + '">' + t('spTmin') + ' <input type="number" id="ovTmin" min="3" max="120" value="' + G.customTmin + '"></label>' +
+        '<label title="' + t('tipTau') + '">' + t('spTau') + ' <input type="number" id="ovTau" min="30" max="600" value="' + G.customTau + '"></label>' +
+        '</div></div>' +
+      '<div class="srow"><span class="slabel">' + t('language') + '</span><div class="seg" id="segLang">' +
+        '<button data-lang="zh"' + on(lang === 'zh') + '>' + t('zh') + '</button>' +
+        '<button data-lang="en"' + on(lang === 'en') + '>' + t('en') + '</button>' +
+      '</div></div>' +
+      (G.mode === 'custom' ? '<div class="hint">' + t('customHint') + '</div>' : '') +
+      '<div class="hint">' + (G.mode === 'custom' ? t('noBest')
+        : t('bestLabel') + ' <b class="bestval">' + bestOf(bestKey()) + '</b>') + '</div>' +
+      '</div>';
+  }
+  function applySetup() {
+    if (G.mode === 'custom') {
+      G.cols = clamp(G.customCols, 5, 40);
+      G.rows = clamp(G.customRows, 6, 40);
+      G.p = G.customP / 100;
+    } else {
+      G.cols = PRESET[G.mode].cols;
+      G.rows = PRESET[G.mode].rows;
+      G.p = DIFF[G.diff].p;
+    }
+    G.best = bestOf(bestKey());
+    const tb = document.getElementById('tbInfo');
+    if (tb) tb.textContent = G.mode === 'custom'
+      ? t('custom') + ' ' + G.cols + '×' + G.rows + ' · ' + Math.round(G.p * 100) + '%'
+      : t(G.mode) + '·' + t(G.diff);
+    gotoMenu();
+  }
+  function bindSetup() {
+    const segLang = document.getElementById('segLang');
+    if (segLang) segLang.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.getAttribute('data-lang'));
+    });
+    const segMode = document.getElementById('segMode');
+    if (segMode) segMode.querySelectorAll('button').forEach(b => {
+      b.onclick = () => { G.mode = b.getAttribute('data-mode'); applySetup(); };
+    });
+    const segDiff = document.getElementById('segDiff');
+    if (segDiff) segDiff.querySelectorAll('button').forEach(b => {
+      b.onclick = () => {
+        G.diff = b.getAttribute('data-diff');
+        if (G.mode === 'custom') {           // 自定义模式：难度档一键预填速度参数
+          const d = DIFF[G.diff];
+          G.customT0 = d.T0; G.customTmin = d.Tmin; G.customTau = d.tau;
+        }
+        applySetup();
+      };
+    });
+    const ovCols = document.getElementById('ovCols');
+    if (ovCols) ovCols.onchange = () => {
+      G.customCols = clamp(parseInt(ovCols.value, 10) || 20, 5, 40);
+      ovCols.value = G.customCols; applySetup();
+    };
+    const ovRows = document.getElementById('ovRows');
+    if (ovRows) ovRows.onchange = () => {
+      G.customRows = clamp(parseInt(ovRows.value, 10) || 20, 6, 40);
+      ovRows.value = G.customRows; applySetup();
+    };
+    const bindNum = (id, min, max, def, set) => {
+      const el = document.getElementById(id);
+      if (el) el.onchange = () => { set(clamp(parseInt(el.value, 10) || def, min, max)); applySetup(); };
+    };
+    bindNum('ovT0', 10, 200, 50, v => { G.customT0 = v; });
+    bindNum('ovTmin', 3, 120, 12, v => { G.customTmin = v; });
+    bindNum('ovTau', 30, 600, 200, v => { G.customTau = v; });
+    const ovDen = document.getElementById('ovDensity');
+    if (ovDen) {
+      ovDen.oninput = () => {
+        const lb = document.getElementById('ovDensLb');
+        if (lb) lb.textContent = ovDen.value + '%';
+      };
+      ovDen.onchange = () => { G.customP = clamp(parseInt(ovDen.value, 10) || 15, 4, 40); applySetup(); };
+    }
+  }
+
+  function showOverlay(kind) {
+    if (kind === 'none') { overlay.classList.add('hidden'); overlay.classList.remove('paused'); return; }
+    overlay.classList.toggle('paused', kind === 'paused');
+    let html = '';
+    if (kind === 'menu') {
+      html = '<div class="panel"><h1>' + t('menuTitle') + '</h1>' +
+        '<p class="sub">' + t('menuSub') + '</p>' +
+        '<div class="rules">' + t('rule1') + '<br>' + t('rule2') + '<br>' +
+        t('rule3') + '<br>' + t('rule4') + '</div>' +
+        setupHtml() +
+        '<div class="tap">' + t('tapHint') + '</div>' +
+        '<div class="btns"><button class="primary" id="ovStart">' + t('startBtn') + '</button></div>' +
+        '<div class="credit">' + t('credit') + '</div></div>';
+    } else if (kind === 'paused') {
+      html = '<div class="panel"><span class="ptitle">' + t('pausedTitle') + '</span>' +
+        '<span class="pstat">' + t('pausedSub').replace('{score}', G.score).replace('{cleared}', G.cleared) + '</span>' +
+        '<div class="pbtns">' +
+        '<button class="primary" id="ovResume">' + t('resumeBtn') + '</button>' +
+        '<button id="ovRestart" class="danger">' + t('restartBtn') + '</button>' +
+        '<button id="ovTitle">' + t('toTitle') + '</button>' +
+        '<button id="ovSound">' + (G.sound ? t('sfxOn') : t('sfxOff')) + '</button>' +
+        '</div>' +
+        '<div class="phint">' +
+          '<div>' + t('footReveal') + '</div>' +
+          '<div>' + t('footFlag') + '</div>' +
+          '<div>' + t('footTouch') + '</div>' +
+          '<div>' + t('footSpace') + '</div>' +
+          '<div>' + t('footRestart') + '</div>' +
+          '<div class="ptip">' + t('footTip') + '</div>' +
+        '</div></div>';
+    } else if (kind === 'over') {
+      const title = G.overReason === 'click' ? t('overClick') : (G.overReason === 'miss' ? t('overMiss') : t('overLives'));
+      const why = G.overReason === 'click' ? t('whyClick') : (G.overReason === 'miss' ? t('whyMiss') : t('whyLives'));
+      html = '<div class="panel">' + (G.newRecord ? '<div class="newrec">' + t('newRec') + '</div>' : '') +
+        '<h2>' + title + '</h2><p class="sub">' + why + '</p>' +
+        '<div class="stats">' +
+        '<div class="stat"><b>' + G.score + '</b><i>' + t('statScore') + '</i></div>' +
+        '<div class="stat"><b>' + (bestKey() ? G.best : '—') + '</b><i>' + t('statBest') + '</i></div>' +
+        '<div class="stat"><b>' + G.cleared + '</b><i>' + t('statCleared') + '</i></div>' +
+        '<div class="stat"><b>×' + Math.max(1, G.comboMax) + '</b><i>' + t('statCombo') + '</i></div>' +
+        '<div class="stat"><b>' + G.revealed + '</b><i>' + t('statOpen') + '</i></div>' +
+        '<div class="stat"><b>' + fmtTime(G.time) + '</b><i>' + t('statTime') + '</i></div>' +
+        '</div><div class="btns"><button class="primary" id="ovAgain">' + t('againBtn') + '</button></div></div>';
+    }
+    overlay.innerHTML = html;
+    overlay.classList.remove('hidden');
+    const bind = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+    bind('ovStart', startGame);
+    bind('ovResume', togglePause);
+    bind('ovRestart', startGame);          // 暂停时「重新开始」= 开一局新游戏
+    bind('ovTitle', gotoMenu);             // 返回标题
+    bind('ovAgain', gotoMenu);
+    bindSetup();
+    const ovSound = document.getElementById('ovSound');
+    if (ovSound) ovSound.onclick = () => { G.sound = !G.sound; ovSound.textContent = G.sound ? t('sfxOn') : t('sfxOff'); };
+  }
+
+  /* ============ 输入（点击雷区即开始） ============ */
+  function ensurePlaying() {
+    if (G.state === 'menu') { startGame(); return true; }
+    if (G.state === 'paused') { togglePause(); return false; }
+    return G.state === 'playing';
+  }
+  function pos(e) {
+    const rect = cv.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+  cv.addEventListener('mousedown', e => {
+    ensurePlaying();
+    if (G.state !== 'playing') return;
+    const p = pos(e), cell = cellAt(p.x, p.y);
+    if (!cell) return;
+    e.preventDefault();
+    if (e.button === 2) toggleFlag(cell.r, cell.c);
+    else if (e.button === 1) {
+      if (cell.row.state[cell.c] === 1) {
+        const first = beginRun();
+        chord(cell.r, cell.c);
+        if (first && G.state === 'playing') openPendingZeros();
+      }
+    }
+    else leftClick(cell);
+  });
+  cv.addEventListener('contextmenu', e => e.preventDefault());
+  cv.addEventListener('mousemove', e => {
+    if (G.state !== 'playing') { G.hover = null; return; }
+    const p = pos(e), cell = cellAt(p.x, p.y);
+    G.hover = cell ? { r: cell.r, c: cell.c } : null;
+  });
+  cv.addEventListener('mouseleave', () => { G.hover = null; });
+
+  let touchTimer = null, touchHandled = false, touchPos = null;
+  cv.addEventListener('touchstart', e => {
+    if (G.state === 'menu' || G.state === 'paused') { ensurePlaying(); e.preventDefault(); return; }
+    if (G.state !== 'playing') return;
+    const tt = e.touches[0], rect = cv.getBoundingClientRect();
+    touchPos = { x: tt.clientX - rect.left, y: tt.clientY - rect.top };
+    touchHandled = false;
+    touchTimer = setTimeout(() => {
+      const cell = cellAt(touchPos.x, touchPos.y);
+      if (cell) toggleFlag(cell.r, cell.c);
+      touchHandled = true;
+    }, 330);
+    e.preventDefault();
+  }, { passive: false });
+  cv.addEventListener('touchend', e => {
+    if (touchTimer) clearTimeout(touchTimer);
+    if (touchHandled || G.state !== 'playing') { e.preventDefault(); return; }
+    const tt = e.changedTouches[0], rect = cv.getBoundingClientRect();
+    const cell = cellAt(tt.clientX - rect.left, tt.clientY - rect.top);
+    if (cell) leftClick(cell);
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); togglePause(); }
+    else if (e.key === 'r' || e.key === 'R') startGame();
+  });
+
+  /* ============ 设置 / 语言 ============ */
+  const btnPause = document.getElementById('btnPause');
+
+  function applyI18n() {
+    L = T[lang];
+    document.documentElement.lang = L.htmlLang;
+    document.title = L.docTitle;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (k === 'langBtn') el.textContent = lang === 'zh' ? T.zh.langBtn : T.en.langBtn;
+      else if (L[k] !== undefined) el.textContent = L[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if (L[k] !== undefined) el.innerHTML = L[k];
+    });
+    btnPause.textContent = G.state === 'paused' ? L.resume : L.pause;
+    if (!overlay.classList.contains('hidden')) {
+      showOverlay(G.state === 'over' ? 'over' : (G.state === 'paused' ? 'paused' : 'menu'));
+    }
+    syncHud(true);
+  }
+  function setLang(next) {
+    lang = (next === 'en') ? 'en' : 'zh';
+    try { localStorage.setItem(KEY_LANG, lang); } catch (e) {}
+    applyI18n();
+  }
+  function detectLang() {
+    let saved = null;
+    try { saved = localStorage.getItem(KEY_LANG); } catch (e) {}
+    if (saved === 'zh' || saved === 'en') return saved;
+    const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    return nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+
+  btnPause.onclick = togglePause;
+
+  window.addEventListener('resize', layout);
+
+  /* ============ 启动 ============ */
+  lang = detectLang();
+  applyI18n();
+  G.mode = window.innerWidth < window.innerHeight ? 'portrait' : 'landscape';
+  applySetup();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
