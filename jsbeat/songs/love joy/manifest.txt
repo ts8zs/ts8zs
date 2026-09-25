@@ -1,7 +1,0 @@
-﻿/* lovejoy */
-
-Name=LOVE & JOY
-Composer=木村由姫
-BPM=173
-From=「JUBEAT knit」所收录的版权曲目
-Level=2,7,8
