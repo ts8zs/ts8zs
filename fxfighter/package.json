@@ -1,0 +1,11 @@
+{
+  "name": "fx-sim",
+  "version": "0.1.0",
+  "private": true,
+  "description": "网页版外汇交易模拟器 MVP",
+  "scripts": {
+    "start": "node tools/serve.js",
+    "vol": "node tools/vol-report.js",
+    "test": "node test/smoke.js && node test/dom-check.js"
+  }
+}

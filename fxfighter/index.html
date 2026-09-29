@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>FXFIGHTER · 外汇模拟交易</title>
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
+
+<header id="topbar">
+  <div class="brand">FX<span>FIGHTER</span></div>
+
+  <div class="stats">
+    <div class="stat"><label>余额</label><b id="stBalance">—</b></div>
+    <div class="stat"><label>净值</label><b id="stEquity">—</b></div>
+    <div class="stat"><label>浮盈</label><b id="stPnl">—</b></div>
+    <div class="stat"><label>已用保证金</label><b id="stMargin">—</b></div>
+    <div class="stat"><label>保证金率</label><b id="stMl">—</b></div>
+  </div>
+
+  <div class="clockbox">
+    <span id="stClock">—</span>
+    <div class="speeds" id="spdBox">
+      <button data-speed="0" title="暂停">❚❚</button>
+      <button data-speed="1" class="on">1x</button>
+      <button data-speed="5">5x</button>
+      <button data-speed="20">20x</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="mascot" title="浮盈越多，她越开心">
+    <img class="sprite" id="mascotSprite" data-frame="3" src="img/一般.png" alt="当前心情立绘" draggable="false">
+    <div class="mood" id="mascotMood">平静观望</div>
+  </div>
+
+  <section id="left">
+    <div id="symbar">
+      <div class="tabs" id="symTabs"></div>
+      <div class="quote">
+        <span class="bid">BID <b id="stBid">—</b></span>
+        <span class="ask">ASK <b id="stAsk">—</b></span>
+        <span class="vol" id="stVol">—</span>
+      </div>
+    </div>
+
+    <div id="chartWrap">
+      <canvas id="chart"></canvas>
+      <div class="zoomctl">
+        <button id="zoomOut" title="缩小">−</button>
+        <button id="zoomIn" title="放大">＋</button>
+        <button id="zoomReset" title="回到最新">⟲</button>
+      </div>
+      <div id="notice">已暂停 · <kbd>空格</kbd> 继续 · <kbd>B</kbd> 做多 <kbd>S</kbd> 做空 · <kbd>Esc</kbd> 一键平仓</div>
+    </div>
+
+    <div id="tfbar">
+      <div class="tabs" id="tfTabs"></div>
+      <div id="stEvent" class="event">市场平静</div>
+    </div>
+  </section>
+
+  <aside id="side">
+    <div class="panel">
+      <h3>下单</h3>
+      <div class="row">
+        <label>手数</label>
+        <input id="fLots" type="number" value="0.10" step="0.01" min="0.01" />
+      </div>
+      <div class="row">
+        <label>杠杆</label>
+        <select id="fLev"></select>
+      </div>
+      <div class="row">
+        <label>止损</label>
+        <input id="fSL" type="number" step="0.01" placeholder="选填" />
+        <input id="qSL" class="dist" type="number" value="20" min="1" step="1" placeholder="pip" title="止损距离（pip）">
+        <button class="inline" id="btnSL" title="按左侧 pip 距离填入止损价">套用</button>
+      </div>
+      <div class="row">
+        <label>止盈</label>
+        <input id="fTP" type="number" step="0.01" placeholder="选填" />
+        <input id="qTP" class="dist" type="number" value="30" min="1" step="1" placeholder="pip" title="止盈距离（pip）">
+        <button class="inline" id="btnTP" title="按左侧 pip 距离填入止盈价">套用</button>
+      </div>
+      <div class="hint" id="fInfo">所需保证金 —</div>
+      <div class="actions">
+        <button id="btnBuy" class="buy">做多 <em id="buyPx">—</em></button>
+        <button id="btnSell" class="sell">做空 <em id="sellPx">—</em></button>
+      </div>
+      <div class="tip">做多＝开多仓（涨则赚）· 做空＝开空仓（跌则赚）</div>
+      <div class="quick">
+        <span class="qhint">左侧数字为距离，单位 pip</span>
+        <button id="btnClear">清空</button>
+      </div>
+    </div>
+
+    <div class="panel grow">
+      <h3>持仓 <span id="posCount" class="tag">0</span></h3>
+      <div id="posList" class="list"><div class="empty">暂无持仓</div></div>
+      <button id="btnCloseAll" class="closeall" hidden>一键平仓</button>
+    </div>
+
+    <div class="panel grow">
+      <h3>成交历史 <span id="hisCount" class="tag">0</span> <span id="stStats" class="tag">—</span></h3>
+      <div id="hisList" class="list"><div class="empty">还没有成交记录</div></div>
+    </div>
+  </aside>
+</main>
+
+<footer id="footbar">
+  <span>虚拟资金 · 非真实交易 · 不构成任何投资建议</span>
+  <span><span id="stSaved">未保存</span> · 种子 <b id="stSeed">—</b> <button id="btnReroll" class="mini">换一局</button></span>
+</footer>
+
+<div id="modal" class="hide">
+  <div class="box">
+    <h2 id="modalTitle">账户清算</h2>
+    <div id="modalBody"></div>
+    <button id="btnRestart">重新开始</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="src/rng.js"></script>
+<script src="src/config.js"></script>
+<script src="src/market.js"></script>
+<script src="src/account.js"></script>
+<script src="src/chart.js"></script>
+<script src="src/save.js"></script>
+<script src="src/mood.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
