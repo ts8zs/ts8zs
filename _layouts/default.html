@@ -70,8 +70,10 @@
       overflow-y: auto;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
-      padding: 20px 16px 60px;
+      padding: 20px 16px 0;
       font-size: 0.93em;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar-brand {
@@ -83,6 +85,9 @@
     }
     .sidebar-brand a { color: var(--fg); }
 
+    .sidebar-nav {
+      flex: 1 1 auto;
+    }
     .sidebar-nav h3 {
       margin: 16px 0 6px;
       font-size: 0.8em;
@@ -191,15 +196,16 @@
     .main th, .main td { border: 1px solid var(--border); padding: 6px 12px; }
     .main th { background: var(--code-bg); }
 
-    /* ====== Footer ====== */
+    /* ====== Footer（侧边栏左下角） ====== */
     footer.site {
-      position: fixed;
+      position: sticky;
       bottom: 0;
-      right: 0;
-      padding: 10px;
+      margin: 16px -16px 0;
+      padding: 10px 16px;
       font-size: 13px;
       color: var(--muted);
-      background: var(--bg);
+      background: var(--sidebar-bg);
+      border-top: 1px solid var(--border);
     }
     footer.site a { color: var(--muted); }
 
@@ -234,7 +240,7 @@
         max-height: 40vh;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 14px 16px;
+        padding: 14px 16px 0;
       }
       .main { padding: 24px 18px 80px; }
     }
@@ -269,15 +275,11 @@
           <li><a href="/hypehype/" {% if page.url == '/hypehype/' %}class="active"{% endif %}>HypeHype 使用体验</a></li>
           <li><a href="/roblox/" {% if page.url == '/roblox/' %}class="active"{% endif %}>[译]所以你想与 Roblox 竞争吗</a></li>
         </ul>
-        
-
-
-  <footer class="site">
-    <a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
-  </footer>
-
-
       </nav>
+
+      <footer class="site">
+        <a href="http://beian.miit.gov.cn">黑ICP备16001198号-1</a>
+      </footer>
     </aside>
 
     <main class="main">
