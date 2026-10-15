@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027年度公务员招考职位筛选</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+         background:#f3f5f9; color:#222; font-size:14px; }
+  header { background:linear-gradient(135deg,#1e3c72,#2a5298); color:#fff; padding:18px 24px;
+           box-shadow:0 2px 8px rgba(0,0,0,.15); position:sticky; top:0; z-index:50; }
+  .titlebar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  header h1 { margin:0; font-size:20px; }
+  .count { background:rgba(255,255,255,.15); padding:8px 14px; border-radius:8px; white-space:nowrap; }
+  .btn-reset { background:#eef2ff; color:#1e3c72; border:1px solid #cfd9ff; padding:6px 14px;
+        border-radius:8px; font-weight:600; cursor:pointer; font-size:13px; }
+  .btn-reset:hover { background:#e0e7ff; }
+  .layout { display:flex; align-items:flex-start; gap:16px; padding:16px 24px; }
+  .sidebar { width:280px; flex:0 0 280px; background:#fff; border-radius:12px; padding:16px;
+            box-shadow:0 1px 4px rgba(0,0,0,.08); position:sticky; top:84px; max-height:calc(100vh - 100px);
+            overflow:auto; }
+  .side-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; }
+  .side-actions { display:flex; gap:8px; align-items:center; }
+  .btn-link { background:transparent; color:#1e3c72; border:1px solid #cfd9ff; padding:6px 12px;
+        border-radius:8px; font-weight:600; cursor:pointer; font-size:13px; }
+  .btn-link:hover { background:#eef2ff; }
+  .sidebar h3 { margin:0; font-size:15px; }
+  .hint { font-size:12px; color:#8a93a6; margin-bottom:10px; }
+  .filter-group { margin-bottom:14px; border-bottom:1px solid #eee; padding-bottom:12px; }
+  .filter-group:last-child { border-bottom:none; }
+  .filter-label { font-weight:600; margin-bottom:6px; color:#444; }
+  .text-input { width:100%; padding:7px 10px; border:1px solid #ccd; border-radius:6px; font-size:13px; }
+  .range-row { display:flex; gap:6px; align-items:center; }
+  .range-row input { width:100%; padding:7px 8px; border:1px solid #ccd; border-radius:6px; }
+  .multiselect { position:relative; }
+  .ms-control { border:1px solid #ccd; border-radius:6px; padding:7px 28px 7px 10px; cursor:pointer;
+                background:#fff; min-height:34px; user-select:none; position:relative; font-size:13px; }
+  .ms-control:after { content:"\25BC"; position:absolute; right:10px; top:9px; font-size:10px; color:#888; }
+  .ms-panel { display:none; position:absolute; top:100%; left:0; right:0; background:#fff;
+              border:1px solid #bbc; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,.12);
+              z-index:30; max-height:220px; overflow:auto; margin-top:2px; }
+  .ms-panel.open { display:block; }
+  .ms-opt { padding:6px 10px; display:flex; align-items:center; gap:8px; font-size:13px; }
+  .ms-opt:hover { background:#f0f4ff; }
+  .ms-opt input { margin:0; }
+  .ms-empty { padding:8px 10px; color:#999; font-size:12px; }
+  main { flex:1; min-width:0; background:#fff; border-radius:12px; padding:14px 16px;
+         box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .table-wrap { overflow:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th, td { border-bottom:1px solid #eef; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f7f9fc; position:sticky; top:0; cursor:pointer; user-select:none; white-space:nowrap; }
+  th .arrow { color:#2a5298; font-size:11px; }
+  tbody tr:hover { background:#f3f8ff; }
+  td .more { color:#2a5298; cursor:pointer; font-size:12px; }
+  .pager { display:flex; gap:6px; align-items:center; justify-content:center; padding:14px 0 4px; flex-wrap:wrap; }
+  .pager button { border:1px solid #ccd; background:#fff; padding:6px 11px; border-radius:6px; cursor:pointer; }
+  .pager button.active { background:#2a5298; color:#fff; border-color:#2a5298; }
+  .pager button:disabled { opacity:.4; cursor:not-allowed; }
+  .pager .pinfo { color:#666; font-size:13px; margin-left:6px; }
+  .pager span { color:#999; padding:0 2px; }
+  .busy { display:none; align-items:center; gap:8px; font-size:13px; color:#ffd34e; }
+  .busy.active { display:inline-flex; }
+  .busy::before { content:''; width:14px; height:14px; border:2px solid rgba(255,255,255,.35);
+        border-top-color:#ffd34e; border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .loading-row { text-align:center; padding:40px; color:#999; }
+  .loading-row::before { content:''; display:inline-block; width:16px; height:16px; vertical-align:-3px;
+        margin-right:10px; border:2px solid #d0d7e6; border-top-color:#1e3c72; border-radius:50%;
+        animation:spin .7s linear infinite; }
+  .tag { display:inline-block; background:#eef3ff; color:#2a5298; border-radius:4px; padding:1px 6px;
+         margin:1px 2px; font-size:12px; }
+  .detail { background:#fafbff; }
+  .detail td { white-space:pre-wrap; line-height:1.6; color:#444; }
+  .empty { text-align:center; padding:40px; color:#999; }
+  @media (max-width:900px){ .layout{flex-direction:column;} .sidebar{width:100%;position:static;max-height:none;} }
+</style>
+        <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "qk8jzgjvf7");
+    </script>
+</head>
+<body>
+<header>
+  <div class="titlebar">
+    <h1>中央机关及其直属机构 2027 年度考试录用公务员招考简章 · 职位筛选</h1>
+    <div class="count" id="count">职位数 0　岗位数 0 人</div>
+    <span class="busy" id="busy">数据加载/筛选中…</span>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-head">
+      <h3>筛选条件</h3>
+      <div class="side-actions">
+        <button class="btn-link" id="copyLink">复制链接</button>
+        <button class="btn-reset" id="resetBtn">重置</button>
+      </div>
+    </div>
+    <div class="hint">筛选条件会自动保存到本地，重开页面仍保留。</div>
+    <div id="filters"></div>
+  </aside>
+  <main>
+    <div class="table-wrap">
+      <table id="tbl">
+        <thead><tr id="head"></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </main>
+</div>
+<script>
+let COLS=[], COL={}, ROWS=[];
+function setCols(cols){ COLS=cols; COL={}; cols.forEach((n,i)=>COL[n]=i); }
+const OPTIONS = {"应届限制": ["仅限应届", "无限制", "面向应届"], "学历": ["仅限博士研究生", "仅限大专", "仅限本科", "仅限硕士研究生", "大专及以上", "大专或本科", "本科及以上", "本科或硕士研究生", "硕士研究生及以上"], "政治面貌": ["不限", "中共党员", "中共党员或共青团员"], "户籍限制": ["无户籍限制", "有户籍限制"], "学位": ["与最高学历相对应的学位", "博士", "学士", "无要求", "硕士"], "基层工作最低年限": ["一年", "三年", "二年", "五年以上", "无限制"], "考试类别": ["中央机关及其省级直属机构综合管理类", "市（地）级及以下直属机构综合管理类", "行政执法类"], "机构层级": ["中央", "县（区）级及以下", "市（地）级", "省（副省）级"], "服务基层项目工作经历": ["“三支一扶”计划", "“三支一扶”计划、大学生志愿服务西部计划", "“三支一扶”计划、大学生志愿服务西部计划、在军队服役5年（含）以上的高校毕业生退役士兵", "农村义务教育阶段学校教师特设岗位计划、“三支一扶”计划", "农村义务教育阶段学校教师特设岗位计划、大学生志愿服务西部计划", "在军队服役5年（含）以上的高校毕业生退役士兵", "大学生志愿服务西部计划", "大学生村官", "大学生村官、“三支一扶”计划", "大学生村官、“三支一扶”计划、在军队服役5年（含）以上的高校毕业生退役士兵", "大学生村官、“三支一扶”计划、大学生志愿服务西部计划", "大学生村官、“三支一扶”计划、大学生志愿服务西部计划、在军队服役5年（含）以上的高校毕业生退役士兵", "大学生村官、农村义务教育阶段学校教师特设岗位计划、“三支一扶”计划", "大学生村官、农村义务教育阶段学校教师特设岗位计划、“三支一扶”计划、大学生志愿服务西部计划", "大学生村官、农村义务教育阶段学校教师特设岗位计划、“三支一扶”计划、大学生志愿服务西部计划、在军队服役5年（含）以上的高校毕业生退役士兵", "大学生村官、农村义务教育阶段学校教师特设岗位计划、在军队服役5年（含）以上的高校毕业生退役士兵", "大学生村官、在军队服役5年（含）以上的高校毕业生退役士兵", "大学生村官、大学生志愿服务西部计划", "无限制"], "专业能力测试": ["否", "是"], "面试比例": ["3:1", "4:1", "5:1", "8:1"], "机构性质": ["中央党群机关", "中央党群机关参照公务员法管理事业单位", "中央国家行政机关参照公务员法管理事业单位", "中央国家行政机关省级以下直属机构", "中央国家行政机关（本级）", "群团机关"], "职位属性": ["公安机关人民警察职位", "普通职位", "特殊专业职位", "证监会计类职位", "证监法律类职位", "证监计算机类职位", "证监财金类职位", "金融监管法律类职位", "金融监管综合类职位", "金融监管计算机类职位", "金融监管财会类职位", "金融监管财经类职位", "非通用语职位（俄语）", "非通用语职位（其他）", "非通用语职位（德语）", "非通用语职位（日语）", "非通用语职位（朝语、韩语）", "非通用语职位（法语）", "非通用语职位（葡萄牙语）", "非通用语职位（西班牙语）", "非通用语职位（阿拉伯语）"], "职位分布": ["其他职位", "西部地区和艰苦边远地区职位"], "类别": ["中央党群机关", "中央国家行政机关参照公务员法管理事业单位", "中央国家行政机关省级以下直属机构", "中央国家行政机关（本级）"]};
+const TEXT_FIELDS = ["专业", "工作地点", "部门名称", "用人司局", "招考职位", "落户地点", "职位简介", "备注"];
+const CAT_FIELDS = ["应届限制", "学历", "政治面貌", "户籍限制", "学位", "基层工作最低年限", "考试类别", "机构层级", "服务基层项目工作经历", "专业能力测试", "面试比例", "机构性质", "职位属性", "职位分布", "类别"];
+const NUM_FIELDS = ["招考人数"];
+const DISPLAY = [["部门名称", 160], ["用人司局", 160], ["招考职位", 150], ["学历", 110], ["应届限制", 100], ["户籍限制", 110], ["政治面貌", 90], ["基层工作最低年限", 120], ["专业", 240], ["工作地点", 110], ["招考人数", 80], ["考试类别", 160], ["机构层级", 110]];
+
+const state = { filters:{}, text:{}, num:{}, sortKey:null, sortDir:1, page:1, pageSize:50,
+  result:[], allCount:0, allSeats:0, total:0 };
+// 初始表格区占位：数据加载完成前显示“加载中”
+document.getElementById('body').innerHTML='<tr><td class="loading-row" colspan="'+DISPLAY.length+'">数据加载中…</td></tr>';
+
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+// 构建筛选区
+const filtersBox = document.getElementById('filters');
+// 文本字段
+TEXT_FIELDS.forEach(f=>{
+  const g=el('div','filter-group');
+  g.appendChild(el('div','filter-label', f));
+  const inp=el('input','text-input'); inp.placeholder='逗号分隔并集，-词 排除'; inp.dataset.field=f;
+  inp.addEventListener('input', ()=>{ state.text[f]=inp.value.trim(); saveState(); autoRun(); });
+  g.appendChild(inp);
+  filtersBox.appendChild(g);
+});
+// 数值范围
+NUM_FIELDS.forEach(f=>{
+  const g=el('div','filter-group');
+  g.appendChild(el('div','filter-label', f+'（人数）'));
+  const row=el('div','range-row');
+  const a=el('input'); a.type='number'; a.min=0; a.placeholder='最小'; a.dataset.min=f;
+  const b=el('input'); b.type='number'; b.min=0; b.placeholder='最大'; b.dataset.max=f;
+  a.addEventListener('input',()=>{ state.num[f]=state.num[f]||{}; state.num[f].min=a.value; saveState(); autoRun(); });
+  b.addEventListener('input',()=>{ state.num[f]=state.num[f]||{}; state.num[f].max=b.value; saveState(); autoRun(); });
+  row.appendChild(a); row.appendChild(el('span','~')); row.appendChild(b);
+  g.appendChild(row); filtersBox.appendChild(g);
+});
+// 分类多选
+CAT_FIELDS.forEach(f=>{
+  const g=el('div','filter-group');
+  g.appendChild(el('div','filter-label', f));
+  const ms=el('div','multiselect');
+  const ctrl=el('div','ms-control','全部');
+  const panel=el('div','ms-panel');
+  const vals=OPTIONS[f]||[];
+  if(!vals.length){ panel.appendChild(el('div','ms-empty','无数据')); }
+  vals.forEach(v=>{
+    const o=el('label','ms-opt');
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.value=v;
+    cb.addEventListener('change',()=>{
+      state.filters[f]=state.filters[f]||new Set();
+      if(cb.checked) state.filters[f].add(v); else state.filters[f].delete(v);
+      updateCtrl(ctrl, state.filters[f], vals); saveState(); autoRun(120);
+    });
+    o.appendChild(cb); o.appendChild(document.createTextNode(v));
+    panel.appendChild(o);
+  });
+  ctrl.addEventListener('click', e=>{ e.stopPropagation(); closeAllPanels(); panel.classList.toggle('open'); });
+  panel.addEventListener('click', e=>e.stopPropagation());
+  ms.appendChild(ctrl); ms.appendChild(panel);
+  g.appendChild(ms); filtersBox.appendChild(g);
+  state.filters[f]=new Set();
+  ctrl._vals=vals;
+});
+function updateCtrl(ctrl, set, vals){
+  if(!set || set.size===0){ ctrl.textContent='全部'; return; }
+  const arr=[...set];
+  ctrl.textContent = arr.length<=2 ? arr.join('、') : ('已选 '+arr.length+' 项');
+}
+function closeAllPanels(){ document.querySelectorAll('.ms-panel.open').forEach(p=>p.classList.remove('open')); }
+document.addEventListener('click', closeAllPanels);
+
+// 表头
+const head=document.getElementById('head');
+DISPLAY.forEach(([key,width])=>{
+  const th=el('th'); th.style.minWidth=width+'px'; th.dataset.key=key;
+  th.innerHTML = key + ' <span class="arrow"></span>';
+  th.addEventListener('click',()=>{
+    if(state.sortKey===key){ state.sortDir*=-1; } else { state.sortKey=key; state.sortDir=1; }
+    run();
+  });
+  head.appendChild(th);
+});
+
+function match(r){
+  // 兼容旧调用（run 旧路径）；新路径统一走 postFilter -> 双模式 match(r, st)
+  return true;
+}
+const LS_KEY='gw_filter_v1';
+function saveState(){
+  const o={ text:state.text, num:state.num,
+    filters:{}, sortKey:state.sortKey, sortDir:state.sortDir };
+  for(const f in state.filters){ if(state.filters[f]&&state.filters[f].size) o.filters[f]=[...state.filters[f]]; }
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(o)); }catch(e){}
+  syncHash();
+}
+function syncHash(){
+  const o={ text:state.text, num:state.num,
+    filters:{}, sortKey:state.sortKey, sortDir:state.sortDir };
+  for(const f in state.filters){ if(state.filters[f]&&state.filters[f].size) o.filters[f]=[...state.filters[f]]; }
+  try{ history.replaceState(null,'','#'+encodeURIComponent(JSON.stringify(o))); }catch(e){}
+}
+// 把{o}应用到 state 与界面（localStorage 与 URL hash 共用）
+function applyObject(o){
+  if(o.text){ state.text=o.text||{};
+    for(const f in state.text){ const inp=document.querySelector('.text-input[data-field="'+f+'"]'); if(inp) inp.value=state.text[f]; } }
+  if(o.num){ state.num=o.num||{};
+    for(const f in state.num){ const a=document.querySelector('input[data-min="'+f+'"]'); const b=document.querySelector('input[data-max="'+f+'"]');
+      if(a&&state.num[f]&&state.num[f].min!==''&&state.num[f].min!=null) a.value=state.num[f].min;
+      if(b&&state.num[f]&&state.num[f].max!==''&&state.num[f].max!=null) b.value=state.num[f].max; } }
+  if(o.filters){ for(const f in o.filters){
+      const set=new Set(o.filters[f]); state.filters[f]=set;
+      const groups=[...document.querySelectorAll('.filter-group')];
+      for(const grp of groups){ const lbl=grp.querySelector('.filter-label');
+        if(lbl&&lbl.textContent===f){ const panel=grp.querySelector('.ms-panel');
+          [...panel.querySelectorAll('input')].forEach(cb=>{ cb.checked=set.has(cb.value); });
+          updateCtrl(grp.querySelector('.ms-control'), set, [...panel.querySelectorAll('input')].map(i=>i.value)); break; } }
+    } }
+  if(o.sortKey){ state.sortKey=o.sortKey; state.sortDir=o.sortDir||1; }
+}
+function loadState(){
+  let o=null;
+  try{ o=JSON.parse(localStorage.getItem(LS_KEY)||'null'); }catch(e){}
+  if(o) applyObject(o);
+}
+function applyHash(){
+  const h=location.hash.replace(/^#/,'').trim();
+  if(!h) return null;
+  try{ return JSON.parse(decodeURIComponent(h)); }catch(e){ return null; }
+}
+
+// 排序点击 / 输入防抖 / 重置 统一走 postFilter（自动分流 Worker 或主线程）
+function run(){ postFilter(); }
+
+// 防抖：输入框变化后自动重新筛选
+let _autoTimer=null;
+function autoRun(ms){ clearTimeout(_autoTimer); _autoTimer=setTimeout(run, ms==null?250:ms); }
+
+// ===== 双模式筛选核心（列式数组：每行是字段值数组，与 COLS 对齐）=====
+let useWorker=false, worker=null;
+function match(r, st){
+  for(const f in st.text){
+    const v=st.text[f]; if(!v) continue;
+    const raw=v.split(/[+，,、]/).map(t=>t.trim()).filter(Boolean);
+    if(!raw.length) continue;
+    const field=String(r[COL[f]]||'').toLowerCase();
+    const inc=[], exc=[];
+    for(const t of raw){
+      if(t[0]==='-'||t[0]==='－'){ const e=t.slice(1).toLowerCase(); if(e) exc.push(e); }
+      else inc.push(t.toLowerCase());
+    }
+    if(inc.length && !inc.some(t=>field.includes(t))) return false;
+    if(exc.some(t=>field.includes(t))) return false;
+  }
+  for(const f in st.filters){
+    const set=st.filters[f];
+    if(set && set.size && !set.has(r[COL[f]])) return false;
+  }
+  for(const f in st.num){
+    const o=st.num[f]; if(!o) continue;
+    const n=parseInt(r[COL[f]],10); if(isNaN(n)) return false;
+    if(o.min!=='' && o.min!=null && n<parseInt(o.min,10)) return false;
+    if(o.max!=='' && o.max!=null && n>parseInt(o.max,10)) return false;
+  }
+  return true;
+}
+function sortRes(res, key, dir){
+  if(!key) return res;
+  const ki=COL[key];
+  return res.sort((a,b)=>{
+    let x=parseInt(a[ki],10), y=parseInt(b[ki],10);
+    if(!isNaN(x)&&!isNaN(y)) return (x-y)*dir;
+    return String(a[ki]).localeCompare(String(b[ki]),'zh')*dir;
+  });
+}
+// 把筛选结果应用到界面（Worker 与主线程模式共用），仅渲染当前页切片
+function applyResult(count, seats, rows){
+  state.allCount=count; state.allSeats=seats; state.result=rows;
+  document.getElementById('busy').classList.remove('active');
+  document.getElementById('count').innerHTML='职位数 <b>'+count+'</b>　岗位数 <b>'+seats+'</b> 人（全部 '+state.total+' 个职位）';
+  render(); renderPager(); saveState();
+}
+// 主线程模式：直接在本线程筛选（双击打开 file:// 时使用）
+function filterLocal(){
+  let res=ROWS.filter(r=>match(r, { text:state.text, num:state.num, filters:state.filters }));
+  res=sortRes(res, state.sortKey, state.sortDir);
+  const seats=res.reduce((a,r)=>a+(parseInt(r[COL['招考人数']],10)||0),0);
+  const start=(state.page-1)*state.pageSize;
+  const rows=res.slice(start, start+state.pageSize);
+  applyResult(res.length, seats, rows);
+}
+// 向 Worker 发送筛选请求；无 Worker 时主线程筛选
+function postFilter(resetPage){
+  if(resetPage!==false) state.page=1;
+  document.getElementById('busy').classList.add('active');
+  if(useWorker && worker) worker.postMessage({ type:'filter', state:{
+    text:state.text, num:state.num, filters:state.filters,
+    sortKey:state.sortKey, sortDir:state.sortDir
+  }, page:state.page, pageSize:state.pageSize });
+  else filterLocal();
+}
+function renderPager(){
+  const pager=document.getElementById('pager');
+  const total=state.allCount||0, ps=state.pageSize;
+  const pages=Math.max(1, Math.ceil(total/ps));
+  if(pages<=1){ pager.innerHTML=''; return; }
+  let h='<button data-p="prev"'+(state.page<=1?' disabled':'')+'>上一页</button>';
+  const win=3, s=Math.max(1, state.page-win), e=Math.min(pages, state.page+win);
+  if(s>1) h+='<button data-p="1">1</button>'+(s>2?'<span>…</span>':'');
+  for(let p=s;p<=e;p++) h+='<button data-p="'+p+'"'+(p===state.page?' class="active"':'')+'>'+p+'</button>';
+  if(e<pages) h+=(e<pages-1?'<span>…</span>':'')+'<button data-p="'+pages+'">'+pages+'</button>';
+  h+='<button data-p="next"'+(state.page>=pages?' disabled':'')+'>下一页</button>';
+  h+='<span class="pinfo">第 '+state.page+' / '+pages+' 页</span>';
+  pager.innerHTML=h;
+  pager.querySelectorAll('button[data-p]').forEach(b=>{
+    b.addEventListener('click', ()=>{ const p=b.dataset.p;
+      if(p==='prev') gotoPage(state.page-1);
+      else if(p==='next') gotoPage(state.page+1);
+      else { const n=+p; if(n!==state.page) gotoPage(n); }
+    });
+  });
+}
+function gotoPage(p){
+  state.page=p;
+  postFilter(false);
+}
+
+function render(){
+  const body=document.getElementById('body');
+  const total=state.result.length;
+  if(!total){
+    body.innerHTML='<tr><td class="empty" colspan="'+DISPLAY.length+'">没有符合条件的职位，试试放宽筛选条件。</td></tr>';
+    return;
+  }
+  // 仅渲染当前页切片（分页，最多 pageSize 行），字符串拼接提升性能
+  let html='';
+  state.result.forEach((r)=>{
+    html+='<tr>';
+    DISPLAY.forEach(([key])=>{
+      let v=r[COL[key]]||'';
+      if(key==='专业' && v.length>40) v=escapeHtml(v.slice(0,40))+'…<span class="more">详情</span>';
+      else if(key==='备注' && v.length>30) v=escapeHtml(v.slice(0,30))+'…<span class="more">详情</span>';
+      else v=escapeHtml(v);
+      html+='<td>'+v+'</td>';
+    });
+    html+='</tr>';
+  });
+  body.innerHTML=html;
+  const rows=body.querySelectorAll('tr');
+  rows.forEach((tr,idx)=>{
+    tr._rec=state.result[idx];
+    tr.addEventListener('click', ()=>toggleDetail(tr));
+  });
+}
+// 详情行点击时按需生成，避免一次性创建上万隐藏行
+function toggleDetail(tr){
+  const next=tr.nextElementSibling;
+  if(next && next.classList.contains('detail')){ next.remove(); return; }
+  const r=tr._rec; if(!r) return;
+  const dtr=document.createElement('tr'); dtr.className='detail';
+  const dtd=document.createElement('td'); dtd.colSpan=DISPLAY.length;
+  let html='';
+  for(const k of COLS){ if(k==='类别') continue; let v=r[COL[k]]||'—';
+    html+='<b>'+k+'：</b>'+(v?'<span style="white-space:pre-wrap">'+escapeHtml(v)+'</span>':'—')+'<br>'; }
+  dtd.innerHTML=html; dtr.appendChild(dtd);
+  tr.parentNode.insertBefore(dtr, tr.nextElementSibling);
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  state.filters={}; state.text={}; state.num={}; state.sortKey=null; state.sortDir=1;
+  document.querySelectorAll('.text-input').forEach(i=>i.value='');
+  document.querySelectorAll('.range-row input').forEach(i=>i.value='');
+  document.querySelectorAll('.ms-panel input').forEach(c=>c.checked=false);
+  document.querySelectorAll('.ms-control').forEach(c=>c.textContent='全部');
+  CAT_FIELDS.forEach(f=>state.filters[f]=new Set());
+  run(); saveState();
+});
+
+// 复制筛选链接
+document.getElementById('copyLink').addEventListener('click', function(){
+  const url=location.href;
+  const done=()=>{ const b=this, t=b.textContent; b.textContent='已复制'; setTimeout(()=>b.textContent=t,1200); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=>{ window.prompt('复制此链接分享筛选结果：', url); });
+  } else { window.prompt('复制此链接分享筛选结果：', url); }
+});
+// ===== 数据加载：优先 Web Worker（本地服务器，主线程零冻结）；双击 file:// 回退主线程 + JSONP =====
+function startApp(){
+  const hs=applyHash();
+  if(hs) applyObject(hs); else loadState();
+  postFilter(false);
+}
+function showError(msg){
+  document.getElementById('body').innerHTML='<tr><td class="empty" colspan="'+DISPLAY.length+'">'+msg+'</td></tr>';
+}
+// 主线程回退：加载 jobs.js（JSONP），可 file:// 双击打开
+function mainThreadLoad(){
+  const s=document.createElement('script');
+  s.src='jobs.js';
+  s.onload=function(){ const d=window.JOBS_DATA||[]; setCols(d[0]); ROWS=d[1]; state.total=ROWS.length; startApp(); };
+  s.onerror=function(){ showError('无法加载 jobs.js。请确保 index.html、jobs.json、jobs.js、filter.worker.js 在同一目录；'
+    +'本地服务器打开：<br><code>python -m http.server</code> 后访问 <code>http://localhost:8000/</code>'); };
+  document.head.appendChild(s);
+}
+if(location.protocol==='file:'){
+  mainThreadLoad();   // 双击打开：浏览器禁止 file:// 的 Worker/fetch，走主线程模式
+} else {
+  try{ worker=new Worker('filter.worker.js'); useWorker=true; }
+  catch(e){ worker=null; useWorker=false; }
+  if(useWorker){
+    worker.onmessage=function(e){
+      const m=e.data;
+      if(m.type==='ready'){ setCols(m.cols); state.total=m.total; startApp(); }
+      else if(m.type==='error'){ document.getElementById('busy').classList.remove('active'); useWorker=false; mainThreadLoad(); }
+      else if(m.type==='result'){ applyResult(m.count, m.seats, m.rows); }
+    };
+    // Worker 自身加载失败（脚本 404/语法错误等）时，回退主线程模式
+    worker.onerror=function(){ document.getElementById('busy').classList.remove('active'); useWorker=false; try{ worker.terminate(); }catch(_){} worker=null; mainThreadLoad(); };
+    worker.postMessage({ type:'init' });   // 触发 Worker 加载 jobs.json
+  } else {
+    mainThreadLoad();
+  }
+}
+</script>
+</body>
+</html>
